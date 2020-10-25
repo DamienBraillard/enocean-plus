@@ -1,0 +1,9 @@
+# IDE
+.idea/
+
+# Python virtual environment
+venv/
+.venv/
+
+# PyTest
+.pytest_cache/
