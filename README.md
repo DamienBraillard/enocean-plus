@@ -1,5 +1,10 @@
 # EnOcean Plus
 An improved library for accessing the EnOcean network from Python through the USB3xx dongles.
+## Build status
+| Branch  | Status                                                                                        |
+| ------- | --------------------------------------------------------------------------------------------- |
+| Main    | ![](https://github.com/DamienBraillard/enocean-plus/workflows/CI/badge.svg?branch=main)       |
+| Develop | ![](https://github.com/DamienBraillard/enocean-plus/workflows/CI/badge.svg?branch=develop)    |
 
 ## Features and goals
 - [ ] Supports asyncio
