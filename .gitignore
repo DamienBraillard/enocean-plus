@@ -5,5 +5,8 @@
 venv/
 .venv/
 
-# PyTest
+# Unit testing
 .pytest_cache/
+
+# Python
+*.pyc
