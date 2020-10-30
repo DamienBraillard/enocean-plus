@@ -1,4 +1,10 @@
 #
+# Code generation tool
+#
+requests
+lxml
+
+#
 # Testing
 #
 pytest
