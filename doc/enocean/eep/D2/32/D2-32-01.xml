@@ -1,0 +1,99 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x32</number>
+        <title>A.C. Current Clamp</title>
+        <type>
+          <number>0x01</number>
+          <title>Type 0x01</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Pressac Communications Ltd</span><br/><br/><img>graphics/D2-32-01.png</img><br/><span style="border-bottom:2px groove #000000;">Notes</span><br/>1) If Power Fail bit is set, all channel readings will be set to
+              zero when this final telegram is sent.
+              <br/>2) Scale/divisor is set to 0 or 1 for all channels only, not individually.
+            </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>2</bitoffs>
+              <bitsize>6</bitsize>
+            </datafield>
+            <datafield>
+              <data>Power Fail</data>
+              <shortcut>PF</shortcut>
+              <description>See Note 1</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Divisor</data>
+              <shortcut>DIV</shortcut>
+              <description>Divisor for all channels</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>x/1</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>x/10</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Channel 1</data>
+              <shortcut>CH1</shortcut>
+              <description>Current value</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>12</bitsize>
+              <range>
+                <min>0</min>
+                <max>0xFFF</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>4095 (409,5)</max>
+              </scale>
+              <unit>A</unit>
+            </datafield>
+            <datafield>
+              <data>Channel 2</data>
+              <shortcut>CH2</shortcut>
+              <description>Current value</description>
+              <info/>
+              <bitoffs>20</bitoffs>
+              <bitsize>12</bitsize>
+              <range>
+                <min>0</min>
+                <max>0xFFF</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>4095 (409,5)</max>
+              </scale>
+              <unit>A</unit>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

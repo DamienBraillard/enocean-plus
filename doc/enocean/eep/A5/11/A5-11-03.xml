@@ -1,0 +1,263 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x11</number>
+        <title>Controller Status</title>
+        <type>
+          <number>0x03</number>
+          <title>Blind Status</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: PEHA / infratec</span><br/><br/>
+          This controller status is specific for blinds, awning and shutter
+          modules. All modules can use this 4BS telegram to send all information about
+          the status, the position and errors of the module, if these data are available.
+          </description>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Blind/shutter pos.</data>
+              <shortcut>BSP</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Angle sign</data>
+              <shortcut>AS</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Positive sign</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Negative sign</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Angle</data>
+              <shortcut>AN</shortcut>
+              <description>Angle in 2&#176; steps<br/>
+              (e.g. 0 = 0&#176;, 90 = 180&#176;)<br/><br/>
+              (EEP 2.6.5:<br/>
+              valid range
+              <span style="text-decoration:line-through;color:red">0 &#8230; 180</span> -&gt;
+              <span style="font-weight:bold;color:green">0 &#8230; 90</span><br/>
+              scale
+              <span style="text-decoration:line-through;color:red">0 &#8230; 360</span> -&gt;
+              <span style="font-weight:bold;color:green">0 &#8230; 180</span>)<br/>
+              </description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>90</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>180</max>
+              </scale>
+              <unit>&#176;</unit>
+            </datafield>
+            <datafield>
+              <data>Position value flag</data>
+              <shortcut>PVF</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No Position value available</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Position value available</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Angle value flag</data>
+              <shortcut>AVF</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No Angle value available</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Angle value available</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Error state</data>
+              <shortcut>ES</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No error present</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>End-positions are not configured</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Internal failure</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>End-position</data>
+              <shortcut>EP</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>20</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No End-position available</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>No End-position reached</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Blind fully open</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Blind fully closed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Status</data>
+              <shortcut>ST</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No Status available</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Blind is stopped</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Blind opens</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Blind closes</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Service Mode</data>
+              <shortcut>SM</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal mode</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Service mode is activated (For example for maintenance)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Mode of the position</data>
+              <shortcut>MOTP</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal mode:<br/>0% Blind fully open / 100% Blind fully close</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Inverse mode:<br/>100% Blind fully open / 0% Blind fully close</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>26</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

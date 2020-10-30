@@ -1,0 +1,153 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x14</number>
+        <title>Multi Function Sensors</title>
+        <type>
+          <number>0x10</number>
+          <title>Sensor for Temperature, Humidity, VOC and Presence, line-powered</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Perfactory</span>
+          </description>
+          <case>
+            <description>
+              <img>graphics/D2-14-10.png</img>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>27</bitoffs>
+              <bitsize>6</bitsize>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP9</shortcut>
+              <description>Temperature (linear)<br/>-----------
+                  <br/>Status of Temperature Sensor
+                </description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>9</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>500</max>
+                  <scale>
+                    <min>0</min>
+                    <max>50</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>501</min>
+                  <max>510</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>511</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Humidity</data>
+              <shortcut>HUM</shortcut>
+              <description>Rel. Humidity (linear)<br/>-----------
+                  <br/>Status of Humidity Sensor
+                </description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>200</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <min>201</min>
+                  <max>254</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>VOC</data>
+              <shortcut>VOC</shortcut>
+              <description>VOC in CO2 equivalents (linear)<br/>-----------
+                  <br/>Status of VOC Sensor
+                </description>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>250</max>
+                  <scale>
+                    <min>0</min>
+                    <max>2000</max>
+                  </scale>
+                  <unit>ppm/e</unit>
+                </item>
+                <item>
+                  <min>251</min>
+                  <max>254</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Presence</data>
+              <shortcut>PR</shortcut>
+              <description>Presence Detector</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Present</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Not present</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Not detectable</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Presence Detector error</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

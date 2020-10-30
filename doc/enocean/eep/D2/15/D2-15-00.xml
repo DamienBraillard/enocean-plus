@@ -1,0 +1,110 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <description/>
+      <func>
+        <number>0x15</number>
+        <title>Occupancy</title>
+        <type>
+          <number>0x00</number>
+          <title>People Activity Counter</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: EnOcean GmBh</span><br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/><br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: unidirectional<br/>Addressing: broadcast
+                <br/>Communication trigger: event_trigger
+                <br/>Communication interval: 
+                <br/>Event description: 
+                <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Teach-in</span><br/>Teach-in method: Universal teach-in (UTE)
+                <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Security</span><br/>Encryption mandatory: No
+              </description>
+          <case>
+            <datafield>
+              <data>Presence</data>
+              <description>Presence detector</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Present</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Not present</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Not detectable</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Presence Detection Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy Storage</data>
+              <description>Energy storageStatus</description>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>High</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Medium</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Low</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Critical</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Pir Update Rate</data>
+              <description>Discrete interval in which the activity is considered.</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>0</min>
+                <max>15</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>16</max>
+              </scale>
+              <unit>s</unit>
+            </datafield>
+            <datafield>
+              <data>Pir Update Counter</data>
+              <description>Amount of times that PIRactivity has been counted.</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+              <range>
+                <min>0</min>
+                <max>65535</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>65535</max>
+              </scale>
+              <unit/>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

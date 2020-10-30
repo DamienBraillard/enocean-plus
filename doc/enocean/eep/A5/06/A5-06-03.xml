@@ -1,0 +1,89 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x06</number>
+        <title>Light Sensor</title>
+        <type>
+          <number>0x03</number>
+          <title>10-bit measurement (1-Lux resolution) with range 0lx to 1000lx</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Lutuo Technology</span>
+            <br/>
+            <br/>
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>18</bitoffs>
+              <bitsize>10</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Supply voltage</data>
+              <shortcut>SVC</shortcut>
+              <description>Supply voltage (linear)<br/>251&#8230;255: reserved for error code
+              </description>
+              <info>DB_3: Supply voltage 0&#8230;5.1V, linear n=0&#8230;255</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>250</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>5.0</max>
+              </scale>
+              <unit>V</unit>
+            </datafield>
+            <datafield>
+              <data>Illumination</data>
+              <shortcut>ILL</shortcut>
+              <description>Illumination (linear)<br/>DB2 = 8 MSB, DB1 = 2 LSB
+                <br/>1001: over range, 1002...1024: reserved
+              </description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>10</bitsize>
+              <range>
+                <min>0</min>
+                <max>1000</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>1000</max>
+              </scale>
+              <unit>lx</unit>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

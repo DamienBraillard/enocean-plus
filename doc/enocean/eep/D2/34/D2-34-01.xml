@@ -1,0 +1,27 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x34</number>
+        <title>Heating Actuator</title>
+        <type>
+          <number>0x01</number>
+          <title>2 Output Channels</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove#000000;font-style:italic;">Submitter: AWAG Elektrotechnik AG</span>
+            <br/>
+          </description>
+          <ref>
+            <rorg>D2</rorg>
+            <func>34</func>
+            <type>00</type>
+          </ref>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

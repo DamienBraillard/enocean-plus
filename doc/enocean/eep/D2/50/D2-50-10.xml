@@ -1,0 +1,24 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x50</number>
+        <title>Heat Recovery Ventilation</title>
+        <type>
+          <number>0x10</number>
+          <title>Type 0x10 (description: see table)</title>
+          <status>released</status>
+          <description/>
+          <ref>
+            <rorg>D2</rorg>
+            <func>50</func>
+            <type>00</type>
+          </ref>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

@@ -1,0 +1,134 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x10</number>
+        <title>Room Operating Panel</title>
+        <type>
+          <number>0x02</number>
+          <title>Temperature Sensor, Set Point, Fan Speed and Day/Night Control</title>
+          <status>released</status>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Turn-switch for fan speed</data>
+              <shortcut>FAN</shortcut>
+              <description>Turn-switch for fan speed</description>
+              <info>DB_3: Turn-switch for fan speed</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>210</min>
+                  <max>255</max>
+                  <description>Stage Auto</description>
+                </item>
+                <item>
+                  <min>190</min>
+                  <max>209</max>
+                  <description>Stage 0</description>
+                </item>
+                <item>
+                  <min>165</min>
+                  <max>189</max>
+                  <description>Stage 1</description>
+                </item>
+                <item>
+                  <min>145</min>
+                  <max>164</max>
+                  <description>Stage 2</description>
+                </item>
+                <item>
+                  <min>0</min>
+                  <max>144</max>
+                  <description>Stage 3</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set point</data>
+              <shortcut>SP</shortcut>
+              <description>Set point (linear)   Min.- ... Max+</description>
+              <info>DB_2: Set point Min. - &#8230; Max. +, linear n=0...255</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>255</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature (linear)</description>
+              <info>DB_1: Temperature 0...40&#176;C, linear n=255...0</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>255</min>
+                <max>0</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Slide switch 0/I</data>
+              <shortcut>SLSW</shortcut>
+              <description>Slide switch or Slide switch Day/Night</description>
+              <info>...</info>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Position I / Night / Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Position O / Day / On</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

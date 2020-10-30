@@ -1,0 +1,135 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x08</number>
+        <title>Light, Temperature and Occupancy Sensor</title>
+        <type>
+          <number>0x03</number>
+          <title>Range 0lx to 1530lx, -30&#176;C to +50&#176;C and Occupancy Button</title>
+          <status>released</status>
+          <description>E.g. for outdoor sensor.</description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Supply voltage</data>
+              <shortcut>SVC</shortcut>
+              <description>Supply voltage (linear)</description>
+              <info>DB_3: Supply voltage 0&#8230;5.1V, linear n=0&#8230;255</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>5.1</max>
+              </scale>
+              <unit>V</unit>
+            </datafield>
+            <datafield>
+              <data>Illumination</data>
+              <shortcut>ILL</shortcut>
+              <description>Illumination (linear)</description>
+              <info>DB_2: Illumination 0...1530lx, linear n=0...255</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>1530</max>
+              </scale>
+              <unit>lx</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature (linear)</description>
+              <info>DB_1: -30...50&#176;C, linear n=0...255</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>-30</min>
+                <max>+50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>PIR Status</data>
+              <shortcut>PIRS</shortcut>
+              <description>PIR Status</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>PIR on</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>PIR off</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Occupancy Button</data>
+              <shortcut>OCC</shortcut>
+              <description>..</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Button pressed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Button released</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

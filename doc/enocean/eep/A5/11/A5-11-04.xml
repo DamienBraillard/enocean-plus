@@ -1,0 +1,220 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x11</number>
+        <title>Controller Status</title>
+        <type>
+          <number>0x04</number>
+          <title>Extended Lighting Status</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: PEHA / infratec</span><br/><br/>
+          This status is an extended answer of new lighting-controllers.
+          All modules can use this 4BS telegram to send all information about the status
+          and errors of the module, if these data are available.
+          </description>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Parameter 1</data>
+              <shortcut>P1</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <description>Mode 0: Dimm-Value (0 .. 255)<br/>
+                Mode 1: R - Red (0 .. 255)
+                <br/>
+                Mode 2: Energy metering value (MSB 15 .. 8)
+                <br/>
+                Mode 3: Not used
+                </description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Parameter 2</data>
+              <shortcut>P2</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <description>Mode 0: Lamp operating hours (MSB 15 .. 8)<br/>
+                Mode 1: G - Green (0 .. 255)
+                <br/>
+                Mode 2: Energy metering value (7 .. 0 LSB)
+                <br/>
+                Mode 3: Not used
+                </description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Parameter 3</data>
+              <shortcut>P3</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <description>Mode 0: Lamp operating hours (7 .. 0 LSB)<br/>
+                Mode 1: B - Blue (0 .. 255)
+                <br/>
+                Mode 2: Unit for energy values:<br/>
+                Enum:<br/>
+                0 = mW<br/>
+                1 = W<br/>
+                2 = kW<br/>
+                3 = MW<br/>
+                4 = Wh<br/>
+                5 = kWh<br/>
+                6 = MWh<br/>
+                7 = GWh<br/>
+                8 = mA<br/>
+                9 = 1/10 A<br/>
+                10 = mV<br/>
+                11 = 1/10 V<br/>
+                12 .. 15 Not used<br/>
+                <br/>
+                Mode 3: Not used
+                </description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Service Mode</data>
+              <shortcut>SM</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal mode</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Service mode is activated.<br/>
+                  (For example for maintenance)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Operating hours flag</data>
+              <shortcut>OHF</shortcut>
+              <description>For Mode 0</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No lamp operating hours available</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Lamp operating hours available</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Error state</data>
+              <shortcut>ES</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>26</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No error present</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Lamp-failure</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Internal failure</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Failure on the external periphery</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Parameter Mode</data>
+              <shortcut>PM</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>8 Bit Dimmer Value and Lamp operating hours</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>RGB Value</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Energy metering value</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Status</data>
+              <shortcut>ST</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Lighting off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Lighting on</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

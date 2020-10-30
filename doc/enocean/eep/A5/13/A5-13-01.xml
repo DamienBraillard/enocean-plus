@@ -1,0 +1,150 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x13</number>
+        <title>Environmental Applications</title>
+        <type>
+          <number>0x01</number>
+          <title>Weather Station</title>
+          <status>released</status>
+          <description>A receiver that accepts EEP A5-13-01 at teach-in automatically needs to accept telegrams from
+            the same ID that comply to the definitions of EEP A5-13-02 thru EEP A5-13-06. Different
+            telegrams received from that ID need to be distinguished by their 4 bit identifiers.</description>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Dawn sensor</data>
+              <shortcut>DWS</shortcut>
+              <description>Dawn sensor</description>
+              <info>DB_3 Dawn sensor 0 &#8230; 999lx, linear n=0&#8230;255</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>999</max>
+              </scale>
+              <unit>lx</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Outdoor Temp</description>
+              <info>DB_2: Outdoor Temp. -40&#176;C ... +80&#176;C, linear n=0&#8230;255</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>-40</min>
+                <max>+80</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Wind speed</data>
+              <shortcut>WND</shortcut>
+              <description>Wind speed</description>
+              <info>DB_1: Wind speed 0 ... 70m/s, linear n=0&#8230;255</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>70</max>
+              </scale>
+              <unit>m/s</unit>
+            </datafield>
+            <datafield>
+              <data>Identifier</data>
+              <shortcut>ID</shortcut>
+              <description>Identifier</description>
+              <info>DB_0.BIT_7 &#8230; 4: Identifier</info>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x1</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Day / Night</data>
+              <shortcut>D/N</shortcut>
+              <description>Day / Night</description>
+              <info>DB_0.BIT_2: Day / Night</info>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Day</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Night</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Rain Indication</data>
+              <shortcut>RAN</shortcut>
+              <description>Rain Indication</description>
+              <info>DB_0.BIT_1: Rain Indication</info>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No Rain</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Rain</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

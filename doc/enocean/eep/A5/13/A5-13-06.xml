@@ -1,0 +1,124 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x13</number>
+        <title>Environmental Applications</title>
+        <type>
+          <number>0x06</number>
+          <title>Geographic Position Exchange</title>
+          <status>released</status>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Latitude(MSB)</data>
+              <shortcut>LAT(MSB)</shortcut>
+              <description>Latitude MSB</description>
+              <info>DB_3.BIT_7 &#8230; 4: Latitude (MSB)</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <ref>LAT(LSB)</ref>
+              </range>
+              <scale>
+                <ref>LAT(LSB)</ref>
+              </scale>
+              <unit>
+                <ref>LAT(LSB)</ref>
+              </unit>
+            </datafield>
+            <datafield>
+              <data>Longitude(MSB)</data>
+              <shortcut>LOT(MSB)</shortcut>
+              <description>Longitude MSB</description>
+              <info>DB_3.BIT_3 &#8230; 0: Longitude (MSB)</info>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <ref>LOT(LSB)</ref>
+              </range>
+              <scale>
+                <ref>LOT(LSB)</ref>
+              </scale>
+              <unit>
+                <ref>LOT(LSB)</ref>
+              </unit>
+            </datafield>
+            <datafield>
+              <data>Latitude(LSB)</data>
+              <shortcut>LAT(LSB)</shortcut>
+              <description>Latitude LSB</description>
+              <info>DB_2: Latitude (LSB) -90&#176; &#8230; +90&#176;, linear n=&#8230;4095</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>4095</max>
+              </range>
+              <scale>
+                <min>-90</min>
+                <max>+90</max>
+              </scale>
+              <unit>&#176;</unit>
+            </datafield>
+            <datafield>
+              <data>Longitude(LSB)</data>
+              <shortcut>LOT(LSB)</shortcut>
+              <description>Longitude LSB</description>
+              <info>DB_1: Longitude (LSB) -180&#176; &#8230; +180&#176;, linear n=0&#8230;4095</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>4095</max>
+              </range>
+              <scale>
+                <min>-180</min>
+                <max>+180</max>
+              </scale>
+              <unit>&#176;</unit>
+            </datafield>
+            <datafield>
+              <data>Identifier</data>
+              <shortcut>ID</shortcut>
+              <description>Identifier</description>
+              <info>DB_0.BIT_7 &#8230; 4: Identifier</info>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x6</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

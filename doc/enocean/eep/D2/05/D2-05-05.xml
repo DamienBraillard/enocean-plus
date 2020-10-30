@@ -1,0 +1,457 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <oldnumber>.RORG</oldnumber>
+      <fullname>Variable Length Data</fullname>
+      <telegram>VLD</telegram>
+      <description></description>
+      <func>
+        <number>0x05</number>
+        <title>Blinds Control for Position and Angle</title>
+        <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: AWAG Elektrotechnik AG</span><br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/>The protocol is intended for commissioning as well as for operation of a blind actuator that supports control of the vertical position as well as the rotation angle of the slats.
+	<br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: bidirectional.
+	<br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">EEP Family Table</span><br/>Each TYPE has to support all telegrams and parameters marked in its column.
+	<br/><br/><table><tr><th style="width:'260px'">Commands Overview</th><th style="width:'23px'">00</th><th style="width:'23px'">01</th><th style="width:'23px'">02</th><th style="width:'23px'">03</th><th style="width:'23px'">05</th></tr><tr><td>Goto command</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Stop command</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Query command</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Reply command</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Set parameters</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>Open motorized window</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>Query data</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>Reply data</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td></tr></table><br/><br/><br/><table><tr><th style="width:'260px'">Parameters Overview</th><th style="width:'23px'">00</th><th style="width:'23px'">01</th><th style="width:'23px'">02</th><th style="width:'23px'">03</th><th style="width:'23px'">05</th></tr><tr><td>position</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Angle</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>verticalMovementTime</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>rotationTime</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>Repositioning</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>lockingMode</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>channel</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>alarmAction</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>transmissivity</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Locking sensor 1</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Locking sensor 2</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>Intrusion detected</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>SolarProtection</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>Motorized sash</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>Error state</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>Opening mode</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td></tr></table><br/><br/><br/></description>
+        <type>
+          <number>0x05</number>
+          <title>4-channel blind actuator</title>
+          <status>not released</status>
+          <case>
+            <title>CMD: Goto command</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/>The protocol is intended for operation of a blind actuator that supports control of the vertical position as well as the rotation angle of the slats. .
+	<br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: to.
+	<br/>Addressing: unicast. 
+	<br/>Communication trigger: event_trigger.
+	<br/>Trigger description: manual trigger.
+	<br/></description>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>position</data>
+              <description>Vertical position</description>
+              <bitoffs>1</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>noChange</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>Angle</data>
+              <description>Rotation angle</description>
+              <bitoffs>9</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>noChange</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>Repositioning</data>
+              <description>How to adjust the internal positioning tracker before going to the new position</description>
+              <bitoffs>17</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>direct</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>firstUp</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>firstDown</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>20</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>lockingMode</data>
+              <description>Set/reset locking modes</description>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>noChange</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>block</description>
+                </item>
+                <item>
+                  <min>2</min>
+                  <max>6</max>
+                  <description>reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>unblock</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>channel</data>
+              <description>Channel address</description>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Channel 2</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Channel 3</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Channel 4</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>All channels</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>commandId</data>
+              <description>command identifier</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Goto command</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD: Stop command</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: to.
+	<br/>Addressing: unicast. 
+	<br/>Communication trigger: event_trigger.
+	<br/>Trigger description: manual trigger.
+	<br/></description>
+            <datafield>
+              <data>channel</data>
+              <description>Channel address</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Channel 2</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Channel 3</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Channel 4</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>All channels</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>commandId</data>
+              <description>command identifier</description>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Stop command</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD: Query command</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: to.
+	<br/>Addressing: unicast. 
+	<br/>Communication trigger: event_trigger.
+	<br/>Trigger description: manual trigger.
+	<br/></description>
+            <datafield>
+              <data>channel</data>
+              <description>Channel address</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Channel 2</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Channel 3</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Channel 4</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>All channels</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>commandId</data>
+              <description>command identifier</description>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Query command</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD: Reply command</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: to.
+	<br/>Addressing: broadcast. 
+	<br/>Communication trigger: response_to_cmd.
+	<br/>Trigger description: Query command.
+	<br/></description>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>position</data>
+              <description>Vertical position</description>
+              <bitoffs>1</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>noChange</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>Angle</data>
+              <description>Rotation angle</description>
+              <bitoffs>9</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>noChange</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>16</bitoffs>
+              <bitsize>3</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>CurrentRun</data>
+              <description>Vertical direction of movement of the blind</description>
+              <bitoffs>19</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>stopped</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>up</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>down</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>unknown</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>lockingMode</data>
+              <description>Set/reset locking modes</description>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>normal (unblocked)</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>blocked</description>
+                </item>
+                <item>
+                  <min>2</min>
+                  <max>7</max>
+                  <description>reserved</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>channel</data>
+              <description>Channel address</description>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Channel 2</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Channel 3</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Channel 4</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>All channels</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>commandId</data>
+              <description>command identifier</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>4</value>
+                  <description>Reply command</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

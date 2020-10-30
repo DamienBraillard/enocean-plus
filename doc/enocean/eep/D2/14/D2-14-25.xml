@@ -1,0 +1,83 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <oldnumber>.RORG</oldnumber>
+      <fullname>Variable Length Data</fullname>
+      <telegram>VLD</telegram>
+      <description></description>
+      <func>
+        <number>0x14</number>
+        <title>Multi Function Sensors</title>
+        <description></description>
+        <type>
+          <number>0x25</number>
+          <title>Light Intensity and Color Temperature Sensor</title>
+          <status>not released</status>
+          <case>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/>The EEP type D2-14-25 is for illumination intensity and light color temperature.  
+
+This proposal is for type 25 which will have a 0-100000Lux range for light intensity (lux) and a 15 bit range for color temperature (K) (0-30,000 K).
+.
+                            <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: to.
+                            <br/>Addressing: broadcast. 
+                            <br/>Communication trigger: event_trigger.
+                            <br/>Trigger description: .
+                            <br/></description>
+            <datafield>
+              <data>Illumination</data>
+              <description>Illumination linear)</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>17</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100000</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100000</max>
+                  </scale>
+                  <unit>lx</unit>
+                </item>
+                <item>
+                  <value>60001</value>
+                  <description>OverRange</description>
+                </item>
+                <item>
+                  <value>65534</value>
+                  <description>invalid</description>
+                </item>
+                <item>
+                  <value>65535</value>
+                  <description>notSupported</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Color Temperature</data>
+              <description>Color Temperature key</description>
+              <bitoffs>17</bitoffs>
+              <bitsize>15</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>30000</max>
+                  <scale>
+                    <min>0</min>
+                    <max>30000</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>32767</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

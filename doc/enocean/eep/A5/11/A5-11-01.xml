@@ -1,0 +1,214 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x11</number>
+        <title>Controller Status</title>
+        <type>
+          <number>0x01</number>
+          <title>Lighting Controller</title>
+          <status>released</status>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Illumination</data>
+              <shortcut>ILL</shortcut>
+              <description>Illumination (linear)</description>
+              <info>DB_3 Illumination 0 &#8230; 510lx, linear n=0&#8230;255</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>510</max>
+              </scale>
+              <unit>lx</unit>
+            </datafield>
+            <datafield>
+              <data>Illumination Set Point</data>
+              <shortcut>ISP</shortcut>
+              <description>Illumination Set Point (Min. ... Max.) (linear)</description>
+              <info>DB_2 Illumination Set Point Min. &#8230; Max., linear n=0&#8230;255</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>255</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Dimming Output Level</data>
+              <shortcut>DIM</shortcut>
+              <description>Dimming Output Level (Min. ... Max.) (linear)</description>
+              <info>DB_1: Dimming Output Level Min. &#8230; Max., linear n=0&#8230;255</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>255</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Repeater</data>
+              <shortcut>REP</shortcut>
+              <description>Repeater</description>
+              <info>Repeater</info>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Power Relay Timer</data>
+              <shortcut>PRT</shortcut>
+              <description>Power Relay Timer</description>
+              <info>Power Relay Timer</info>
+              <bitoffs>25</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Daylight Harvesting</data>
+              <shortcut>DHV</shortcut>
+              <description>Daylight Harvesting</description>
+              <info>Daylight Harvesting</info>
+              <bitoffs>26</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Dimming</data>
+              <shortcut>EDIM</shortcut>
+              <description>Dimming</description>
+              <info>Dimming</info>
+              <bitoffs>27</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>switching load</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>dimming load</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Magnet Contact</data>
+              <shortcut>MGC</shortcut>
+              <description>Magnet Contact</description>
+              <info>Magnet Contact</info>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>open</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>closed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Occupancy</data>
+              <shortcut>OCC</shortcut>
+              <description>Occupancy</description>
+              <info>Occupancy</info>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>unoccupied</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>occupied</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Power Relay</data>
+              <shortcut>PWR</shortcut>
+              <description>Power Relay</description>
+              <info>Power Relay</info>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>on</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

@@ -1,0 +1,147 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x09</number>
+        <title>Gas Sensor</title>
+        <type>
+          <number>0x07</number>
+          <title>Particles</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: NanoSense</span>
+          </description>
+          <case>
+            <datafield>
+              <data>Particles_10</data>
+              <shortcut>PM10</shortcut>
+              <description>Dust less than 10 &#181;m (PM10)</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>0</min>
+                <max>511</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>511</max>
+              </scale>
+              <unit>&#181;g/m3</unit>
+            </datafield>
+            <datafield>
+              <data>Particles_2.5</data>
+              <shortcut>PM2.5</shortcut>
+              <description>Dust less than 2.5 &#181;m (PM2.5)</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>0</min>
+                <max>511</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>511</max>
+              </scale>
+              <unit>&#181;g/m3</unit>
+            </datafield>
+            <datafield>
+              <data>Particles_1</data>
+              <shortcut>PM1</shortcut>
+              <description>Dust less than 1 &#181;m (PM1)</description>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>0</min>
+                <max>511</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>511</max>
+              </scale>
+              <unit>&#181;g/m3</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>27</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>PM10 active</data>
+              <shortcut>PM10a</shortcut>
+              <description/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>PM10 not active</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>PM10 active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>PM2.5 active</data>
+              <shortcut>PM2.5a</shortcut>
+              <description/>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>PM2.5 not active</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>PM2.5 active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>PM1 active</data>
+              <shortcut>PM1a</shortcut>
+              <description/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>PM1 not active</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>PM1 active</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

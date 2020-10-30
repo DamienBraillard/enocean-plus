@@ -1,0 +1,134 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x12</number>
+        <title>Automated Meter Reading (AMR)</title>
+        <type>
+          <number>0x04</number>
+          <title>Temperature and Load Sensor</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: SIMICS, NTT East</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>Temp and Load Sensor aimed for fridge and other application.
+            <br/>E.g. milk carton puts on this sensor in fridge. The sensor sends a signal
+            of temp and remaining amount of milk (in gram).
+            Since this sensor is battery-powered, battery level information is
+            transmitted with Temp and Load information, too.
+            <br/><br/><span style="border-bottom:2px groove #000000;">Data exchange</span><br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event- &amp; time-triggered
+            <br/>Communication interval: -
+            <br/>Trigger event: load changed
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: 4BS teach-in 2
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: yes
+            <br/>Security level format: RLC + AES128
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>14</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Meter reading</data>
+              <shortcut>MR</shortcut>
+              <description>Current value in gram</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>14</bitsize>
+              <range>
+                <min>0</min>
+                <max>16383</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>16383</max>
+              </scale>
+              <unit>gram</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature (linear)</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>-40</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Battery Level</data>
+              <shortcut>BL</shortcut>
+              <description>Battery level</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>100-75%</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>75-50%</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>50-25%</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>25-0%</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

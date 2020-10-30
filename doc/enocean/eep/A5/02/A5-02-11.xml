@@ -1,0 +1,69 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x02</number>
+        <title>Temperature Sensors</title>
+        <type>
+          <number>0x11</number>
+          <title>Temperature Sensor Range -50&#176;C to +30&#176;C</title>
+          <status>released</status>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature (linear)</description>
+              <info>DB_1 Temperature (8 bit) -50... +30&#176;C, linear n=255...0</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>255</min>
+                <max>0</max>
+              </range>
+              <scale>
+                <min>-50</min>
+                <max>+30</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

@@ -1,0 +1,85 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x14</number>
+        <title>Multi-Func Sensor</title>
+        <type>
+          <number>0x01</number>
+          <title>Single Input Contact (Window/Door), Supply voltage monitor</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Lutuo Technology</span><br/><br/>
+          Purpose (eg): Ventilation, Lighting, Alarm
+          </description>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Supply voltage</data>
+              <shortcut>SVC</shortcut>
+              <description>Supply voltage / super cap. (linear);<br/>
+            251 &#8211; 255 reserved for error code</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>250</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>5.0</max>
+              </scale>
+              <unit>V</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>20</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Contact</data>
+              <shortcut>CT</shortcut>
+              <description/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Contact closed</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Contact open</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

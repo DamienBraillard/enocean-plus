@@ -1,0 +1,1899 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x01</number>
+        <title>Electronic Switches and Dimmers with Local Control</title>
+        <type>
+          <number>0x00</number>
+          <title>Type 0x00</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Team</span>
+            <br/>
+            <br/>
+          </description>
+          <case>
+            <title>CMD 0x1 - Actuator Set Output</title>
+            <description>This message is sent to an actuator. It controls switching / dimming of one or all channels of an actuator.<br/><br/>
+            <img>graphics/EEP_D2-01-xx_CMD_01.png</img>
+            <br/>
+   			REMARK:<br/>
+            In case an Actuator Set Output message specifies a parameter that is
+            not supported by the addressed device, such device should react as
+            following:
+            <br/>
+            - Channel not supported by device -&gt; ignore message<br/>
+            - Dimming command to switching device -&gt; no change of status<br/>
+            - Dimming command with non-supported speed -&gt; dim with regular speed<br/>
+            <br/>
+            RECOMMENDATION:<br/>
+            Dimmers should take things like phase shifting into account to provide
+            dimming based on power consumption (results in brightness for lamps) rather than
+            interpreting percentage values as phase angle only.
+            <br/>
+            <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x01</value>
+                  <description>ID 01</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Dim value</data>
+              <shortcut>DV</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Switch to new output value</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Dim to new output value &#8211; dim timer 1</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Dim to new output value &#8211; dim timer 2</description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Dim to new output value &#8211; dim timer 3</description>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>Stop dimming</description>
+                </item>
+                <item>
+                  <min>0x05</min>
+                  <max>0x07</max>
+                  <description>not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>I/O channel</data>
+              <shortcut>I/O</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <description>Output channel (to load)</description>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All output channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Input channel (from mains supply)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Output value</data>
+              <shortcut>OV</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Output value 0% or OFF</description>
+                </item>
+                <item>
+                  <min>0x01</min>
+                  <max>0x64</max>
+                  <description>Output value 1% to 100% or ON</description>
+                </item>
+                <item>
+                  <min>0x65</min>
+                  <max>0x7E</max>
+                  <description>Not used</description>
+                </item>
+                <item>
+                  <value>0x7F</value>
+                  <description>Output value not valid / not applicable</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x2 - Actuator Set Local</title>
+            <description>This message is sent to an actuator. It configures one or all channels of an actuator.<br/>
+                <br/>Response Timing: None
+                <br/>
+                <br/>
+                RECOMMENDATION:
+                <br/>
+                In case the device implements an internal order for dim timers, this order
+                should be from &#8220;dim timer 1&#8221; (fast) to &#8220;dim timer 3&#8221; (slow).
+                The configured time shall always be interpreted for a full range (0 to 100%) dimming.
+                <br/>
+                <br/>
+                <img>graphics/EEP_D2-01-xx_CMD_02.png</img>
+                <br/>
+              </description>
+            <datafield>
+              <data>Taught-in devices</data>
+              <shortcut>d/e</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Disable taught-in devices (with different EEP)</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Enable taught-in devices (with different EEP)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>1</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x02</value>
+                  <description>ID 02</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Over current shut down</data>
+              <shortcut>OC</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Over current shut down: static off</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Over current shut down: automatic restart</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>reset over current shut down</data>
+              <shortcut>RO</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Reset over current shut down: not active</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Reset over current shut down: trigger signal</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Local control</data>
+              <shortcut>LC</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Disable local control</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Enable local control</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>I/O channel</data>
+              <shortcut>I/O</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <description>Output channel (to load)</description>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All output channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Input channel (from mains supply)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Dim timer 3</data>
+              <shortcut>DT3</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>20</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Not used</description>
+                </item>
+                <item>
+                  <min>0x01</min>
+                  <max>0x0F</max>
+                  <description>Dim timer 3 [0,5 &#8230; 7,5s / steps 0,5s]</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Dim timer 1</data>
+              <shortcut>DT1</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Not used</description>
+                </item>
+                <item>
+                  <min>0x01</min>
+                  <max>0x0F</max>
+                  <description>Dim timer 1 [0,5 &#8230; 7,5s / steps 0,5s]</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Dim timer 2</data>
+              <shortcut>DT2</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Not used</description>
+                </item>
+                <item>
+                  <min>0x01</min>
+                  <max>0x0F</max>
+                  <description>Dim timer 2 [0,5 &#8230; 7,5s / steps 0,5s]</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>User interface indication</data>
+              <shortcut>d/n</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>User interface indication: day operation</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>User interface indication: night operation</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Power Failure</data>
+              <shortcut>PF</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Disable Power Failure Detection</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Enable Power Failure Detection</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Default state</data>
+              <shortcut>DS</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>26</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0b00</value>
+                  <description>Default state: 0% or OFF</description>
+                </item>
+                <item>
+                  <value>0b01</value>
+                  <description>Default state: 100% or ON</description>
+                </item>
+                <item>
+                  <value>0b10</value>
+                  <description>Default state: remember previous state</description>
+                </item>
+                <item>
+                  <value>0b11</value>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x3 - Actuator Status Query</title>
+            <description>This message is sent to an actuator. It requests the status of one or all channels of an actuator.<br/>
+                <br/>
+                Response Timing:<br/>
+                An Actuator Status Response message shall be received within a maximum of 300ms from the time of transmission of this message.
+                In case no such response is received within this time frame the action shall be treated as completed without result.
+                <br/>
+                <img>graphics/EEP_D2-01-xx_CMD_03.png</img>
+                <br/>
+              </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x03</value>
+                  <description>ID 03</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>I/O channel</data>
+              <shortcut>I/O</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <description>Output channel (to load)</description>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All output channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Input channel (from mains supply)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x4 - Actuator Status Response</title>
+            <description>This message is sent by an actuator if one of the following events occurs:<br/>
+                          -	Status of one channel has been changed locally<br/>
+                          -	Message Actuator Status Query has been received<br/>
+                <br/>
+                Response Timing:<br/>
+                This message shall be sent within a maximum of 50ms from the time of reception of the Actuator Status Query message.<br/>
+                <br/>
+                <img>graphics/EEP_D2-01-xx_CMD_04.png</img>
+                <br/>
+                REMARK 1:<br/>
+                In case an Actuator Status Query message specifies a parameter that is not supported by the device being addresses, such device shall ignore the message and shall not answer using the Actuator Status Response message.<br/>
+                REMARK 2:<br/>
+                In case an Actuator Status Query message queries all output channels supported by a device being addresses, such device shall answer per each output channel by using an individual Actuator Measurement Response message.<br/>
+                <br/>
+                </description>
+            <datafield>
+              <data>Power Failure</data>
+              <shortcut>PF</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Power Failure Detection disabled/not supported</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Power Failure Detection enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Power Failure Detection</data>
+              <shortcut>PFD</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Power Failure not detected/not supported/disabled</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Power Failure Detected</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>2</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x04</value>
+                  <description>ID 04</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Over current switch off</data>
+              <shortcut>OC</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Over current switch off: ready / not supported</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Over current switch off: executed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Error level</data>
+              <shortcut>EL</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0b00</value>
+                  <description>Error level 0: hardware OK</description>
+                </item>
+                <item>
+                  <value>0b01</value>
+                  <description>Error level 1: hardware warning</description>
+                </item>
+                <item>
+                  <value>0b10</value>
+                  <description>Error level 2: hardware failure</description>
+                </item>
+                <item>
+                  <value>0b11</value>
+                  <description>Error level not supported</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>I/O channel</data>
+              <shortcut>I/O</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <description>Output channel (to load)</description>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>Not applicable, do not use</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Input channel (from mains supply)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Local control</data>
+              <shortcut>LC</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Local control disabled / not supported</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Local control enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Output value</data>
+              <shortcut>OV</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Output value 0% or OFF</description>
+                </item>
+                <item>
+                  <min>0x01</min>
+                  <max>0x64</max>
+                  <description>Output value 1% to 100% or ON</description>
+                </item>
+                <item>
+                  <min>0x65</min>
+                  <max>0x7E</max>
+                  <description>Not used</description>
+                </item>
+                <item>
+                  <value>0x7F</value>
+                  <description>output value not valid / not set</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x5 - Actuator Set Measurement</title>
+            <description>The command defines values at offset 32 and at offset 40 which
+              are the limits for the transmission periodicity of messages.
+              MIT must not be set to 0, MAT &gt;= MIT.<br/>
+                <br/>Response Timing: None
+                <br/>
+                <br/>
+                <img>graphics/EEP_D2-01-xx_CMD_05.png</img>
+                </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>20</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x05</value>
+                  <description>ID 05</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Report measurement</data>
+              <shortcut>RM</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Report measurement: query only</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Report measurement: query / auto reporting</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Reset measurement</data>
+              <shortcut>RE</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Reset measurement: not active</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Reset measurement: trigger signal</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Measurement mode</data>
+              <shortcut>e/p</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Energy measurement</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Power measurement</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>I/O channel</data>
+              <shortcut>I/O</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <description>Output channel (to load)</description>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All output channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Input channel (from mains supply)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Measurement delta to be reported (LSB)</data>
+              <shortcut>MD_LSB</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>0</min>
+                <max>4095</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>4095</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Measurement delta to be reported (MSB)</data>
+              <shortcut>MD_MSB</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>4095</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>4095</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Unit</data>
+              <shortcut>UN</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Energy [Ws]</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Energy [Wh]</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Energy [KWh]</description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Power [W]</description>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>Power [KW]</description>
+                </item>
+                <item>
+                  <min>0x05</min>
+                  <max>0x07</max>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Maximum time between two subsequent actuator messages</data>
+              <shortcut>MAT</shortcut>
+              <description>Measurement Response messages [10s]</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>1</min>
+                  <max>255</max>
+                  <scale>
+                    <min>10</min>
+                    <max>2550</max>
+                  </scale>
+                  <unit>s</unit>
+                </item>
+                <item>
+                  <value>0</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Minimum time between two subsequent actuator messages</data>
+              <shortcut>MIT</shortcut>
+              <description>Measurement Response messages [s]</description>
+              <info/>
+              <bitoffs>40</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>1</min>
+                  <max>255</max>
+                  <scale>
+                    <min>1</min>
+                    <max>255</max>
+                  </scale>
+                  <unit>s</unit>
+                </item>
+                <item>
+                  <value>0</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x6 - Actuator Measurement Query</title>
+            <description>This message is sent to an actuator. The actuator replies with an Actuator Measurement Response message.<br/>
+                <br/>Response Timing:
+                <br/>An Actuator Message Response message shall be received within a maximum of 300ms from the time of transmission of this message.
+In case no such response is received within this time frame the action shall be treated as completed without result.
+                <br/>
+                <img>graphics/EEP_D2-01-xx_CMD_06.png</img>
+              </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x06</value>
+                  <description>ID 06</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Query</data>
+              <shortcut>qu</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Query energy</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Query power</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>I/O channel</data>
+              <shortcut>I/O</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <description>Output channel (to load)</description>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All output channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Input channel (from mains supply)</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x7 - Actuator Measurement Response</title>
+            <description>This message is sent by an actuator if one of the following events occurs:<br/>
+              -	Measurement results trigger an automated transmission (see Actuator Set Measurement message)<br/>
+              -	Message Actuator Measurement Query has been received
+                <br/>
+                <br/>Response Timing:<br/>
+                This message shall be sent within a maximum of 50ms from the time of reception of the Actuator Measurement Query message.
+                <br/>
+                <img>graphics/EEP_D2-01-xx_CMD_07.png</img>
+                <br/>
+                REMARK 1:<br/>
+                In case an Actuator Measurement Query message specifies a parameter that is not supported by the device addressed, such device shall ignore the message and shall not answer using the Actuator Measurement Response message.
+                <br/>
+                REMARK 2:<br/>
+                In case an Actuator Measurement Query message queries all output channels supported by a device being addresses, such device shall answer per each output channel by using an individual Actuator Measurement Response message.
+                <br/>
+              </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x07</value>
+                  <description>ID 07</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Unit</data>
+              <shortcut>UN</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Energy [Ws]</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Energy [Wh]</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Energy [KWh]</description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Power [W]</description>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>Power [KW]</description>
+                </item>
+                <item>
+                  <min>0x05</min>
+                  <max>0x07</max>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>I/O channel</data>
+              <shortcut>I/O</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <description>Output channel (to load)</description>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>Not applicable, do not use</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Input channel (from mains supply)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Measurement value (4 bytes)</data>
+              <shortcut>MV</shortcut>
+              <description>DB3 = MSB / DB0 = LSB</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>32</bitsize>
+              <range>
+                <min>0</min>
+                <max>4294967295</max>
+              </range>
+              <unit>N/A</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x8 - Actuator Set Pilot Wire Mode</title>
+            <description>
+              <img>graphics/EEP_D2-01-xx_CMD_08.png</img>
+              <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x08</value>
+                  <description>ID 08</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Pilotwire mode</data>
+              <shortcut>PM</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>13</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Comfort</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Eco</description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Anti-freeze</description>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>Comfort-1</description>
+                </item>
+                <item>
+                  <value>0x05</value>
+                  <description>Comfort-2</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x9 - Actuator Pilot Wire Mode Query</title>
+            <description>
+              <img>graphics/EEP_D2-01-xx_CMD_09.png</img>
+              <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x09</value>
+                  <description>ID 09</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0xA - Actuator Pilot Wire Mode Response</title>
+            <description>
+              <img>graphics/EEP_D2-01-xx_CMD_0A.png</img>
+              <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x0A</value>
+                  <description>ID 0A</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Pilotwire mode</data>
+              <shortcut>PM</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>13</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Comfort</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Eco</description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Anti-freeze</description>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>Comfort-1</description>
+                </item>
+                <item>
+                  <value>0x05</value>
+                  <description>Comfort-2</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0xB - Actuator Set External Interface Settings</title>
+            <description>
+              <img>graphics/EEP_D2-01-xx_CMD_0B.png</img>
+              <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>51</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x0B</value>
+                  <description>ID 0B</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>I/O channel</data>
+              <shortcut>I/O</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <description>Output channel (to load)</description>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All output channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Input channel (from mains supply)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Auto OFF Timer</data>
+              <shortcut>AOT</shortcut>
+              <description>Timer to automatically set OFF output channel when it is set ON</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>16</bitsize>
+              <enum>
+                <item>
+                  <value>0x0000</value>
+                  <description>Timer deactivated</description>
+                </item>
+                <item>
+                  <min>0x0001</min>
+                  <max>0xFFFE</max>
+                  <scale>
+                    <min>0.1</min>
+                    <max>6553.4</max>
+                  </scale>
+                  <unit>s</unit>
+                </item>
+                <item>
+                  <value>0xFFFF</value>
+                  <description>Does not modify saved value</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Delay OFF Timer</data>
+              <shortcut>DOT</shortcut>
+              <description>Delay timer before setting output channel to OFF value received by radio cmd</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>16</bitsize>
+              <enum>
+                <item>
+                  <value>0x0000</value>
+                  <description>Timer deactivated</description>
+                </item>
+                <item>
+                  <min>0x0001</min>
+                  <max>0xFFFE</max>
+                  <scale>
+                    <min>0.1</min>
+                    <max>6553.4</max>
+                  </scale>
+                  <unit>s</unit>
+                </item>
+                <item>
+                  <value>0xFFFF</value>
+                  <description>Does not modify saved value</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>External Switch/Push Button</data>
+              <shortcut>EBM</shortcut>
+              <description>External interface mode</description>
+              <info/>
+              <bitoffs>48</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0b00</value>
+                  <description>Not applicable</description>
+                </item>
+                <item>
+                  <value>0b01</value>
+                  <description>External Switch</description>
+                </item>
+                <item>
+                  <value>0b10</value>
+                  <description>External Push Button</description>
+                </item>
+                <item>
+                  <value>0b11</value>
+                  <description>Auto detect</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>2-state switch</data>
+              <shortcut>SWT</shortcut>
+              <description>Switching state</description>
+              <info/>
+              <bitoffs>50</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b00</value>
+                  <description>Change of key state sets ON or OFF</description>
+                </item>
+                <item>
+                  <value>0b01</value>
+                  <description>Specific ON/OFF positions.<br/>
+                    ON when contacts are closed.<br/>
+                    OFF when contacts are open.</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0xC - Actuator External Interface Settings Query</title>
+            <description>
+              <img>graphics/EEP_D2-01-xx_CMD_0C.png</img>
+              <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x0C</value>
+                  <description>ID 0C</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>I/O channel</data>
+              <shortcut>I/O</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <description>Output channel (to load)</description>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All output channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Input channel (from mains supply)</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0xD - Actuator External Interface Settings Response</title>
+            <description>
+              <img>graphics/EEP_D2-01-xx_CMD_0D.png</img>
+              <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>51</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x0D</value>
+                  <description>ID 0D</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>I/O channel</data>
+              <shortcut>I/O</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <description>Output channel (to load)</description>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>Not applicable</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Input channel (from mains supply)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Auto OFF Timer</data>
+              <shortcut>AOT</shortcut>
+              <description>Timer to automatically set OFF output channel when it is set ON</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>16</bitsize>
+              <enum>
+                <item>
+                  <value>0x0000</value>
+                  <description>Timer deactivated</description>
+                </item>
+                <item>
+                  <min>0x0001</min>
+                  <max>0xFFFE</max>
+                  <scale>
+                    <min>0.1</min>
+                    <max>6553.4</max>
+                  </scale>
+                  <unit>s</unit>
+                </item>
+                <item>
+                  <value>0xFFFF</value>
+                  <description>Does not modify saved value</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Delay OFF Timer</data>
+              <shortcut>DOT</shortcut>
+              <description>Delay timer before setting output channel to OFF value received by radio cmd</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>16</bitsize>
+              <enum>
+                <item>
+                  <value>0x0000</value>
+                  <description>Timer deactivated</description>
+                </item>
+                <item>
+                  <min>0x0001</min>
+                  <max>0xFFFE</max>
+                  <scale>
+                    <min>0.1</min>
+                    <max>6553.4</max>
+                  </scale>
+                  <unit>s</unit>
+                </item>
+                <item>
+                  <value>0xFFFF</value>
+                  <description>Does not modify saved value</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>External Switch/Push Button</data>
+              <shortcut>EBM</shortcut>
+              <description>External interface mode</description>
+              <info/>
+              <bitoffs>48</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0b00</value>
+                  <description>Not applicable</description>
+                </item>
+                <item>
+                  <value>0b01</value>
+                  <description>External Switch</description>
+                </item>
+                <item>
+                  <value>0b10</value>
+                  <description>External Push Button</description>
+                </item>
+                <item>
+                  <value>0b11</value>
+                  <description>Auto detect</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>2-state switch</data>
+              <shortcut>SWT</shortcut>
+              <description>Switching state</description>
+              <info/>
+              <bitoffs>50</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b00</value>
+                  <description>Change of key state sets ON or OFF</description>
+                </item>
+                <item>
+                  <value>0b01</value>
+                  <description>Specific ON/OFF positions.<br/>ON when contacts are closed.
+                      <br/>OFF when contacts are open.
+                    </description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0xF / ECID 0x00 - Actuator Set Dimming Limits</title>
+            <description>This message is sent to the actuator. It controls the maximum and
+                minimum brightness of the channel output. If the actuator receives
+                an out of range dimming value or an error command, the following
+                actions should be performed:<br/>
+                <ul><li>Channel not supported by device -&gt; ignore the message</li></ul>
+                <ul><li>Set dimming minimum value is less than 0% -&gt; The minimum
+                value is set to 0%</li></ul>
+                <ul><li>Set dimming maximum value greater than 100% -&gt; The
+                maximum value is set to 100%</li></ul>
+                <img>graphics/EEP_D2-01-xx_CMD_0F_ECID_00.png</img>
+                <br/>
+              </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>21</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>32</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0xF</value>
+                  <description>ID F</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Extended Command ID</data>
+              <shortcut>ECID</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>ID 00</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>I/O Channel</data>
+              <shortcut>I/O</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <description>Output channel (to load)</description>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All output channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Maximum Value</data>
+              <shortcut>MAXV</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <min>0x01</min>
+                  <max>0x64</max>
+                  <description>Set maximum value</description>
+                </item>
+                <item>
+                  <min>0x65</min>
+                  <max>0x7F</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Minimum Value</data>
+              <shortcut>MINV</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>33</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x63</max>
+                  <description>Set minimum value</description>
+                </item>
+                <item>
+                  <min>0x64</min>
+                  <max>0x7F</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0xF / ECID 0x01 - Actuator Dimming Limits Query</title>
+            <description>
+              <img>graphics/EEP_D2-01-xx_CMD_0F_ECID_01.png</img>
+              <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0xF</value>
+                  <description>ID F</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Extended Command ID</data>
+              <shortcut>ECID</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x01</value>
+                  <description>ID 01</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>I/O Channel</data>
+              <shortcut>I/O</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <description>Single channel (to load)</description>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All output channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0xF / ECID 0x02 - Actuator Dimming Limits Response</title>
+            <description>
+              <img>graphics/EEP_D2-01-xx_CMD_0F_ECID_02.png</img>
+              <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>21</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>32</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0xF</value>
+                  <description>ID F</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Extended Command ID</data>
+              <shortcut>ECID</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x02</value>
+                  <description>ID 02</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>I/O Channel</data>
+              <shortcut>I/O</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <description>Output channel (to load)</description>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All output channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Maximum Value</data>
+              <shortcut>MAXV</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <min>0x01</min>
+                  <max>0x64</max>
+                  <description>Set maximum value</description>
+                </item>
+                <item>
+                  <min>0x65</min>
+                  <max>0x7F</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Minimum Value</data>
+              <shortcut>MINV</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>33</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x63</max>
+                  <description>Set minimum value</description>
+                </item>
+                <item>
+                  <min>0x64</min>
+                  <max>0x7F</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

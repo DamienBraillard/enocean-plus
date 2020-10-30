@@ -1,0 +1,464 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x20</number>
+        <title>Fan Control</title>
+        <type>
+          <number>0x01</number>
+          <title>Type 0x01</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Maico Elektroapparate-Fabrik GmbH</span>
+            <br/>
+            <br/>
+          </description>
+          <case>
+            <title>Telegram Definition : &#8216;Fan Control Message&#8217;</title>
+            <description>* Devices with discrete fan speed levels instead of a continuous fan speed
+              range should divide the full range linearly and match values beside those
+              discrete levels to the next lower fan speed level.</description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>7</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description>Defines the message type</description>
+              <info/>
+              <bitoffs>7</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Fan control</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Size Reference</data>
+              <shortcut>RSR</shortcut>
+              <description>Defines if the provided room size has to be considered</description>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Used</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Not used</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Default</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Size</data>
+              <shortcut>RS</shortcut>
+              <description>Defines the room size</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>&lt; 25 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>25...50 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>50...75 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>75...100 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>4</value>
+                  <description>100...125 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>5</value>
+                  <description>125...150 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>6</value>
+                  <description>150...175 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>7</value>
+                  <description>175...200 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>8</value>
+                  <description>200...225 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>9</value>
+                  <description>225...250 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>10</value>
+                  <description>250...275 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>11</value>
+                  <description>275...300 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>12</value>
+                  <description>300...325 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>13</value>
+                  <description>325...350 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>14</value>
+                  <description>&gt; 350 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>15</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Speed *</data>
+              <shortcut>FS</shortcut>
+              <description>Sets the fan speed</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <description>0...100%</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <min>101</min>
+                  <max>252</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>253</value>
+                  <description>Auto</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>254</value>
+                  <description>Default</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>255</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Telegram Definition : &#8216;Fan Status Message&#8217;</title>
+            <description/>
+            <datafield>
+              <reserved/>
+              <bitoffs>4</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <data>Operating Mode Status</data>
+              <shortcut>OMS</shortcut>
+              <description>Provides the recent operating mode</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Standard compliant</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <min>2</min>
+                  <max>14</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>15</value>
+                  <description>Not supported</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description>Defines the message type</description>
+              <info/>
+              <bitoffs>7</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Fan status</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Size Reference</data>
+              <shortcut>RSR</shortcut>
+              <description>States if the provided room size has to be considered</description>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Used</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Not used</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Not supported</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Size Status</data>
+              <shortcut>RSS</shortcut>
+              <description>Room size status</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>&lt; 25 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>25...50 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>50...75 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>75...100 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>4</value>
+                  <description>100...125 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>5</value>
+                  <description>125...150 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>6</value>
+                  <description>150...175 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>7</value>
+                  <description>175...200 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>8</value>
+                  <description>200...225 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>9</value>
+                  <description>225...250 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>10</value>
+                  <description>250...275 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>11</value>
+                  <description>275...300 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>12</value>
+                  <description>300...325 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>13</value>
+                  <description>325...350 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>14</value>
+                  <description>&gt; 350 m&#178;</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>15</value>
+                  <description>Not supported</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Speed Status</data>
+              <shortcut>FSS</shortcut>
+              <description>Fan speed</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <description>0...100%</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <min>101</min>
+                  <max>254</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>255</value>
+                  <description>Not supported</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

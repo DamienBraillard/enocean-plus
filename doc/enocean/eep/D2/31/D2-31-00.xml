@@ -1,0 +1,1071 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x31</number>
+        <title>Automated Meter Reading Gateway</title>
+        <type>
+          <number>0x00</number>
+          <title>Type 0x00</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: MSR-Solutions</span>
+          </description>
+          <case>
+            <title>CMD 0x6 - Set meter configuration / MBUS (BUS = 1)</title>
+            <description>This message is sent to a metering device gateway to configure the meter
+              settings for one channel.<br/>
+                <br/>Sender: controller; send type: broadcast or addressed.
+                <br/>
+              </description>
+            <datafield>
+              <data>Report measurement</data>
+              <shortcut>RM</shortcut>
+              <description>Minimum auto reporting interval</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No auto reporting</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Min. 1 s interval</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Min. 3 s interval</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Min. 10 s interval</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Min. 30 s interval</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Min. 100 s interval</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Min. 300 s interval</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Min. 1000 s interval</description>
+                </item>
+                <item>
+                  <min>8</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x06</value>
+                  <description>ID 06</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Meter bus type</data>
+              <shortcut>BUS</shortcut>
+              <description>The meter bus that should be configured</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Reserved</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>MBUS</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>S0</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>D0</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Meter channel index</data>
+              <shortcut>MCH</shortcut>
+              <description>The meter number of given bus that should be configured</description>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>0</min>
+                <max>30</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>30</max>
+              </scale>
+              <unit>1</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Meter 1 units</data>
+              <shortcut>UNIT1</shortcut>
+              <description>Physical units of first measured quantity<br/>(imported value)
+                </description>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No reading (unconfigured)</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Current value W, accumulated value kWh</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Current value W, accumulated value Wh</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Accumulated value kWh only</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Current value m3/h, accumulated value m3</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Current value dm3/h, accumulated value dm3</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Accumulated value m3 only</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Digital counter</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Meter 2 units</data>
+              <shortcut>UNIT2</shortcut>
+              <description>Physical units of second measured quantity<br/>(exported value)
+                </description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No reading (unconfigured)</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Current value W, accumulated value kWh</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Current value W, accumulated value Wh</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Accumulated value kWh only</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Current value m3/h, accumulated value m3</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Current value dm3/h, accumulated value dm3</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Accumulated value m3 only</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Digital counter</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Primary Address</data>
+              <shortcut>ADDR</shortcut>
+              <description>The primary MBUS address of the meter</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>1</min>
+                <max>250</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>250</max>
+              </scale>
+              <unit>1</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>32</bitoffs>
+              <bitsize>40</bitsize>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x6 - Set meter configuration / S0 (BUS = 2)</title>
+            <description/>
+            <datafield>
+              <data>Report measurement</data>
+              <shortcut>RM</shortcut>
+              <description>Minimum auto reporting interval</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No auto reporting</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Min. 1 s interval</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Min. 3 s interval</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Min. 10 s interval</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Min. 30 s interval</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Min. 100 s interval</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Min. 300 s interval</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Min. 1000 s interval</description>
+                </item>
+                <item>
+                  <min>8</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x06</value>
+                  <description>ID 06</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Meter bus type</data>
+              <shortcut>BUS</shortcut>
+              <description>The meter bus that should be configured</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Reserved</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>MBUS</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>S0</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>D0</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Meter channel index</data>
+              <shortcut>MCH</shortcut>
+              <description>The meter number of given bus that should be configured</description>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>0</min>
+                <max>30</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>30</max>
+              </scale>
+              <unit>1</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Meter 1 units</data>
+              <shortcut>UNIT1</shortcut>
+              <description>Physical units of first measured quantity<br/>(imported value)
+                </description>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No reading (unconfigured)</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Current value W, accumulated value kWh</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Current value W, accumulated value Wh</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Accumulated value kWh only</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Current value m3/h, accumulated value m3</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Current value dm3/h, accumulated value dm3</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Accumulated value m3 only</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Digital counter</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Meter 2 units</data>
+              <shortcut>UNIT2</shortcut>
+              <description>Physical units of second measured quantity<br/>(exported value)
+                </description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No reading (unconfigured)</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Current value W, accumulated value kWh</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Current value W, accumulated value Wh</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Accumulated value kWh only</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Current value m3/h, accumulated value m3</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Current value dm3/h, accumulated value dm3</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Accumulated value m3 only</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Digital counter</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Factor of number of pulses</data>
+              <shortcut>FACP</shortcut>
+              <description>The factor for the number of pulses<br/>per value in UNIT1
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>1</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>0.1</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>0.01</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>0.001</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Number of pulses</data>
+              <shortcut>NOP</shortcut>
+              <description>The number of pulses per value in UNIT1* FACP</description>
+              <info/>
+              <bitoffs>26</bitoffs>
+              <bitsize>14</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Do not change the current setting of NOP</description>
+                  <info/>
+                </item>
+                <item>
+                  <min>1</min>
+                  <max>16383</max>
+                  <description>Number of pulses per unit<br/> (EEP 2.6.5:
+                    <span style="font-weight:bold;color:green">1 &#8230; 16383</span>
+                    <span style="text-decoration:line-through;color:red">1 &#8230; 65535</span>)
+                    </description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Preset value</data>
+              <shortcut>RST</shortcut>
+              <description>Preset the accumulated value to this value</description>
+              <info/>
+              <bitoffs>40</bitoffs>
+              <bitsize>32</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>4294967294</max>
+                  <description>New preset value</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>0xFFFFFFFF</value>
+                  <description>Do not change the current value</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x6 - Set meter configuration / D0 (BUS = 3)</title>
+            <description/>
+            <datafield>
+              <data>Report measurement</data>
+              <shortcut>RM</shortcut>
+              <description>Minimum auto reporting interval</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No auto reporting</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Min. 1 s interval</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Min. 3 s interval</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Min. 10 s interval</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Min. 30 s interval</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Min. 100 s interval</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Min. 300 s interval</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Min. 1000 s interval</description>
+                </item>
+                <item>
+                  <min>8</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x06</value>
+                  <description>ID 06</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Meter bus type</data>
+              <shortcut>BUS</shortcut>
+              <description>The meter bus that should be configured</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Reserved</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>MBUS</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>S0</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>D0</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Meter channel index</data>
+              <shortcut>MCH</shortcut>
+              <description>The meter number of given bus that should be configured</description>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>0</min>
+                <max>30</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>30</max>
+              </scale>
+              <unit>1</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Meter 1 units</data>
+              <shortcut>UNIT1</shortcut>
+              <description>Physical units of first measured quantity<br/>(imported value)
+                </description>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No reading (unconfigured)</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Current value W, accumulated value kWh</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Current value W, accumulated value Wh</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Accumulated value kWh only</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Current value m3/h, accumulated value m3</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Current value dm3/h, accumulated value dm3</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Accumulated value m3 only</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Digital counter</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Meter 2 units</data>
+              <shortcut>UNIT2</shortcut>
+              <description>Physical units of second measured quantity<br/>(exported value)
+                </description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No reading (unconfigured)</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Current value W, accumulated value kWh</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Current value W, accumulated value Wh</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Accumulated value kWh only</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Current value m3/h, accumulated value m3</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Current value dm3/h, accumulated value dm3</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Accumulated value m3 only</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Digital counter</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>D0 Protocol</data>
+              <shortcut>PROT</shortcut>
+              <description>The D0 protocol that should be used for that meter</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto detect</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>SML (Smart Message Language)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>DLMS (Device Language Message Specification)</description>
+                </item>
+                <item>
+                  <min>3</min>
+                  <max>255</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>32</bitoffs>
+              <bitsize>40</bitsize>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x7 - Meter Status Query</title>
+            <description>This message is sent to a metering device gateway to query the status of a meter.<br/>Sender: controller; send type: broadcast or addressed; expected response: CMD 0x8.
+                <br/>
+              </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x07</value>
+                  <description>ID 07</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Meter bus type</data>
+              <shortcut>BUS</shortcut>
+              <description>The meter bus type that is queried</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Reserved</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>MBUS</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>S0</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>D0</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Meter channel index</data>
+              <shortcut>MCH</shortcut>
+              <description>The meter channel of given bus that status is queried</description>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>30</max>
+                  <description>Meter channel</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>31</value>
+                  <description>All valid channels</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x8 - Meter reading report / status response</title>
+            <description>This message is sent by a metering device gateway to report the meter
+              values for each configured channel.
+              It is sent if one of the following events occurs:<br/>- Message 'meter status query' has been received (CMD 0x7)
+                <br/>- Status or meter reading of one channel has changed and auto
+              reporting was configured by signal RM.
+                <br/>
+                <br/>Sender: sensor; send type: broadcast; maximum send delay 1 s.
+                <br/>
+              </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Meter status / error</data>
+              <shortcut>MSTAT</shortcut>
+              <description>Meter channel status</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No fault</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>General error</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Bus unconfigured</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Bus unconnected</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Bus shortcut</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Communication timeout</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Unknown protocol or<br/>configuration mismatch
+                    </description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Bus initialization running</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x08</value>
+                  <description>ID 08</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Meter bus type</data>
+              <shortcut>BUS</shortcut>
+              <description>The used bus of the meter status response</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Reserved</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>MBUS</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>S0</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>D0</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Meter channel index</data>
+              <shortcut>MCH</shortcut>
+              <description>The meter number of given bus that status is reported</description>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>0</min>
+                <max>30</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>30</max>
+              </scale>
+              <unit>1</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>Value selection</data>
+              <shortcut>VSEL</shortcut>
+              <description>The selection of the reported value</description>
+              <info/>
+              <bitoffs>19</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Meter 1 Current value</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Meter 1 Accumulated value</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Meter 2 Current value</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Meter 2 Accumulated value</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Value unit</data>
+              <shortcut>VUNIT</shortcut>
+              <description>The unit of the reported value</description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>W</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Wh</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>kWh</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>m3/h</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>dm3/h</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>m3</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>dm3</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>1 (digital counter)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Meter reading value</data>
+              <shortcut>VAL</shortcut>
+              <description>The reported value</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>32</bitsize>
+              <range>
+                <min>0</min>
+                <max>4294967295</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>4294967295</max>
+              </scale>
+              <unit>According to VUNIT</unit>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

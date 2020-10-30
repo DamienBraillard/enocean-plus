@@ -1,0 +1,274 @@
+<!DOCTYPE eep SYSTEM "./eep.dtd">
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD</title>
+      <fullname>EnOcean variable length</fullname>
+      <func>
+        <title>Multisensors</title>
+        <number>0x14</number>
+        <type>
+          <number>0x40</number>
+          <title>Indoor -Temperature, Humidity XYZ Acceleration, Illumination Sensor</title>
+          <status>proposed</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: EnOcean</span>
+          </description>
+          <case>
+            <description>
+              <img>graphics/D2-14-zz.png</img>
+            </description>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP10</shortcut>
+              <description>Temperature (linear)<br/>
+                -----------
+                <br/>
+                Status of Temperature Sensor
+                </description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>10</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>1000</max>
+                  <scale>
+                    <min>-40</min>
+                    <max>60</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>1001</min>
+                  <max>1020</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>1021</value>
+                  <description>Out of Range negative</description>
+                </item>
+                <item>
+                  <value>1022</value>
+                  <description>Out of Range positive</description>
+                </item>
+                <item>
+                  <value>1023</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Humidity</data>
+              <shortcut>HUM</shortcut>
+              <description>Rel. Humidity (linear)<br/>
+                -----------
+                <br/>
+                Status of Humidity Sensor
+                </description>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>200</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <min>201</min>
+                  <max>254</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Illumination</data>
+              <shortcut>ILL</shortcut>
+              <description>Illumination (linear)<br/>-----------
+                  <br/>Status of Illumination Sensor
+                </description>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>17</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100000</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100000</max>
+                  </scale>
+                  <unit>lx</unit>
+                </item>
+                <item>
+                  <min>100001</min>
+                  <max>131070</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>131071</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Accleration Status</data>
+              <shortcut>ACC_S</shortcut>
+              <description>Status of the Sensor</description>
+              <info/>
+              <bitoffs>35</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Heartbeat</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Threshold 1 exceeded</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Threshold 2 exceeded</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Acceleration X</data>
+              <shortcut>ACC_X</shortcut>
+              <description>Acceleration  X (linear)<br/>-----------
+                <br/>Status of Acceleration  Sensor
+                </description>
+              <info/>
+              <bitoffs>37</bitoffs>
+              <bitsize>10</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>1000</max>
+                  <scale>
+                    <min>-2.5</min>
+                    <max>2.5</max>
+                  </scale>
+                  <unit>g</unit>
+                </item>
+                <item>
+                  <min>1000</min>
+                  <max>1020</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>1021</value>
+                  <description>Out of range negative</description>
+                </item>
+                <item>
+                  <value>1022</value>
+                  <description>Out of range positive</description>
+                </item>
+                <item>
+                  <value>1023</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Acceleration Y</data>
+              <shortcut>ACC_Y</shortcut>
+              <description>Acceleration  Y (linear)<br/>-----------
+                <br/>Status of Acceleration  Sensor
+                </description>
+              <info/>
+              <bitoffs>47</bitoffs>
+              <bitsize>10</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>1000</max>
+                  <scale>
+                    <min>-2.5</min>
+                    <max>2.5</max>
+                  </scale>
+                  <unit>g</unit>
+                </item>
+                <item>
+                  <min>1000</min>
+                  <max>1020</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>1021</value>
+                  <description>Out of range negative</description>
+                </item>
+                <item>
+                  <value>1022</value>
+                  <description>Out of range positive</description>
+                </item>
+                <item>
+                  <value>1023</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Acceleration Z</data>
+              <shortcut>ACC_Z</shortcut>
+              <description>Acceleration  Z (linear)<br/>-----------
+                <br/>Status of Acceleration  Sensor
+                </description>
+              <info/>
+              <bitoffs>57</bitoffs>
+              <bitsize>10</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>1000</max>
+                  <scale>
+                    <min>-2.5</min>
+                    <max>2.5</max>
+                  </scale>
+                  <unit>g</unit>
+                </item>
+                <item>
+                  <min>1000</min>
+                  <max>1020</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>1021</value>
+                  <description>Out of range negative</description>
+                </item>
+                <item>
+                  <value>1022</value>
+                  <description>Out of range positive</description>
+                </item>
+                <item>
+                  <value>1023</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>67</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

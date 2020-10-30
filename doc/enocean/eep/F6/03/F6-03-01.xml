@@ -1,0 +1,271 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xF6</number>
+      <title>RPS Telegram</title>
+      <telegram>RPS</telegram>
+      <func>
+        <number>0x03</number>
+        <title>Rocker Switch, 4 Rocker</title>
+        <type>
+          <number>0x01</number>
+          <title>Light and Blind Control - Application Style 1</title>
+          <status>released</status>
+          <description>This EEP definition is based on the assumption that a RPS switch module is installed in a
+              0-STATE up position!
+              Application Style 1 is widely used in EU but may be found in other markets as well.</description>
+          <case>
+            <condition>
+              <statusfield>
+                <bitoffs>2</bitoffs>
+                <bitsize>1</bitsize>
+                <value>0</value>
+              </statusfield>
+              <statusfield>
+                <bitoffs>3</bitoffs>
+                <bitsize>1</bitsize>
+                <value>1</value>
+              </statusfield>
+            </condition>
+            <statusfield>
+              <data>T21</data>
+              <bitoffs>2</bitoffs>
+              <bitsize>1</bitsize>
+              <value>0</value>
+            </statusfield>
+            <statusfield>
+              <data>NU</data>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+              <value>1</value>
+            </statusfield>
+            <datafield>
+              <data>Rocker 1st action</data>
+              <shortcut>R1</shortcut>
+              <description>....</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Button AI:<br/> "Switch light on" or "Dim light down" or "Move blind closed"
+                    </description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Button A0:<br/> "Switch light off" or "Dim light up" or "Move blind open"
+                    </description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Button BI:<br/>&#8220;Switch light on&#8221; or "Dim light down&#8221; or "Move blind closed&#8221;
+                    </description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Button B0:<br/>&#8220;Switch light off&#8221; or &#8220;Dim light up&#8221; or "Move blind open&#8221;
+                    </description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Button CI:<br/> "Switch light on" or "Dim light down" or "Move blind closed"
+                    </description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Button C0:<br/> "Switch light off" or "Dim light up" or "Move blind open"
+                    </description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Button DI:<br/>&#8220;Switch light on&#8221; or "Dim light down&#8221; or "Move blind closed&#8221;
+                    </description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Button D0:<br/>&#8220;Switch light off&#8221; or &#8220;Dim light up&#8221; or "Move blind open&#8221;
+                    </description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy Bow</data>
+              <shortcut>EB</shortcut>
+              <description>....</description>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>released</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>pressed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Rocker 2nd action</data>
+              <shortcut>R2</shortcut>
+              <description>....</description>
+              <bitoffs>4</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Button AI:<br/> "Switch light on" or "Dim light down" or "Move blind closed"
+                    </description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Button A0:<br/> "Switch light off" or "Dim light up" or "Move blind open"
+                    </description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Button BI:<br/>&#8220;Switch light on&#8221; or "Dim light down&#8221; or "Move blind closed&#8221;
+                    </description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Button B0:<br/>&#8220;Switch light off&#8221; or &#8220;Dim light up&#8221; or "Move blind open&#8221;
+                    </description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Button CI:<br/> "Switch light on" or "Dim light down" or "Move blind closed"
+                    </description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Button C0:<br/> "Switch light off" or "Dim light up" or "Move blind open"
+                    </description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Button DI:<br/>&#8220;Switch light on&#8221; or "Dim light down&#8221; or "Move blind closed&#8221;
+                    </description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Button D0:<br/>&#8220;Switch light off&#8221; or &#8220;Dim light up&#8221; or "Move blind open&#8221;
+                    </description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>2nd Action</data>
+              <shortcut>SA</shortcut>
+              <description>....</description>
+              <bitoffs>7</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No 2nd action</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>2nd action valid</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <condition>
+              <statusfield>
+                <bitoffs>2</bitoffs>
+                <bitsize>1</bitsize>
+                <value>0</value>
+              </statusfield>
+              <statusfield>
+                <bitoffs>3</bitoffs>
+                <bitsize>1</bitsize>
+                <value>0</value>
+              </statusfield>
+            </condition>
+            <statusfield>
+              <data>T21</data>
+              <bitoffs>2</bitoffs>
+              <bitsize>1</bitsize>
+              <value>0</value>
+            </statusfield>
+            <statusfield>
+              <data>NU</data>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+              <value>0</value>
+            </statusfield>
+            <datafield>
+              <data>Number of buttons pressed simultaneously</data>
+              <shortcut>R1</shortcut>
+              <description>....</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>no Button pressed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>2 buttons pressed</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>3 buttons pressed</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>4 buttons pressed</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>5 buttons pressed</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>6 buttons pressed</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>7 buttons pressed</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>8 buttons pressed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy Bow</data>
+              <shortcut>EB</shortcut>
+              <description>....</description>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>released</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>pressed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

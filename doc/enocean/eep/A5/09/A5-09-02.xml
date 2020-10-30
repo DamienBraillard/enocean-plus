@@ -1,0 +1,124 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x09</number>
+        <title>Gas Sensor</title>
+        <type>
+          <number>0x02</number>
+          <title>CO-Sensor 0 ppm to 1020 ppm</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Unitronic AG</span>
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Supply voltage</data>
+              <shortcut>SVC</shortcut>
+              <description>Supply voltage (linear)</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>5.1</max>
+              </scale>
+              <unit>V</unit>
+            </datafield>
+            <datafield>
+              <data>Concentration</data>
+              <shortcut>Conc</shortcut>
+              <description>Gas concentration</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>1020</max>
+              </scale>
+              <unit>ppm</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature (linear)</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+51</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>T-Sensor</data>
+              <shortcut>TSN</shortcut>
+              <description>..</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Temperature Sensor not available</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Temperature Sensor available</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

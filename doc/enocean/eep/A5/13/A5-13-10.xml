@@ -1,0 +1,142 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x13</number>
+        <title>Environmental Applications</title>
+        <type>
+          <number>0x10</number>
+          <title>Sun position and radiation</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: NanoSense</span>
+          </description>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Day / Night</data>
+              <shortcut>D/N</shortcut>
+              <description>Day / Night</description>
+              <bitoffs>7</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Day</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Night</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Sun Elevation</data>
+              <shortcut>SNE</shortcut>
+              <description>Sun Elevation (linear);<br/>91 - 127: reserved
+              </description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>90</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>90</max>
+              </scale>
+              <unit>&#176;</unit>
+            </datafield>
+            <datafield>
+              <data>Sun Azimuth</data>
+              <shortcut>SNA</shortcut>
+              <description>Sun Azimuth<br/>181 - 255: reserved
+              </description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>180</max>
+              </range>
+              <scale>
+                <min>-90</min>
+                <max>+90</max>
+              </scale>
+              <unit>&#176;</unit>
+            </datafield>
+            <datafield>
+              <data>Solar Radiation (MSB)</data>
+              <shortcut>SRA (MSB)</shortcut>
+              <description>Solar Radiation (MSB)</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <ref>SRA (LSB)</ref>
+              </range>
+              <scale>
+                <ref>SRA (LSB)</ref>
+              </scale>
+              <unit>
+                <ref>SRA (LSB)</ref>
+              </unit>
+            </datafield>
+            <datafield>
+              <data>Solar Radiation (LSB)</data>
+              <shortcut>SRA (LSB)</shortcut>
+              <description>Solar Radiation (LSB) (Linear);<br/>2001..2048: reserved
+              </description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+              <range>
+                <min>0</min>
+                <max>2000</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>2000</max>
+              </scale>
+              <unit>W/m2</unit>
+            </datafield>
+            <datafield>
+              <data>Identifier</data>
+              <shortcut>ID</shortcut>
+              <description>Identifier</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x7</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

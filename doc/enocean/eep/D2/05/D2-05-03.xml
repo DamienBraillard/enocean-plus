@@ -1,0 +1,794 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <oldnumber>.RORG</oldnumber>
+      <fullname>Variable Length Data</fullname>
+      <telegram>VLD</telegram>
+      <description></description>
+      <func>
+        <number>0x05</number>
+        <title>Blinds Control for Position and Angle</title>
+        <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Hydro Building Systems</span><br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/>The protocol is intended for commissioning as well as for operation of a blind actuator that supports control of the vertical position as well as the rotation angle of the slats.
+	<br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: bidirectional.
+	<br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Teach-in</span><br/>Teach-in method: UTE.
+	<br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Security</span><br/>Security mandatory: no.
+	<br/>Security level format: _.
+	<br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">EEP Family Table</span><br/>Each TYPE has to support all telegrams and parameters marked in its column.
+	<br/><br/><table><tr><th style="width:'260px'">Commands Overview</th><th style="width:'23px'">00</th><th style="width:'23px'">01</th><th style="width:'23px'">02</th><th style="width:'23px'">03</th></tr><tr><td>Goto command</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Stop command</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Query command</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Reply command</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Set parameters</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>6 - Open motorized window</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>7 - Query data</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>8 - Reply data</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr></table><br/><br/><br/><table><tr><th style="width:'260px'">Parameters Overview</th><th style="width:'23px'">00</th><th style="width:'23px'">01</th><th style="width:'23px'">02</th><th style="width:'23px'">03</th></tr><tr><td>position</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Angle</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>verticalMovementTime</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>rotationTime</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>Repositioning</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>lockingMode</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>channel</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>alarmAction</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>commandId</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Locking sensor 1</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Locking sensor 2</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Intrusion detected</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Transmissivity</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Indoor Temperature</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Outdoor Temperature</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Solar protection</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Motorized sash</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Error state</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Opening mode</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td></tr></table><br/><br/><br/></description>
+        <type>
+          <number>0x03</number>
+          <title>Smart Window</title>
+          <status>not released</status>
+          <case>
+            <title>CMD: Goto command</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/>The type is intended for operation of a smart window that supports control of the vertical position and the rotation angle of the slats when using blinds, or the position and tint level of a electrochrome glass zone. There is the possibility to operate a motorization that opens and closes the window. The smart window has several sensors to return operational and environmental data.         .
+	<br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: to.
+	<br/>Addressing: unicast. 
+	<br/>Communication trigger: event_trigger.
+	<br/>Trigger description: Once the actuator is configured the position of the blinds or electrochromic glass zones can be controlled with this command.When the actuator is set to blockage mode, neither local nor central positioning and configuration commands will beexecuted. This mode is intended for putting the device temporarily out of service, e.g. for a maintenance operation.When the actuator is set to the alarm mode neither local nor central positioning and configuration commands will beexecuted. When this command is sent with the deblockage option, the actuator terminates the alarm or blockage modeand enters the normal mode.
+	<br/></description>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>position</data>
+              <description>Vertical position of blind/shutter or electrochrome glass zones</description>
+              <bitoffs>1</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Do not change</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>Angle</data>
+              <description>blade orientation or electrochrom glass tint level</description>
+              <bitoffs>9</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Do not change</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>Repositioning</data>
+              <description>How to adjust the internal positioning tracker before going to the new position</description>
+              <bitoffs>17</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Go directly to POS/ANG</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Go up (0%), then to POS/ANG</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Go down (100%, then to POS/ANG)</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>20</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>lockingMode</data>
+              <description>Set/reset locking modes</description>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Do not change</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Set blockade mode</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Set alarm mode</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Deblockade</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>channel</data>
+              <description>Channel address</description>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>commandId</data>
+              <description>Command identifier</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Goto command</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD: Stop command</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: to.
+	<br/>Addressing: unicast. 
+	<br/>Communication trigger: event_trigger.
+	<br/>Trigger description: This command immediately stops a running blind motor. It has no effect when the actuator is in blockage or alarm mode, i.e. it will not stop an eventual go up or go down alarm action.
+	<br/></description>
+            <datafield>
+              <data>channel</data>
+              <description>Channel address</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>commandId</data>
+              <description>Command identifier</description>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Stop command</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD: Query command</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: to.
+	<br/>Addressing: unicast. 
+	<br/>Communication trigger: event_trigger.
+	<br/>Trigger description: This command requests the actuator to return a reply command.
+	<br/></description>
+            <datafield>
+              <data>channel</data>
+              <description>Channel address</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>commandId</data>
+              <description>Command identifier</description>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Query command</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD: Reply command</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: from.
+	<br/>Addressing: unicast. 
+	<br/>Communication trigger: response_to_cmd.
+	<br/>Trigger description: Either upon request (Query command) or after an internal trigger (see EEP Properties) the actuator sends this command to inform about its current state.
+	<br/></description>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>position</data>
+              <description>Vertical position of blind/shutter or electrochrome glass zones. 0%=up; 100%=down</description>
+              <bitoffs>1</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Position/glass zone unknown, will be known after the next goto cmd</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>Angle</data>
+              <description>blade orientation or electrochrom glass opacity</description>
+              <bitoffs>9</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Angle/opacity unknown, will be known after the next goto cmd</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>16</bitoffs>
+              <bitsize>5</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>lockingMode</data>
+              <description>Set/reset locking modes</description>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal (no lock)</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Blockage mode</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Alarm mode</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>channel</data>
+              <description>Channel address</description>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>commandId</data>
+              <description>Command identifier</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>4</value>
+                  <description>Reply command</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD: 6 - Open motorized window</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: to.
+	<br/>Addressing: unicast. 
+	<br/>Communication trigger: event_trigger.
+	<br/>Trigger description: This command is for opening of a motorized window.
+	<br/></description>
+            <datafield>
+              <data>Motorized sash</data>
+              <description>Opening of the motorized window (0%=closed, 100% fully open)</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>channel</data>
+              <description>Channel address</description>
+              <bitoffs>8</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>commandId</data>
+              <description>Command identifier</description>
+              <bitoffs>12</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>6</value>
+                  <description>Open</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD: 7 - Query data</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: to.
+	<br/>Addressing: unicast. 
+	<br/>Communication trigger: event_trigger.
+	<br/>Trigger description: This command requests the actuator to return a reply data command.
+	<br/></description>
+            <datafield>
+              <data>channel</data>
+              <description>Channel address</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>commandId</data>
+              <description>Command identifier</description>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>7</value>
+                  <description>Query data</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD: 8 - Reply data</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: from.
+	<br/>Addressing: unicast. 
+	<br/>Communication trigger: event_time_trigger.
+	<br/>Trigger description: Either upon request (Query data command) or after an internal trigger (see EEP Properties) the actuator sends this command to inform about its current state.
+	<br/>Timing description: no special timing requested<br/><br/></description>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>position</data>
+              <description>Vertical position of blind/shutter or electrochrome glass zones 0%=up; 100%=down</description>
+              <bitoffs>1</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>Angle</data>
+              <description>blade orientation or electrochrom glass tint level</description>
+              <bitoffs>9</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>Transmissivity</data>
+              <description>quantity of (sun) light that can go through the glass</description>
+              <bitoffs>17</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Locking sensor 1</data>
+              <description>Locking sensor 1</description>
+              <bitoffs>24</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>window open</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>window closed</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>sensor not available</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>reserved</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Locking sensor 2</data>
+              <description>Locking sensor 2</description>
+              <bitoffs>26</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>window open</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>window closed</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>sensor not available</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>reserved</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Intrusion detected</data>
+              <description>Intrusion detected</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>intrusion detector not triggered</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>intrusion detector triggered</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>intrusion detector not available</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>reserved</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Solar protection</data>
+              <description>Solar protection available</description>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Solar protection without orientation available</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Solar protection with orientation available</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Solar protection with electrochromic glass available</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>No solar protection available</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Indoor Temperature</data>
+              <description>Indoor Temperature</description>
+              <bitoffs>32</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>50</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>101</min>
+                  <max>255</max>
+                  <description>reserved</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Outdoor Temperature</data>
+              <description>Outdoor Temperature</description>
+              <bitoffs>40</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>200</max>
+                  <scale>
+                    <min>-40</min>
+                    <max>60</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>201</min>
+                  <max>255</max>
+                  <description>reserved</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Opening mode</data>
+              <description>Opening mode</description>
+              <bitoffs>48</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Automode</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Manual override</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Motorized sash</data>
+              <description>Opening of the motorized window (0%=closed, 100%=fully open)</description>
+              <bitoffs>49</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>not available</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <bitoffs>56</bitoffs>
+              <bitsize>4</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>Error state</data>
+              <description>Error state key</description>
+              <bitoffs>60</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No error</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Current Kill Error. This indicates the maximum current was exceeded. Typically there is a short in the wires somewhere. When this error occurs, all IGUs electrochromic glasses) connected to the controller will be turned off and cannot be tinted.</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>IGU Not Tinting. The controller detects if there voltage and no current. Most likely issue is an open wire somewhere.</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>IGU Warning. The controller detects that the IGU is not operating as expected. Most likely the IGU is still tinting, but may have some visual inconsistencies.</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Parameter Error. The controller detects an IGU parameter is out of bounds.In this case, all IGUs on that controller are turned off.This should only happen during commissioning, but is required to ensure our glass is controlled safely.</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>System Error. Other potential system errors.This will most likely required replacement of the controller card or software update.</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Opening motorized error. the motor meets an issue for opening the sash; check if there isn&#8217;t an obstacle; it could be necessary to call a technician</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Closing motorized error. the motor meets an issue for closing the sash; check if there isn&#8217;t an obstacle; it could be necessary to call a technician</description>
+                </item>
+                <item>
+                  <min>8</min>
+                  <max>15</max>
+                  <description>reserved</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>channel</data>
+              <description>Channel address</description>
+              <bitoffs>64</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>commandId</data>
+              <description>Command identifier</description>
+              <bitoffs>68</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>8</value>
+                  <description>Reply data</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

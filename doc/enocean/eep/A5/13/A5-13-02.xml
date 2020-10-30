@@ -1,0 +1,132 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x13</number>
+        <title>Environmental Applications</title>
+        <type>
+          <number>0x02</number>
+          <title>Sun Intensity</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Elsner electronics</span>
+          </description>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Sun &#8211; West</data>
+              <shortcut>SNW</shortcut>
+              <description>Sun - West,linear</description>
+              <info>DB_3: Sun &#8211; West 1klx &#8230; 150klx, linear n=0&#8230;255</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>150</max>
+              </scale>
+              <unit>klx</unit>
+            </datafield>
+            <datafield>
+              <data>Sun &#8211; South</data>
+              <shortcut>SNS</shortcut>
+              <description>Sun - South,linear</description>
+              <info>DB_2: Sun &#8211; West 1klx &#8230; 150klx, linear n=0&#8230;255</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>150</max>
+              </scale>
+              <unit>klx</unit>
+            </datafield>
+            <datafield>
+              <data>Sun &#8211; East</data>
+              <shortcut>SNE</shortcut>
+              <description>Sun - East,linear</description>
+              <info>DB_1: Sun &#8211; East 1klx &#8230; 150klx, linear n=0&#8230;255</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>150</max>
+              </scale>
+              <unit>klx</unit>
+            </datafield>
+            <datafield>
+              <data>Identifier</data>
+              <shortcut>ID</shortcut>
+              <description>Identifier</description>
+              <info>DB_0.BIT_7 &#8230; 4: Identifier</info>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x2</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Hemisphere</data>
+              <shortcut>HEM</shortcut>
+              <description>0 = north / 1 = south, then swith Sun south to Sun North when in southern hemisphere</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>North</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>South</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description>Not Used</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

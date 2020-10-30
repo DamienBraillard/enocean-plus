@@ -1,0 +1,133 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x06</number>
+        <title>Light Sensor</title>
+        <type>
+          <number>0x05</number>
+          <title>Range 0lx to 10.200lx</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: ITEC</span><br/><br/><br/><span style="border-bottom:2px groove #000000;">Data exchange</span><br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event- &amp; time-triggered
+            <br/>Communication interval: 20 seconds &#8211; 1 hour (one time configuration)
+            <br/>Trigger event: threshold/delta for observed value, heartbeat
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: 4BS teach-in 2
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: no
+            <br/>Security level format: -
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Supply voltage</data>
+              <shortcut>SVC</shortcut>
+              <description>Supply voltage (linear)</description>
+              <info>DB_3: Supply voltage 0&#8230;5.1V, linear n=0&#8230;255</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>5.1</max>
+              </scale>
+              <unit>V</unit>
+            </datafield>
+            <datafield>
+              <data>Illumination</data>
+              <shortcut>ILL2</shortcut>
+              <description>Illumination (linear)</description>
+              <info>DB_2: Illumination 0&#8230;5100 lx, linear n=0&#8230;255</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>5100</max>
+              </scale>
+              <unit>lx</unit>
+            </datafield>
+            <datafield>
+              <data>Illumination</data>
+              <shortcut>ILL1</shortcut>
+              <description>Illumination (linear)</description>
+              <info>DB_1: Illumination 0&#8230;10.200 lx, linear n=0&#8230;255</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>10200</max>
+              </scale>
+              <unit>lx</unit>
+            </datafield>
+            <datafield>
+              <data>Range select</data>
+              <shortcut>RS</shortcut>
+              <description>Range</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Range acc. to DB_1 (ILL1)</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Range acc. to DB_2 (ILL2)</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

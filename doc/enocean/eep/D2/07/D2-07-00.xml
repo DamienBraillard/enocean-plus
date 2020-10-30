@@ -1,0 +1,89 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <oldnumber>.RORG</oldnumber>
+      <fullname>Variable Length Data</fullname>
+      <telegram>VLD</telegram>
+      <description></description>
+      <func>
+        <number>0x07</number>
+        <title>Locking Systems Control</title>
+        <status>released</status>
+        <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Schulte-Schlagbaum AG</span><br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/>  In this EEP family electronic locking systems and mortise locks are collected
+                <br/>
+                <br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span>
+                <br/>Direction: unidirectional
+                <br/>
+                <br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Teach-in</span>
+                <br/>Teach-in method: Universal teach-in (UTE)
+                <br/>
+                <br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Security</span>
+                <br/>Encryption mandatory: No  
+            <br/>
+            <br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">EEP Family Table</span>
+            <br/>Each TYPE has to support all telegrams and parameters marked in its column.
+            <br/>
+            <br/><table><tr><th>Command Overview</th><th>00</th></tr></table>
+            <br/>
+            <br/><table><tr><th>Parameter Overview</th><th>00</th></tr><tr><td>Bold state</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Catch state</td><td style="background-color:#FFFFFF">X</td></tr></table>
+            <br/>
+            <br/>
+            <br/>
+            </description>
+        <type>
+          <number>0x00</number>
+          <title>Mortise lock</title>
+          <status>not released</status>
+          <case>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/>Sending the current state of a mortise lock to a property management system
+(PMS). Therefor the information about the current state is generated inside the lock and put
+together into the EEP.
+A message is generated every time, the catch or the bold is moved into a different position.
+With each movement an energy harvester is triggered, the controller gets the current state by
+two sensors and the message is sended.
+The mortise lock acts just as a sensor and not as actor in any way. .
+                   <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Addressing: broadcast 
+                    <br/>Communication trigger: event_trigger<br/>Event description: Movement of the bolt or the catch
+                  <br/></description>
+            <datafield>
+              <data>Bold state</data>
+              <description>Bold state key</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Bold inside the lock1</description>
+                </item>
+              </enum>
+              <trigger>X</trigger>
+            </datafield>
+            <datafield>
+              <data>Catch state</data>
+              <description>Catch state key</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Catch inside the lock1</description>
+                </item>
+              </enum>
+              <trigger>X</trigger>
+            </datafield>
+            <datafield>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>6</bitsize>
+              <reserved/>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

@@ -1,0 +1,89 @@
+<!DOCTYPE eep SYSTEM "./eep.dtd">
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD</title>
+      <fullname>EnOcean variable length</fullname>
+      <func>
+        <title>Multisensors</title>
+        <number>0x14</number>
+        <type>
+          <number>0x50</number>
+          <title>Basic Water Properties Sensor</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter:Echoflex</span>
+          </description>
+          <case>
+            <description></description>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP10</shortcut>
+              <description>Temperature (linear)<br/>
+                -----------
+                <br/>
+                Status of Temperature Sensor
+                </description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>9</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>500</max>
+                  <scale>
+                    <min>0</min>
+                    <max>50</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>501</min>
+                  <max>510</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>511</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>PH</data>
+              <shortcut>PH</shortcut>
+              <description>PH<br/>
+                -----------
+                <br/>
+                Status of PH Sensor
+                </description>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>140</max>
+                  <scale>
+                    <min>0</min>
+                    <max>14</max>
+                  </scale>
+                  <unit>PH</unit>
+                </item>
+                <item>
+                  <min>141</min>
+                  <max>254</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

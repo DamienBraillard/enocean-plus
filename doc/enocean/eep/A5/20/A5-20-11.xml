@@ -1,0 +1,303 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x20</number>
+        <title>HVAC Components</title>
+        <type>
+          <number>0x11</number>
+          <title>Generic HVAC Interface &#8211; Error Control</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Intesis Software SL</span><br/><br/>
+          Error Control: AC Error Code, Error States and Disablements. With this
+          EEP plus the already existing EEP A5-10-03 and A5-20-10 all the information of AC indoor
+          unit can be sent and received allowing a much easier and complete control of these units.
+          <br/>
+          <br/>
+          DIRECTION-1 = Receive mode: Commands received by the HVAC interface.
+          <br/>
+          DIRECTION-2 = Transmit mode: Commands sent by the HVAC interface.</description>
+          <case>
+            <direction>1</direction>
+            <condition>
+              <direction>1</direction>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>23</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Disable remote controller</data>
+              <shortcut>DRC</shortcut>
+              <description>Disable remote controller<br/>(When in receive mode it controls if the interface overwrites the remote controller commands.)</description>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Enable Remote controller</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Disable Remote controller</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>External disablement</data>
+              <shortcut>EXDS</shortcut>
+              <description>External disablement</description>
+              <info/>
+              <bitoffs>23</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Not disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Disabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Window contact</data>
+              <shortcut>WC</shortcut>
+              <description>Window contact</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Windows opened</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Windows closed</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <direction>2</direction>
+            <condition>
+              <direction>2</direction>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Remote controller Disablement</data>
+              <shortcut>RCD</shortcut>
+              <description>Remote controller Disablement<br/>(In transmit it sends the status of this parameter. If the manufacturer doesn't support this option, it will send allways 0, no matter what it receives.)</description>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Remote controller enabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Remote controller disabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Error Code</data>
+              <shortcut>ERR</shortcut>
+              <description>Error Code (DB3 HI,DB2 LO); generated by A.C.</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>16</bitsize>
+              <range>
+                <min>0</min>
+                <max>65535</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>65535</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Reserved</data>
+              <shortcut>RES</shortcut>
+              <description>Reserved (0b0000)</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value/>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Other disablement</data>
+              <shortcut>OD</shortcut>
+              <description>Manufacturer defined. It is just to provide an extra &#8220;disablement signal&#8221; that could be used for other
+devices. People would not have to change anything then as this is already an established &#8220;signal&#8221;</description>
+              <info/>
+              <bitoffs>20</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Not disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Disabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Window contact disablement</data>
+              <shortcut>WCD</shortcut>
+              <description>Window contact disablement</description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Not disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Disabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Key card disablement</data>
+              <shortcut>KCD</shortcut>
+              <description>Key carddisablement</description>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Not disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Disabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>External disablement</data>
+              <shortcut>ED</shortcut>
+              <description>External disablement</description>
+              <info/>
+              <bitoffs>23</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Not disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Disabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Window contact</data>
+              <shortcut>WC</shortcut>
+              <description>Window contact</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Windows opened</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Windows closed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Alarm State</data>
+              <shortcut>AS</shortcut>
+              <description>Alarm State</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Ok</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

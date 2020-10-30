@@ -1,0 +1,175 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x10</number>
+        <title>Room Operating Panel</title>
+        <type>
+          <number>0x1D</number>
+          <title>Humidity, Humidity Set Point, Temperature Sensor, Fan Speed and Occupancy Control</title>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Humidity</data>
+              <shortcut>HUM</shortcut>
+              <description>Rel. Humidity (linear)</description>
+              <info>DB_3: Rel. Humidity 0...100%, linear n=0...250</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>250</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Humidity Set Point</data>
+              <shortcut>HUMSP</shortcut>
+              <description>Humidity Set Point (linear)</description>
+              <info>DB_2: Humidity Set Point 0...100%, linear n=0...250</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>250</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature (linear)</description>
+              <info>DB_1: Temperature 0...40&#176;C, linear n=0...250</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>250</min>
+                <max>0</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Fan speed</data>
+              <shortcut>FAN</shortcut>
+              <description>Fan Speed</description>
+              <info>DB_0.BIT_5_ BIT_4: Fan speed</info>
+              <bitoffs>25</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Speed 0</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Speed 1</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Speed 2</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Speed 3</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Speed 4</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Speed 5</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Off</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Occupancy enable/disable</data>
+              <shortcut>OED</shortcut>
+              <description/>
+              <info>DB_0.BIT_1: Occ enable/disable</info>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Occupancy enabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Occupancy disabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Occupancy button</data>
+              <shortcut>OB</shortcut>
+              <description/>
+              <info>DB_0.BIT_0: Occupancy button</info>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Button pressed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Button released</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

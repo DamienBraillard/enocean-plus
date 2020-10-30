@@ -1,0 +1,511 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x3F</number>
+        <title>Universal</title>
+        <type>
+          <number>0x00</number>
+          <title>Radio Link Test</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: PROBARE</span><br/><br/>
+              Units supporting the EEP Radio Link Test shall offer a functionality that allows for radio link testing between them (Position A to Position B, point-to-point only). Testing shall be possible without the need for prior teach-in and as an option it shall cover two way communications.
+              <br/>
+              <br/>
+              Further, testing shall be backward compatible to existing EnOcean installations that support at least 1BS (RORG=0xD5) and 4BS (RORG=0xA5) EnOcean messages.
+              <br/>
+              <br/>
+              The main area of RLT application are in-field testing of radio links between portable test equipment placed at different locations as well as between portable test equipment and fixed installation, e.g. an EnOcean Gateway.
+              <br/>
+              <h4>Functional description of RLT:</h4>
+              When two units perform radio link testing one unit needs to act in a mode called RLT Master and
+              the other unit needs to act in a mode called RLT Slave.
+              On a RLT enabled unit one or both modes may be supported. The mode(s) supported shall require
+              explicitly activation at run time.
+              <br/>
+              After activation a RLT Master listens for RLT_Query messages. On reception of at least one
+              RLT_Query message a RLT Master responds with an RLT_Response message. Following that it
+              starts transmission of RLT_MasterTest messages within a maximum time frame of 250ms and
+              awaits the response from the RLT Slave for each RLT_MasterTest message sent.
+              A radio link test communication consists of a minimum of 16 and a maximum of 256
+              RLT_MasterTest messages. Timing distance between individual RLT_MasterTest messages shall
+              not exceed 250ms.
+              When the radio link test communication is completed the RLT Master gets deactivated
+              automatically.
+              <br/>
+              After activation a RLT Slave periodically transmits RLT_Query messages (1 message / 2s). It stops
+              transmission of RLT_Query messages as soon as it has received at least one RLT_Response
+              message. It then waits for RLT_MasterTest messages from the same EnOcean ID and replies to
+              them within a maximum delay of 100ms thru RLT_SlaveTest messages.
+              If it does not receive RLT_MasterTest messages from the same EnOcean ID for a time period of
+              5s, the RLT Slave restarts periodic transmission of RLT_Query messages.
+              The RLT Slave requires explicit deactivation.
+              <h4>RLT_Query Message</h4>
+              This Message is a &#8220;4BS Teach-In Query&#8221; message with FUNC, Type and Manufacturer ID set
+              properly. For details please refer to the description of the 4BS teach-in process.
+              <h4>RLT_Response Message</h4>
+              This Message is a &#8220;4BS Teach-In Response&#8221; message with FUNC, Type and Manufacturer ID set
+              properly. For details please refer to the description of the 4BS teach-in process.
+              As a RLT Master does accept teach-in of a RLT Slave only for the time period required by a single
+              RLT communication it shall indicate the EEP to be supported but the EnOcean ID of the RLT Slave
+              not to be stored permanently.
+            </description>
+          <case>
+            <title>RLT_MasterTest_4BS</title>
+            <description>This is the 4BS message sent by the RLT Master during a radio link test communication</description>
+            <direction>1</direction>
+            <condition>
+              <datafield>
+                <bitoffs>29</bitoffs>
+                <bitsize>2</bitsize>
+                <value>2</value>
+              </datafield>
+              <datafield>
+                <bitoffs>31</bitoffs>
+                <bitsize>1</bitsize>
+                <value>0</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data>Not used</data>
+              <shortcut></shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>28</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>MSG_ID</data>
+              <shortcut>MSGID</shortcut>
+              <description>Message ID</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>MSG-Source</data>
+              <shortcut>MSGS</shortcut>
+              <description>Message Source</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>RLT-Master</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>RLT_SlaveTest_4BS</title>
+            <description>This is the 4BS message sent by the RLT Slave in reply to an RLT_MasterTest_4BS message.</description>
+            <direction>2</direction>
+            <condition>
+              <datafield>
+                <bitoffs>29</bitoffs>
+                <bitsize>2</bitsize>
+                <value>2</value>
+              </datafield>
+              <datafield>
+                <bitoffs>31</bitoffs>
+                <bitsize>1</bitsize>
+                <value>1</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Sub-Telegram Counter</data>
+              <shortcut>STCNT</shortcut>
+              <description>related to RLT_MasterTest_4BS message received
+                  Repeater level 2</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not supported</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>1 sub telegram</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>2 sub telegram</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>&#8805; 3 sub telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>RSSI Level in dBm</data>
+              <shortcut>RSLV</shortcut>
+              <description>related to RLT_MasterTest_4BS message received
+                  Repeater level 1</description>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>6</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>not supported</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>&#8805;-31</description>
+                  <unit>dBm</unit>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>-32</description>
+                  <unit>dBm</unit>
+                </item>
+                <item>
+                  <value>0x3F</value>
+                  <description>&#8804;-93</description>
+                  <unit>dBm</unit>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Sub-Telegram Counter/RSSI Level in dBm</data>
+              <shortcut>RSLV</shortcut>
+              <description>Related to RLT_MasterTest_4BS message received
+ Repeater level 1 (for details see DB3)</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value/>
+                  <description>See prev</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Sub-Telegram Counter/RSSI Level in dBm</data>
+              <shortcut>RSLV</shortcut>
+              <description>Related to RLT_MasterTest_4BS message received direct link</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value/>
+                  <description>See prev</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>RSSI Level in dBm</data>
+              <shortcut>RSLV</shortcut>
+              <description>Non-EnOcean signal detection since last RLT_MasterTest message
+ RSSI Level with 6dB quantization steps</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>not supported</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>&#8805; -31</description>
+                  <unit>dBm</unit>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>-32...-37</description>
+                  <unit>dBm</unit>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>-38...-43</description>
+                  <unit>dBm</unit>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>-44...-49</description>
+                  <unit>dBm</unit>
+                </item>
+                <item>
+                  <value>0x05</value>
+                  <description>-50...-55</description>
+                  <unit>dBm</unit>
+                </item>
+                <item>
+                  <value>0x06</value>
+                  <description>-56...-61</description>
+                  <unit>dBm</unit>
+                </item>
+                <item>
+                  <value>0x07</value>
+                  <description>-62...-67</description>
+                  <unit>dBm</unit>
+                </item>
+                <item>
+                  <value>0x08</value>
+                  <description>-68...-73</description>
+                  <unit>dBm</unit>
+                </item>
+                <item>
+                  <value>0x09</value>
+                  <description>-74...-79</description>
+                  <unit>dBm</unit>
+                </item>
+                <item>
+                  <value>0x0A</value>
+                  <description>-80...-85</description>
+                  <unit>dBm</unit>
+                </item>
+                <item>
+                  <value>0x0B</value>
+                  <description>&#8804; -92</description>
+                  <unit>dBm</unit>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>MSG_ID</data>
+              <shortcut>MSGID</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>MSG-Source</data>
+              <shortcut>MSGS</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>RLT-Slave</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>RLT_MasterTest_1BS</title>
+            <description>This is the 1BS message sent by the RLT Master during a radio link test communication.<br/><br/>
+                REMARK: The column 'Bitrange' is automatically generated from the telegram type and the offset. The column Bitrange shows currently DB_3 instead of DB_0. This isn't a bug in the XML, only a weakness of the formatting. AT THIS POINT, DB_0 WOULD BE CORRECT.<br/>
+              </description>
+            <direction>1</direction>
+            <condition>
+              <datafield>
+                <bitoffs>31</bitoffs>
+                <bitsize>1</bitsize>
+                <value>0</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>4</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>RLT MSG-Counter MSB</data>
+              <shortcut>MC-MSB</shortcut>
+              <description>Round-trip, covering all RLT_x_1BS messages
+  4 bit MSB</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value/>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>RLT MSG-Counter LSB</data>
+              <shortcut>MC-LSB</shortcut>
+              <description>Round-trip, covering all RLT_x_1BS messages
+  2 bit LSB</description>
+              <info/>
+              <bitoffs>5</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value/>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>MSG-Source</data>
+              <shortcut>MSGS</shortcut>
+              <description>Message Source</description>
+              <info/>
+              <bitoffs>7</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>RLT Master</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>RLT_SlaveTest_1BS</title>
+            <description>This is the 1BS message sent by the RLT Slave in reply to an RLT_MasterTest_1BS message.<br/><br/>
+                REMARK: The column 'Bitrange' is automatically generated from the telegram type and the offset. The column Bitrange shows currently DB_3 instead of DB_0. This isn't a bug in the XML, only a weakness of the formatting. AT THIS POINT, DB_0 WOULD BE CORRECT.<br/>
+              </description>
+            <direction>2</direction>
+            <condition>
+              <datafield>
+                <bitoffs>31</bitoffs>
+                <bitsize>1</bitsize>
+                <value>1</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>4</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>RLT MSG-Counter MSB</data>
+              <shortcut>MC-MSB</shortcut>
+              <description>Round-trip, covering all RLT_x_1BS messages
+  4 bit MSB</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value/>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>RLT MSG-Counter LSB</data>
+              <shortcut>MC-LSB</shortcut>
+              <description>Round-trip, covering all RLT_x_1BS messages
+  2 bit LSB</description>
+              <info/>
+              <bitoffs>5</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value/>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>MSG-Source</data>
+              <shortcut>MSGS</shortcut>
+              <description>Message Source</description>
+              <info/>
+              <bitoffs>7</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>RLT-Slave</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

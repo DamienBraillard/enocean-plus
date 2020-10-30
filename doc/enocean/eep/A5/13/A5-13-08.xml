@@ -1,0 +1,148 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x13</number>
+        <title>Environmental Applications</title>
+        <type>
+          <number>0x08</number>
+          <title>Rain Sensor</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Hideki Electronics Limited</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>This profile provides rain sensor information.
+            <br/>That includes the current rainfall count value and the rainfall count correction.
+            <br/>Using these values, the receiver of the information can calculate the currently
+                 measured amount of rainfall.
+            <br/><br/>Rainfall = (Rainfall Count x 0.6875 mm) x (1+ (Rainfall Adjust Sign) Rainfall Adjust)
+            <br/><br/>Example:
+            <br/>Rainfall Count = 10
+            <br/>Rainfall Adjust = 26
+            <br/>Rainfall Adjust Sign = 1
+            <br/>Rainfall = 10 x 0.6875 mm X (1 + 2.6/100) = 7.05375 mm
+            <br/><br/><span style="border-bottom:2px groove #000000;">Data exchange</span><br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: time-triggered
+            <br/>Communication interval: 183 seconds
+            <br/>Trigger event: timer
+            <br/>Tx delay: N/A
+            <br/>Rx timeout: N/A
+            <br/><br/><span style="border-bottom:2px groove #000000;">Teach-in</span><br/>Teach-in method: 4BS teach-in 1
+            <br/><br/><span style="border-bottom:2px groove #000000;">Security</span><br/>Encryption supported: no
+            <br/>Security level format: N/A
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Rainfall Adjust Sign</data>
+              <shortcut>RAS</shortcut>
+              <description>Provides the sign of the rainfall adjust value</description>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Negative</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Positive</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Rainfall Adjust</data>
+              <shortcut>RFA</shortcut>
+              <description>Provides the rainfall count correction value</description>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>6</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>39</max>
+                  <scale>
+                    <min>0</min>
+                    <max>3.9</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <min>40</min>
+                  <max>63</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Rainfall Count</data>
+              <shortcut>RFC</shortcut>
+              <description>Number of counted rain drops</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+              <range>
+                <min>0</min>
+                <max>65535</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>65535</max>
+              </scale>
+              <unit/>
+            </datafield>
+            <datafield>
+              <data>Battery Status</data>
+              <shortcut>BS</shortcut>
+              <description>Indicates if the battery is low</description>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Battery okay</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Battery low</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

@@ -1,0 +1,144 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x04</number>
+        <title>CO2, Humidity, Temperature, Day/Night and Autonomy</title>
+        <type>
+          <number>0x00</number>
+          <title>Type 0x00</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: NanoSense</span>
+          </description>
+          <case>
+            <description>The manufacturer will indicate emission rates versus battery autonomy and day night status.<br/>
+                <br/>
+              </description>
+            <datafield>
+              <data>CO2</data>
+              <shortcut>CO2</shortcut>
+              <description>Concentration (linear), 1 LSB = 7.84 ppm<br/>Or
+                  <br/>Concentration (linear), 1 LSB = 19.6 ppm
+                </description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>2000 (or 5000)</max>
+              </scale>
+              <unit>ppm</unit>
+            </datafield>
+            <datafield>
+              <data>Humidity</data>
+              <shortcut>HUM</shortcut>
+              <description>Rel. Humidity (linear), 1 LSB = 0.5 %</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>200</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature (linear), 1 LSB = 0.2 &#176;C</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+51</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Day/Night</data>
+              <shortcut>DN</shortcut>
+              <description>...</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Day</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Night</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Battery autonomy</data>
+              <shortcut>BA</shortcut>
+              <description>Battery autonomy</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>100 - 87.5 %</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>87.5 - 75 %</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>75 - 62.5 %</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>62.5 - 50 %</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>50 - 37.5 %</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>37.5 - 25 %</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>25 - 12.5 %</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>12.5 - 0 %</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>28</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

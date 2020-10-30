@@ -1,0 +1,31 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x01</number>
+        <title>Electronic Switches and Dimmers with Local Control</title>
+        <type>
+          <number>0x0F</number>
+          <title>Type 0x0F (description: see table)</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: ID-RF</span>
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Description see TYPE 0x0D</span>
+            <br/>
+            <br/>
+          </description>
+          <ref>
+            <rorg>D2</rorg>
+            <func>01</func>
+            <type>00</type>
+          </ref>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

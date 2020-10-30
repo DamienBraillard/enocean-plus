@@ -1,0 +1,17 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x10</number>
+        <title>Room Operating Panel</title>
+        <type>
+          <number>0x1E</number>
+          <title>see A5-10-1B</title>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

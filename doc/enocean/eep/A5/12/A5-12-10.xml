@@ -1,0 +1,173 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x12</number>
+        <title>Automated Meter Reading (AMR)</title>
+        <type>
+          <number>0x10</number>
+          <title>Current meter 16 channels</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Ewattch</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>
+            This profile is used for up to 16 channels current meters.
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Data exchange</span>
+            <br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event- &amp; time-triggered
+            <br/>Communication interval: can be defined by user
+            <br/>Trigger event: 10 or 20 % delta for observed value
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: 4BS teach-in 2
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: no
+            <br/>Security level format: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Recommendation</span>
+            <br/>Channels not used should not be transmitted.
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Appendix</span>
+            <br/>
+            Our new product is a 12 channels current meter. It is able to measure,
+            using a maximum of 12 current transformers, the current (mA) or
+            cumulative current (mAh) of all of his channels.
+            It is however not sending data for not configured channels
+            (e.g. channels 12 to 15).
+            The meter is sending values every 5 or 10 seconds, and in order to
+            improve accuracy, a current fluctuation of more than 10 or 20 % will
+            trigger a new transmission of the corresponding channel.
+            <br/>
+            <img>graphics/A5-12-10.png</img>
+          </description>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Meter reading</data>
+              <shortcut>MR</shortcut>
+              <description>Current value in mA or
+              cumulative value in A.h</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>24</bitsize>
+              <range>
+                <min>0</min>
+                <max>16777215</max>
+              </range>
+              <scale>
+                <ref>DIV</ref>
+              </scale>
+              <unit>
+                <ref>DT</ref>
+              </unit>
+            </datafield>
+            <datafield>
+              <data>Measurement channel</data>
+              <shortcut>CH</shortcut>
+              <description>Channel no.</description>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>0</min>
+                <max>15</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>15</max>
+              </scale>
+              <unit/>
+            </datafield>
+            <datafield>
+              <data>Data type (unit)</data>
+              <shortcut>DT</shortcut>
+              <description>Current value or cumulative value</description>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Cumulative value</description>
+                  <scale>0</scale>
+                  <unit>A.h</unit>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Current value</description>
+                  <scale>1</scale>
+                  <unit>mA</unit>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Divisor (scale)</data>
+              <shortcut>DIV</shortcut>
+              <description>Divisor for value</description>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>x/1</description>
+                  <scale>
+                    <min>0</min>
+                    <max>16777215</max>
+                  </scale>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>x/10</description>
+                  <scale>
+                    <min>0</min>
+                    <max>1677721.5</max>
+                  </scale>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>x/100</description>
+                  <scale>
+                    <min>0</min>
+                    <max>167772.15</max>
+                  </scale>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>x/1000</description>
+                  <scale>
+                    <min>0</min>
+                    <max>16777.215</max>
+                  </scale>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

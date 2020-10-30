@@ -1,0 +1,224 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x11</number>
+        <title>Controller Status</title>
+        <type>
+          <number>0x02</number>
+          <title>Temperature Controller Output</title>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Thermokon Sensortechnik GmbH</span>
+          </description>
+          <status/>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Control Variable</data>
+              <shortcut>CVAR</shortcut>
+              <description>Actual value of controller</description>
+              <info>DB_3: Control variable 0&#8230; 100 % 0...255</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>FanStage</data>
+              <shortcut>FAN</shortcut>
+              <description>Actual value of fan</description>
+              <info>DB_2: FanStage 0,1,2,3, 0xFF not available</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Stage 0 Manual</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Stage 1 Manual</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Stage 2 Manual</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Stage 3 Manual</description>
+                </item>
+                <item>
+                  <value>16</value>
+                  <description>Stage 0 Automatic</description>
+                </item>
+                <item>
+                  <value>17</value>
+                  <description>Stage 1 Automatic</description>
+                </item>
+                <item>
+                  <value>18</value>
+                  <description>Stage 2 Automatic</description>
+                </item>
+                <item>
+                  <value>19</value>
+                  <description>Stage 3 Automatic</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Not Available</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Actual Setpoint</data>
+              <shortcut>ASP</shortcut>
+              <description>Occupied:<br/>Basic setpoint occupied + Setpoint shift + Sensor offset
+            <br/><br/>StandBy:<br/>Basic setpoint standBy + Setpoint shift
+            <br/><br/>Unoccupied:<br/>Basic setpoint unoccupied + setpoint shift </description>
+              <info>DB_1: Actual Set point 0&#8230; 51.2 &#176;C 0&#8230;255</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+51.2</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Alarm</data>
+              <shortcut>ALR</shortcut>
+              <description>In case of internal error alarm is set</description>
+              <info>Alarm</info>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No alarm</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Alarm</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Controller mode</data>
+              <shortcut>CTM</shortcut>
+              <description>Actual state of controller</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Heating</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Cooling</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Off</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Controller state</data>
+              <shortcut>CST</shortcut>
+              <description>Automatic control, or is controlled from another device</description>
+              <info>Controller state</info>
+              <bitoffs>27</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Automatic</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Override</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy hold-off</data>
+              <shortcut>ERH</shortcut>
+              <description>Stop control if window is opened</description>
+              <info>Energy holdoff</info>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Energy hold-off/ Dew point</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room occupancy</data>
+              <shortcut>RO</shortcut>
+              <description>Actual room occupancy</description>
+              <info>Room occupancy</info>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Occupied</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unoccupied</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>StandBy</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Frost</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

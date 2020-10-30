@@ -1,0 +1,619 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x20</number>
+        <title>HVAC Components</title>
+        <type>
+          <number>0x10</number>
+          <title>Generic HVAC Interface</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Intesis Software SL</span><br/><br/>
+          Functions: Mode, Vane Position, Fan Speed, Sensors and On/Off: With this
+          EEP plus the already existing EEP A5-10-03 and A5-20-11 all the information of AC
+          indoor unit can be sent and received allowing a much easier and complete control
+          of these units.
+          <br/>
+          <br/>
+          DIRECTION-1 = Receive mode: Commands received by the HVAC interface.
+          <br/>
+          DIRECTION-2 = Transmit mode: Commands sent by the HVAC interface.</description>
+          <case>
+            <direction>1</direction>
+            <condition>
+              <direction>1</direction>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Mode</data>
+              <shortcut>MD</shortcut>
+              <description>The modes are the same as in KNX and LON allowing a more transparent integration with this protocols
+and it has plenty of free positions for future expansion</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Heat</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Morning Warmup</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Cool</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Night Purge</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Precool</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Test</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>Emergency Heat</description>
+                </item>
+                <item>
+                  <value>9</value>
+                  <description>Fan only</description>
+                </item>
+                <item>
+                  <value>10</value>
+                  <description>Free cool</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>Ice</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>Max heat</description>
+                </item>
+                <item>
+                  <value>13</value>
+                  <description>Economic heat/cool</description>
+                </item>
+                <item>
+                  <value>14</value>
+                  <description>Dehumidification (dry)</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>Calibration</description>
+                </item>
+                <item>
+                  <value>16</value>
+                  <description>Emergency cool</description>
+                </item>
+                <item>
+                  <value>17</value>
+                  <description>Emergency steam</description>
+                </item>
+                <item>
+                  <value>18</value>
+                  <description>max cool</description>
+                </item>
+                <item>
+                  <value>19</value>
+                  <description>Hvc load</description>
+                </item>
+                <item>
+                  <value>20</value>
+                  <description>no load</description>
+                </item>
+                <item>
+                  <min>21</min>
+                  <max>30</max>
+                  <description>reserved</description>
+                </item>
+                <item>
+                  <value>31</value>
+                  <description>Auto Heat</description>
+                </item>
+                <item>
+                  <value>32</value>
+                  <description>Auto Cool</description>
+                </item>
+                <item>
+                  <min>33</min>
+                  <max>254</max>
+                  <description>reserved</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>N/A</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Vane position</data>
+              <shortcut>VPS</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Horizontal</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Pos2</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Pos3</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Pos4</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Vertical</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Swing</description>
+                </item>
+                <item>
+                  <min>7</min>
+                  <max>10</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>Vertical swing</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>Horizontal swing</description>
+                </item>
+                <item>
+                  <value>13</value>
+                  <description>Horizontal and vertical swing</description>
+                </item>
+                <item>
+                  <value>14</value>
+                  <description>Stop swing</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>N/A</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Speed</data>
+              <shortcut>FANSP</shortcut>
+              <description>fan speed value goes from 1 to 14. 1 is the lowest fan speed allowed by the AC and from there it
+increments with the value of this variable. Typically AC units have up to 5-6 speeds. Any speed higher than
+the maximum the AC allows would set it to the higher speed.
+0 is auto and 15 is N/A</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <min>1</min>
+                  <max>14</max>
+                  <description>Up to 14 fan speeds being 1 the lowest</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>N/A</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Control variable</data>
+              <shortcut>CVAR</shortcut>
+              <description>Control variable; value 255 = auto</description>
+              <info>DB_1 Control variable 0&#8230; 100% 0...100, 255 = Auto</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100, 255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Room occupancy</data>
+              <shortcut>RO</shortcut>
+              <description>The interfaces can automatically control the behaviour of the AC without integration in automation
+systems when linked to presence/movement sensors.</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Occupied</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>StandBy (waiting to perform action)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Unoccupied (action performed)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Off (no occupancy and no action)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>On/Off</data>
+              <shortcut>O/I</shortcut>
+              <description>On/Off</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>off (the unit is not running)</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>on</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <direction>2</direction>
+            <condition>
+              <direction>2</direction>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Mode</data>
+              <shortcut>MD</shortcut>
+              <description>The modes are the same as in KNX and LON allowing a more transparent integration with this protocols
+and it has plenty of free positions for future expansion</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Heat</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Morning Warmup</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Cool</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Night Purge</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Precool</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Test</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>Emergency Heat</description>
+                </item>
+                <item>
+                  <value>9</value>
+                  <description>Fan only</description>
+                </item>
+                <item>
+                  <value>10</value>
+                  <description>Free cool</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>Ice</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>Max heat</description>
+                </item>
+                <item>
+                  <value>13</value>
+                  <description>Economic heat/cool</description>
+                </item>
+                <item>
+                  <value>14</value>
+                  <description>Dehumidification (dry)</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>Calibration</description>
+                </item>
+                <item>
+                  <value>16</value>
+                  <description>Emergency cool</description>
+                </item>
+                <item>
+                  <value>17</value>
+                  <description>Emergency steam</description>
+                </item>
+                <item>
+                  <value>18</value>
+                  <description>max cool</description>
+                </item>
+                <item>
+                  <value>19</value>
+                  <description>Hvc load</description>
+                </item>
+                <item>
+                  <value>20</value>
+                  <description>no load</description>
+                </item>
+                <item>
+                  <min>21</min>
+                  <max>30</max>
+                  <description>reserved</description>
+                </item>
+                <item>
+                  <value>31</value>
+                  <description>Auto Heat</description>
+                </item>
+                <item>
+                  <value>32</value>
+                  <description>Auto Cool</description>
+                </item>
+                <item>
+                  <min>33</min>
+                  <max>254</max>
+                  <description>reserved</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>N/A</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Vane position</data>
+              <shortcut>VPS</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Horizontal</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Pos2</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Pos3</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Pos4</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Vertical</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Swing</description>
+                </item>
+                <item>
+                  <min>7</min>
+                  <max>10</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>Vertical swing</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>Horizontal swing</description>
+                </item>
+                <item>
+                  <value>13</value>
+                  <description>Horizontal and vertical swing</description>
+                </item>
+                <item>
+                  <value>14</value>
+                  <description>Stop swing</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>N/A</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Speed</data>
+              <shortcut>FANSP</shortcut>
+              <description>fan speed value goes from 1 to 14. 1 is the lowest fan speed allowed by the AC and from there it
+increments with the value of this variable. Typically AC units have up to 5-6 speeds. Any speed higher than
+the maximum the AC allows would set it to the higher speed.
+0 is auto and 15 is N/A</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <min>1</min>
+                  <max>14</max>
+                  <description>Up to 14 fan speeds being 1 the lowest</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>N/A</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Control variable</data>
+              <shortcut>CVAR</shortcut>
+              <description>Control variable (linear); value 255 = auto</description>
+              <info>DB_1 Control variable 0&#8230; 100% 0...100, 255 = Auto</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100, 255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Room occupancy</data>
+              <shortcut>RO</shortcut>
+              <description>Room occupancy</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Occupied</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>StandBy (waiting to perform action)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Unoccupied (action performed)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Off (no occupancy and no action)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>On/Off</data>
+              <shortcut>O/I</shortcut>
+              <description>On/Off</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>on</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

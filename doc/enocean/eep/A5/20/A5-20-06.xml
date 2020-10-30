@@ -1,0 +1,496 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <description/>
+      <func>
+        <number>0x20</number>
+        <title>HVAC Components</title>
+        <type>
+          <number>0x06</number>
+          <title>Harvesting-powered actuator with local temperature offset control (BI-DIR)</title>
+          <status>released</status>
+          <description></description>
+          <case>
+            <direction>1</direction>
+            <condition>
+              <direction>1</direction>
+            </condition>
+            <datafield>
+              <data>Current Value</data>
+              <shortcut>CV</shortcut>
+              <description>Current valce position</description>
+              <info>actual value 0...100 %, linear n=0...100</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Local Offset Mode</data>
+              <shortcut>LOM</shortcut>
+              <description>Local Offset Mode defines the format of LO</description>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>LO is relative - Offsettemperature</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>LO is absolute - Absoluttemperature</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Local Offset</data>
+              <shortcut>LO</shortcut>
+              <description>LOM =1, use with temperature setpoint mode (DIR-2, DB1.2, SPS = 1)<br/><br/>LOM = 0, use with valve position mode (DIR-2,DB1.2, SPS = 0) </description>
+              <info></info>
+              <bitoffs>9</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>80</max>
+                  <description>Temperature setpoint &#176;C +/- local offset &#176;C</description>
+                  <scale>
+                    <min>0</min>
+                    <max>40</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>0x0</value>
+                  <description>Local Offset 0C</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Local Offset 1C</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Local Offset 2C</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Local Offset 3C</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Local Offset 4C</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Local Offset 5C</description>
+                </item>
+                <item>
+                  <value>123</value>
+                  <description>Local Offset -5C</description>
+                </item>
+                <item>
+                  <value>124</value>
+                  <description>Local Offset -4C</description>
+                </item>
+                <item>
+                  <value>125</value>
+                  <description>Local Offset -3C</description>
+                </item>
+                <item>
+                  <value>126</value>
+                  <description>Local Offset -2CC</description>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Local Offset -1C</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Local Ambient or Feed temperature (Selected by Direction 2, DB1.1)</description>
+              <info></info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>80</max>
+                  <description>Local ambient temperature</description>
+                  <scale>
+                    <min>0</min>
+                    <max>40</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>0</min>
+                  <max>160</max>
+                  <description>Feed temperature</description>
+                  <scale>
+                    <min>0</min>
+                    <max>80</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Tempertature Selection</data>
+              <shortcut>TSL</shortcut>
+              <description>Indicates which sensor is used for TMP</description>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Ambient Sensor Temperature</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Feed Sensor Temperature</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy Input Enabled</data>
+              <shortcut>ENIE</shortcut>
+              <description>Harvesting status</description>
+              <bitoffs>25</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Not Harvesting</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Harvesting active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy Storage</data>
+              <shortcut>ES</shortcut>
+              <description>Charge level of energy storage</description>
+              <bitoffs>26</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Low - almost discharged</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Sufficently charged</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Window open detection</data>
+              <shortcut>DWO</shortcut>
+              <description>Window open detection</description>
+              <bitoffs>27</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO window open detected</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Window open detected</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Radio Com Error</data>
+              <shortcut>RCE</shortcut>
+              <description>Indicates radio communication error</description>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Radio communication is stable</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>6 or more consecutive communication erros have occured</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Radio Signal strength</data>
+              <shortcut>RSS</shortcut>
+              <description>Weak radio signal warning</description>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Radio signal is strong</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Radio signal is weak under -77dBm</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Actuator obstructed</data>
+              <shortcut>ACO</shortcut>
+              <description>Reports blocked actuator</description>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Actuator working correctly</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Actuator blocked</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <direction>2</direction>
+            <condition>
+              <direction>2</direction>
+            </condition>
+            <datafield>
+              <data>Setpoint</data>
+              <shortcut>SP</shortcut>
+              <description>Valve position<br/>or<br/> Temperature Setpoint</description>
+              <info></info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <description>Valve position</description>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <min>0</min>
+                  <max>80</max>
+                  <description>Temperature setpoinz</description>
+                  <scale>
+                    <min>0</min>
+                    <max>40</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room temperature from contrul unit</data>
+              <shortcut>TMP</shortcut>
+              <description>Room temperature from contrul unit</description>
+              <info></info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>160</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>40</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Reference run</data>
+              <shortcut>REF</shortcut>
+              <description>Execute reference run</description>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal operation</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Reference run</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>RF Communication intervall</data>
+              <shortcut>RFC</shortcut>
+              <description>Radio duty cycle selection</description>
+              <bitoffs>17</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>2 minutes</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>5 minutes</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>10 minutes</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>20 minutes</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>30 minutes</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>60 minutes</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>120 minutes</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Initiate summer mode Bit</data>
+              <shortcut>SB</shortcut>
+              <description>Initiate summer mode</description>
+              <bitoffs>20</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal operation</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Summer mode with 8hours radio duty cycle</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set point selection</data>
+              <shortcut>SPS</shortcut>
+              <description/>
+              <bitoffs>21</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Valve position mode</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Temperature setpoint</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Selection</data>
+              <shortcut>TSL</shortcut>
+              <description/>
+              <bitoffs>22</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Request ambient temperature</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Request feedtemperature</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Standbye</data>
+              <shortcut>SBY</shortcut>
+              <description>Enter standbye</description>
+              <bitoffs>23</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal operation</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enter standbye</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

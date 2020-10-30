@@ -1,0 +1,56 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x14</number>
+        <title>Multi Function Sensors</title>
+        <type>
+          <number>0x06</number>
+          <title>Sensor for CO2, line-powered</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Perfactory</span>
+          </description>
+          <case>
+            <description>
+              <img>graphics/D2-14-06.png</img>
+            </description>
+            <datafield>
+              <data>CO2</data>
+              <shortcut>CO2</shortcut>
+              <description>CO2 (linear)<br/>-----------
+                  <br/>Status of CO2 Sensor
+                </description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>250</max>
+                  <scale>
+                    <min>0</min>
+                    <max>2000</max>
+                  </scale>
+                  <unit>ppm</unit>
+                </item>
+                <item>
+                  <min>251</min>
+                  <max>254</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

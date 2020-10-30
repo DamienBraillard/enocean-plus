@@ -1,0 +1,973 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x38</number>
+        <title>Central Command</title>
+        <type>
+          <number>0x08</number>
+          <title>Gateway</title>
+          <description>Communication between gateway and actuator uses byte DB_3 to identify Commands.
+              Commands 0x01 to 0x7F shall be common to all types belonging to this profile.
+              Commands 0x80 to 0xFE can be defined individually for each device type.</description>
+          <case>
+            <title>0x01 Switching</title>
+            <description/>
+            <status>released</status>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command</data>
+              <shortcut>COM</shortcut>
+              <description>Command ID</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x01</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Time</data>
+              <shortcut>TIM</shortcut>
+              <description>Time in 1/10 seconds. 0 = no time specifed</description>
+              <info>DB_2/DB_1: Time in 1/10 seconds.</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+              <range>
+                <min>1</min>
+                <max>65535</max>
+              </range>
+              <scale>
+                <min>0.1</min>
+                <max>6553.5</max>
+              </scale>
+              <unit>s</unit>
+            </datafield>
+            <datafield>
+              <data>Lock/Unlock</data>
+              <shortcut>LCK</shortcut>
+              <description>Lock for duration time if time &gt;0, unlimited time of no time
+                  specified. Locking may be cleared with &#8222;unlock&#8220;. During lock
+                  phase no other commands will be accepted or executed</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unlock</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Lock</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Delay or duration</data>
+              <shortcut>DEL</shortcut>
+              <description>Delay or duration (if Time &gt; 0);<br/> 0 = Duration (Execute switching command immediately and switch back after duration)<br/> 1 = Delay (Execute switching command after delay)
+                </description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Duration</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Delay</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Switching Command</data>
+              <shortcut>SW</shortcut>
+              <description>Switching Command ON/OFF</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>On</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>0x02 Dimming</title>
+            <description>REMARK:<br/>
+              Ramp time is the time needed to transition from minimum to maximum dimming levels.
+              <br/>
+              </description>
+            <status>released</status>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x02</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command</data>
+              <shortcut>COM</shortcut>
+              <description>Command ID</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x02</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Dimming value</data>
+              <shortcut>EDIM</shortcut>
+              <description>Dimming value (absolute [0...255] or relative [0...100])</description>
+              <info>DB_2: Dimming value (absolute [0...255] or relative [0...100])</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Ramping time</data>
+              <shortcut>RMP</shortcut>
+              <description>Ramping time in seconds, 0 = no ramping, 1... 255 = seconds to 100%</description>
+              <info>DB_1: Ramping time in seconds</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>255</max>
+              </scale>
+              <unit>s</unit>
+            </datafield>
+            <datafield>
+              <data>Dimming Range</data>
+              <shortcut>EDIM R</shortcut>
+              <description>Dimming Range</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Absolute value</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Relative value</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Store final value</data>
+              <shortcut>STR</shortcut>
+              <description>Store final value</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Yes</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Switching Command</data>
+              <shortcut>SW</shortcut>
+              <description>Switching Command ON/OFF</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>On</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>0x03 Setpoint shift</title>
+            <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Thermokon Sensortechnik GmbH</span><br/><br/>
+              Used for changing set point, for example summer / winter compensation
+              </description>
+            <br/>
+            <br/>
+            <status>released</status>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x03</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command</data>
+              <shortcut>COM</shortcut>
+              <description>Command ID</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x03</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Setpoint</data>
+              <shortcut>SP</shortcut>
+              <description>Setpoint shift</description>
+              <info>DB_1: Setpoint shift -12,7
+                  K&#8230; 0&#8230; +12,8 K 0&#8230;
+                  128&#8230; 255</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>-12.7</min>
+                <max>12.8</max>
+              </scale>
+              <unit>K</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>0x04 Basic Setpoint</title>
+            <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Thermokon Sensortechnik GmbH</span><br/><br/>
+              Send a new basic set point via DDC to an actuator</description>
+            <status>released</status>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x04</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command</data>
+              <shortcut>COM</shortcut>
+              <description>Command ID</description>
+              <info>DB_3: 0x04</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x04</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Basic Setpoint</data>
+              <shortcut>BSP</shortcut>
+              <description>Basic Setpoint</description>
+              <info>DB_1: Basic Setpoint 0&#176;C &#8230; 51.2&#176;C &#8230;
+                  255</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+51.2</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>0x05 Control variable</title>
+            <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Thermokon Sensortechnik GmbH</span><br/><br/>
+              Set occupancy, energy holdoff and control directly actuator
+              </description>
+            <status>released</status>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x05</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command</data>
+              <shortcut>COM</shortcut>
+              <description>Command ID</description>
+              <info>DB_3: 0x05</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x05</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Control variable override</data>
+              <shortcut>CVOV</shortcut>
+              <description>Control variable override</description>
+              <info>DB_1: Control variable override 0&#8230; 100 % 0...
+                  255</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Controller mode</data>
+              <shortcut>CM</shortcut>
+              <description>Controller Mode</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Automatic mode selection</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Heating</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Cooling</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Off</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Controller state</data>
+              <shortcut>CS</shortcut>
+              <description>Controller state</description>
+              <info/>
+              <bitoffs>27</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Automatic</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Override</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy hold off</data>
+              <shortcut>ENHO</shortcut>
+              <description>Energy Hold Off</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Energy holdoff/ Dew point</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room occupancy</data>
+              <shortcut>RMOCC</shortcut>
+              <description>Room occupancy</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Occupied</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unoccupied</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Standby</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>0x06 Fan stage</title>
+            <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Thermokon Sensortechnik GmbH</span><br/><br/>
+              Set directly fan stage<br/>
+              </description>
+            <status>released</status>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x06</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command</data>
+              <shortcut>COM</shortcut>
+              <description>Command ID</description>
+              <info>DB_3: 0x06</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x06</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>FanStage override</data>
+              <shortcut>FO</shortcut>
+              <description>FanStage override</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Stage 0</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Stage 1</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Stage 2</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Stage 3</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Auto</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>0x07 Blind Central Command</title>
+            <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: PEHA / infratec</span><br/><br/>
+              With this central command all blinds, awnings and shutters can be manipulated.<br/><br/>
+            <br/>
+            Remarks for data table:
+            <br/><br/>
+            REMARK 1:<br/>
+            The angle is usually available in blinds and awning modules.<br/>
+            Normally, in shutter modules the angle value is ignored.<br/>
+            The angle value can be set from -180&#176; (e.g. maximum slat angle at the fully
+            SHUT position) to 180&#176; (e.g. maximum slat angle at the fully OPEN position).<br/>
+            The byte is set with following rule:<br/>
+            Bit7: Sign of the slat angle (0 = positive value, 1 = negative value)<br/>
+            Bit6..0: Slat angle value in 2&#176; steps (e.g. 50 = 100&#176;)
+            <br/><br/>
+            REMARK 2:<br/>
+            If this function (Blind drives to position with angle value)
+            is not supported or not configured, use following rule:<br/>
+            - Position is 0 to 49%  -&gt; The blind opens<br/>
+            - Position is 50 to 100% -&gt; The blind closes.
+            <br/><br/>
+            REMARK 3:<br/>
+            Conventional blinds and shutters can be configured with these 3 parameters
+            to calculate the sufficiently accurate position and angle of the blind.
+            <br/><br/>
+            REMARK 4:<br/>
+            With this command you can adjust the minimal and maximal position of the
+            blinds. So it&#8217;s possible to override the running-range of blinds via a central
+            control unit. Local operations are restricted and increase safety
+            (e.g. to open blinds in case of wind or fire).<br/>
+            Condition: The Minimal value must be smaller or equal the maximal value.
+            <br/>
+            <img>graphics/EEP_A5-38-08_CMD07_01.png</img>
+            Example to lock the local functionality: Drive the shutters to a define position
+            and set the minimal and maximal values to this position.
+            <br/><br/>
+            REMARK 5:<br/>
+            These to angle values describe the maximum slat angle at the fully SHUT
+            position and the maximal slat angle at the fully OPEN position.
+            With the time parameter, e.g.:
+            <br/>
+            <img>graphics/EEP_A5-38-08_CMD07_02.png</img>
+            <br/><br/>
+            REMARK 6:<br/>
+            Set the position logic for the blind control and visualization.
+            <br/>
+            <img>graphics/EEP_A5-38-08_CMD07_03.png</img>
+            Note: If the mode is changed, the minimum and maximal values
+            (function 9) are converted as well!
+            <br/><br/>
+            REMARK 7:<br/>
+            For important central commands, it's not necessary to send directly
+            the statefeedback, e.g. when many modules are activated simultaneously.<br/>
+            Note: Special functionality is in function &#8220;Status request (0)&#8221;, the status is always sent.
+            <br/><br/><br/>
+              </description>
+            <status>released</status>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x07</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command</data>
+              <shortcut>COM</shortcut>
+              <description>Command ID</description>
+              <info>DB_3: 0x07</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x07</value>
+                  <description>Shutters / Blinds</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Parameter 1</data>
+              <shortcut>P1</shortcut>
+              <description>Function defined parameter value</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <description>Func. 00: -- not used &#8211;-<br/><br/>Func. 01: -- not used --
+
+                    <br/><br/>Func. 02: -- not used --
+
+                    <br/><br/>Func. 03: -- not used --
+
+                    <br/><br/>Func. 04: 0% ... 100%
+                    <br/>e.g.: 0% = Blind fully open / 100% = Blind fully closed
+
+                    <br/><br/>Func. 05: 0 ... 255 seconds
+
+                    <br/><br/>Func. 06: 0 ... 255 seconds
+
+                    <br/><br/>Func. 07: Runtime value to close the blind
+                    <br/>0 ... 255 seconds
+
+                    <br/><br/>Func. 08: Runtime value for the sunblind reversion time
+                    <br/>This is the time to revolve the sunblind from one
+                    <br/>slat angle end position to the other end position:
+                    <br/>0.0 &#8230; 25.5 seconds (0.1s steps)
+
+                    <br/><br/>Func. 09: Set minimal position value
+                    <br/>0 ... 100%
+
+                    <br/><br/>Func. 10: Angle at the fully SHUT position
+                    <br/>Bit7 0 = positive sign
+                    <br/>Bit7 1 = negative sign
+                    <br/>Bit6...0  0 ... 90
+                    <br/>Angle in 2&#176; steps (e.g. 0 = 0&#176;, 90 = 180&#176;)
+                    
+                    <br/><br/>Func. 11: Position logic
+                    <br/>0 = Highest position = 0% / Lowest position = 100%
+                    <br/>1 = Highest position = 100% / Lowest position = 0%
+                   </description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Parameter 2</data>
+              <shortcut>P2</shortcut>
+              <description>Function defined parameter value</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <description>Func. 00: -- not used &#8211;-<br/><br/>Func. 01: -- not used --
+
+                    <br/><br/>Func. 02: -- not used --
+
+                    <br/><br/>Func. 03: -- not used --
+
+                    <br/><br/>Func. 04: Angel (see remark 1)
+                    <br/>Bit7 0 = positive sign
+                    <br/>Bit7 1 = negative sign
+                    <br/>Bit6...0  0 ... 90
+                    <br/>Angle in 2&#176; steps (e.g. 0 = 0&#176;, 90 = 180&#176;)
+
+                    <br/><br/>Func. 05: 0.0 ... 25.5 seconds
+
+                    <br/><br/>Func. 06: 0.0 ... 25.5 seconds
+
+                    <br/><br/>Func. 07: Runtime value to open the blind
+                    <br/>0 ... 255 seconds
+
+                    <br/><br/>Func. 08: -- not used --
+
+                    <br/><br/>Func. 09: Set maximal position value
+                    <br/>0 ... 100%
+
+                    <br/><br/>Func. 10: Angle at the fully OPEN position
+                    <br/>Bit7 0 = positive sign
+                    <br/>Bit7 1 = negative sign
+                    <br/>Bit6...0  0 ... 90
+                    <br/>Angle in 2&#176; steps (e.g. 0 = 0&#176;, 90 = 180&#176;)
+
+                    <br/><br/>Func. 11: -- not used --
+                   </description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Function</data>
+              <shortcut>FUNC</shortcut>
+              <description/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Do nothing, status request</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Blind stops</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Blind opens</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Blind closes</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Blind drives to position with angle value (see remark 2)</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Blind opens for time (position value) and angle (angle value)</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Blind closes for time (position value) and angle (angle value)</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Set Runtime parameters (see remark 3)</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>Set angle configuration (see remark 3)</description>
+                </item>
+                <item>
+                  <value>9</value>
+                  <description>Set Min, Max values (see remark 4)</description>
+                </item>
+                <item>
+                  <value>10</value>
+                  <description>Set slat angle for SHUT and OPEN position (see remark 5)</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>Set position logic (see remark 6)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Send status flag</data>
+              <shortcut>SSF</shortcut>
+              <description>see remark 7</description>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Send new status of device</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Send no status (e.g. Global central commands)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Pos. and Angle flag</data>
+              <shortcut>PAF</shortcut>
+              <description/>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No Angle and position value available</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Angle and position value available</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Service Mode Flag</data>
+              <shortcut>SMF</shortcut>
+              <description/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal operation</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Service mode: The module disables all
+                      senders, except this sender, which has set the service mode.
+                      (For example for maintenance)</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

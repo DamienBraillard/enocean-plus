@@ -1,0 +1,110 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xF6</number>
+      <title>RPS Telegram</title>
+      <telegram>RPS</telegram>
+      <func>
+        <number>0x10</number>
+        <title>Mechanical Handle</title>
+        <type>
+          <number>0x00</number>
+          <title>Window Handle</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: HOPPE AG</span><br/><br/>
+              The bits marked with 'X' in
+              DB_0 should not be checked.
+              These bits can be '1' or '0'
+              and should not be assumed
+              to be a defined value,
+              because both of them are
+              allowed and not predictable!
+            </description>
+          <case>
+            <condition>
+              <statusfield>
+                <bitoffs>2</bitoffs>
+                <bitsize>1</bitsize>
+                <value>1</value>
+              </statusfield>
+              <statusfield>
+                <bitoffs>3</bitoffs>
+                <bitsize>1</bitsize>
+                <value>0</value>
+              </statusfield>
+            </condition>
+            <statusfield>
+              <data>T21</data>
+              <bitoffs>2</bitoffs>
+              <bitsize>1</bitsize>
+              <value>1</value>
+            </statusfield>
+            <statusfield>
+              <data>NU</data>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+              <value>0</value>
+            </statusfield>
+            <datafield>
+              <data>Window handle</data>
+              <shortcut>WIN</shortcut>
+              <description>Movement of the window handle</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0b11X0XXXX</value>
+                  <description>Moved from up to right.<br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_01.png</img>
+                    </description>
+                </item>
+                <item>
+                  <value>0b1111XXXX</value>
+                  <description>Moved from right to down.<br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_02.png</img>
+                    </description>
+                </item>
+                <item>
+                  <value>0b11X0XXXX</value>
+                  <description>Moved from down to left.<br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_03.png</img>
+                    </description>
+                </item>
+                <item>
+                  <value>0b1101XXXX</value>
+                  <description>Moved from left to up.<br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_04.png</img>
+                    </description>
+                </item>
+                <item>
+                  <value>0b11X0XXXX</value>
+                  <description>Moved from up to left.<br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_05.png</img>
+                    </description>
+                </item>
+                <item>
+                  <value>0b1111XXXX</value>
+                  <description>Moved from left  to down.<br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_06.png</img>
+                    </description>
+                </item>
+                <item>
+                  <value>0b11X0XXXX</value>
+                  <description>Moved from down to right.<br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_07.png</img>
+                    </description>
+                </item>
+                <item>
+                  <value>0b1101XXXX</value>
+                  <description>Moved from right to up.<br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_08.png</img>
+                    </description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

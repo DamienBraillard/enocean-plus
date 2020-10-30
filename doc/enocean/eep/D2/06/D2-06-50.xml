@@ -1,0 +1,523 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x06</number>
+        <title>Multisensor Window / Door Handle and Sensors</title>
+        <type>
+          <number>0x50</number>
+          <title>Window Sash and Hardware Position Sensor</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: SIEGENIA-AUBI KG</span><br/><br/><span style="border-bottom:2px groove #000000;">Data exchange</span><br/>Direction: unidirectional
+              <br/>Addressing: broadcast
+              <br/>Communication trigger: event-triggered
+              <br/>Communication interval: event-triggered, time-triggered
+              <br/>Trigger event: alarm, handle movement, window movement
+              <br/>Tx delay: N/A
+              <br/>Rx timeout: N/A
+              <br/><br/><span style="border-bottom:2px groove #000000;">Teach-in</span><br/>Teach-in method: Universal teach-in (UTE)
+              <br/><br/><span style="border-bottom:2px groove #000000;">Security</span><br/>Encryption supported: no
+              <br/>Security level format: N/A
+              <br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>
+              TYPE 50 is a profile without environmental sensors except for the
+              state of window and window handle.
+            </description>
+          <case>
+            <title>Message Type 0x01 (Send): Window Status</title>
+            <description>
+              <img>graphics/D2-06-50_MT01.png</img>
+              <br/>
+            </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x01</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description>Message identification</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x01</value>
+                  <description>Window Status</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Alive Message</data>
+              <shortcut>AM</shortcut>
+              <description>Message sent without window status change</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>Standard status message</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>Message because of alive cycle</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Window Status Event</data>
+              <shortcut>WDS</shortcut>
+              <description>Current status of window</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>None</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Sash: closed<br/>
+                    Window hardware/handle: closed
+                    </description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Sash: closed<br/>
+                    Window hardware/handle: open
+                    </description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Sash: closed<br/>
+                    Window hardware/handle: tilted
+                    </description>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>Sash: open<br/>
+                    Window hardware/handle: closed
+                    </description>
+                </item>
+                <item>
+                  <value>0x05</value>
+                  <description>Sash: open<br/>
+                    Window hardware/handle: open
+                    </description>
+                </item>
+                <item>
+                  <value>0x06</value>
+                  <description>Sash: open<br/>
+                    Window hardware/handle: tilted
+                    </description>
+                </item>
+                <item>
+                  <value>0x07</value>
+                  <description>Sash: tilted<br/>
+                    Window hardware/handle: closed
+                    </description>
+                </item>
+                <item>
+                  <value>0x08</value>
+                  <description>Sash: tilted<br/>
+                    Window hardware/handle: open
+                    </description>
+                </item>
+                <item>
+                  <value>0x09</value>
+                  <description>Sash: tilted<br/>
+                    Window hardware/handle: tilted
+                    </description>
+                </item>
+                <item>
+                  <min>0x0A</min>
+                  <max>0x7F</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Counter</data>
+              <shortcut>CT</shortcut>
+              <description>Counter status events</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>32</bitsize>
+              <enum>
+                <item>
+                  <min>0x00000000</min>
+                  <max>0xFFFFFFFF</max>
+                  <description>Individual counter status of the active window status event</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Change Battery</data>
+              <shortcut>CB</shortcut>
+              <description>Change battery</description>
+              <info/>
+              <bitoffs>48</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>Battery OK</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>Change battery</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Battery State</data>
+              <shortcut>BS</shortcut>
+              <description>State of battery charge<br/>in 5% steps
+                </description>
+              <info/>
+              <bitoffs>49</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x64</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <min>0x65</min>
+                  <max>0x7F</max>
+                  <description>Invalid</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Motion Sensor Error</data>
+              <shortcut>MOE</shortcut>
+              <description>OK: Motion sensor works correctly and delivers correct values<br/>
+                Error: Motion sensor returns incorrect values (out of defined areas)
+                <br/>
+                Not supported: No motion sensor available
+                </description>
+              <info/>
+              <bitoffs>56</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>OK</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>Error</description>
+                </item>
+                <item>
+                  <value>0x2</value>
+                  <description>Not supported</description>
+                </item>
+                <item>
+                  <value>0x3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Acceleration Sensor Error</data>
+              <shortcut>ACE</shortcut>
+              <description>OK: Acceleration sensor works correctly and delivers correct values<br/>
+                Error: Acceleration sensor returns incorrect values (out of defined areas)
+                <br/>
+                Not supported: No acceleration sensor available
+                </description>
+              <info/>
+              <bitoffs>58</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>OK</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>Error</description>
+                </item>
+                <item>
+                  <value>0x2</value>
+                  <description>Not supported</description>
+                </item>
+                <item>
+                  <value>0x3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Magnetic Sensor Error</data>
+              <shortcut>MAE</shortcut>
+              <description>OK: Magnetic sensor works correctly and delivers correct values<br/>
+                Error: Magnetic sensor returns incorrect values (out of defined areas)
+                <br/>
+                Not supported: No magnetic sensor available
+                </description>
+              <info/>
+              <bitoffs>60</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>OK</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>Error</description>
+                </item>
+                <item>
+                  <value>0x2</value>
+                  <description>Not supported</description>
+                </item>
+                <item>
+                  <value>0x3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>System Error</data>
+              <shortcut>SE</shortcut>
+              <description>OK: No system error detected<br/>
+                Error: System error detected (sensors not included)
+                <br/>
+                Not supported: No system error detection available
+                </description>
+              <info/>
+              <bitoffs>62</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>OK</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>Error</description>
+                </item>
+                <item>
+                  <value>0x2</value>
+                  <description>Not supported</description>
+                </item>
+                <item>
+                  <value>0x3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message Type 0x02 (Send): Device Alarm Status</title>
+            <description>
+              <img>graphics/D2-06-50_MT02.png</img>
+              <br/>
+            </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x02</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description>Message identification</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x02</value>
+                  <description>Device Alarm Status</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Burglary Alarm</data>
+              <shortcut>BA</shortcut>
+              <description>Burglary alarm</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>Burglary alarm not triggered</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>Burglary alarm triggered</description>
+                </item>
+                <item>
+                  <min>0x2</min>
+                  <max>0xF</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message Type 0x11 (Send): Calibrate</title>
+            <description><span style="border-bottom:2px groove #000000;">Calibration Routine: e.g.</span><br/><br/>
+              Throughout the calibration routine some of the steps are sent
+              sequentially in a specific order to request a certain action from
+              the user.
+              <br/>	1.	Calibration Step 0x0A is sent
+              <br/>	... a. The user is prompted to close the window
+              <br/>	2.	Calibration step 0x01 is sent
+              <br/>	... a.	The user is prompted to close the handle
+              <br/>	3.	Calibration step 0x02 is sent
+              <br/>	... a.	The user is prompted to open the handle
+              <br/>	4.	Calibration Step 0x03 is sent
+              <br/>	... a.	The user is prompted to tilt the handle
+              <br/>	5.	Calibration step 0x01 is sent
+              <br/>	... a.	The user is prompted to close the handle
+              <br/>	6.	Calibration step 0x00 is sent
+              <br/>	... a.	The calibration was successful
+              <br/><br/>
+              <img>graphics/D2-06-50_MT11.png</img>
+              <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x11</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description>Message identification</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x11</value>
+                  <description>Calibrate</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Calibration Status</data>
+              <shortcut>CS</shortcut>
+              <description>Current calibration status</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>OK</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>Error</description>
+                </item>
+                <item>
+                  <value>0x2</value>
+                  <description>Invalid</description>
+                </item>
+                <item>
+                  <value>0x3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Calibration Step</data>
+              <shortcut>CAL</shortcut>
+              <description>Next calibration step</description>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>6</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>No next step / none</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Sash: closed<br/>Window hardware/handle: closed
+                    </description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Sash: closed<br/>Window hardware/handle: open
+                    </description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Sash: closed<br/>Window hardware/handle: tilted
+                    </description>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>Sash: open<br/>Window hardware/handle: closed
+                    </description>
+                </item>
+                <item>
+                  <value>0x05</value>
+                  <description>Sash: open<br/>Window hardware/handle: open
+                    </description>
+                </item>
+                <item>
+                  <value>0x06</value>
+                  <description>Sash: open<br/>Window hardware/handle: tilted
+                    </description>
+                </item>
+                <item>
+                  <value>0x07</value>
+                  <description>Sash: tilted<br/>Window hardware/handle: closed
+                    </description>
+                </item>
+                <item>
+                  <value>0x08</value>
+                  <description>Sash: tilted<br/>Window hardware/handle: open
+                    </description>
+                </item>
+                <item>
+                  <value>0x09</value>
+                  <description>Sash: tilted<br/>Window hardware/handle: tilted
+                    </description>
+                </item>
+                <item>
+                  <value>0x0A</value>
+                  <description>Frame magnet validation</description>
+                </item>
+                <item>
+                  <min>0x0B</min>
+                  <max>0x3F</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

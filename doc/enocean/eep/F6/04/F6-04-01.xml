@@ -1,0 +1,98 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xF6</number>
+      <title>RPS Telegram</title>
+      <telegram>RPS</telegram>
+      <func>
+        <number>0x04</number>
+        <title>Position Switch, Home and Office Application</title>
+        <type>
+          <number>0x01</number>
+          <title>Key Card Activated Switch</title>
+          <status>released</status>
+          <description>Insertion of Key Card generates an N-Message, take-out a U-Message</description>
+          <case>
+            <condition>
+              <statusfield>
+                <bitoffs>2</bitoffs>
+                <bitsize>1</bitsize>
+                <value>1</value>
+              </statusfield>
+              <statusfield>
+                <bitoffs>3</bitoffs>
+                <bitsize>1</bitsize>
+                <value>1</value>
+              </statusfield>
+            </condition>
+            <statusfield>
+              <data>T21</data>
+              <bitoffs>2</bitoffs>
+              <bitsize>1</bitsize>
+              <value>1</value>
+            </statusfield>
+            <statusfield>
+              <data>NU</data>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+              <value>1</value>
+            </statusfield>
+            <datafield>
+              <data>Key Card</data>
+              <shortcut>KC</shortcut>
+              <description>...</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>112</value>
+                  <description>inserted
+  (0x70)</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <condition>
+              <statusfield>
+                <bitoffs>2</bitoffs>
+                <bitsize>1</bitsize>
+                <value>1</value>
+              </statusfield>
+              <statusfield>
+                <bitoffs>3</bitoffs>
+                <bitsize>1</bitsize>
+                <value>0</value>
+              </statusfield>
+            </condition>
+            <statusfield>
+              <data>T21</data>
+              <bitoffs>2</bitoffs>
+              <bitsize>1</bitsize>
+              <value>1</value>
+            </statusfield>
+            <statusfield>
+              <data>NU</data>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+              <value>0</value>
+            </statusfield>
+            <datafield>
+              <data>Key Card</data>
+              <shortcut>KC</shortcut>
+              <description>...</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>taken out</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

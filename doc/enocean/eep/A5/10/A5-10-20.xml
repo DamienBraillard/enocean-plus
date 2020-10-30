@@ -1,0 +1,168 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x10</number>
+        <title>Room Operating Panel</title>
+        <type>
+          <number>0x20</number>
+          <title>Temperature and Set Point with Special Heating States</title>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: MSR-Solutions GmbH, Wangen i.Allg.</span><br/><br/>
+              Description:<br/>
+              Set Point for Heating Control, Temperature, User Activity.
+              <br/><br/>
+              This EEP defines a Room Operating Panel that contains a sensor for
+              temperature measurement. The set point selector knob determines the
+              desired room temperature with the ability to set special set point
+              modes for heating control.
+              User activity and the sensor&#8217;s battery state are indicated in the telegram.
+              <br/><br/>
+              <span style="border-bottom:2px groove #000000;">Data exchange</span>
+              <br/>
+              Direction: unidirectional<br/>
+              Addressing: broadcast<br/>
+              Communication trigger: event- &amp; time-triggered<br/>
+              Communication intervall: 1200 s<br/>
+              Trigger event: change of any input signal<br/>
+              Tx delay: n/a<br/>
+              Rx timeout: 0 ms (minimum time between two received messages)<br/>
+              Teach-in method: 4BS teach-in 2 / Universal teach-in<br/>
+              Security Encryption supported: no<br/>
+              Security level format: -
+          </description>
+          <case>
+            <datafield>
+              <data>Set Point</data>
+              <shortcut>SP</shortcut>
+              <description>Set point (linear) Min.- ... Max+</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>255</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature (linear)</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>250</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Set point mode</data>
+              <shortcut>SPM</shortcut>
+              <description>Selection of heating mode</description>
+              <bitoffs>25</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Room temperature defined by SP</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Frost protection</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Automatic control (e.g. defined by time program)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Battery state</data>
+              <shortcut>BATT</shortcut>
+              <description>Battery change needed</description>
+              <bitoffs>27</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Battery ok</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Battery low</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>User activity</data>
+              <shortcut>ACT</shortcut>
+              <description>User intervention action on device</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No user action</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>User interaction</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

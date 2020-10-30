@@ -1,0 +1,356 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x14</number>
+        <title>Multi Function Sensors</title>
+        <type>
+          <number>0x30</number>
+          <title>Sensor for Smoke, Air quality, Hygrothermal comfort, Temperature and Humidity</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Nexelec</span><br/><br/>
+              For the parameter ES (energy storage) applies: manufacturers /
+              devices which would like to indicate a percentage value it is
+              recommended to handle this in the user manual of the device,
+              respectively an application note.
+            </description>
+          <case>
+            <description>
+              <img>graphics/D2-14-30.png</img>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>44</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Smoke Alarm status</data>
+              <shortcut>SMA</shortcut>
+              <description>Smoke Alarm status</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Smoke Alarm non-activated</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Smoke Alarm activated</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Sensor fault mode status</data>
+              <shortcut>SMA</shortcut>
+              <description>Sensor fault mode status</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Sensor Fault mode non-activated</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Sensor Fault mode activated</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Smoke Alarm Condition analysis: Maintenance</data>
+              <shortcut>SMA</shortcut>
+              <description>Smoke Alarm Condition analysis: Maintenance</description>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Maintenance OK</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Maintenance not done</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Smoke Alarm Condition analysis: Humidity</data>
+              <shortcut>SMA</shortcut>
+              <description>Smoke Alarm Condition analysis: Humidity</description>
+              <info/>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Humidity range OK</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Humidity range NOK</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Smoke Alarm Condition analysis: Temperature</data>
+              <shortcut>SMA</shortcut>
+              <description>Smoke Alarm Condition analysis: Temperature</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Temperature range OK</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Temperature range NOK</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Time since last maintenance</data>
+              <shortcut>SMA</shortcut>
+              <description>Time since last maintenance</description>
+              <info/>
+              <bitoffs>5</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>250</max>
+                  <scale>
+                    <min>0</min>
+                    <max>250</max>
+                  </scale>
+                  <unit>Week</unit>
+                </item>
+                <item>
+                  <min>251</min>
+                  <max>254</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy Storage</data>
+              <shortcut>ES</shortcut>
+              <description>Energy Storage Status</description>
+              <info/>
+              <bitoffs>13</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>High</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Medium</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Low</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Critical</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Remaining Product Life Time</data>
+              <shortcut>RPLT</shortcut>
+              <description>Countdown time until product end of life</description>
+              <info/>
+              <bitoffs>15</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>120</max>
+                  <scale>
+                    <min>0</min>
+                    <max>120</max>
+                  </scale>
+                  <unit>Month</unit>
+                </item>
+                <item>
+                  <min>121</min>
+                  <max>254</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP8</shortcut>
+              <description>Temperature (linear)<br/>
+                -----------
+                <br/>
+                Status of Temperature Sensor
+                </description>
+              <info/>
+              <bitoffs>23</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>250</max>
+                  <scale>
+                    <min>0</min>
+                    <max>50</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>251</min>
+                  <max>254</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Humidity</data>
+              <shortcut>HUM</shortcut>
+              <description>Rel. Humidity (linear)<br/>-----------
+                  <br/>Status of Humidity Sensor
+                </description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>200</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%RH</unit>
+                </item>
+                <item>
+                  <min>201</min>
+                  <max>254</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Hygrothermal Comfort Index</data>
+              <shortcut>HCI</shortcut>
+              <description>Comfort Index based on temperature and humidity</description>
+              <info/>
+              <bitoffs>39</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Good</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Medium</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Bad</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>T/Hum. Indoor Air Analysis</data>
+              <shortcut>IAQTH</shortcut>
+              <description>Indoor Air quality analysis based on temperature
+                and humidity</description>
+              <info/>
+              <bitoffs>41</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Optimal air range</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Dry Air range</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>High humidity range</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>High temperature and humidity range</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Temperature or Humidity out of analysis range</description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>6</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

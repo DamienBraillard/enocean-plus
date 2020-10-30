@@ -1,0 +1,143 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x13</number>
+        <title>Environmental Applications</title>
+        <type>
+          <number>0x03</number>
+          <title>Date Exchange</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Elsner electronics</span>
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Day</data>
+              <shortcut>DY</shortcut>
+              <description>Day</description>
+              <info>DB_3.BIT_4 &#8230; 0: Day n=1 &#8230; 31</info>
+              <bitoffs>3</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>1</min>
+                <max>31</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>31</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Month</data>
+              <shortcut>MTH</shortcut>
+              <description>Month (1-&gt;January)</description>
+              <info>DB_2.BIT_3 &#8230; 0: Month n=1 &#8230; 12 1-&gt;January</info>
+              <bitoffs>12</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>1</min>
+                <max>12</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>12</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Year</data>
+              <shortcut>YR</shortcut>
+              <description>Year (0-&gt;Year 2000)</description>
+              <info>DB_1.BIT_6 &#8230; 0: Year n=0 &#8230; 99</info>
+              <bitoffs>17</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>99</max>
+              </range>
+              <scale>
+                <min>2000</min>
+                <max>2099</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Identifier</data>
+              <shortcut>ID</shortcut>
+              <description>Identifier</description>
+              <info>DB_0.BIT_7 &#8230; 4: Identifier</info>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x3</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Source</data>
+              <shortcut>SRC</shortcut>
+              <description>Source</description>
+              <info>DB_0.BIT_0: Source</info>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Real Time Clock</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>GPS or equivalent (e.g. DCF77, WWV)</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

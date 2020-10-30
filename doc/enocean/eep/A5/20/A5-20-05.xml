@@ -1,0 +1,508 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x20</number>
+        <title>HVAC Components</title>
+        <type>
+          <number>0x05</number>
+          <title>Ventilation Unit</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Itho Daalderop</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>
+            The device represented by this EEP is a stand-alone ventilation unit.
+            <br/><br/>
+            Smart-Ack is not supported/required.
+            <br/><br/>
+            The ventilation unit itself does not send messages on a regular
+            (time or event triggered) base but will always send a response message
+            after it receives a message from e.g. a remote control or gateway.
+            <br/><br/>
+            When the controller only wants to know the status of the ventilation
+            unit and does not want to change the ventilation setting this can be
+            requested by sending a message from controller to the fan unit with
+            new fan speed setting NSP = 7 = &#8220;no change&#8221;.
+            <br/><br/>
+            When more than one controller is connected to the unit the last received
+            speed setting will be the new speed setting.
+            <br/><br/>
+            When a ventilation unit supports auto speed this means that the speed
+            is influenced / calculated by sensor values which are directly connected
+            to the ventilation unit (e.g. CO2 or RH sensors).
+            <br/><br/>
+            How the timer setting for a new fan speed (NSPT) is handled by the
+            ventilation unit is depending on the unit and legislation.
+            <br/><br/>
+            When the timer period has expired the ventilation unit will go back
+            to the previous or auto setting, this behavior is depending on the
+            ventilation unit and legislation.
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Data exchange</span>
+            <br/>Direction: bidirectional
+            <br/>Addressing: addressed
+            <br/>Communication trigger: event-triggered
+            <br/>Communication interval: N/A
+            <br/>Trigger event: received message
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: 4BS teach-in variation 3 (bidirectional)
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: no
+            <br/>Security level format: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Directions</span>
+            <br/>
+            DIRECTION-1 = Transmit mode: Message from ventilation unit to controller
+            <br/>
+            DIRECTION-2 = Receive mode: Commands from controller to ventilation unit
+          </description>
+          <case>
+            <direction>1</direction>
+            <condition>
+              <direction>1</direction>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>6</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>27</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Actual speed setting</data>
+              <shortcut>ASP</shortcut>
+              <description>Actual speed setting of ventilation unit</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Minimum speed / away</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Speed 1 / low</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Speed 2 / mid</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Speed 3 / high</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Max speed</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Not used</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Actual speed timer setting</data>
+              <shortcut>ASPT</shortcut>
+              <description>Actual timer value for actual speed</description>
+              <bitoffs>3</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No timer set or expired</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>1..10 min left</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>11..20 min left</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>21..30 min left</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>31..40 min left</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>41..50 min left</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>51..60 min left</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>&gt; 60 min left</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Node low battery</data>
+              <shortcut>E-NBAT</shortcut>
+              <description>External node low battery error</description>
+              <bitoffs>11</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No error</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Node comm. error</data>
+              <shortcut>E-NCOM</shortcut>
+              <description>External node communication error</description>
+              <bitoffs>12</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No error</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Sensor error</data>
+              <shortcut>E-SENS</shortcut>
+              <description>Internal sensor error</description>
+              <bitoffs>13</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No error</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan speed error</data>
+              <shortcut>E-FSPD</shortcut>
+              <description>Desired fan speed not reached error</description>
+              <bitoffs>14</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No error</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Error</data>
+              <shortcut>ERR</shortcut>
+              <description>Unit has an error</description>
+              <bitoffs>15</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No error</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Filter condition</data>
+              <shortcut>FLTR</shortcut>
+              <description>Indication of the air filter&#8217;s condition</description>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Filter needs replacement</description>
+                </item>
+                <item>
+                  <min>1</min>
+                  <max>100</max>
+                  <description>% dirty..clean filter</description>
+                </item>
+                <item>
+                  <min>101</min>
+                  <max>254</max>
+                  <description>Not used</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>No filter present</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Auto speed supported</data>
+              <shortcut>AUTO</shortcut>
+              <description>Ventilation unit supports auto speed or not</description>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto speed not supported</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Auto speed supported</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>By-pass active</data>
+              <shortcut>BPASS</shortcut>
+              <description>Summer bypass active or not</description>
+              <bitoffs>25</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Summer bypass not active</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Summer bypass active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Frost protection</data>
+              <shortcut>FROST</shortcut>
+              <description>Frost protection active or not</description>
+              <bitoffs>26</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Frost protection not active</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Frost protection active</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <direction>2</direction>
+            <condition>
+              <direction>2</direction>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>26</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>New speed setting</data>
+              <shortcut>NSP</shortcut>
+              <description>New speed setting for ventilation unit</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Minimum speed / away</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Speed 1 / low</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Speed 2 / mid</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Speed 3 / high</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Max speed</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Not used</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>New speed timer setting</data>
+              <shortcut>NSPT</shortcut>
+              <description>Timer setting for new speed</description>
+              <bitoffs>3</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No timer / no change</description>
+                </item>
+                <item>
+                  <min>1</min>
+                  <max>6</max>
+                  <description>10..60 min</description>
+                </item>
+                <item>
+                  <min>7</min>
+                  <max>29</max>
+                  <description>2..24 hrs</description>
+                </item>
+                <item>
+                  <min>30</min>
+                  <max>31</max>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Reset error</data>
+              <shortcut>RSTE</shortcut>
+              <description>Reset the unit when error present</description>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Don&#8217;t reset error</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Reset error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Reset filter timer</data>
+              <shortcut>RSTF</shortcut>
+              <description>Reset the filter timer</description>
+              <bitoffs>25</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Don&#8217;t reset filter timer</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Reset filter timer<br/>Reset only possible when
+                  <br/>timer expired (FLTR=0)
+                  </description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

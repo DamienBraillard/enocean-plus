@@ -1,0 +1,112 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x03</number>
+        <title>Light, Switching + Blind Control</title>
+        <type>
+          <number>0x00</number>
+          <title>Type 0x00</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: EnOcean GmbH</span><br/><br/><b>EEP Properties:</b><br/>DATA EXCHANGE
+                <br/>Direction: unidirectional
+                <br/>Addressing: broadcast
+                <br/>Communication trigger: event-triggered
+                <br/>Communication interval: N/A
+                <br/>Trigger event: N/A
+                <br/>Tx delay: N/A
+                <br/>Rx timeout : N/A
+                <br/><br/>TEACH-IN
+                <br/>Teach-in method: Universal teach-in (UTE) + Secure Teach-in (for secure communication)
+                <br/><br/>SECURITY
+                <br/>Encryption supported: yes
+                <br/><br/><br/><b>EEP Family Table:</b><br/><br/><table><tr><th>Supported function</th><th>Type 00</th></tr><tr><td>2 Rocker Switch</td><td style="background-color:#FFFFFF">X</td></tr></table></description>
+          <case>
+            <description>The encrypted telegram has the R-ORG 0x30. The payload (4 bits) is encrypted.
+              That telegram can be repeated. After decryption and the authentication of the CMAC,
+              the telegram turns into a non-encrypted EnOcean telegram with the R-ORG 0x32.
+              The payload will be expanded to 8 bits (4 MSB set to zero) and can then be
+              interpreted as described in the telegram definition table.<br/>
+                <br/>The decrypted telegram may not be repeated as the information is not secure anymore.
+              The following table provides information about the conversion between the profiles
+              D2-03-00 and F6-02-01:
+                <br/>
+                <br/>
+                <table><tr><th>D2-03-00 DATA</th><th>F6-02-01 DATA</th><th>F6-02-01 STATUS</th></tr><tr><td>0...4</td><td style="background-color:#F1FFB7">-</td><td style="background-color:#F1FFB7">-</td></tr><tr><td>5</td><td style="background-color:#F1FFB7">0x17</td><td style="background-color:#F1FFB7">0x30</td></tr><tr><td>6</td><td style="background-color:#F1FFB7">0x70</td><td style="background-color:#F1FFB7">0x20</td></tr><tr><td>7</td><td style="background-color:#F1FFB7">0x37</td><td style="background-color:#F1FFB7">0x30</td></tr><tr><td>8</td><td style="background-color:#F1FFB7">0x10</td><td style="background-color:#F1FFB7">0x20</td></tr><tr><td>9</td><td style="background-color:#F1FFB7">0x15</td><td style="background-color:#F1FFB7">0x30</td></tr><tr><td>10</td><td style="background-color:#F1FFB7">0x35</td><td style="background-color:#F1FFB7">0x30</td></tr><tr><td>11</td><td style="background-color:#F1FFB7">0x50</td><td style="background-color:#F1FFB7">0x30</td></tr><tr><td>12</td><td style="background-color:#F1FFB7">0x70</td><td style="background-color:#F1FFB7">0x30</td></tr><tr><td>13</td><td style="background-color:#F1FFB7">0x10</td><td style="background-color:#F1FFB7">0x30</td></tr><tr><td>14</td><td style="background-color:#F1FFB7">0x30</td><td style="background-color:#F1FFB7">0x30</td></tr><tr><td>15</td><td style="background-color:#F1FFB7">bxxx0xxxx</td><td style="background-color:#F1FFB7">0x20</td></tr></table>
+                <br/>
+                <br/>
+                <br/>
+              </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Rocker Information</data>
+              <shortcut>RI2</shortcut>
+              <description>Information about pressed rockers (similar to RPS profiles)</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>4</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Button A1 + B0 pressed, energy bow pressed</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>3 or 4 buttons pressed, energy bow pressed</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Button A0 + B0 pressed, energy bow pressed</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>No buttons pressed, energy bow pressed</description>
+                </item>
+                <item>
+                  <value>9</value>
+                  <description>Button A1 + B1 pressed, energy bow pressed</description>
+                </item>
+                <item>
+                  <value>10</value>
+                  <description>Button A0 + B1 pressed, energy bow pressed</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>Button B1 pressed, energy bow pressed</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>Button B0 pressed, energy bow pressed</description>
+                </item>
+                <item>
+                  <value>13</value>
+                  <description>Button A1 pressed, energy bow pressed</description>
+                </item>
+                <item>
+                  <value>14</value>
+                  <description>Button A0 pressed, energy bow pressed</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>Energy bow released</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

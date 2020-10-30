@@ -1,0 +1,132 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x14</number>
+        <title>Multi-Func Sensor</title>
+        <type>
+          <number>0x08</number>
+          <title>Dual-door-contact with States Open/Closed and Locked/Unlocked, Supply voltage monitor and Vibration detection</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: EiMSIG eine Marke der EFP GmbH</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>Door-sensor with the door-states open/closed
+            and sensor for the door-lock with states locked/unlocked.
+            <br/>Additional supply-voltage-monitor and vibration-sensor for
+            glass-breakage detection.
+            <br/><br/><span style="border-bottom:2px groove #000000;">Data exchange</span><br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event- &amp; time-triggered
+            <br/>Communication interval: N/A
+            <br/>Trigger event: timer and change on state
+            <br/>Tx delay: N/A
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: 4BS teach-in
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: yes
+            <br/>Security level format: -
+          </description>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Supply voltage</data>
+              <shortcut>SVC</shortcut>
+              <description>Supply voltage<br/>/ super cap. (linear)
+              </description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>250</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>5.0</max>
+              </scale>
+              <unit>V</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>20</bitsize>
+            </datafield>
+            <datafield>
+              <data>Door Contact</data>
+              <shortcut>DCT</shortcut>
+              <description/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Door Closed</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Door Open</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Lock Contact</data>
+              <shortcut>LCT</shortcut>
+              <description/>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Door Locked</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Door Unlocked</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Vibration</data>
+              <shortcut>VIB</shortcut>
+              <description/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>No vibration detected</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Vibration detected</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

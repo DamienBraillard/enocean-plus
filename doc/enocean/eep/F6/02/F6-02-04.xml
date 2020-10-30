@@ -1,0 +1,130 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xF6</number>
+      <title>RPS Telegram</title>
+      <telegram>RPS</telegram>
+      <func>
+        <number>0x02</number>
+        <title>Rocker Switch, 2 Rocker</title>
+        <type>
+          <number>0x04</number>
+          <title>Light and blind control ERP2</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: EnOcean GmbH</span>
+          </description>
+          <case>
+            <datafield>
+              <data>Energy Bow</data>
+              <shortcut>EBO</shortcut>
+              <description>State of the energy bow</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>released</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>pressed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Button coding</data>
+              <shortcut>BC</shortcut>
+              <description>Signalize button coding</description>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>button</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>2</bitoffs>
+              <bitsize>2</bitsize>
+              <enum/>
+            </datafield>
+            <datafield>
+              <data>BI</data>
+              <shortcut>RBI</shortcut>
+              <description>State I of the rocker B</description>
+              <bitoffs>4</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not pressed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>pressed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>B0</data>
+              <shortcut>RB0</shortcut>
+              <description>State 0 of the rocker B</description>
+              <bitoffs>5</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not pressed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>pressed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>AI</data>
+              <shortcut>RAI</shortcut>
+              <description>State I of the rocker A</description>
+              <bitoffs>6</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not pressed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>pressed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>A0</data>
+              <shortcut>RA0</shortcut>
+              <description>State 0 of the rocker A</description>
+              <bitoffs>7</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not pressed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>pressed</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

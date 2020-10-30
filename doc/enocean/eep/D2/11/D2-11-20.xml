@@ -1,0 +1,2752 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x11</number>
+        <title>Bidirectional Room Operating Panel</title>
+        <type>
+          <number>0x20</number>
+          <title>Type 0x20</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Menred GmbH</span><br/><br/><span style="border-bottom:2px groove #000000;">Data exchange</span><br/>Direction: bidirectional
+              <br/>Addressing: unicast (ADT)
+              <br/>Communication trigger: data change event-triggered / time-triggered
+              <br/>Communication interval: send interval adjustment, minimum 5 sec., maximum 30 min.
+              <br/>Trigger event: sensor data changes or key set data
+              <br/>Tx delay: N/A (maximum response time)
+              <br/>Rx timeout: N/A (minimum time between two received messages)
+              <br/><br/><span style="border-bottom:2px groove #000000;">Teach-in</span><br/>Teach-in method: Smart-Ack teach-in
+              <br/><br/><span style="border-bottom:2px groove #000000;">Security</span><br/>Encryption required: no
+              <br/>Security level format: N/A
+              <br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>
+              This EEP is intended to be used for a Room Control Panel (RCP)
+              offering the following features:
+              <br/>
+              <ul><li>Multi symbol, multi segment LCD display (or equivalent)</li></ul>
+              <ul><li>Repeater operation shall work in compliance with the Smart Ack specification</li></ul>
+              This VLD family consists of several profiles for a group of different
+              RCPs with various functions and measurements (see following table
+              of parameters for a feature list). The profiles are designed to
+              establish a communication between a battery-powered room control
+              panel and a line-powered (and therefor always receiving) gateway.
+              It also allows a gateway-to-gateway communication. Due to the high
+              energy consumption while powering the receiver, the room control
+              panel will always be the initiator of a data exchange. It cannot
+              be triggered by the gateway as it is not in a receiving mode most
+              of the time.
+              <br/>
+              If RCP does not receive the gateway message, RCP attempts to resend
+              it, and if it fails two consecutive times, the fault code hint is
+              displayed. Key or temperature change RCP will try to resend it
+              once, and if the communication resumes, clear the fault code.
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">SmartAck usage and sematics</span>
+              <br/>
+              The Communication is based on the Smart Ack concept. Some basics
+              related hereto are included in this document for convenience but
+              for details please consult the Smart Ack specification.
+              <br/>
+              1. Button press Modify setting value sends message
+              <br/>
+	          2. Periodic automatic sending time is determined by the Send interval setting, can be set by the RCM button, or through the gateway through the message settings; Reference messages 4 and 12
+	          <br/>
+              3. Room temperature changes will also send messages
+              <br/>
+              <br/>
+              <img>graphics/D2-11-20_flow.png</img>
+              <br/>
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Messages ID Definitions &amp; Directions</span>
+              <br/>
+              <br/>
+            <table><tr><th>Message ID</th><th>Message: RCP to Gateway/Actor</th></tr><tr><td>3</td><td style="background-color:#FFFFFF">Heartbeat message</td></tr><tr><td>4</td><td style="background-color:#FFFFFF">Sensor values and Data set-point message</td></tr><tr><td>5</td><td style="background-color:#FFFFFF">Sensor and battery data
+                message (period sample and transmit)</td></tr><tr><td>6</td><td style="background-color:#FFFFFF">Data set-points message
+                (key set event)</td></tr><tr><td>7</td><td style="background-color:#FFFFFF">Install set-points message
+                (parameter store at RCP)</td></tr></table>
+              <br/>
+              <br/>
+            <table><tr><th>Message ID</th><th>Message: Gateway/Actor to RCP</th></tr><tr><td>8</td><td style="background-color:#FFFFFF">Reply message</td></tr><tr><td>9</td><td style="background-color:#FFFFFF">Sensor values and Data set-point message</td></tr><tr><td>10</td><td style="background-color:#FFFFFF">Gateway/actuator data status</td></tr><tr><td>11</td><td style="background-color:#FFFFFF">Gateway/actuator's data
+                set-points message</td></tr><tr><td>12</td><td style="background-color:#FFFFFF">Install set-points message</td></tr></table>
+            </description>
+          <case>
+            <title>Message ID 3</title>
+            <description>Direction: RCP -&gt; Gateway/Actuator<br/>
+                <img>graphics/D2-11-20_ID3.png</img>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x03</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>1</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>Telegram Type</data>
+              <shortcut>TTP</shortcut>
+              <description>Telegram Type</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Heartbeat</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Gateway setting</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message ID</data>
+              <shortcut>MID</shortcut>
+              <description>Message ID-3</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>ID-3</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message ID 4</title>
+            <description>Direction: RCP -&gt; Gateway/Actuator<br/>
+                <img>graphics/D2-11-20_ID4.png</img>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x04</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>2</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>44</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Work Mode Symbol</data>
+              <shortcut>WMS</shortcut>
+              <description>RCP display symbol as FloorHeating, AirCondition /
+                FanCoil, FanVentilation</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>FloorHeating symbol</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>AirCondition symbol</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>FanVentilation symbol</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message ID</data>
+              <shortcut>MID</shortcut>
+              <description>Message ID-4</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>4</value>
+                  <description>ID-4</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Controller Panel Mode</data>
+              <shortcut>RCPM</shortcut>
+              <description>RCP mode selector for control messages and data synchronization</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>FloorHeating + AirCondition + FanVentilation</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>FloorHeating</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>AirCondition</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>FanVentilation</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>FloorHeating + AirCondition</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>FloorHeating + FanVentilation</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>AirCondition + FanVentilation</description>
+                </item>
+                <item>
+                  <min>7</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Battery Status</data>
+              <shortcut>BS</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Solar powered</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Backup batteryPowered</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Backup batteryLow</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Backup batteryEmpty</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Failure Code</data>
+              <shortcut>FC</shortcut>
+              <description>RCP exception status</description>
+              <info/>
+              <bitoffs>14</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NoError</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Temperature sensor error</description>
+                </item>
+                <item>
+                  <min>2</min>
+                  <max>3</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Temperature</data>
+              <shortcut>RTEMP</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>50</max>
+                  <scale>
+                    <min>0</min>
+                    <max>50</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>51</min>
+                  <max>127</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Contact State</data>
+              <shortcut>ACCTST</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>23</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Floor Heating Occupany / Power</data>
+              <shortcut>FHO</shortcut>
+              <description>If the room is occupied the floor heating is on, if it is
+                unoccupied the floor heating is off</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unoccupied/Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Occupied/On</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Floor Heating Temperature Setpoint</data>
+              <shortcut>FHTSP</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>30</max>
+                  <scale>
+                    <min>5</min>
+                    <max>35</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>31</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Mode Setpoint</data>
+              <shortcut>ACMSP</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Cooling</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Heating</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Auto</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Fan Setpoint</data>
+              <shortcut>ACFSP</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Off (Stage 0)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Low (Stage 1)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Medium (Stage 2)</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>High (Stage 3)</description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>7</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Temperature Setting</data>
+              <shortcut>ACTS</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>35</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>30</max>
+                  <scale>
+                    <min>5</min>
+                    <max>35</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>31</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Floor Ventilation Occupany / Power</data>
+              <shortcut>FVO</shortcut>
+              <description>If the room is occupied the Fan Ventilation is on, if it is
+                unoccupied the Fan Ventilation is off</description>
+              <info/>
+              <bitoffs>40</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unoccupied/Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Occupied/On</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Ventilation Setpoint</data>
+              <shortcut>FVSP</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>41</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Off (Stage 0)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Low (Stage 1)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Medium (Stage 2)</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>High (Stage 3)</description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>7</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message ID 5</title>
+            <description>Direction: RCP -&gt; Gateway/Actuator<br/>
+                <img>graphics/D2-11-20_ID5.png</img>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x05</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>2</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Work Mode Symbol</data>
+              <shortcut>WMS</shortcut>
+              <description>RCP display symbol as FloorHeating, AirCondition /
+                FanCoil, FanVentilation</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>FloorHeating symbol</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>AirCondition symbol</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>FanVentilation symbol</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message ID</data>
+              <shortcut>MID</shortcut>
+              <description>Message ID-5</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>5</value>
+                  <description>ID-5</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Controller Panel Mode</data>
+              <shortcut>RCPM</shortcut>
+              <description>RCP mode selector for control messages and data synchronization</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>FloorHeating + AirCondition + FanVentilation</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>FloorHeating</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>AirCondition</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>FanVentilation</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>FloorHeating + AirCondition</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>FloorHeating + FanVentilation</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>AirCondition + FanVentilation</description>
+                </item>
+                <item>
+                  <min>7</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Battery Status</data>
+              <shortcut>BS</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Solar powered</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Backup batteryPowered</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Backup batteryLow</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Backup batteryEmpty</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Failure Code</data>
+              <shortcut>FC</shortcut>
+              <description>RCP exception status</description>
+              <info/>
+              <bitoffs>14</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NoError</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Temperature sensor error</description>
+                </item>
+                <item>
+                  <min>2</min>
+                  <max>3</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Temperature</data>
+              <shortcut>RTEMP</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>50</max>
+                  <scale>
+                    <min>0</min>
+                    <max>50</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>51</min>
+                  <max>127</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Contact State</data>
+              <shortcut>ACCTST</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>23</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message ID 6</title>
+            <description>Direction: RCP -&gt; Gateway/Actuator<br/>
+                <img>graphics/D2-11-20_ID6.png</img>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x06</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>2</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Work Mode Symbol</data>
+              <shortcut>WMS</shortcut>
+              <description>RCP display symbol as FloorHeating, AirCondition /
+                FanCoil, FanVentilation</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>FloorHeating symbol</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>AirCondition symbol</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>FanVentilation symbol</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message ID</data>
+              <shortcut>MID</shortcut>
+              <description>Message ID-6</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>6</value>
+                  <description>ID-6</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Controller Panel Mode</data>
+              <shortcut>RCPM</shortcut>
+              <description>RCP mode selector for control messages and data synchronization</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>FloorHeating + AirCondition + FanVentilation</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>FloorHeating</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>AirCondition</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>FanVentilation</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>FloorHeating + AirCondition</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>FloorHeating + FanVentilation</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>AirCondition + FanVentilation</description>
+                </item>
+                <item>
+                  <min>7</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Ventilation Occupany / Power</data>
+              <shortcut>FVO</shortcut>
+              <description>If the room is occupied the Fan Ventilation is on, if it is
+                unoccupied the Fan Ventilation is off</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unoccupied/Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Occupied/On</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Ventilation Setpoint</data>
+              <shortcut>FVSP</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>13</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Off (Stage 0)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Low (Stage 1)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Medium (Stage 2)</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>High (Stage 3)</description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>7</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Floor Heating Occupany / Power</data>
+              <shortcut>FHO</shortcut>
+              <description>If the room is occupied the floor heating is on, if it is
+                unoccupied the floor heating is off</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unoccupied/Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Occupied/On</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Floor Heating Temperature Setpoint</data>
+              <shortcut>FHTSP</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>30</max>
+                  <scale>
+                    <min>5</min>
+                    <max>35</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>31</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Mode Setpoint</data>
+              <shortcut>ACMSP</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Cooling</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Heating</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Auto</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Fan Setpoint</data>
+              <shortcut>ACFSP</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Off (Stage 0)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Low (Stage 1)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Medium (Stage 2)</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>High (Stage 3)</description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>7</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Temperature Setting</data>
+              <shortcut>ACTS</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>27</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>30</max>
+                  <scale>
+                    <min>5</min>
+                    <max>35</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>31</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message ID 7</title>
+            <description>Direction: RCP -&gt; Gateway/Actuator<br/>
+                <img>graphics/D2-11-20_ID7.png</img>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x07</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>26</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>32</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message ID</data>
+              <shortcut>MID</shortcut>
+              <description>Message ID-7</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>7</value>
+                  <description>ID-7</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Controller Panel Mode</data>
+              <shortcut>RCPM</shortcut>
+              <description>RCP mode selector for control messages and data synchronization</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>FloorHeating + AirCondition + FanVentilation</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>FloorHeating</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>AirCondition</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>FanVentilation</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>FloorHeating + AirCondition</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>FloorHeating + FanVentilation</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>AirCondition + FanVentilation</description>
+                </item>
+                <item>
+                  <min>7</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Sensor Select Option</data>
+              <shortcut>TSSO</shortcut>
+              <description>Select between a remote sensor or a built-in sensor</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Built-in sensor</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Remote sensor</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Auto Transmit Period</data>
+              <shortcut>ATC</shortcut>
+              <description>RCP send message period</description>
+              <info/>
+              <bitoffs>13</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>5 minutes</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>5 seconds</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>30 seconds</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>1 minute</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>3 minutes</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>10 minutes</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>15 minutes</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>30 minutes</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Sensor Sample Period</data>
+              <shortcut>SSC</shortcut>
+              <description>RCP sample period</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>3 minutes</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>1 second</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>10 seconds</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>30 seconds</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>1 minute</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>5 minutes</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>10 minutes</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>30 minutes</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Type Option</data>
+              <shortcut>ACT</shortcut>
+              <description>Choose between cooling, cooling and heating, or auto cooling and heating</description>
+              <info/>
+              <bitoffs>19</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Off, Cooling, Heating, Fan</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Off, Cooling, Fan</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Off, Cooling, Heating, Fan, Auto</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Fan Speed Option</data>
+              <shortcut>ACFO</shortcut>
+              <description>Choose the fan speed</description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto Low Medium High</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Auto Low High</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Low High</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>High</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Lock Mode</data>
+              <shortcut>LOCK</shortcut>
+              <description>When Lock mode = 1, RCP manual can modify only occupany/on/off function</description>
+              <info/>
+              <bitoffs>23</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unlock</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Lock</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Ventilation Speed Option</data>
+              <shortcut>FVS</shortcut>
+              <description>Choose the fan speed type according to the fan speed option</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto Low Medium High</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Auto Low High</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Low High</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>High</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Temperature Correct Value</data>
+              <shortcut>TSCV</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>27</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>14</max>
+                  <scale>
+                    <min>-7</min>
+                    <max>7</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Contact State</data>
+              <shortcut>ACCTST</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Floor Heating Temperature Range Setting</data>
+              <shortcut>FHTSR</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>34</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>5 ... 35 &#176;C</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>10 ... 30 &#176;C</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>10 ... 25 &#176;C</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>10 ... 20 &#176;C</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>10 ... 15 &#176;C</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>15 ... 30 &#176;C</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>15 ... 25 &#176;C</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>15 ... 20 &#176;C</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Temperature Range Setting</data>
+              <shortcut>ACTSR</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>37</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>5 ... 35 &#176;C</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>10 ... 30 &#176;C</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>10 ... 25 &#176;C</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>10 ... 20 &#176;C</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>10 ... 15 &#176;C</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>15 ... 30 &#176;C</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>15 ... 25 &#176;C</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>15 ... 20 &#176;C</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message ID 8</title>
+            <description>Direction: Gateway/Actuator -&gt; RCP<br/>
+                <img>graphics/D2-11-20_ID8.png</img>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x08</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>Message Continuation Flag</data>
+              <shortcut>MCF</shortcut>
+              <description>Indicates if another telegram has to be expected
+                or if the message is complete</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Complete</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Incomplete</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Run Init Sequence</data>
+              <shortcut>RIN</shortcut>
+              <description>Indicates if the Gateway / actuator requires more
+                messages to be initialized</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Gateway</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>FloorHeating</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>AirCondition</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>FanVentilation</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message ID</data>
+              <shortcut>MID</shortcut>
+              <description>Message ID-8</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>8</value>
+                  <description>ID-8</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message ID 9</title>
+            <description>Direction: Gateway/Actuator -&gt; RCP<br/>
+                <img>graphics/D2-11-20_ID9.png</img>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x09</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>39</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Continuation Flag</data>
+              <shortcut>MCF</shortcut>
+              <description>Indicates if another telegram has to be expected
+                or if the message is complete</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Complete</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Incomplete</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Run Init Sequence</data>
+              <shortcut>RIN</shortcut>
+              <description>Indicates if the Gateway / actuator requires more messages
+                to be initialized</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Gateway</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>FloorHeating</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>AirCondition</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>FanVentilation</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message ID</data>
+              <shortcut>MID</shortcut>
+              <description>Message ID-9</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>9</value>
+                  <description>ID-9</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Exception Status</data>
+              <shortcut>ES</shortcut>
+              <description>Displays on the RCP if there is an error in the actuator</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NoError</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Remote temperature sensor error</description>
+                </item>
+                <item>
+                  <min>2</min>
+                  <max>3</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Floor Heating Occupany / Power</data>
+              <shortcut>FHO</shortcut>
+              <description>If the room is occupied the floor heating is on, if it is
+                unoccupied the floor heating is off</description>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unoccupied/Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Occupied/On</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Floor Heating Temperature Setpoint</data>
+              <shortcut>FHTSP</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>30</max>
+                  <scale>
+                    <min>5</min>
+                    <max>35</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>31</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Mode Setpoint</data>
+              <shortcut>ACMSP</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Cooling</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Heating</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Auto</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Fan Setpoint</data>
+              <shortcut>ACFSP</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Off (Stage 0)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Low (Stage 1)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Medium (Stage 2)</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>High (Stage 3)</description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>7</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Ventilation Setpoint</data>
+              <shortcut>FVSP</shortcut>
+              <description></description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Off (Stage 0)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Low (Stage 1)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Medium (Stage 2)</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>High (Stage 3)</description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>7</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Temperature Setting</data>
+              <shortcut>ACTS</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>30</max>
+                  <scale>
+                    <min>5</min>
+                    <max>35</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>31</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Ventilation Occupancy / Power</data>
+              <shortcut>FVO</shortcut>
+              <description>If the room is occupied the Fan Ventilation is on, if it is
+                unoccupied the Fan Ventilation is off</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unoccupied/Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Occupied/On</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Work Mode Symbol</data>
+              <shortcut>WMS</shortcut>
+              <description>RCP display symbol as FloorHeating, AirCondition / FanCoil, FanVentilation, sensor</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>FloorHeating symbol</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Air Condition symbol</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>FanVentilation symbol</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Remote Temperature Original Value</data>
+              <shortcut>RTOV</shortcut>
+              <description>If remote temperature is enable, the external sensor value select
+                display and control, the built-in sensor is disabled</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>50</max>
+                  <scale>
+                    <min>0</min>
+                    <max>50</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>51</min>
+                  <max>127</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message ID 10</title>
+            <description>Direction: Gateway/Actuator -&gt; RCP<br/>
+                <img>graphics/D2-11-20_ID10.png</img>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x0A</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>10</bitoffs>
+              <bitsize>6</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>23</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Continuation Flag</data>
+              <shortcut>MCF</shortcut>
+              <description>Indicates if another telegram has to be expected
+                or if the message is complete</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Complete</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Incomplete</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Run Init Sequence</data>
+              <shortcut>RIN</shortcut>
+              <description>Indicates if the Gateway / actuator requires more messages to
+                be initialized</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Gateway</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>FloorHeating</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>AirCondition</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>FanVentilation</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message ID</data>
+              <shortcut>MID</shortcut>
+              <description>Message ID-10</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>10</value>
+                  <description>ID-10</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Exception Status</data>
+              <shortcut>ES</shortcut>
+              <description>Displays on the RCP if there is an error in the actuator</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NoError</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Remote temperature sensor error</description>
+                </item>
+                <item>
+                  <min>2</min>
+                  <max>3</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Remote Temperature Original Value</data>
+              <shortcut>RTOV</shortcut>
+              <description>If remote temperature is enable, the external sensor value select
+                display and control, the built-in sensor is disabled</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>50</max>
+                  <scale>
+                    <min>0</min>
+                    <max>50</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>51</min>
+                  <max>127</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message ID 11</title>
+            <description>Direction: Gateway/Actuator -&gt; RCP<br/>
+                <img>graphics/D2-11-20_ID11.png</img>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x0B</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>12</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Continuation Flag</data>
+              <shortcut>MCF</shortcut>
+              <description>Indicates if another telegram has to be expected
+                or if the message is complete</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Complete</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Incomplete</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Run Init Sequence</data>
+              <shortcut>RIN</shortcut>
+              <description>Indicates if the Gateway / actuator requires more messages to
+                be initialized</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Gateway</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>FloorHeating</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>AirCondition</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>FanVentilation</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message ID</data>
+              <shortcut>MID</shortcut>
+              <description>Message ID-11</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>11</value>
+                  <description>ID-11</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Ventilation Occupany / Power</data>
+              <shortcut>FVO</shortcut>
+              <description>If the room is occupied the Fan Ventilation is on, if it is
+                unoccupied the Fan Ventilation is off</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unoccupied/Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Occupied/On</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Ventilation Setpoint</data>
+              <shortcut>FVSP</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Off (Stage 0)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Low (Stage 1)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Medium (Stage 2)</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>High (Stage 3)</description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>7</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Work Mode Symbol</data>
+              <shortcut>WMS</shortcut>
+              <description>RCP display symbol as FloorHeating, AirCondition / FanCoil,
+                FanVentilation</description>
+              <info/>
+              <bitoffs>14</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>FloorHeating symbol</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Air Condition symbol</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>FanVentilation symbol</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Floor Heating Occupany / Power</data>
+              <shortcut>FHO</shortcut>
+              <description>If the room is occupied the floor heating is on, if it is
+                unoccupied the floor heating is off</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unoccupied/Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Occupied/On</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Floor Heating Temperature Setpoint</data>
+              <shortcut>FHTSP</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>30</max>
+                  <scale>
+                    <min>5</min>
+                    <max>35</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>31</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Mode Setpoint</data>
+              <shortcut>ACMSP</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Cooling</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Heating</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Auto</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Fan Setpoint</data>
+              <shortcut>ACFSP</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Off (Stage 0)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Low (Stage 1)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Medium (Stage 2)</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>High (Stage 3)</description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>7</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Temperature Setting</data>
+              <shortcut>ACTS</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>27</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>30</max>
+                  <scale>
+                    <min>5</min>
+                    <max>35</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>31</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message ID 12</title>
+            <description>Direction: Gateway/Actuator -&gt; RCP<br/>
+                <img>graphics/D2-11-20_ID12.png</img>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x0C</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>27</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>32</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Continuation Flag</data>
+              <shortcut>MCF</shortcut>
+              <description>Indicates if another telegram has to be expected
+                or if the message is complete</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Complete</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Incomplete</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Run Init Sequence</data>
+              <shortcut>RIN</shortcut>
+              <description>Indicates if the Gateway / actuator requires more messages to
+                be initialized</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Gateway</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>FloorHeating</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>AirCondition</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>FanVentilation</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message ID</data>
+              <shortcut>MID</shortcut>
+              <description>Message ID-12</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>12</value>
+                  <description>ID-12</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Controller Panel Mode</data>
+              <shortcut>RCPM</shortcut>
+              <description>RCP mode selector for control messages and data synchronization</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>FloorHeating + AirCondition + FanVentilation</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>FloorHeating</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>AirCondition</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>FanVentilation</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>FloorHeating + AirCondition</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>FloorHeating + FanVentilation</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>AirCondition + FanVentilation</description>
+                </item>
+                <item>
+                  <min>7</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Sensor Select Option</data>
+              <shortcut>TSSO</shortcut>
+              <description>Select between a remote sensor or a built-in sensor</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Built-in sensor</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Remote sensor</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Auto Transmit Period</data>
+              <shortcut>ATC</shortcut>
+              <description>RCP send message period</description>
+              <info/>
+              <bitoffs>13</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>5 minutes</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>5 seconds</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>30 seconds</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>1 minute</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>3 minutes</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>10 minutes</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>15 minutes</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>30 minutes</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Sensor Sample Period</data>
+              <shortcut>SSC</shortcut>
+              <description>RCP sample period</description>
+              <description/>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>3 minutes</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>1 second</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>10 seconds</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>30 seconds</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>1 minute</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>5 minutes</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>10 minutes</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>30 minutes</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Fan Speed Option</data>
+              <shortcut>ACFO</shortcut>
+              <description>Choose the fan speed</description>
+              <info/>
+              <bitoffs>19</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto Low Medium High</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Auto Low High</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Low High</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>High</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Lock Mode</data>
+              <shortcut>LOCK</shortcut>
+              <description>When Lock mode = 1, RCP manual can modify ony occupany/on/off function</description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unlock</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Lock</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Contact State</data>
+              <shortcut>ACCTST</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Type Option</data>
+              <shortcut>ACT</shortcut>
+              <description>Choose between cooling, cooling and heating, or auto cooling and heating</description>
+              <info/>
+              <bitoffs>23</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Off, Cooling, Heating, Fan</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Off, Cooling, Fan</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Off, Cooling, Heating, Fan, Auto Cooling and Heating</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Ventilation Speed Option</data>
+              <shortcut>FVS</shortcut>
+              <description>Choose the fan speed type according to the fan speed option</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto Low Medium High</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Auto Low High</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Low High</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>High</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Temperature Correct Value</data>
+              <shortcut>TSCV</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>14</max>
+                  <scale>
+                    <min>-7</min>
+                    <max>7</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Floor Heating Temperature Range Setting</data>
+              <shortcut>FHTSR</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>34</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>5 ... 35 &#176;C</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>10 ... 30 &#176;C</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>10 ... 25 &#176;C</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>10 ... 20 &#176;C</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>10 ... 15 &#176;C</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>15 ... 30 &#176;C</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>15 ... 25 &#176;C</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>15 ... 20 &#176;C</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Condition Temperature Range Setting</data>
+              <shortcut>ACTSR</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>37</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>5 ... 35 &#176;C</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>10 ... 30 &#176;C</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>10 ... 25 &#176;C</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>10 ... 20 &#176;C</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>10 ... 15 &#176;C</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>15 ... 30 &#176;C</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>15 ... 25 &#176;C</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>15 ... 20 &#176;C</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

@@ -1,0 +1,121 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x14</number>
+        <title>Multi Function Sensors</title>
+        <type>
+          <number>0x0F</number>
+          <title>Sensor for Temperature, Humidity and Barometric Pressure, line-powered</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Perfactory</span>
+          </description>
+          <case>
+            <description>
+              <img>graphics/D2-14-0F.png</img>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>26</bitoffs>
+              <bitsize>6</bitsize>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP9</shortcut>
+              <description>Temperature (linear)<br/>-----------
+                  <br/>Status of Temperature Sensor
+                </description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>9</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>500</max>
+                  <scale>
+                    <min>0</min>
+                    <max>50</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>501</min>
+                  <max>510</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>511</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Humidity</data>
+              <shortcut>HUM</shortcut>
+              <description>Rel. Humidity (linear)<br/>-----------
+                  <br/>Status of Humidity Sensor
+                </description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>200</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <min>201</min>
+                  <max>254</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Barometer</data>
+              <shortcut>BAR</shortcut>
+              <description>Barometer (linear)<br/>-----------
+                  <br/>Status of Barometer Sensor
+                </description>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>9</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>500</max>
+                  <scale>
+                    <min>600</min>
+                    <max>1100</max>
+                  </scale>
+                  <unit>hPa</unit>
+                </item>
+                <item>
+                  <min>501</min>
+                  <max>510</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>511</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

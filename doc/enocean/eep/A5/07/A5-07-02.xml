@@ -1,0 +1,90 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x07</number>
+        <title>Occupancy Sensor</title>
+        <type>
+          <number>0x02</number>
+          <title>Occupancy with Supply voltage monitor</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Lutuo Technology</span><br/><br/>
+  The transmission of &#8220;PIR off&#8221; telegrams is optional.</description>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Supply voltage (REQUIRED)</data>
+              <shortcut>SVC</shortcut>
+              <description>Supply voltage / super cap. (linear);<br/>
+      251 &#8211; 255 reserved for error code</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>250</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>5.0</max>
+              </scale>
+              <unit>V</unit>
+            </datafield>
+            <datafield>
+              <data>PIR Status</data>
+              <shortcut>PIRS</shortcut>
+              <description>PIR Status</description>
+              <info>PIR Status</info>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Uncertain of occupancy status</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Motion detected</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>25</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

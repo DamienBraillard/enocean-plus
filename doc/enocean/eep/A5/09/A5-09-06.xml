@@ -1,0 +1,67 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x09</number>
+        <title>Gas Sensor</title>
+        <type>
+          <number>0x06</number>
+          <title>Radon</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: NanoSense</span>
+          </description>
+          <case>
+            <datafield>
+              <data>Radon</data>
+              <shortcut>Act</shortcut>
+              <description>Radon activity (regulation is an average of 100 Bq/m3/24h)</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>10</bitsize>
+              <range>
+                <min>0</min>
+                <max>1023</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>1023</max>
+              </scale>
+              <unit>Bq/m3</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>10</bitoffs>
+              <bitsize>18</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

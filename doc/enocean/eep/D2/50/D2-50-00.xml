@@ -1,0 +1,1501 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x50</number>
+        <title>Heat Recovery Ventilation</title>
+        <type>
+          <number>0x00</number>
+          <title>Type 0x00</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Glen Dimplex</span>
+          </description>
+          <case>
+            <title>Telegram Definition: &#8216;Ventilation Remote Transmission Request Message&#8217;</title>
+            <description>The &#8216;Ventilation Remote Transmission Request Message&#8217; queries a particular
+                status message from the heat-recovery ventilation unit.
+                Thus status messages can be obtained at any time or at a higher update
+                rate than the heartbeat rate, e.g. during commissioning.<br/>
+                <br/>Direction: Gateway --&gt; Heat-recovery ventilation unit
+                <br/>
+                <img>graphics/D2-50-ZZ-No001.png</img>
+                <br/>
+              </description>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description>Defines the message type</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Ventilation remote transmission request</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Ventilation control</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Ventilation basic status</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Ventilation extended status</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Requested Message Type</data>
+              <shortcut>RMT</shortcut>
+              <description>Defines the message type, which is requested by the remote device</description>
+              <info/>
+              <bitoffs>5</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Ventilation basic status</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Ventilation extended status</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>3</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+          </case>
+          <case>
+            <title>Telegram Definition: &#8216;Ventilation Control Message&#8217;</title>
+            <description>The &#8216;Ventilation Control Message&#8217; changes the operating mode,
+              the state of several actuators and a subset of control parameters.<br/>
+              <br/>Direction: Gateway --&gt; Heat-recovery ventilation unit
+              <br/>
+              <img>graphics/D2-50-ZZ-No002.png</img>
+              <br/>
+              </description>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>12</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>32</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>40</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description>Defines the message type</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Ventilation remote transmission request</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Ventilation control</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Ventilation basic status</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Ventilation extended status</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Direct Operation Mode Control</data>
+              <shortcut>DOMC</shortcut>
+              <description>Selects ventilation mode/level</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Level 1</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Level 2</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Level 3</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Level 4</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>9</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>10</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>Automatic</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>Automatic on demand</description>
+                </item>
+                <item>
+                  <value>13</value>
+                  <description>Supply air only</description>
+                </item>
+                <item>
+                  <value>14</value>
+                  <description>Exhaust air only</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>No action (keep current ventilation mode/level)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Operation Mode Control</data>
+              <shortcut>OMC</shortcut>
+              <description>Selects the next resp. previous available ventilation mode/level</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No action</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Select next operation mode (edge-trigger)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Select previous operation mode (edge-trigger)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Heat Exchanger Bypass Control</data>
+              <shortcut>HBC</shortcut>
+              <description>Manual override of automatic heat exchanger bypass control</description>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No action</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Close bypass (edge-trigger)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Open bypass (edge-trigger)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Timer Operation Mode Control</data>
+              <shortcut>TOMC</shortcut>
+              <description>Enables Timer Operation Mode, i.e. a particular ventilation mode
+                is activated for a defined time</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No action</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Start timer operation mode (edge-trigger)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>CO2 Threshold</data>
+              <shortcut>COT</shortcut>
+              <description>Overrides CO2 threshold for CO2 control in automatic mode</description>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <description>0...100 %</description>
+                </item>
+                <item>
+                  <min>101</min>
+                  <max>126</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Default (use threshold configured in device)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Humidity Threshold</data>
+              <shortcut>HT</shortcut>
+              <description>Overrides humidity threshold for humidity control in automatic mode</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <description>0...100 %</description>
+                </item>
+                <item>
+                  <min>101</min>
+                  <max>126</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Default (use threshold configured in device)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Quality Threshold</data>
+              <shortcut>AQT</shortcut>
+              <description>Overrides air quality threshold for air quality control in automatic mode</description>
+              <info/>
+              <bitoffs>33</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <description>0...100 %</description>
+                </item>
+                <item>
+                  <min>101</min>
+                  <max>126</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Default (use threshold configured in device)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room temperature threshold</data>
+              <shortcut>RTT</shortcut>
+              <description>Overrides room temperature threshold for room temperature control mode</description>
+              <info/>
+              <bitoffs>41</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>1</min>
+                  <max>127</max>
+                  <scale>
+                    <min>-63</min>
+                    <max>+63</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>0</value>
+                  <description>Default - use threshold configured in device</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Telegram Definition: &#8216;Ventilation Basic Status Message&#8217;</title>
+            <description>The &#8216;Ventilation Basic Status Message&#8217; provides current sensor values
+                and  internal control status information. It is triggered once at
+                power-on and on particular value changes.<br/>
+                Additionally this message is available on request.
+                <br/>
+                <br/>Direction: Heat-recovery ventilation unit --&gt; Gateway
+                <br/>
+                <img>graphics/D2-50-ZZ-No003.png</img>
+                <br/>
+              </description>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>8</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description>Defines the message type</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Ventilation remote transmission request</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Ventilation control</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Ventilation basic status</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Ventilation extended status</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Operation Mode Status</data>
+              <shortcut>OMS</shortcut>
+              <description>Shows current Operation Mode Status</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Level 1</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Level 2</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Level 3</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Level 4</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>9</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>10</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>Automatic</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>Automatic on demand</description>
+                </item>
+                <item>
+                  <value>13</value>
+                  <description>Supply air only</description>
+                </item>
+                <item>
+                  <value>14</value>
+                  <description>Exhaust air only</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Safety Mode Status</data>
+              <shortcut>SMS</shortcut>
+              <description>Indicates if device is running in fireplace safety mode</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Fireplace safety mode disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Fireplace safety mode enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Heat Exchanger Bypass Status</data>
+              <shortcut>HBS</shortcut>
+              <description>Indicates heat exchanger bypass status</description>
+              <info/>
+              <bitoffs>13</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Bypass closed (heat-recovery active)</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Bypass opened (heat-recovery inactive)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Supply Air Flap Position</data>
+              <shortcut>SFP</shortcut>
+              <description>Supply Air Flap Position</description>
+              <info/>
+              <bitoffs>14</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Supply air flap closed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Supply air flap opened</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Exhaust Air Flap Position</data>
+              <shortcut>EFP</shortcut>
+              <description>Exhaust Air Flap Position</description>
+              <info/>
+              <bitoffs>15</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Exhaust air flap closed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Exhaust air flap opened</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Defrost Mode Status</data>
+              <shortcut>DMS</shortcut>
+              <description>Indicates if device is running in defrost mode, i.e.
+                automatic defrosting of heat exchanger is active</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Defrost mode inactive</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Defrost mode active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Cooling Protection Status</data>
+              <shortcut>CPS</shortcut>
+              <description>Indicates if device is running in cooling protection</description>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Cooling protection mode inactive</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Cooling protection mode active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Outdoor Air Heater Status</data>
+              <shortcut>OHS</shortcut>
+              <description>Outdoor Air Heater Status</description>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Inactive</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Supply Air Heater Status</data>
+              <shortcut>SHS</shortcut>
+              <description>Supply Air Heater Status</description>
+              <info/>
+              <bitoffs>19</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Inactive</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Drain Heater Status</data>
+              <shortcut>DHS</shortcut>
+              <description>Drain Heater Status</description>
+              <info/>
+              <bitoffs>20</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Inactive</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Timer Operation Mode Status</data>
+              <shortcut>TOMS</shortcut>
+              <description>Indicates timer operation mode status</description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>timer operation mode inactive</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>timer operation mode active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Filter Maintenance Status</data>
+              <shortcut>FMS</shortcut>
+              <description>Filter Maintenance Status</description>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Maintenance not required</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Maintenance required</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Weekly Timer Program Status</data>
+              <shortcut>WTPS</shortcut>
+              <description>Indicates if weekly timer program is active
+                (i.e. if device is running according to configured program)</description>
+              <info/>
+              <bitoffs>23</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Weekly timer program disabled or not configured</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Weekly timer program active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Temperature Control Status</data>
+              <shortcut>RTCS</shortcut>
+              <description>Indicates room temperature control status</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Room temperature control inactive</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Room temperature control active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Quality Sensor 1</data>
+              <shortcut>AQS1</shortcut>
+              <description>Current air quality sensor 1 measurement value</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <description>0...100 %</description>
+                </item>
+                <item>
+                  <min>101</min>
+                  <max>126</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Not available</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Master/Slave Configuration Status</data>
+              <shortcut>MSS</shortcut>
+              <description>Indicates whether device is configured as master or slave unit</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Master</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Slave</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Quality Sensor 2</data>
+              <shortcut>AQS2</shortcut>
+              <description>Current air quality sensor 2 measurement value</description>
+              <info/>
+              <bitoffs>33</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <description>0...100 %</description>
+                </item>
+                <item>
+                  <min>101</min>
+                  <max>126</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Not available</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Outdoor Air Temperature</data>
+              <shortcut>OUTT</shortcut>
+              <description>Current outdoor air temperature</description>
+              <info/>
+              <bitoffs>40</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>127</max>
+              </range>
+              <scale>
+                <min>-64</min>
+                <max>+63</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Supply Air Temperature</data>
+              <shortcut>SPLYT</shortcut>
+              <description>Current supply air temperature</description>
+              <info/>
+              <bitoffs>47</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>127</max>
+              </range>
+              <scale>
+                <min>-64</min>
+                <max>+63</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Indoor Air Temperature</data>
+              <shortcut>INT</shortcut>
+              <description>Current indoor air temperature</description>
+              <info/>
+              <bitoffs>54</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>127</max>
+              </range>
+              <scale>
+                <min>-64</min>
+                <max>+63</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Exhaust Air Temperature</data>
+              <shortcut>EXHT</shortcut>
+              <description>Current exhaust air temperature</description>
+              <info/>
+              <bitoffs>61</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>127</max>
+              </range>
+              <scale>
+                <min>-64</min>
+                <max>+63</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Supply Air Fan Air Flow Rate</data>
+              <shortcut>SPLYFF</shortcut>
+              <description>Current supply air fan air flow rate setpoint</description>
+              <info/>
+              <bitoffs>68</bitoffs>
+              <bitsize>10</bitsize>
+              <range>
+                <min>0</min>
+                <max>1023</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>1023</max>
+              </scale>
+              <unit>m3/h</unit>
+            </datafield>
+            <datafield>
+              <data>Exhaust Air Fan Air Flow Rate</data>
+              <shortcut>EXHFF</shortcut>
+              <description>Current exhaust air fan air flow rate setpoint</description>
+              <info/>
+              <bitoffs>78</bitoffs>
+              <bitsize>10</bitsize>
+              <range>
+                <min>0</min>
+                <max>1023</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>1023</max>
+              </scale>
+              <unit>m3/h</unit>
+            </datafield>
+            <datafield>
+              <data>Supply Fan Speed</data>
+              <shortcut>SPLYFS</shortcut>
+              <description>Current supply air fan speed</description>
+              <info/>
+              <bitoffs>88</bitoffs>
+              <bitsize>12</bitsize>
+              <range>
+                <min>0</min>
+                <max>4095</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>4095</max>
+              </scale>
+              <unit>1/min</unit>
+            </datafield>
+            <datafield>
+              <data>Exhaust Fan Speed</data>
+              <shortcut>EXHFS</shortcut>
+              <description>Current exhaust air fan speed</description>
+              <info/>
+              <bitoffs>100</bitoffs>
+              <bitsize>12</bitsize>
+              <range>
+                <min>0</min>
+                <max>4095</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>4095</max>
+              </scale>
+              <unit>1/min</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>Telegram Definition: &#8216;Ventilation Extended Status Message&#8217;</title>
+            <description>The &#8216;Ventilation Extended Status Message&#8217; provides additional
+                information, e.g. active failure information.
+                It is triggered once at power-on and on particular value changes.<br/>Additionally, this message is available on request.
+                <br/>
+                <br/>Direction: Heat-recovery ventilation unit --&gt; Gateway
+                <br/>
+                <img>graphics/D2-50-ZZ-No004.png</img>
+                <br/>
+              </description>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description>Defines the message type</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Ventilation remote transmission request</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Ventilation control</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Ventilation basic status</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Ventilation extended status</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Software Version Info</data>
+              <shortcut>SVI</shortcut>
+              <description>Shows Software Version Information</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>12</bitsize>
+              <range>
+                <min>0</min>
+                <max>4095</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>4095</max>
+              </scale>
+              <unit>-</unit>
+            </datafield>
+            <datafield>
+              <data>Operation Hours Counter</data>
+              <shortcut>OHC</shortcut>
+              <description>Indicates device operation hours</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>16</bitsize>
+              <range>
+                <min>0</min>
+                <max>65535</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>196605</max>
+              </scale>
+              <unit>h</unit>
+            </datafield>
+            <datafield>
+              <data>Digital Input 0...15 Status</data>
+              <shortcut>DIS</shortcut>
+              <description>Indicates the current state of digital inputs 0...15 of the device<br/><br/>
+                input assignment depends on device variant and configuration</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>16</bitsize>
+              <enum>
+                <item>
+                  <value>0x0001</value>
+                  <description>Input no. 00 active</description>
+                </item>
+                <item>
+                  <value>0x0002</value>
+                  <description>Input no. 01 active</description>
+                </item>
+                <item>
+                  <value>0x0004</value>
+                  <description>Input no. 02 active</description>
+                </item>
+                <item>
+                  <value>0x0008</value>
+                  <description>Input no. 03 active</description>
+                </item>
+                <item>
+                  <value>0x0010</value>
+                  <description>Input no. 04 active</description>
+                </item>
+                <item>
+                  <value>0x0020</value>
+                  <description>Input no. 05 active</description>
+                </item>
+                <item>
+                  <value>0x0040</value>
+                  <description>Input no. 06 active</description>
+                </item>
+                <item>
+                  <value>0x0080</value>
+                  <description>Input no. 07 active</description>
+                </item>
+                <item>
+                  <value>0x0100</value>
+                  <description>Input no. 08 active</description>
+                </item>
+                <item>
+                  <value>0x0200</value>
+                  <description>Input no. 09 active</description>
+                </item>
+                <item>
+                  <value>0x0400</value>
+                  <description>Input no. 10 active</description>
+                </item>
+                <item>
+                  <value>0x0800</value>
+                  <description>Input no. 11 active</description>
+                </item>
+                <item>
+                  <value>0x1000</value>
+                  <description>Input no. 12 active</description>
+                </item>
+                <item>
+                  <value>0x2000</value>
+                  <description>Input no. 13 active</description>
+                </item>
+                <item>
+                  <value>0x4000</value>
+                  <description>Input no. 14 active</description>
+                </item>
+                <item>
+                  <value>0x8000</value>
+                  <description>Input no. 15 active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Digital Output 0...15 Status</data>
+              <shortcut>DOS</shortcut>
+              <description>Indicates the current state of digital outputs 0...15 of the device<br/>
+                  <br/>output assignment depends on device variant and configuration
+                </description>
+              <info/>
+              <bitoffs>48</bitoffs>
+              <bitsize>16</bitsize>
+              <enum>
+                <item>
+                  <value>0x0001</value>
+                  <description>Output no. 00 active</description>
+                </item>
+                <item>
+                  <value>0x0002</value>
+                  <description>Output no. 01 active</description>
+                </item>
+                <item>
+                  <value>0x0004</value>
+                  <description>Output no. 02 active</description>
+                </item>
+                <item>
+                  <value>0x0008</value>
+                  <description>Output no. 03 active</description>
+                </item>
+                <item>
+                  <value>0x0010</value>
+                  <description>Output no. 04 active</description>
+                </item>
+                <item>
+                  <value>0x0020</value>
+                  <description>Output no. 05 active</description>
+                </item>
+                <item>
+                  <value>0x0040</value>
+                  <description>Output no. 06 active</description>
+                </item>
+                <item>
+                  <value>0x0080</value>
+                  <description>Output no. 07 active</description>
+                </item>
+                <item>
+                  <value>0x0100</value>
+                  <description>Output no. 08 active</description>
+                </item>
+                <item>
+                  <value>0x0200</value>
+                  <description>Output no. 09 active</description>
+                </item>
+                <item>
+                  <value>0x0400</value>
+                  <description>Output no. 10 active</description>
+                </item>
+                <item>
+                  <value>0x0800</value>
+                  <description>Output no. 11 active</description>
+                </item>
+                <item>
+                  <value>0x1000</value>
+                  <description>Output no. 12 active</description>
+                </item>
+                <item>
+                  <value>0x2000</value>
+                  <description>Output no. 13 active</description>
+                </item>
+                <item>
+                  <value>0x4000</value>
+                  <description>Output no. 14 active</description>
+                </item>
+                <item>
+                  <value>0x8000</value>
+                  <description>Output no. 15 active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Info Message 0...15 Status</data>
+              <shortcut>IMS</shortcut>
+              <description>Indicates the current state of info message no. 0...15
+                generated by the device</description>
+              <info/>
+              <bitoffs>64</bitoffs>
+              <bitsize>16</bitsize>
+              <enum>
+                <item>
+                  <value>0x0001</value>
+                  <description>Info no. 00 active</description>
+                </item>
+                <item>
+                  <value>0x0002</value>
+                  <description>Info no. 01 active</description>
+                </item>
+                <item>
+                  <value>0x0004</value>
+                  <description>Info no. 02 active</description>
+                </item>
+                <item>
+                  <value>0x0008</value>
+                  <description>Info no. 03 active</description>
+                </item>
+                <item>
+                  <value>0x0010</value>
+                  <description>Info no. 04 active</description>
+                </item>
+                <item>
+                  <value>0x0020</value>
+                  <description>Info no. 05 active</description>
+                </item>
+                <item>
+                  <value>0x0040</value>
+                  <description>Info no. 06 active</description>
+                </item>
+                <item>
+                  <value>0x0080</value>
+                  <description>Info no. 07 active</description>
+                </item>
+                <item>
+                  <value>0x0100</value>
+                  <description>Info no. 08 active</description>
+                </item>
+                <item>
+                  <value>0x0200</value>
+                  <description>Info no. 09 active</description>
+                </item>
+                <item>
+                  <value>0x0400</value>
+                  <description>Info no. 10 active</description>
+                </item>
+                <item>
+                  <value>0x0800</value>
+                  <description>Info no. 11 active</description>
+                </item>
+                <item>
+                  <value>0x1000</value>
+                  <description>Info no. 12 active</description>
+                </item>
+                <item>
+                  <value>0x2000</value>
+                  <description>Info no. 13 active</description>
+                </item>
+                <item>
+                  <value>0x4000</value>
+                  <description>Info no. 14 active</description>
+                </item>
+                <item>
+                  <value>0x8000</value>
+                  <description>Info no. 15 active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fault 0...31 Status</data>
+              <shortcut>FS</shortcut>
+              <description>Indicates the current state of fault no. 0...31 generated
+                by the device</description>
+              <info/>
+              <bitoffs>80</bitoffs>
+              <bitsize>32</bitsize>
+              <enum>
+                <item>
+                  <value>0x00000001</value>
+                  <description>Fault no. 00 active</description>
+                </item>
+                <item>
+                  <value>0x00000002</value>
+                  <description>Fault no. 01 active</description>
+                </item>
+                <item>
+                  <value>0x00000004</value>
+                  <description>Fault no. 02 active</description>
+                </item>
+                <item>
+                  <value>0x00000008</value>
+                  <description>Fault no. 03 active</description>
+                </item>
+                <item>
+                  <value>0x00000010</value>
+                  <description>Fault no. 04 active</description>
+                </item>
+                <item>
+                  <value>0x00000020</value>
+                  <description>Fault no. 05 active</description>
+                </item>
+                <item>
+                  <value>0x00000040</value>
+                  <description>Fault no. 06 active</description>
+                </item>
+                <item>
+                  <value>0x00000080</value>
+                  <description>Fault no. 07 active</description>
+                </item>
+                <item>
+                  <value>0x00000100</value>
+                  <description>Fault no. 08 active</description>
+                </item>
+                <item>
+                  <value>0x00000200</value>
+                  <description>Fault no. 09 active</description>
+                </item>
+                <item>
+                  <value>0x00000400</value>
+                  <description>Fault no. 10 active</description>
+                </item>
+                <item>
+                  <value>0x00000800</value>
+                  <description>Fault no. 11 active</description>
+                </item>
+                <item>
+                  <value>0x00001000</value>
+                  <description>Fault no. 12 active</description>
+                </item>
+                <item>
+                  <value>0x00002000</value>
+                  <description>Fault no. 13 active</description>
+                </item>
+                <item>
+                  <value>0x00004000</value>
+                  <description>Fault no. 14 active</description>
+                </item>
+                <item>
+                  <value>0x00008000</value>
+                  <description>Fault no. 15 active</description>
+                </item>
+                <item>
+                  <value>0x00010000</value>
+                  <description>Fault no. 16 active</description>
+                </item>
+                <item>
+                  <value>0x00020000</value>
+                  <description>Fault no. 17 active</description>
+                </item>
+                <item>
+                  <value>0x00040000</value>
+                  <description>Fault no. 18 active</description>
+                </item>
+                <item>
+                  <value>0x00080000</value>
+                  <description>Fault no. 19 active</description>
+                </item>
+                <item>
+                  <value>0x00100000</value>
+                  <description>Fault no. 20 active</description>
+                </item>
+                <item>
+                  <value>0x00200000</value>
+                  <description>Fault no. 21 active</description>
+                </item>
+                <item>
+                  <value>0x00400000</value>
+                  <description>Fault no. 22 active</description>
+                </item>
+                <item>
+                  <value>0x00800000</value>
+                  <description>Fault no. 23 active</description>
+                </item>
+                <item>
+                  <value>0x01000000</value>
+                  <description>Fault no. 24 active</description>
+                </item>
+                <item>
+                  <value>0x02000000</value>
+                  <description>Fault no. 25 active</description>
+                </item>
+                <item>
+                  <value>0x04000000</value>
+                  <description>Fault no. 26 active</description>
+                </item>
+                <item>
+                  <value>0x08000000</value>
+                  <description>Fault no. 27 active</description>
+                </item>
+                <item>
+                  <value>0x10000000</value>
+                  <description>Fault no. 28 active</description>
+                </item>
+                <item>
+                  <value>0x20000000</value>
+                  <description>Fault no. 29 active</description>
+                </item>
+                <item>
+                  <value>0x40000000</value>
+                  <description>Fault no. 30 active</description>
+                </item>
+                <item>
+                  <value>0x80000000</value>
+                  <description>Fault no. 31 active</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

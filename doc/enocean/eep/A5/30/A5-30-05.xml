@@ -1,0 +1,122 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x30</number>
+        <title>Digital Input</title>
+        <type>
+          <number>0x05</number>
+          <title>Single Input Contact, Retransmission, Battery Monitor</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: ITEC</span><br/><br/><span style="border-bottom:2px groove #000000;">Data exchange</span><br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event- &amp; time-triggered
+            <br/>Communication interval:
+            <br/>- retransmission: 5 ... 255 seconds (one time configuration)
+            <br/>- number of retransmission times: 0 ... 127 times (one time configuration)
+            <br/>- heartbeat: 60 ... 65535 seconds (one time configuration)
+            <br/>Trigger event: digital input, retransmission, heartbeat
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: 4BS teach-in 2
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: no
+            <br/>Security level format: -
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Supply voltage</data>
+              <shortcut>VDD</shortcut>
+              <description>Supply voltage</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>3.3</max>
+              </scale>
+              <unit>V</unit>
+            </datafield>
+            <datafield>
+              <data>Signal type</data>
+              <shortcut>ST</shortcut>
+              <description>Signal type</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal signal</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Heart beat signal</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Index of Signals</data>
+              <shortcut>IOS</shortcut>
+              <description>Ordinal count</description>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>127</max>
+                  <description>Increment a counter by new telegram</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

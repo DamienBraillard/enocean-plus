@@ -1,0 +1,292 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x09</number>
+        <title>Gas Sensor</title>
+        <type>
+          <number>0x0C</number>
+          <title>VOC Sensor</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: NanoSense</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>
+            Since this EEP has been released, Total VOC has been regulated by
+            ISO standard. ISO 16000-29 is using weight per cubic metre instead
+            of concentration. This update is for using free bits of this EEP to
+            choose between ppb and &#956;g/m3.
+            <br/>
+            Therefore the updated EEP will be compatible with previous version
+            and will provide compliance with ISO standard. Some new VOC have
+            been added in the list especially Naphthalene that will be soon
+            regulated in certain European countries and 4-Phenylcyclohexene
+            because it is part of the LEED (National rating system for
+            sustainable buildings for North America).
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Data exchange</span>
+            <br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event- &amp; time-triggered
+            <br/>Communication interval: -
+            <br/>Trigger event: value change or time
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: 4BS teach-in 2
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: no
+            <br/>Security level format: -
+            <br/><br/>
+            *: For instance, Monthly means the last or the forecast cost of
+            consumption of the last or the next month.
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>VOC</data>
+              <shortcut>Conc</shortcut>
+              <description>VOC concentration</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>16</bitsize>
+              <range>
+                <min>0</min>
+                <max>65535</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>65535</max>
+              </scale>
+              <unit>
+                <ref>Unit</ref>
+              </unit>
+            </datafield>
+            <datafield>
+              <data>VOC ID*</data>
+              <shortcut>VOC ID</shortcut>
+              <description>VOC identification</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>VOCT (total)</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Formaldehyde</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Benzene</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Styrene</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Toluene</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Tetrachloroethylene</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Xylene</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>n-Hexane</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>n-Octane</description>
+                </item>
+                <item>
+                  <value>9</value>
+                  <description>Cyclopentane</description>
+                </item>
+                <item>
+                  <value>10</value>
+                  <description>Methanol</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>Ethanol</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>1-Pentanol</description>
+                </item>
+                <item>
+                  <value>13</value>
+                  <description>Acetone</description>
+                </item>
+                <item>
+                  <value>14</value>
+                  <description>ethylene Oxide</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>Acetaldehyde ue</description>
+                </item>
+                <item>
+                  <value>16</value>
+                  <description>Acetic Acid</description>
+                </item>
+                <item>
+                  <value>17</value>
+                  <description>Propionice Acid</description>
+                </item>
+                <item>
+                  <value>18</value>
+                  <description>Valeric Acid</description>
+                </item>
+                <item>
+                  <value>19</value>
+                  <description>Butyric Acid</description>
+                </item>
+                <item>
+                  <value>20</value>
+                  <description>Ammoniac</description>
+                </item>
+                <item>
+                  <value>22</value>
+                  <description>Hydrogen Sulfide</description>
+                </item>
+                <item>
+                  <value>23</value>
+                  <description>Dimethylsulfide</description>
+                </item>
+                <item>
+                  <value>24</value>
+                  <description>2-Butanol (butyl Alcohol)</description>
+                </item>
+                <item>
+                  <value>25</value>
+                  <description>2-Methylpropanol</description>
+                </item>
+                <item>
+                  <value>26</value>
+                  <description>Diethyl ether</description>
+                </item>
+                <item>
+                  <value>27</value>
+                  <description>Naphthalene</description>
+                </item>
+                <item>
+                  <value>28</value>
+                  <description>4-Phenylcyclohexene</description>
+                </item>
+                <item>
+                  <value>29</value>
+                  <description>Limonene</description>
+                </item>
+                <item>
+                  <value>30</value>
+                  <description>Trichloroethylene</description>
+                </item>
+                <item>
+                  <value>31</value>
+                  <description>Isovaleric acid</description>
+                </item>
+                <item>
+                  <value>32</value>
+                  <description>Indole</description>
+                </item>
+                <item>
+                  <value>33</value>
+                  <description>Cadaverine</description>
+                </item>
+                <item>
+                  <value>34</value>
+                  <description>Putrescine</description>
+                </item>
+                <item>
+                  <value>35</value>
+                  <description>Caproic acid</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Ozone</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Unit</data>
+              <shortcut>Unit</shortcut>
+              <description>Unit of VOC concentration</description>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>ppb</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>&#956;g/m3</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Scale Multiplier</data>
+              <shortcut>SCM</shortcut>
+              <description>Scale multiplier</description>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>0.01</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>0.1</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>1</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>10</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

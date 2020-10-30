@@ -1,0 +1,3901 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x10</number>
+        <title/>
+        <type>
+          <number>0x30</number>
+          <title>Type 0x30</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Kieback&amp;Peter GmbH &amp; CO KG</span>
+          </description>
+          <case>
+            <title>Heartbeat Message (0x00)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID00.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x00</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Heartbeat Message</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Acknowledge Message (0x20)</title>
+            <description>Direction: Sensor -&gt; Gateway<br/>
+                <img>graphics/D2-10-30_MID20.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x20</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x20</value>
+                  <description>Acknowledge Message</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Data Message (0x21)</title>
+            <description>Direction: Sensor -&gt; Gateway<br/>
+                Communication trigger: timer triggered
+                <br/>
+                <img>graphics/D2-10-30_MID21.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x21</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>20</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>32</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x21</value>
+                  <description>Data Message</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Humidity</data>
+              <shortcut>HUM</shortcut>
+              <description>Measured relative air humidity<br/>(0.5% steps)
+                </description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>200</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%RH</unit>
+            </datafield>
+            <datafield>
+              <data>Open Window Detect</data>
+              <shortcut>WOD</shortcut>
+              <description>Indicates whether an open window has been detected</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Window closed</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Window open</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Occupancy Button Status</data>
+              <shortcut>OBS</shortcut>
+              <description>Indicates if the occupancy button was pressed or is still in
+                automatic mode</description>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Occupied</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Unoccupied</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Automatic mode</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Control Mode</data>
+              <shortcut>RCM</shortcut>
+              <description>Indicates the current room control mode</description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Eco mode</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Comfort mode</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Vacation mode</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Measured room temperature<br/>(0.1K steps)
+                </description>
+              <info/>
+              <bitoffs>23</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>0</min>
+                <max>500</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>PIR Status</data>
+              <shortcut>PIR</shortcut>
+              <description>Indicates whether the motion sensor detected a movement</description>
+              <info/>
+              <bitoffs>35</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Movement detected</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>No movement detected</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Locked</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Speed</data>
+              <shortcut>FS</shortcut>
+              <description>Indicates the current fan speed level</description>
+              <info/>
+              <bitoffs>37</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Level 0 (OFF)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Level 1</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Level 2</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Level 3</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>AUTO</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>NO FAN</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Recent Temperature Set Point - absolute</data>
+              <shortcut>TSP</shortcut>
+              <description>Indicates the current temperature set point as an absolute value<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>40</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Recent Temperature Set Point - relative</data>
+              <shortcut>TSPR</shortcut>
+              <description>Indicates the current temperature set point as a relative value
+                in Kelvin (0.5K steps)</description>
+              <info/>
+              <bitoffs>48</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>40</max>
+              </range>
+              <scale>
+                <min>-10</min>
+                <max>10</max>
+              </scale>
+              <unit>K</unit>
+            </datafield>
+            <datafield>
+              <data>Analog Value</data>
+              <shortcut>AV</shortcut>
+              <description>Analog measured value</description>
+              <info/>
+              <bitoffs>56</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>Status Message (0x22)</title>
+            <description>Direction: Sensor -&gt; Gateway<br/>Communication trigger: event triggered
+                <br/>
+                <img>graphics/D2-10-30_MID22.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x22</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>12</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x22</value>
+                  <description>Status Message</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>UI Type</data>
+              <shortcut>UITY</shortcut>
+              <description>Indicates the user interface type</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>No set point UI</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Two buttons for set point</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Rotary control for set point</description>
+                </item>
+                <item>
+                  <min>4</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Mold Warning/Advice</data>
+              <shortcut>MW</shortcut>
+              <description>Mold warning and prevention advice</description>
+              <info/>
+              <bitoffs>14</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>No warning</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Mold warning &#8211; ventilation advice</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Mold warning &#8211; heating advice</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Display Content</data>
+              <shortcut>DC</shortcut>
+              <description>Indicates the current main display content</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Date</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Time</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Room temperature</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Humidity</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Temperature set point</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Display off</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>External value</description>
+                </item>
+                <item>
+                  <min>8</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Device Status</data>
+              <shortcut>IEC</shortcut>
+              <description>Device status info code</description>
+              <info/>
+              <bitoffs>20</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Normal operating state</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Actuator communication is weak</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Actuator communication loss</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>RTC error</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Actuator low energy</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Gateway communication loss</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>9</value>
+                  <description>Radio module error</description>
+                </item>
+                <item>
+                  <min>10</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Party/Holiday Status</data>
+              <shortcut>PHS</shortcut>
+              <description>Indicates the current party or holiday status</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Neither</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Party mode</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Holiday mode</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Heating/Cooling Status</data>
+              <shortcut>HCS</shortcut>
+              <description>Indicates the current heating or cooling status</description>
+              <info/>
+              <bitoffs>26</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Neither</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Heating mode</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Cooling mode</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Sun/Moon Status</data>
+              <shortcut>SMS</shortcut>
+              <description>Indicates the current sun or moon icon status</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Neither</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Sun icon</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Moon icon</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Daylight Saving Time</data>
+              <shortcut>DST</shortcut>
+              <description>Indicates the daylight saving time (summertime)</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Automatic</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>+ 0 h</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>+ 1 h</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Autonomous Level</data>
+              <shortcut>AL</shortcut>
+              <description>Indicates the current autonomous level, e.g. the device operates
+                autonomic in stand-alone-mode or is fully controlled by a
+                controller</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Default</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Stand-alone mode 1</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Stand-alone mode 2</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Controlled mode 1</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Controlled mode 2</description>
+                </item>
+                <item>
+                  <min>6</min>
+                  <max>7</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy State</data>
+              <shortcut>BS</shortcut>
+              <description>Device energy state, e. g. battery power status</description>
+              <info/>
+              <bitoffs>35</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Line powered</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Battery good</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>battery low</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Battery critical</description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>7</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Solar Power Status</data>
+              <shortcut>SPS</shortcut>
+              <description>Indicates if the device is actually powered by its solar panel</description>
+              <info/>
+              <bitoffs>38</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Solar power good</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Solar power low</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Not solar powered</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Set Point Vacation Mode</data>
+              <shortcut>SPB</shortcut>
+              <description>Temperature set point for vacation room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>40</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature Set Point Eco Mode</data>
+              <shortcut>SPE</shortcut>
+              <description>Temperature set point for eco room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>48</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature Set Point Comfort Mode</data>
+              <shortcut>SPC</shortcut>
+              <description>Temperature set point for comfort room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>56</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>Actuator Status (0x23)</title>
+            <description>Direction: Sensor -&gt; Gateway<br/>Communication trigger: event triggered
+                <br/>
+                <img>graphics/D2-10-30_MID23.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x23</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x23</value>
+                  <description>Actuator Status</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Position, Valve 1</data>
+              <shortcut>VP1</shortcut>
+              <description>Current valve 1 position<br/>(1% steps)
+                </description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Position, Valve 2</data>
+              <shortcut>VP2</shortcut>
+              <description>Current valve 2 position<br/>(1% steps)
+                </description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Position, Valve 3</data>
+              <shortcut>VP3</shortcut>
+              <description>Current valve 3 position<br/>(1% steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Position, Valve 4</data>
+              <shortcut>VP4</shortcut>
+              <description>Current valve 4 position<br/>(1% steps)
+                </description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature, Actuator 1</data>
+              <shortcut>AT1</shortcut>
+              <description>Temperature of actuator 1<br/>(5K steps)
+                </description>
+              <info/>
+              <bitoffs>40</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>0</min>
+                <max>14</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>70</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature, Actuator 2</data>
+              <shortcut>AT2</shortcut>
+              <description>Temperature of actuator 2<br/>(5K steps)
+                </description>
+              <info/>
+              <bitoffs>44</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>0</min>
+                <max>14</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>70</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature, Actuator 3</data>
+              <shortcut>AT3</shortcut>
+              <description>Temperature of actuator 3<br/>(5K steps)
+                </description>
+              <info/>
+              <bitoffs>48</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>0</min>
+                <max>14</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>70</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature, Actuator 4</data>
+              <shortcut>AT4</shortcut>
+              <description>Temperature of actuator 4<br/>(5K steps)
+                </description>
+              <info/>
+              <bitoffs>52</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>0</min>
+                <max>14</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>70</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Status, Actuator 1</data>
+              <shortcut>AS1</shortcut>
+              <description>Actuator 1 status</description>
+              <info/>
+              <bitoffs>56</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Line powered</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Battery good</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Battery low</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Harvesting good</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Harvesting low</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Error</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Not present</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Status, Actuator 2</data>
+              <shortcut>AS2</shortcut>
+              <description>Actuator 2 status</description>
+              <info/>
+              <bitoffs>60</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Line powered</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Battery good</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Battery low</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Harvesting good</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Harvesting low</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Error</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Not present</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Status, Actuator 3</data>
+              <shortcut>AS3</shortcut>
+              <description>Actuator 3 status</description>
+              <info/>
+              <bitoffs>64</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Line powered</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Battery good</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Battery low</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Harvesting good</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Harvesting low</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Error</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Not present</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Status, Actuator 4</data>
+              <shortcut>AS4</shortcut>
+              <description>Actuator 4 status</description>
+              <info/>
+              <bitoffs>68</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Line powered</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Battery good</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Battery low</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Harvesting good</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Harvesting low</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Error</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Not present</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Set Point Limits Status (0x24)</title>
+            <description>Direction: Sensor -&gt; Gateway<br/>Communication trigger: event triggered
+                <br/>
+                <img>graphics/D2-10-30_MID24.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x24</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x24</value>
+                  <description>Set Point Limits Status</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Set Point Range Relative</data>
+              <shortcut>SPRR</shortcut>
+              <description>Temperature set point range relative. The given value indicates
+                the maximum permissible offset (positive or negative) to the
+                temperature set point.<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>20</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>10</max>
+              </scale>
+              <unit>K</unit>
+            </datafield>
+            <datafield>
+              <data>Upper Temperature Set Point Limit Vacation Mode</data>
+              <shortcut>SPBUL</shortcut>
+              <description>Sets the upper limit of the temperature set point for the
+                vacation room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Lower Temperature Set Point Limit Vacation Mode</data>
+              <shortcut>SPBLL</shortcut>
+              <description>Sets the lower limit of the temperature set point for the
+                vacation room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Upper Temperature Set Point Limit Eco Mode</data>
+              <shortcut>SPEUL</shortcut>
+              <description>Sets the upper limit of the temperature set point for the
+                economic room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Lower Temperature Set Point Limit Eco Mode</data>
+              <shortcut>SPELL</shortcut>
+              <description>Sets the lower limit of the temperature set point for the
+                economic room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>40</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Upper Temperature Set Point Limit Comfort Mode</data>
+              <shortcut>SPCUL</shortcut>
+              <description>Sets the upper limit of the temperature set point for the
+                comfort room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>48</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Lower Temperature Set Point Limit Comfort Mode</data>
+              <shortcut>SPCLL</shortcut>
+              <description>Sets the lower limit of the temperature set point for the
+                comfort room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>56</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>Configuration Message (0x61)</title>
+            <description>Direction: bidirectional<br/>Communication trigger: silent acknowledge
+                <br/>
+                <img>graphics/D2-10-30_MID61.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x61</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>48</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x61</value>
+                  <description>Configuration Message</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>PIR Status Lock</data>
+              <shortcut>PSL</shortcut>
+              <description>Indicates if the PIR status is transmitted</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Transmitting on</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Transmitting off</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Scale Lock</data>
+              <shortcut>TSL</shortcut>
+              <description>Indicates if the temperature scale (&#176;C/&#176;F) can be changed at the
+                room control panel</description>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Locked</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Display Content Lock</data>
+              <shortcut>DCL</shortcut>
+              <description>Indicates if the display content can be changed at the room
+                control panel, e.g. toggle button</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Locked</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Date/Time Lock</data>
+              <shortcut>DTL</shortcut>
+              <description>Indicates if date and time can be changed at the room
+                control panel</description>
+              <info/>
+              <bitoffs>14</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Locked</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Time Program Lock</data>
+              <shortcut>TPL</shortcut>
+              <description>Indicates if the time program can be changed at the room control
+                panel, in menu or auto adaptation</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Locked / disabled</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Occupancy Button Lock</data>
+              <shortcut>OBL</shortcut>
+              <description>Indicates if the occupancy button and menu entry is blocked at
+                the room control panel, e.g. 2 = only menu entry is blocked,
+                3 = button and menu is blocked</description>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Menu entry locked</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Complete locked</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Set Point Lock</data>
+              <shortcut>SPL</shortcut>
+              <description>Indicates if the temperature set point are allowed to be changed
+                at the room control panel</description>
+              <info/>
+              <bitoffs>20</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Menu entry locked</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Complete locked</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Speed Lock</data>
+              <shortcut>FSL</shortcut>
+              <description>Indicates if the fan speed can be changed at the room control
+                panel</description>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Locked</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Holiday Feature Lock</data>
+              <shortcut>HFL</shortcut>
+              <description>Indicates if the holiday feature can be activated at the room
+                control panel</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Locked</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Time Bar</data>
+              <shortcut>SBA</shortcut>
+              <description>Indicates if the time bar is now activated, or not activated,
+                or even the configuration is blocked</description>
+              <info/>
+              <bitoffs>26</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Bar is active</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Bar is not active</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Menu locked</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Season Energy Saving Mode</data>
+              <shortcut>SEM</shortcut>
+              <description>Season energy saving mode, e.g. Summer-Mode</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Automatic</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Active</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Not active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Mold Warning Signal</data>
+              <shortcut>MWS</shortcut>
+              <description>Indicates what mold warning signal is activated</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Either activated</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Communication active</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Local display active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Mold Warning Coefficient</data>
+              <shortcut>MWC</shortcut>
+              <description>Defines room specific mold warning delta in degree kelvin</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Default</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>2 K</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>5 K</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>7 K</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>10 K</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>14 K</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Ventilation advice disabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Mold Warning Limit</data>
+              <shortcut>MWH</shortcut>
+              <description>Defines Room specific mold warning limit for heating</description>
+              <info/>
+              <bitoffs>35</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Default</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>7 &#176;C</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>10 &#176;C</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>12 &#176;C</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>14 &#176;C</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>16 &#176;C</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Heating advice disabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set Point Mode Config</data>
+              <shortcut>SPM</shortcut>
+              <description>Indicates which set point mode is used.
+                Temperature set point = absolute;
+                temperature offset = relative/correction</description>
+              <info/>
+              <bitoffs>38</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Default</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Temperature set point</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Temperature offset</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Display Content Toggle List</data>
+              <shortcut>DCTL</shortcut>
+              <description>Indicates what content is allowed to display.
+                8 Bits masked.
+                Multiple choices are allowed.</description>
+              <info/>
+              <bitoffs>40</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Date is allowed</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Time is allowed</description>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>Temperature is allowed</description>
+                </item>
+                <item>
+                  <value>0x08</value>
+                  <description>Humidity is allowed</description>
+                </item>
+                <item>
+                  <value>0x10</value>
+                  <description>Temp set point is allowed</description>
+                </item>
+                <item>
+                  <value>0x20</value>
+                  <description>External value is allowed</description>
+                </item>
+                <item>
+                  <value>0x40</value>
+                  <description>Analog channel</description>
+                </item>
+                <item>
+                  <value>0x80</value>
+                  <description>Default</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Radio Communication Interval</data>
+              <shortcut>RCI</shortcut>
+              <description>The configurable interval is 1 per minute to 1 per day.
+                It defines the longest time between two consecutive
+                telegrams. (default = 600 s)</description>
+              <info/>
+              <bitoffs>50</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>1 min.</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>2 min.</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>4 min.</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>6 min.</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>8 min.</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>10 min.</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>15 min.</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>30 min.</description>
+                </item>
+                <item>
+                  <value>9</value>
+                  <description>1 hour</description>
+                </item>
+                <item>
+                  <value>10</value>
+                  <description>3 hours</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>6 hours</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>12 hours</description>
+                </item>
+                <item>
+                  <value>13</value>
+                  <description>24 hours</description>
+                </item>
+                <item>
+                  <value>14</value>
+                  <description>No communication interval</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Scale</data>
+              <shortcut>TS</shortcut>
+              <description>Defines the used temperature scale for the room control panel
+                display and menus</description>
+              <info/>
+              <bitoffs>54</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>&#176;C</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>&#176;F</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Heating Coefficient</data>
+              <shortcut>HC</shortcut>
+              <description>Defines Room specific heating coefficient in degree kelvin
+                per hour</description>
+              <info/>
+              <bitoffs>56</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Auto adapt</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>4 K/h</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>2 K/h</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>1.4 K/h</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>1 K/h</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>0.7 K/h</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>0.5 K/h</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Key Lock</data>
+              <shortcut>KL</shortcut>
+              <description>Indicates if only the hidden keys or all keys (front side and
+                back side) on the device are locked</description>
+              <info/>
+              <bitoffs>59</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Hidden keys locked</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>All keys locked</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Window Open Detection Stopping Time</data>
+              <shortcut>WDST</shortcut>
+              <description>Window open detection stopping time</description>
+              <info/>
+              <bitoffs>61</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Default</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>30 minutes</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>1 hour</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>1.5 hour</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>2 hour</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>3 hour</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Window detection disabled</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Clock Setup (0x62)</title>
+            <description>Direction: bidirectional<br/>Communication trigger: silent acknowledge
+                <br/>
+                <img>graphics/D2-10-30_MID62.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x62</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>32</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>40</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x62</value>
+                  <description>Clock Setup</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Time Notation</data>
+              <shortcut>TN</shortcut>
+              <description>Defines the used time notation</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Default</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>24 h</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>12 h</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Day</data>
+              <shortcut>DAY</shortcut>
+              <description>Day</description>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>1</min>
+                <max>31</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>31</max>
+              </scale>
+              <unit>Day</unit>
+            </datafield>
+            <datafield>
+              <data>Month</data>
+              <shortcut>MON</shortcut>
+              <description>Month</description>
+              <info/>
+              <bitoffs>20</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>1</min>
+                <max>12</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>12</max>
+              </scale>
+              <unit>Mon</unit>
+            </datafield>
+            <datafield>
+              <data>Year</data>
+              <shortcut>YR</shortcut>
+              <description>Year = 2000 + x</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>127</max>
+              </range>
+              <scale>
+                <min>2000</min>
+                <max>2127</max>
+              </scale>
+              <unit>Year</unit>
+            </datafield>
+            <datafield>
+              <data>Minute</data>
+              <shortcut>MIN</shortcut>
+              <description>Minute</description>
+              <info/>
+              <bitoffs>34</bitoffs>
+              <bitsize>6</bitsize>
+              <range>
+                <min>0</min>
+                <max>59</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>59</max>
+              </scale>
+              <unit>Min</unit>
+            </datafield>
+            <datafield>
+              <data>Date/Time Update Flag</data>
+              <shortcut>DTU</shortcut>
+              <description>Indicates if an update of date and time is provided by the
+                gateway</description>
+              <info/>
+              <bitoffs>42</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Update</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Hour</data>
+              <shortcut>HR</shortcut>
+              <description>Hour</description>
+              <info/>
+              <bitoffs>43</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>0</min>
+                <max>23</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>23</max>
+              </scale>
+              <unit>Hour</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Room Temperature Override (0x80)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID80.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x80</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>15</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x80</value>
+                  <description>Room temperature override</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Temperature Override</data>
+              <shortcut>TMPO</shortcut>
+              <description>Room temperature override<br/>(0.1K steps)
+                </description>
+              <info/>
+              <bitoffs>23</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>0</min>
+                <max>500</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211;
+              Recent Temperature Set Point Override Absolute (0x81)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID81.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x81</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x81</value>
+                  <description>Recent temperature set point override absolute</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Recent Temperature Set Point Override Absolute</data>
+              <shortcut>TSPO</shortcut>
+              <description>Recent temperature set point override absolute<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211;
+              Recent Temperature Set Point Override Relative (0x82)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID82.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x82</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x82</value>
+                  <description>Recent temperature set point override relative</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Recent Temperature Set Point Offset Override</data>
+              <shortcut>TSPRO</shortcut>
+              <description>Recent temperature set point override relative
+                offset, in Kelvin<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>40</max>
+              </range>
+              <scale>
+                <min>-10</min>
+                <max>10</max>
+              </scale>
+              <unit>K</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; External Value (0x83)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID83.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x83</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>10</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x83</value>
+                  <description>External value</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>External Value Scale and Unit</data>
+              <shortcut>EXVSU</shortcut>
+              <description>Display representation for<br/>
+                external value,<br/>
+                scaling and unit
+                </description>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Temperature<br/>
+                    valid range 0 &#8230; 1000,<br/>
+                    scale -40 &#8230; 60,<br/>
+                    0.1K steps,<br/>
+                    unit = &#176;C
+                    </description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Humidity<br/>
+                    valid range 0 &#8230; 200,<br/>
+                    scale 0 &#8230; 100,<br/>
+                    0.5% steps,<br/>
+                    unit = % RH
+                    </description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>CO2/VOC<br/>
+                    valid range 0 &#8230; 1000,<br/>
+                    scale 0 &#8230; 5000,<br/>
+                    5ppm steps,<br/>
+                    unit = ppm
+                    </description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>VOC<br/>
+                    valid range 0 &#8230; 100,<br/>
+                    scale 0 &#8230; 100,<br/>
+                    1% steps,<br/>
+                    unit = %
+                    </description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>External Value</data>
+              <shortcut>EXV</shortcut>
+              <description>External value, raw data;<br/>
+                scaling and unit in according<br/>
+                to EXVSU
+                </description>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>10</bitsize>
+              <range>
+                <min>0</min>
+                <max>1023</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>1023</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Humidity Override (0x84)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID84.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x84</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x84</value>
+                  <description>Humidity Override</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Humidity Override</data>
+              <shortcut>HUMO</shortcut>
+              <description>Humidity override<br/>(0.5% steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>200</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%RH</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Fan Speed Override (0x85)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID85.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x85</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>21</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x85</value>
+                  <description>Fan speed override</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Speed Override</data>
+              <shortcut>FSO</shortcut>
+              <description>Fan speed display symbol override</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Level 0 (OFF)</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Level 1</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Level 2</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Level 3</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>AUTO</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>NO FAN</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Room Mode Override (0x86)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID86.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x86</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>22</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x86</value>
+                  <description>Room mode override</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room Mode Override</data>
+              <shortcut>RCMO</shortcut>
+              <description>Room mode override</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>ECO mode</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>COMFORT mode</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>VACATION mode</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Open Window Override (0x87)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID87.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x87</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>22</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x87</value>
+                  <description>Open window override</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Open Window Override</data>
+              <shortcut>WODO</shortcut>
+              <description>Open window override</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Window closed</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Window open</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; PIR Override (0x88)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID88.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x88</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>22</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x88</value>
+                  <description>PIR override</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>PIR Override</data>
+              <shortcut>PIRO</shortcut>
+              <description>PIR override, e.g. a single movement from an external sensor
+                detected</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Movement detected</description>
+                </item>
+                <item>
+                  <min>2</min>
+                  <max>3</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Occupancy Override (0x89)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID89.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x89</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>22</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x89</value>
+                  <description>Occupancy override</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Occupancy Override</data>
+              <shortcut>OBO</shortcut>
+              <description>Sets the room in occupied or unoccupied mode</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Occupied</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Unoccupied</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Set Display Advice Symbol (0x8A)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID8A.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x8A</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>22</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x8A</value>
+                  <description>Set display advice symbol</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set Display Advice Symbol</data>
+              <shortcut>SDAS</shortcut>
+              <description>Set display advice symbol</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>No warning</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Mold &#8211; ventilation advice</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Mold &#8211; heating advice</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Autonomous Level Override (0x8B)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID8B.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x8B</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>21</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x8B</value>
+                  <description>Autonomous level override</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Autonomous Level Override</data>
+              <shortcut>ALO</shortcut>
+              <description>Sets the autonomous level and defines the general control mode
+                of the device, e.g. the device operates autonomic in
+                stand-alone-mode or is fully controlled by a controller</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Default</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Stand-alone mode 1</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Stand-alone mode 2</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Controlled mode 1</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Controlled mode 2</description>
+                </item>
+                <item>
+                  <min>6</min>
+                  <max>7</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Set Display Cooling/Heating Symbol (0x8C)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID8C.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x8C</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>22</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x8C</value>
+                  <description>Set display cooling/heating symbol</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set Display Cooling/Heating Symbol</data>
+              <shortcut>SDCH</shortcut>
+              <description>Sets the cooling/heating icon in the display</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Both icons off</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Heating icon</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Cooling icon</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Set Display Sun/Moon Symbol (0x8D)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID8D.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x8D</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>22</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x8D</value>
+                  <description>Set display sun/moon symbol</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set Display Sun/Moon Symbol</data>
+              <shortcut>SDSM</shortcut>
+              <description>Sets the sun/moon icon in the display</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Both icons off</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Sun icon</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Moon icon</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Display Content Override (0x8E)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID8E.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x8E</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>20</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x8E</value>
+                  <description>Display content override</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Display Content Override</data>
+              <shortcut>DCO</shortcut>
+              <description>Sets the display to a specific mode</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Date</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Time</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Room temperature</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Humidity</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Temperature set point</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Display off</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>External value</description>
+                </item>
+                <item>
+                  <min>8</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Daylight Saving Time Override (0x8F)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID8F.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x8F</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>22</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x8F</value>
+                  <description>Daylight saving time override</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Daylight Saving Time Override</data>
+              <shortcut>DSTO</shortcut>
+              <description>Sets the summer time to the automatic mode or to a certain value</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Automatic</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>+0 h</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>+1 h</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Set User Defined Info Code (0x90)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID90.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x90</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>20</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x90</value>
+                  <description>Set user defined info code</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set User Defined Info Code</data>
+              <shortcut>UDEC</shortcut>
+              <description>User defined information code are to be displayed</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <min>1</min>
+                  <max>9</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>10</value>
+                  <description>No user information</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>User info code 1</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>User info code 2</description>
+                </item>
+                <item>
+                  <value>13</value>
+                  <description>User info code 3</description>
+                </item>
+                <item>
+                  <value>14</value>
+                  <description>User info code 4</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>User info code 5</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Temperature Set Point Vacation Mode (0x91)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID91.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x91</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x91</value>
+                  <description>Temperature set point vacation mode</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Set Point Vacation Mode</data>
+              <shortcut>SPBO</shortcut>
+              <description>Sets the temperature set point for the vacation room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Temperature Set Point Comfort Mode (0x92)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID92.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x92</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x92</value>
+                  <description>Temperature set point comfort mode</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Set Point Comfort Mode</data>
+              <shortcut>SPCO</shortcut>
+              <description>Sets the temperature set point for the comfort room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Temperature Set Point Eco Mode (0x93)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID93.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x93</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x93</value>
+                  <description>Temperature set point eco mode</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Set Point Eco Mode</data>
+              <shortcut>SPEO</shortcut>
+              <description>Sets the temperature set point for the economic
+                room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Upper Temperature Set Point Limit Vacation Mode (0x94)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID94.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x94</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x94</value>
+                  <description>Upper temperature set point limit vacation mode</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Upper Temperature Set Point Limit Vacation Mode</data>
+              <shortcut>SPBULO</shortcut>
+              <description>Sets the upper limit of the temperature set point for the
+                vacation room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Lower Temperature Set Point Limit Vacation Mode (0x95)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID95.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x95</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x95</value>
+                  <description>Lower temperature set point limit vacation mode</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Lower Temperature Set Point Limit Vacation Mode</data>
+              <shortcut>SPBLLO</shortcut>
+              <description>Sets the lower limit of the temperature set point for the
+                vacation room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Upper Temperature Set Point Limit Eco Mode (0x96)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID96.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x96</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x96</value>
+                  <description>Upper temperature set point limit eco mode</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Upper Temperature Set Point Limit Eco Mode</data>
+              <shortcut>SPEULO</shortcut>
+              <description>Sets the upper limit of the temperature set point for the
+                  economic room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Lower Temperature Set Point Limit Eco Mode (0x97)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID97.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x97</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x97</value>
+                  <description>Lower temperature set point limit eco mode</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Lower Temperature Set Point Limit Eco Mode</data>
+              <shortcut>SPELLO</shortcut>
+              <description>Sets the lower limit of the temperature set point for the
+                  economic room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Upper Temperature Set Point Limit Comfort Mode (0x98)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID98.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x98</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x98</value>
+                  <description>Upper temperature set point limit comfort mode</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Upper Temperature Set Point Limit Comfort Mode</data>
+              <shortcut>SPCULO</shortcut>
+              <description>Sets the upper limit of the temperature set point for the
+                  comfort room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Lower Temperature Set Point Limit Comfort Mode (0x99)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID99.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x99</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x99</value>
+                  <description>Lower temperature set point limit comfort mode</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Lower Temperature Set Point Limit Comfort Mode</data>
+              <shortcut>SPCLLO</shortcut>
+              <description>Sets the lower limit of the temperature set point for the
+                  comfort room mode<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>50</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Temperature Set Point Range Relative (0x9A)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID9A.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x9A</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x9A</value>
+                  <description>Temperature set point range relative</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Set Point Range Relative</data>
+              <shortcut>SPRRO</shortcut>
+              <description>Temperature set point range relative in Kelvin, e.g. 10K sets
+                  a -10K &#8230; +10K maximum permissible offset<br/>(0.5K steps)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>20</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>10</max>
+              </scale>
+              <unit>K</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>COMMAND MESSAGE &#8211; Energy Saving Mode Override (0x9B)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <img>graphics/D2-10-30_MID9B.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x9B</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>22</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the message identifier</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x9B</value>
+                  <description>Energy saving mode override</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy Saving Mode Override</data>
+              <shortcut>SEMO</shortcut>
+              <description>Energy saving mode override, e.g. no heating in summertime</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>NO_CHANGE</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Automatic</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Saving mode</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Normal mode</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

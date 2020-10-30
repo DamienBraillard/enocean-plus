@@ -1,0 +1,92 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x30</number>
+        <title>Digital Input</title>
+        <type>
+          <number>0x01</number>
+          <title>Single Input Contact, Battery Monitor</title>
+          <status>released</status>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Supply voltage</data>
+              <shortcut>SVC</shortcut>
+              <description>Supply voltage (linear)</description>
+              <info>DB_2: Supply voltage</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>120</max>
+                  <description>Battery LOW</description>
+                </item>
+                <item>
+                  <min>121</min>
+                  <max>255</max>
+                  <description>Battery OK</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Input State</data>
+              <shortcut>IPS</shortcut>
+              <description>Input State</description>
+              <info>DB_1: Input State</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>195</max>
+                  <description>Contact closed</description>
+                </item>
+                <item>
+                  <min>196</min>
+                  <max>255</max>
+                  <description>Contact open</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

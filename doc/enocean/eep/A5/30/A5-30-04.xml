@@ -1,0 +1,128 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x30</number>
+        <title>Digital Input</title>
+        <type>
+          <number>0x04</number>
+          <title>3 Digital Inputs, 1 Digital Input 8 Bits</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Afriso / EnOcean</span><br/><br/>Description:
+            <br/>This profile is used for universal module with 1 analog input (= 8 bits resolution digital) and 3 digital inputs.
+            The application meaning and exact data interpretation of the input channels depends on the
+            end application and is not defined in this profile documentation.
+            <br/><br/><span style="border-bottom:2px groove #000000;">Data exchange</span><br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event- &amp; time-triggered
+            <br/>Trigger event: values have changed
+            <br/>Teach-in method: 4BS teach-in 2
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>16</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Digital value-input</data>
+              <shortcut>DV0</shortcut>
+              <description>Digital value 1 byte</description>
+              <info>Digital value-input</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>255</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Digital Input 2</data>
+              <shortcut>DI2</shortcut>
+              <description>Measured digital Input 2</description>
+              <info>Digital Input 2</info>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Low</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>High</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Digital Input 1</data>
+              <shortcut>DI1</shortcut>
+              <description>Measured digital Input 1</description>
+              <info>Digital Input 1</info>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Low</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>High</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Digital Input 0</data>
+              <shortcut>DI0</shortcut>
+              <description>Measured digital Input 0</description>
+              <info>Digital Input 0</info>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Low</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>High</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

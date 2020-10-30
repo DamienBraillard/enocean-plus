@@ -1,0 +1,28 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x10</number>
+        <title/>
+        <type>
+          <number>0x31</number>
+          <title>Type 0x31 (description: see table)</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Kieback&amp;Peter GmbH &amp; CO KG</span>
+            <br/>
+            <br/>
+          </description>
+          <ref>
+            <rorg>D2</rorg>
+            <func>10</func>
+            <type>30</type>
+          </ref>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

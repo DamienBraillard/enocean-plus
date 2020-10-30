@@ -1,0 +1,397 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x20</number>
+        <title>HVAC Components</title>
+        <type>
+          <number>0x01</number>
+          <title>Battery Powered Actuator</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Kieback + Peter GmbH</span><br/><br/><br/>
+          DIRECTION-1 = Transmit mode: Message from the actuator to the controller
+          <br/>
+          DIRECTION-2 = Receive mode: Commands from the controller to the actuator;
+          max. reponse time 1 sec.</description>
+          <case>
+            <direction>1</direction>
+            <condition>
+              <direction>1</direction>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Current Value</data>
+              <shortcut>CV</shortcut>
+              <description>Current value</description>
+              <info>actual value 0...100 %, linear n=0...100</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Service On</data>
+              <shortcut>SO</shortcut>
+              <description>Service On</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>on</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy input enabled</data>
+              <shortcut>ENIE</shortcut>
+              <description>Energy input enabled</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy Storage</data>
+              <shortcut>ES</shortcut>
+              <description>Energy storage sufficiently charged</description>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Battery capacity</data>
+              <shortcut>BCAP</shortcut>
+              <description>Battery capacity; change battery next days</description>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Contact, cover open</data>
+              <shortcut>CCO</shortcut>
+              <description>Contact, cover open</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Failure temperature sensor, out off range</data>
+              <shortcut>FTS</shortcut>
+              <description>Failure Temperature sensor, out off range</description>
+              <info/>
+              <bitoffs>13</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Detection, window open</data>
+              <shortcut>DWO</shortcut>
+              <description>Detection, window open</description>
+              <info/>
+              <bitoffs>14</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Actuator obstructed</data>
+              <shortcut>ACO</shortcut>
+              <description>Actuator obstructed</description>
+              <info/>
+              <bitoffs>15</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature (linear)</description>
+              <info>DB_1: Temperature 0...40&#176;C, linear n=0...255 Min.=0 ; Max.=255</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <direction>2</direction>
+            <condition>
+              <direction>2</direction>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Valve position or Temperature Setpoint</data>
+              <shortcut>SP</shortcut>
+              <description>Valve position or Temperature set point (linear); selection with DB1.2<br/><br/>Valve position 0&#8230;100% in combination with compatible classic controllers the actuator used DB_3;
+<br/><br/>Temperature set point: The actuator can be used as self-sufficient room controller (pi controller) without integration
+in automation systems. Wherever the user wants room conditions to be individually controlled, the actuator can work in combination with a wireless room device (RCU).</description>
+              <info>DB_3: Valve set point 0...100 %, linear n=0...100
+                Temperature set point 0...40&#176;C, linear n=0...255</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100 or 255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100 or +40</max>
+              </scale>
+              <unit>% or &#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature  from RCU</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature actual from RCU = 0b0 (Room controller-unit), see DB1.0<br/><br/>Maintenance mode ('service on'): DB_2.BIT_5: energy memory sufficiently charged =1<br/><br/>DB_2.BIT_4: battery capacity changing battery in the next days, need changing batteries = 0<br/><br/>Status feedback signal (service on, DB_2.BIT_7</description>
+              <info>Temperature actual from RCU = 0b0 (Room controller-unit), see DB1.0<br/><br/>0...40&#176;C, linear n=255...0
+              </info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>255</min>
+                <max>0</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Run init sequence</data>
+              <shortcut>RIN</shortcut>
+              <description>The limit switching measures the travel and signals when an end position has been reached. This end position (valve zero point) in the actuator is stored.</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Lift set</data>
+              <shortcut>LFS</shortcut>
+              <description>Initialization, adjustment to the valve stroke. The Initialization is switched after receiving the command. The valve is completely opened and closed during initialization.</description>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Valve open / maintenance</data>
+              <shortcut>VO</shortcut>
+              <description>After receiving an operation command, the actuator moves the valve in direction open or close.
+when reaching the end position, an automatic switch-off procedure is started. In service mode the valve
+can be set to open or closed always.</description>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Valve closed</data>
+              <shortcut>VC</shortcut>
+              <description>valve closed</description>
+              <info/>
+              <bitoffs>19</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Summer bit, Reduction of energy consumption</data>
+              <shortcut>SB</shortcut>
+              <description>The radio communication between the actuator and the controller is restricted, sleep mode is extended. This functionality can be used for battery powered actuators.</description>
+              <info/>
+              <bitoffs>20</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set Point Selection</data>
+              <shortcut>SPS</shortcut>
+              <description>Set Point Selection for DB3</description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Valve position (0-100%). Unit respond to controller.</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Temperature set point 0...40&#176;C. Unit respond to room sensor and use internal PI loop.</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set point inverse</data>
+              <shortcut>SPN</shortcut>
+              <description>Valve set point can be sent to the actuator normal or inverted.
+The selection is done by DB_1.Bit1. The implementation is done and is controlled in the actuator with DB_3. This function is used in dependence on the type of valve.</description>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Select function</data>
+              <shortcut>RCU</shortcut>
+              <description>RCU or 'Service on': After transmitting the command to the actuator, it can be send from the controller or a
+service device, the actuator sends a status feedback signal (service on, DB_2.BIT_7).</description>
+              <info/>
+              <bitoffs>23</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>RCU</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>service on</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

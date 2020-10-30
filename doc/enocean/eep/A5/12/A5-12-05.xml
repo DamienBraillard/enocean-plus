@@ -1,0 +1,292 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x12</number>
+        <title>Automated Meter Reading (AMR)</title>
+        <type>
+          <number>0x05</number>
+          <title>Temperature and Container Sensor</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: SIMICS, NTT East</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>Temp and Container Sensor aimed for fridge and other application.
+            <br/>E.g. eggs or egg carton puts on the Container Sensor in fridge.
+            The sensor sends a signal of temp and remaining of eggs. Since this sensor
+            is battery-powered, battery level information is transmitted with other information, too.
+            <br/><br/><span style="border-bottom:2px groove #000000;">Data exchange</span><br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event- &amp; time-triggered
+            <br/>Communication interval: -
+            <br/>Trigger event: load changed
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: 4BS teach-in 2
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: yes
+            <br/>Security level format: RLC + AES128
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Appendix</span>
+            <br/>Location 0 - 9 are assigned as follows:
+            <br/>
+            <img>graphics/A5-12-05.png</img>
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>10</bitoffs>
+              <bitsize>6</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Position Sensor 0</data>
+              <shortcut>PS0</shortcut>
+              <description>Location 0</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not possessed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>possessed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Position Sensor 1</data>
+              <shortcut>PS1</shortcut>
+              <description>Location 1</description>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not possessed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>possessed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Position Sensor 2</data>
+              <shortcut>PS2</shortcut>
+              <description>Location 2</description>
+              <bitoffs>2</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not possessed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>possessed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Position Sensor 3</data>
+              <shortcut>PS3</shortcut>
+              <description>Location 3</description>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not possessed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>possessed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Position Sensor 4</data>
+              <shortcut>PS4</shortcut>
+              <description>Location 4</description>
+              <bitoffs>4</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not possessed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>possessed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Position Sensor 5</data>
+              <shortcut>PS5</shortcut>
+              <description>Location 5</description>
+              <bitoffs>5</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not possessed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>possessed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Position Sensor 6</data>
+              <shortcut>PS6</shortcut>
+              <description>Location 6</description>
+              <bitoffs>6</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not possessed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>possessed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Position Sensor 7</data>
+              <shortcut>PS7</shortcut>
+              <description>Location 7</description>
+              <bitoffs>7</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not possessed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>possessed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Position Sensor 8</data>
+              <shortcut>PS8</shortcut>
+              <description>Location 8</description>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not possessed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>possessed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Position Sensor 9</data>
+              <shortcut>PS9</shortcut>
+              <description>Location 9</description>
+              <bitoffs>9</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>not possessed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>possessed</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature (linear)</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>-40</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Battery Level</data>
+              <shortcut>BL</shortcut>
+              <description>Battery level</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>100-75%</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>75-50%</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>50-25%</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>25-0%</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

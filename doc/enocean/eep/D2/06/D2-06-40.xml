@@ -1,0 +1,218 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <oldnumber>.RORG</oldnumber>
+      <fullname>Variable Length Data</fullname>
+      <telegram>VLD</telegram>
+      <description></description>
+      <func>
+        <number>0x06</number>
+        <title>Multisensor Window / Door Handle and Sensors</title>
+        <status>released</status>
+        <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: HOPPE AG</span><br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/>A typical device using the proposed EEP is a window handle that includes an <br/>electronically controlled lock-bolt to secure a window against unauthorized <br/>opening. The typical communication counterpart for such a window handle is a <br/>building automation system that manages opening authorizations per each <br/>individual window handle or a group of such handles. <br/><br/>The default state of a window handle using the proposed EEP is closed and <br/>mechanically locked by its lock-bolt. Prior to opening or tilting the window unlock <br/>allowance needs to be requested, e.g. by pressing an "unlock button" located at <br/>the window handle. <br/> <br/>In addition to the locking functionality the window handle reports its status at <br/>least every 30 minutes and immediately in case the tilt / open / closed status is <br/>changed by manual interaction. <br/><br/>
+                <br/>
+                <br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span>
+                <br/>Direction: bidirectional<br/>Timeout: 290
+                <br/>
+                <br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Teach-in</span>
+                <br/>Teach-in method: Not specified
+                <br/>
+                <br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Security</span>
+                <br/>Encryption mandatory: No  
+            <br/>
+            <br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">EEP Family Table</span>
+            <br/>Each TYPE has to support all telegrams and parameters marked in its column.
+            <br/>
+            <br/><table><tr><th>Command Overview</th><th>40</th></tr><tr><td>Status / Unlock-Query Message</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Unlock-Reply Message</td><td style="background-color:#FFFFFF">X</td></tr></table>
+            <br/>
+            <br/><table><tr><th>Parameter Overview</th><th>40</th></tr><tr><td>Handle Status</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Mechanics Status</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Lock Status</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Unlock Query</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Unlock Reply</td><td style="background-color:#FFFFFF">X</td></tr></table>
+            <br/>
+            <br/>
+            <br/>
+            </description>
+        <type>
+          <number>0x40</number>
+          <title>Lockable Window Handle with Status Reporting</title>
+          <status>not released</status>
+          <case>
+            <title>CMD: Status / Unlock-Query Message</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/>Lockable Window Handle with Status Reporting    .
+                   <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Addressing: undefined 
+                    <br/>Communication trigger: event_time_trigger<br/>Timing description:   at least every 30 minutes<br/><br/></description>
+            <datafield>
+              <data>Cmd Id</data>
+              <description>Command Id</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Ignore (for compatibility reasons)</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Status / Request</description>
+                </item>
+                <item>
+                  <min>2</min>
+                  <max>3</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Handle Status</data>
+              <description>Status of window handle</description>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Closed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Open</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Tilted</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Unknown</description>
+                </item>
+              </enum>
+              <trigger>X</trigger>
+            </datafield>
+            <datafield>
+              <data>Mechanics Status</data>
+              <description>Status of mechanics</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>OK</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>ERROR</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Lock Status</data>
+              <description>Status of lock-bolt</description>
+              <info/>
+              <bitoffs>5</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unlocked</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Locked</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Unknown</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Unlock Query</data>
+              <description>Query to unlock window handle</description>
+              <info/>
+              <bitoffs>7</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unlock NOT requested</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unlock requested</description>
+                </item>
+              </enum>
+              <trigger>X</trigger>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD: Unlock-Reply Message</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Addressing: undefined 
+                    <br/>Communication trigger: response_to_cmd
+                  <br/></description>
+            <datafield>
+              <data>Cmd Id</data>
+              <description>Command Id</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Ignore (for compatibility reasons)</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Reply</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data/>
+              <description/>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>5</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>Unlock Reply</data>
+              <description>UnlockAllowanceInfo</description>
+              <info/>
+              <bitoffs>7</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Unlock NOT allowed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unlock allowed</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

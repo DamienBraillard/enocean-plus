@@ -1,0 +1,390 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x02</number>
+        <title>Sensors for Temperature, Illumination, Occupancy And Smoke</title>
+        <type>
+          <number>0x00</number>
+          <title>Type 0x00</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: MSR-Office</span>
+          </description>
+          <case>
+            <title>CMD 0x1 - Sensor Measurement</title>
+            <description>This message is sent by a sensor if one of the following events occurs:<br/>
+                <br/>- Measurement results trigger an automated transmission (see Actuator Set Measurement message)
+                <br/>
+                <br/>- Message Actuator Measurement Query has been received
+                <br/>
+                <br/>Response Timing: None
+                <br/>
+                <br/>
+                <img>graphics/EEP_D2-02-xx_CMD_01.png</img>
+                <br/>
+                <br/>
+              </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x01</value>
+                  <description>ID 01</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Measurement type</data>
+              <shortcut>type</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Temperature (0&#8230;65535: -40 to +120&#176;C)</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Illumination (0&#8230;65535: 0 to 2047lx)</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Occupancy (0: not detected; 1: detected)</description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Smoke<br/>The following content applies for the value in DB_0 and DB_1:
+                      <br/>0x00 - No smoke detected
+                      <br/>0x01 - Smoke detected via ionization chamber
+                      <br/>0x02 - Smoke detected via optical chamber
+                      <br/>0x03 - Smoke detected via both chambers
+                      <br/>
+                    </description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <data>Measurement value (2 bytes)</data>
+              <shortcut>MV</shortcut>
+              <description>DB_0 = LSB / DB_1 = MSB</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>16</bitsize>
+              <range>
+                <min>0</min>
+                <max>65535</max>
+              </range>
+              <unit>N/A</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x2 - Sensor Test/Trigger</title>
+            <description>This message is sent to a sensor.
+              It causes the sensor to enter self-test mode or trigger an alarm (if supported).<br/>
+                <br/>Response Timing: None
+                <br/>
+                <br/>
+                <img>graphics/EEP_D2-02-xx_CMD_02.png</img>
+                <br/>
+              </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x02</value>
+                  <description>ID 02</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Self-test</data>
+              <shortcut>ST</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Self-test mode</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Normal operation</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Trigger alarm</data>
+              <shortcut>TA</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Trigger alarm</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Normal operation</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>10</bitoffs>
+              <bitsize>6</bitsize>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x3 - Actuator Set Measurement</title>
+            <description>This message is sent to a sensor. It configures the measurement behaviour of the sensor.<br/>
+                <br/>Response Timing: None
+                <br/>
+                <br/>
+                <img>graphics/EEP_D2-02-xx_CMD_03.png</img>
+              </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x03</value>
+                  <description>ID 03</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Report measurement</data>
+              <shortcut>RM</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0b0</value>
+                  <description>Report measurement: query only</description>
+                </item>
+                <item>
+                  <value>0b1</value>
+                  <description>Report measurement: query / auto reporting</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>9</bitoffs>
+              <bitsize>7</bitsize>
+            </datafield>
+            <datafield>
+              <data>Measurement delta to be reported (LSB)</data>
+              <shortcut>MD_LSB</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>0</min>
+                <max>4095</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>4095</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Measurement delta to be reported (MSB)</data>
+              <shortcut>MD_MSB</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>4095</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>4095</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>20</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Unit</data>
+              <shortcut>UN</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Temperature (&#176;C)</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Illumination (lx)</description>
+                </item>
+                <item>
+                  <min>0x02</min>
+                  <max>0x07</max>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Maximum time between two subsequent Actuator</data>
+              <shortcut>MAT</shortcut>
+              <description>Measurement Response messages [10s]</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>10</min>
+                <max>2550</max>
+              </scale>
+              <unit>s</unit>
+            </datafield>
+            <datafield>
+              <data>Minimum time between two subsequent Actuator</data>
+              <shortcut>MIT</shortcut>
+              <description>Measurement Response messages [s]</description>
+              <info/>
+              <bitoffs>40</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>255</max>
+              </scale>
+              <unit>s</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 0x4 - Sensor Measurement Query</title>
+            <description>This message is sent to a sensor. The sensor replies with an Sensor Measurement message.<br/>
+                <br/>Response Timing:
+                <br/>A Sensor Measurement message shall be received within a maximum of
+                300ms from the time of transmission of this message.
+                <br/>In case no such response is received within this time frame the action
+                shall be treated as completed without result.
+                <br/>
+                <img>graphics/EEP_D2-02-xx_CMD_04.png</img>
+              </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x04</value>
+                  <description>ID 04</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Query</data>
+              <shortcut>qu</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>Query temperature</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>Query illumination</description>
+                </item>
+                <item>
+                  <value>0x2</value>
+                  <description>Query occupancy</description>
+                </item>
+                <item>
+                  <value>0x3</value>
+                  <description>Query smoke</description>
+                </item>
+                <item>
+                  <min>0x4</min>
+                  <max>0x7</max>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

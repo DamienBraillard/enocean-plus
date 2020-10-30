@@ -1,0 +1,1552 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x10</number>
+        <title/>
+        <type>
+          <number>0x01</number>
+          <title>Type 0x01</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Kieback&amp;Peter GmbH &amp; CO KG</span>
+          </description>
+          <case>
+            <title>General Message</title>
+            <description>
+              <img>graphics/D2-10-01_MID00.png</img>
+              <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>3</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>General Message</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message continuation flag</data>
+              <shortcut>MCF</shortcut>
+              <description>Indicates if another telegram has to be expected or if the message is complete</description>
+              <info/>
+              <bitoffs>6</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Automatic message control</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Incomplete</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Complete</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Information request classifier</data>
+              <shortcut>IRC</shortcut>
+              <description>Defines the type of information request</description>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>6</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>5</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>4</value>
+                  <description>Time program request</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Room control setup request</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Configuration request</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Data request</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Acknowledge request</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Feedback classifier</data>
+              <shortcut>FBC</shortcut>
+              <description>Defines the type of feedback</description>
+              <info/>
+              <bitoffs>13</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Message repetition request</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Telegram repetition request</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Acknowledge / heartbeat</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>General message type</data>
+              <shortcut>GMT</shortcut>
+              <description>Indicates if the general message is a feedback or
+                an information request</description>
+              <info/>
+              <bitoffs>15</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Information request</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Feedback</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Data Message</title>
+            <description>
+              <img>graphics/D2-10-01_MID01.png</img>
+              <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>3</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>17</bitoffs>
+              <bitsize>7</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>25</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>26</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>32</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>35</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>36</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>40</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>42</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Data Message</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message continuation flag</data>
+              <shortcut>MCF</shortcut>
+              <description>Indicates if another telegram has to be expected or if the message is complete</description>
+              <info/>
+              <bitoffs>6</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Automatic message control</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Incomplete</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Complete</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Custom warning 2</data>
+              <shortcut>CW2</shortcut>
+              <description>Flag for an application specific warning</description>
+              <info/>
+              <bitoffs>27</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Custom warning 1</data>
+              <shortcut>CW1</shortcut>
+              <description>Flag for an application specific warning</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Window open detection</data>
+              <shortcut>WOD</shortcut>
+              <description>Indicates if an open window is detected</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Open</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Closed</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Battery status</data>
+              <shortcut>BS</shortcut>
+              <description>Battery status</description>
+              <info/>
+              <bitoffs>33</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Critical</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Low</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Good</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Occupancy button status</data>
+              <shortcut>OBS</shortcut>
+              <description>Indicates if the occupancy button was pressed and its occupancy status</description>
+              <info/>
+              <bitoffs>38</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Button pressed and unoccupied</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Button pressed and occupied</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room control mode</data>
+              <shortcut>RCM</shortcut>
+              <description>Recent room control mode</description>
+              <info/>
+              <bitoffs>44</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Building protection</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Pre-comfort</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Economy</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Comfort</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature set point validity</data>
+              <shortcut>SPV</shortcut>
+              <description>Indicates if the temperature set point value is valid</description>
+              <info/>
+              <bitoffs>46</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Valid value</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature validity</data>
+              <shortcut>TPV</shortcut>
+              <description>Indicates if the temperature value is valid</description>
+              <info/>
+              <bitoffs>47</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Valid value</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature set point</data>
+              <shortcut>TSP</shortcut>
+              <description>Recent temperature set point</description>
+              <info/>
+              <bitoffs>48</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Recent room temperature</description>
+              <info/>
+              <bitoffs>56</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>Configuration Message</title>
+            <description>
+              <img>graphics/D2-10-01_MID02.png</img>
+              <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>3</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>15</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>23</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>54</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>61</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Configuration Message</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message continuation flag</data>
+              <shortcut>MCF</shortcut>
+              <description>Indicates if another telegram has to be expected or if the message is complete</description>
+              <info/>
+              <bitoffs>6</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Automatic message control</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Incomplete</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Complete</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature scale lock</data>
+              <shortcut>TSL</shortcut>
+              <description>Indicates if the temperature scale can be changed at the room control panel</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Locked</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Display content lock</data>
+              <shortcut>DCL</shortcut>
+              <description>Indicates if the display content can be changed at the room control panel</description>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Locked</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Date / time lock</data>
+              <shortcut>DTL</shortcut>
+              <description>Indicates if date and time can be changed at the room control panel</description>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Locked</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Time program lock</data>
+              <shortcut>TPL</shortcut>
+              <description>Indicates if the time program can be changed at the room control panel</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Locked</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Occupancy button lock</data>
+              <shortcut>OBL</shortcut>
+              <description>Indicates if the occupancy status can be changed at the room control panel</description>
+              <info/>
+              <bitoffs>13</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Locked</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature set point lock</data>
+              <shortcut>SPL</shortcut>
+              <description>Indicates if the temperature set point can be changed at the room control panel</description>
+              <info/>
+              <bitoffs>14</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Locked</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Radio communication interval</data>
+              <shortcut>RCI</shortcut>
+              <description>Defines the longest time between two consecutive telegrams (clock-based communication)</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>6</bitsize>
+              <enum>
+                <item>
+                  <value>63</value>
+                  <description>24 hours</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>62</value>
+                  <description>12 hours</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>61</value>
+                  <description>3 hours</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <min>1</min>
+                  <max>60</max>
+                  <description>1...60 min</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No communication interval</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Key lock</data>
+              <shortcut>KL</shortcut>
+              <description>Indicates if all buttons on the device are locked</description>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Unlocked</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Locked</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Display content</data>
+              <shortcut>DC</shortcut>
+              <description>Defines the main display content</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>7</value>
+                  <description>Humidity</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>6</value>
+                  <description>Display off</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>5</value>
+                  <description>Temperature set point</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>4</value>
+                  <description>Room temperature (external)</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Room temperature (internal)</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Time</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Default</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature scale</data>
+              <shortcut>TS</shortcut>
+              <description>Defines the used temperature scale for the room control panel display and menus</description>
+              <info/>
+              <bitoffs>27</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>&#176; Fahrenheit</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>&#176; Celsius</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Default</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Daylight saving time flag</data>
+              <shortcut>DST</shortcut>
+              <description>Indicates if daylight saving time is supported</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Not supported</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Supported</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Time notation</data>
+              <shortcut>TN</shortcut>
+              <description>Defines the used time notation</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>12 h</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>24 h</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Default</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Day</data>
+              <shortcut>DAY</shortcut>
+              <description>Date format: YYYY/MM/DD</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>1</min>
+                <max>31</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>31</max>
+              </scale>
+              <unit>day</unit>
+            </datafield>
+            <datafield>
+              <data>Month</data>
+              <shortcut>MON</shortcut>
+              <description>Date format: YYYY/MM/DD</description>
+              <info/>
+              <bitoffs>37</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>1</min>
+                <max>12</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>12</max>
+              </scale>
+              <unit>mon</unit>
+            </datafield>
+            <datafield>
+              <data>Year</data>
+              <shortcut>YR</shortcut>
+              <description>Date format: YYYY/MM/DD<br/>year = 2000 + x
+                </description>
+              <info/>
+              <bitoffs>41</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>127</max>
+              </range>
+              <scale>
+                <min>2000</min>
+                <max>2127</max>
+              </scale>
+              <unit>year</unit>
+            </datafield>
+            <datafield>
+              <data>Minute</data>
+              <shortcut>MIN</shortcut>
+              <description>Time format: hh:mm</description>
+              <info/>
+              <bitoffs>48</bitoffs>
+              <bitsize>6</bitsize>
+              <range>
+                <min>0</min>
+                <max>59</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>59</max>
+              </scale>
+              <unit>min</unit>
+            </datafield>
+            <datafield>
+              <data>Hour</data>
+              <shortcut>HR</shortcut>
+              <description>Time format: hh:mm</description>
+              <info/>
+              <bitoffs>56</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>0</min>
+                <max>23</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>23</max>
+              </scale>
+              <unit>h</unit>
+            </datafield>
+            <datafield>
+              <data>Date / time update flag</data>
+              <shortcut>DTU</shortcut>
+              <description>Indicates if an update of date or time is provided</description>
+              <info/>
+              <bitoffs>63</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Update</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No update</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Room Control Setup</title>
+            <description>
+              <img>graphics/D2-10-01_MID03.png</img>
+              <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>3</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>40</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>45</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Room Control Setup</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message continuation flag</data>
+              <shortcut>MCF</shortcut>
+              <description>Indicates if another telegram has to be expected or if the message is complete</description>
+              <info/>
+              <bitoffs>6</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Automatic message control</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Incomplete</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Complete</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature set point building protection mode</data>
+              <shortcut>SPB</shortcut>
+              <description>Temperature set point building protection mode</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature set point economy mode</data>
+              <shortcut>SPE</shortcut>
+              <description>Temperature set point economy mode</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature set point comfort mode</data>
+              <shortcut>SPC</shortcut>
+              <description>Temperature set point comfort mode</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature set point flag building protection mode</data>
+              <shortcut>SFB</shortcut>
+              <description>Indicates if a temperature set point for the building protection mode is provided</description>
+              <info/>
+              <bitoffs>44</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Valid value</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature set point flag economy mode</data>
+              <shortcut>SFE</shortcut>
+              <description>Indicates if a temperature set point for the economy mode is provided</description>
+              <info/>
+              <bitoffs>46</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Valid value</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature set point flag comfort mode</data>
+              <shortcut>SFC</shortcut>
+              <description>Indicates if a temperature set point for the comfort mode is provided</description>
+              <info/>
+              <bitoffs>47</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Valid value</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Time Program Setup</title>
+            <description>
+              <img>graphics/D2-10-01_MID04.png</img>
+              <br/>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>3</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>32</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>46</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>4</value>
+                  <description>Time Program Setup</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message continuation flag</data>
+              <shortcut>MCF</shortcut>
+              <description>Indicates if another telegram has to be expected or if the message is complete</description>
+              <info/>
+              <bitoffs>6</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Automatic message control</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Incomplete</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Complete</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>End time: Minute</data>
+              <shortcut>ETM</shortcut>
+              <description>Time format: hh:mm</description>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>6</bitsize>
+              <range>
+                <min>0</min>
+                <max>59</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>59</max>
+              </scale>
+              <unit>1</unit>
+            </datafield>
+            <datafield>
+              <data>End time: Hour</data>
+              <shortcut>ETH</shortcut>
+              <description>Time format: hh:mm</description>
+              <info/>
+              <bitoffs>19</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>0</min>
+                <max>23</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>23</max>
+              </scale>
+              <unit>1</unit>
+            </datafield>
+            <datafield>
+              <data>Start time: Minute</data>
+              <shortcut>STM</shortcut>
+              <description>Time format: hh:mm</description>
+              <info/>
+              <bitoffs>26</bitoffs>
+              <bitsize>6</bitsize>
+              <range>
+                <min>0</min>
+                <max>59</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>59</max>
+              </scale>
+              <unit>1</unit>
+            </datafield>
+            <datafield>
+              <data>Start time: Hour</data>
+              <shortcut>STH</shortcut>
+              <description>Time format: hh:mm</description>
+              <info/>
+              <bitoffs>35</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>0</min>
+                <max>23</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>23</max>
+              </scale>
+              <unit>1</unit>
+            </datafield>
+            <datafield>
+              <data>Period</data>
+              <shortcut>PER</shortcut>
+              <description>Assigned period of time (weekdays) for the provided schedule time</description>
+              <info/>
+              <bitoffs>40</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>15</value>
+                  <description>Friday - Monday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>14</value>
+                  <description>Friday - Sunday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>13</value>
+                  <description>Thursday - Friday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>12</value>
+                  <description>Wednesday - Friday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>11</value>
+                  <description>Tuesday - Thursday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>10</value>
+                  <description>Monday - Wednesday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>9</value>
+                  <description>Sunday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>8</value>
+                  <description>Saturday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>7</value>
+                  <description>Friday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>6</value>
+                  <description>Thursday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>5</value>
+                  <description>Wednesday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>4</value>
+                  <description>Tuesday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Monday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Saturday - Sunday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Monday - Friday</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Monday - Sunday</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room control mode</data>
+              <shortcut>RCM</shortcut>
+              <description>Assigned room control mode for the provided schedule time</description>
+              <info/>
+              <bitoffs>44</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Building protection</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Pre-comfort</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Economy</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Comfort</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Time program deletion</data>
+              <shortcut>TPD</shortcut>
+              <description>Deletes the stored time program</description>
+              <info/>
+              <bitoffs>47</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Deletion</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No deletion</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

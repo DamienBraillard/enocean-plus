@@ -1,0 +1,274 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x37</number>
+        <title>Energy Management</title>
+        <type>
+          <number>0x01</number>
+          <title>Demand Response</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Echoflex Solutions Inc.</span><br/><br/>
+          Purpose of EEP:<br/>
+Demand Response is a developing standard to allow utility
+companies to send requests for reduction in power consumption
+during peak usage times. It is also used as a means to allow users
+to reduce overall power consumption as energy prices increase.
+Having an EEP for this will allow ease of integration with
+EnOcean products to this standard. The EEP was designed with a
+very flexible setting for the level (0-15) as well as a default level
+whereby the transmitter can specify a specific level for all
+controllers to use (0-100% of either maximum or current power
+output, depending on the load type). This EEP also includes a
+timeout setting to indicate how long the DR event should last if the
+DR transmitting device does not send heartbeats or subsequent
+new DR levels.
+<br/>
+<br/>
+Description:
+<br/>
+This EEP is included under a new function of Energy
+Management. Additional types could be added in future for power,
+voltage, and current data. The proposed EEP type 01 only deals
+with demand response activation at this point.
+Data Byte 3 is the default DR value for devices that
+implement a control algorithm that uses a set-point. It will be used
+for any controllers not supporting the current DR Level in the
+message and having an adjustable set-point.
+<br/>
+<br/>
+Data Byte 2 is the default DR Level for any controllers not
+supporting the current DR Level in the message and having an
+adjustable control. It can be defined as either a percentage of the
+maximum power or a percentage of the current power, depending
+on the value of bit 7 in Data Byte 2. Bits 0 through 6 contain the
+percentage of power (either relative or absolute) that should be
+used. A value of 0 corresponds to 0% and a value of 100
+corresponds to 100%. Any value higher that n100 should be
+interpreted as 100%. For example, if the current DR level is not
+supported by the controller and Data Byte 2 bit 7 is 0 and Data
+Byte 2 bits 0 through 6 are set to 55, then the controller should try
+to use 55% of its maximum power usage. In the case of a lighting
+load with 0-10V dimming, this would correspond to 5.5V on the
+dimming line. In the case of a heating controller with a maximum
+set back of 5 degrees C, this would correspond to a set back of 2.75
+degrees C (this would most likely be rounded to 3).
+<br/>
+<br/>
+Data Byte 1 is the timeout for this DR event. After this
+command is sent the controller will stay at the DR level for Data
+Byte 1 multiplied by 15 minutes. Once this time has elapsed the
+controller will return to normal operation. If Data Byte 1 is 0 then
+the controller will remain in the DR event until the next DR
+command is received. This timeout allows DR devices to leave or
+turn off after setting controllers into a DR state, thus the DR
+transmitter is not needed to take the devices out of the DR state
+and the controllers will automatically recover. For example a DR
+transmitter that only sends messages when a DR event is active
+could be used with the timeout to create a successful DR system.
+<br/>
+<br/>
+Data Byte 0, Bits 7 through 4 make up a nibble that will be
+used as the DR level. Levels 0 through 15 will be possible using
+these bits. Bit 4 will be the lowest bit in this nibble and bit 7 will
+be the highest. If any level is not supported by a controller then
+that controller should use the default settings sent in this message
+or map the level to one that it supports.
+<br/>
+<br/>
+Data Byte 0 Bits 2 and 1 indicate whether the power adjustment at
+start and end of the DR event should be randomized or not. This
+feature is intended to minimize rapid changes on the power
+distribution equipment by delaying each controller&#8217;s response. If
+random start or end is enabled, each controller will delay starting
+or ending the DR event by a random time that will vary uniformly
+over a specific time period (for example, 5 seconds, 60 seconds, or
+15 minutes).. The maximum length of these random delays will
+depend on the implementation in the controller.
+<br/>
+<br/>
+Data Byte 0, Bit 0 is the state for loads that are not adjustable
+for the default DR level. If a controller does not support the current
+DR level and does not have adjustable control then it should use
+this bit. The two states of this bit are defined as follows: 1 =
+maximum power usage by controller, 0 = minimum power usage
+by the controller. If for example lights are being controlled, then a
+setting of 1 will mean the lights should be ON, where as a setting
+of 0 will mean the lights should be OFF. For a thermostat
+application with non adjustable set back, a setting of 1 will mean
+that no set back should be applied, whereas a setting of 0 will mean
+that the full set back should be applied. This setting only applies to
+the maximum power usage of the controller, if for example the
+lights are currently off and the controller receives a DR event with this bit set, then the lights should not turn ON as the DR event has
+only set the maximum power usage for the device.
+</description>
+          <case>
+            <datafield>
+              <data>DR Level</data>
+              <shortcut>DRL</shortcut>
+              <description>DR Level</description>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>0</min>
+                <max>15</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>15</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temporary default</data>
+              <shortcut>TMPD</shortcut>
+              <description>New Temporary default DR set point Min. ... Max. (linear)</description>
+              <info>DB_3: new Temporary default DR set-point</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>255</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Absolute/relative power usage</data>
+              <shortcut>SPWRU</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Absolute power usage. Interpret
+DB_2.BIT_6...DB_2.BIT_0 as a percentage of the
+maximum power use.</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Relative power usage. Interpret
+DB_2.BIT_6...DB_2.BIT_0 as a percentage of the
+current power use.</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Power Usage</data>
+              <shortcut>PWRU</shortcut>
+              <description>0% to 100% power usage in 1% increments; 101...127 = interpreted as 100%</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Timeout Setting</data>
+              <shortcut>TMOS</shortcut>
+              <description>Time in 15 min. intervals; 0 = No time specified; 1...255 = increasing 15 min. intervals. Max value: 3825 = 255*15</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>1</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>15</min>
+                <max>3825</max>
+              </scale>
+              <unit>min</unit>
+            </datafield>
+            <datafield>
+              <data>Random start delay</data>
+              <shortcut>RSD</shortcut>
+              <description>...</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Randomized end delay</data>
+              <shortcut>RED</shortcut>
+              <description>...</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Max/Min Power Usage for Default DR State</data>
+              <shortcut>MPWRU</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Minimum Power usage</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Maximum Power usage</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

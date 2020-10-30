@@ -1,0 +1,216 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x20</number>
+        <title>HVAC Components</title>
+        <type>
+          <number>0x12</number>
+          <title>Temperature Controller Input</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Thermokon Sensortechnik GmbH</span>
+          </description>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Control Variable override</data>
+              <shortcut>CV</shortcut>
+              <description>Actual value for controller</description>
+              <info>DB_3: Control variable &#8230; 100 % 0...255</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>FanStage override</data>
+              <shortcut>FANOR</shortcut>
+              <description>FanStage override</description>
+              <info></info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Stage 0</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Stage 1</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Stage 2</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Stage 3</description>
+                </item>
+                <item>
+                  <value>31</value>
+                  <description>auto</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>not available</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Setpoint shift</data>
+              <shortcut>SPS</shortcut>
+              <description>Actual set point could be shifted</description>
+              <info>DB_1: 10K&#8230;
+              0&#8230; +10K 0&#8230;
+              128&#8230; 255</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>-10</min>
+                <max>+10</max>
+              </scale>
+              <unit>&#176;K</unit>
+            </datafield>
+            <datafield>
+              <data>Fan override</data>
+              <shortcut>FANOR</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Automatic</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Override Fan DB2</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Controller mode</data>
+              <shortcut>CTM</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto mode</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Heating</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Cooling</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Off</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Controller state</data>
+              <shortcut>CST</shortcut>
+              <description>Controller state</description>
+              <info>Controller state</info>
+              <bitoffs>27</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Automatic</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Override control variable DB3</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy hold-off / Dew point</data>
+              <shortcut>ERH</shortcut>
+              <description>Energy hold-off / Dew point</description>
+              <info>Energy hold-off / Dew point</info>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Energy hold-off/ Dew point</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Room occupancy</data>
+              <shortcut>RO</shortcut>
+              <description>Actual room occupancy</description>
+              <info>Room occupancy</info>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Occupied</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Unoccupied</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>StandBy</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Frost</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

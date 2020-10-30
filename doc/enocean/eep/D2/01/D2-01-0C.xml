@@ -1,0 +1,61 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x01</number>
+        <title>Electronic Switches and Dimmers with Local Control</title>
+        <type>
+          <number>0x0C</number>
+          <title>Type 0x0C</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: AVIDSEN</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>Intended for heating module with Pilotwire command and Energy Measurement.
+            <br/>Pilot wire includes 6 different modes:
+            <br/>- Off
+            <br/>- Comfort
+            <br/>- Eco
+            <br/>- Anti-freeze
+            <br/>- Comfort-1&#176;C
+            <br/>- Comfort-2&#176;C
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Data exchange</span>
+            <br/>Direction: bidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event-triggered
+            <br/>Communication interval: at each state change / every 5 minutes
+            <br/>Trigger event: actuator status change, consumption information change
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: Universal teach-in (UTE)
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: no
+            <br/>Security level format: -
+            <br/>
+            <br/>
+          <table><tr><th>Supported command</th><th>Type 0x0C</th></tr><tr><td>0x1 &#8211; Actuator Set Output</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x2 &#8211; Actuator Set Local</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x3 &#8211; Actuator Status Query</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x4 &#8211; Actuator Status Response</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x5 &#8211; Actuator Set Measurement</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x6 &#8211; Actuator Measurement Query</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x7 &#8211; Actuator Measurement Response</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x8 &#8211; Actuator Set Pilot Wire Mode</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x9 &#8211; Actuator Pilot Wire Mode Query</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0xA &#8211; Actuator Pilot Wire Mode Response</td><td style="background-color:#FFFFFF">X</td></tr></table>
+          <br/>
+          <span style="border-bottom:2px groove #000000;">Telegram Definition</span>
+          <br/>
+          The telegrams corresponding to Command IDs: 0x1, 0x2, 0x3, 0x4, 0x5, 0x6
+          and 0x7 are already defined in EEP V2.6.2 and do not change.
+          <br/>
+          <br/>
+		</description>
+          <ref>
+            <rorg>D2</rorg>
+            <func>01</func>
+            <type>00</type>
+          </ref>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

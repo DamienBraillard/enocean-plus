@@ -1,0 +1,86 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xF6</number>
+      <title>RPS Telegram</title>
+      <telegram>RPS</telegram>
+      <func>
+        <number>0x05</number>
+        <title>Detectors</title>
+        <type>
+          <number>0x00</number>
+          <title>Wind Speed Threshold Detector</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: ViCOS GmbH</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>
+              This profile is used to communicate wind speed threshold detection.
+              <br/><br/>
+              The &#8220;Alarm ON&#8221; message shall be sent when the wind speed exceeds
+              the threshold longer than the specified Delay_Time_AlarmON.
+              If wind speed falls below the specified threshold longer than
+              Delay_Time_AlarmOFF the &#8220;Alarm OFF&#8221; message shall be sent.
+              <br/><br/>
+              Delay time and threshold have to be set on the device.
+              <br/>
+              <br/>Delay_Time_AlarmON:	1 &#8230; 15 s (resolution 1 s)
+              <br/>Delay_Time_AlarmOFF:	1 &#8230; 15 min (resolution 1 min)
+              <br/>Threshold:			0 &#8230; 255 km/h
+              <br/><br/>
+              To ensure that the receiver gets the &#8220;Alarm On&#8221; message under any
+              condition (e.g. AC mains failure), it shall be sent every 60 s in
+              alarm state.
+              <br/><br/>
+              When changing to &#8220;Alarm OFF&#8221; state the &#8220;Alarm OFF&#8221; messages shall
+              be sent at least 2 times to avoid losing the &#8220;Alarm OFF&#8221; signal.
+              <br/><br/>
+              During &#8220;Alarm OFF&#8221; state the &#8220;Alarm OFF&#8221; message shall be repeated
+              every 20 minutes.
+              <br/><br/>
+              In case of low energy, the &#8220;Energy LOW&#8221; message shall be sent every
+              60 minutes.
+              <br/><br/>
+              <span style="border-bottom:2px groove #000000;">Data exchange</span>
+              <br/>Direction: unidirectional
+              <br/>Addressing: broadcast
+              <br/>Communication trigger: event-triggered
+              <br/>Communication interval: in case of detection
+              <br/>Trigger event: detection
+              <br/>Tx delay: -
+              <br/>Rx timeout: -
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Teach-in</span>
+              <br/>Teach-in method: RPS teach-in (3 messages within 2s)
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Security</span>
+              <br/>Encryption supported: no
+              <br/>Security level format: -
+            </description>
+          <case>
+            <datafield>
+              <data>Status</data>
+              <shortcut>WND</shortcut>
+              <description>Status of detection and battery</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Wind speed below threshold (Alarm OFF)</description>
+                </item>
+                <item>
+                  <value>0x10</value>
+                  <description>Wind speed exceeds threshold (Alarm ON)</description>
+                </item>
+                <item>
+                  <value>0x30</value>
+                  <description>Energy LOW</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

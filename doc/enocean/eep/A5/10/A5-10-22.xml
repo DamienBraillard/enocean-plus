@@ -1,0 +1,168 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x10</number>
+        <title>Room Operating Panel</title>
+        <type>
+          <number>0x22</number>
+          <title>Temperature, Setpoint, Humidity and Fan Speed</title>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Thermokon Sensortechnik GmbH</span><br/><br/><span style="border-bottom:2px groove #000000;">Data exchange</span><br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event- &amp; time-triggered
+            <br/>Communication interval: time-triggered (configurable at the device) &amp; event-triggered
+            <br/>Trigger event: setpoint change, fan speed change
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: 4BS teach-in 2
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: no
+            <br/>Security level format: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Product Description</span>
+            <br/>
+            The device represented by this EEP is a &#8220;Room Operating Panel with Display&#8221;.
+            It is powered by solar cell.<br/>
+            <br/>
+            It is equipped with the following features:<br/>
+            - Temperature Sensor<br/>
+            - Humidity Sensor<br/>
+            - Temperature Setpoint Adjustment<br/>
+            - Fanspeed Adjustment<br/>
+            <br/>
+            For pairing the unidirectional &#8220;4BS Teach-In Variation 2&#8221; method is used.<br/>
+            <br/>
+            The device transmits the actual sensor values periodically (Default: 1000s)
+            or on an event like &#8220;Temperature Setpoint Adjustment&#8221; or &#8220;Fanspeed Adjustment&#8221;.<br/>
+            <br/>
+            Temperature Sensor, Humidity Sensor:<br/>
+            The environmental sensors are updated periodically (adjustable, default: 100s)
+            and, if there is a change, the updated values will be send immediately.<br/>
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>27</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>Relative Setpoint</data>
+              <shortcut>SP</shortcut>
+              <description>Setpoint (linear) Min.- ... Max+</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>255</max>
+              </scale>
+              <unit>N/A</unit>
+            </datafield>
+            <datafield>
+              <data>Humidity</data>
+              <shortcut>HUM</shortcut>
+              <description>Rel. Humidity (linear)</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>250</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature (linear)</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>250</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Fanspeed</data>
+              <shortcut>FAN</shortcut>
+              <description>Fanspeed</description>
+              <bitoffs>24</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Speed 0 / OFF</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Speed 1</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Speed 2</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Speed 3</description>
+                </item>
+                <item>
+                  <value>5 ... 7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

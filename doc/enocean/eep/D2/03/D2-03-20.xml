@@ -1,0 +1,85 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x03</number>
+        <title>Light, Switching + Blind Control</title>
+        <type>
+          <number>0x20</number>
+          <title>Beacon with Vibration Detection</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Star Micronics Co., LTD.</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>
+              This profile is defined for the use in beacon devices.
+              Such devices transmit if the telegram was triggered by a vibration or the timer.
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Data exchange</span>
+              <br/>Direction: unidirectional
+              <br/>Addressing: broadcast
+              <br/>Communication trigger: event- &amp; time-triggered
+              <br/>Communication interval: -
+              <br/>Trigger event: Vibration (movement), timer
+              <br/>Tx delay: -
+              <br/>Rx timeout: -
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Teach-in</span>
+              <br/>Teach-in method: N/A
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Security</span>
+              <br/>Encryption supported: no
+              <br/>Security level format: -
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Appendix</span>
+              <br/>
+              This beacon device can send a radio telegram at a prescribed timing.
+              The receiver can detect the beacon device with this transmission.
+              This device, when attached to a human body, can also be made into a
+              wide variety of beacon-based systems, which keep people within the
+              safe area, or keep them out of the danger zone.
+              <br/><br/>
+              This device can replace a battery with a vibration power generator.
+              The beacon device harvests power from human walking motion and
+              activates the radio transmitter circuit; it does not require
+              batteries of any kind, enabling maintenance-free operation in many
+              applications.
+              <br/><br/>
+              The product to be immediately released comes with no switches, and
+              the future product, to follow soon, will be equipped with pushbuttons
+              for wider application possibilities.
+            </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>1</bitoffs>
+              <bitsize>7</bitsize>
+            </datafield>
+            <datafield>
+              <data>Energy Supply</data>
+              <shortcut>ES</shortcut>
+              <description>Defines the energy source for the transmission</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Battery supply</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Vibration generator supply</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

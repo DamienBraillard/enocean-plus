@@ -1,0 +1,63 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0xB0</number>
+        <title>Liquid Leakage Sensor</title>
+        <type>
+          <number>0x51</number>
+          <title>Mechanic Harvester</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Afriso / EnOcean</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/><br/>This device is used to detect water. It is commonly placed on ground
+            where a water leakage causes damage.
+            <br/>The principle is that &#8220;paper rings&#8221; swell in water and trigger
+            an ECO 200 (generator) based transmitter.
+            <br/>This version is done for USA 902 MHz.
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Data exchange</span>
+            <br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event-triggered
+            <br/>Communication interval: N/A
+            <br/>Trigger event: (water detected)
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: UTE teach-in
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: no
+            <br/>Security level format: -
+            </description>
+          <case>
+            <datafield>
+              <data>Water sensor</data>
+              <shortcut>WA</shortcut>
+              <description>Alert signal that the sensor detected water leakage.</description>
+              <info>Water sensor</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>No water detected / return position</description>
+                </item>
+                <item>
+                  <value>0x11</value>
+                  <description>Water detected</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

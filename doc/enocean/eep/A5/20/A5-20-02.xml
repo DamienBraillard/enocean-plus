@@ -1,0 +1,174 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x20</number>
+        <title>HVAC Components</title>
+        <type>
+          <number>0x02</number>
+          <title>Basic Actuator</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Spartan Peripheral Devices</span><br/><br/>
+            Basic Actuator can be used by any manufacturer for linear or rotary actuator.
+            <br/><br/>
+            DIRECTION-1 = Transmit mode: Message from the actuator to the controller.
+            <br/>
+            DIRECTION-2 = Receive mode: Commands from the controller to the actuator.
+            To use with a BAS/Gateway system; max. reponse time 1 sec.</description>
+          <case>
+            <direction>1</direction>
+            <condition>
+              <direction>1</direction>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>14</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Actual Value</data>
+              <shortcut>AV</shortcut>
+              <description>Actual value (linear); can be a linear or rotation motion.</description>
+              <info>Transmit status (sent every time there is a positioning or randomly sent every 15-
+                  20 minutes if no change in position. &#8220;Heartbeat&#8221;)
+                  DB_3: % open value 0...100 %, linear n=0...255</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Set point inverse</data>
+              <shortcut>SPI</shortcut>
+              <description>Set point inverse (Needs to be defined by manufacturer what zero(0) is equal to, and one(1) is equal to. Default state to be define as per product manufacturer</description>
+              <info>DB_1.BIT_1: Set point inverse. Needs to be defined by manufacturer what zero(0) is equal to, and
+                  one(1) is equal to.</info>
+              <bitoffs>22</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <direction>2</direction>
+            <condition>
+              <direction>2</direction>
+            </condition>
+            <datafield>
+              <data/>
+              <shortcut/>
+              <description/>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>6</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>23</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Valve Set point</data>
+              <shortcut>VSP</shortcut>
+              <description>Valve set Point (linear)</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Set point inverse</data>
+              <shortcut>VSP</shortcut>
+              <description>'Set point inverse' needs to be defined by manufacturer what zero(0) is equal to, and one(1) is equal to. Default state to be define as per product manufacturer. It can send a command to invert functionality of the unit. In some instance some equipment might need 100% to represent fully extracted, in other fully retracted.</description>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>true</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

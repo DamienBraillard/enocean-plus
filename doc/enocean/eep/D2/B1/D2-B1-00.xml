@@ -1,0 +1,102 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <description/>
+      <func>
+        <number>0xB1</number>
+        <title>Level Sensor</title>
+        <type>
+          <number>0x00</number>
+          <title>Dispenser</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Digital Concept</span><br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/>A family of EEPs for various products, e.g. like dispenser products which could be applied for soap, bathroom<br/>tissues or towel.
+                        <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: unidirectional<br/>Addressing: broadcast
+                        <br/>Communication trigger: event_trigger
+                        <br/>Communication interval: 
+                        <br/>Event description: 
+                        <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Teach-in</span><br/>Teach-in method: Universal teach-in (UTE)
+                        <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Security</span><br/>Encryption mandatory: No
+                    </description>
+          <case>
+            <datafield>
+              <data>ChannelNumber</data>
+              <description>Number ofthe channelof thedispenser.Each devicestarts withchannel &#135;0</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>255</max>
+              </scale>
+              <unit/>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Level of Material</data>
+              <description>Level of thematerial inthe channel</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit/>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>errorCode</data>
+              <description>errorCode</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No Error</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Measurements not reliable</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Device empty</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Loop line at ground</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>malfunction of internal IR-sensor</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Communication error with sensors</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <info/>
+              <bitoffs>23</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

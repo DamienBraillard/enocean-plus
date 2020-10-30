@@ -1,0 +1,91 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xF6</number>
+      <title>RPS Telegram</title>
+      <telegram>RPS</telegram>
+      <func>
+        <number>0x04</number>
+        <title>Position Switch, Home and Office Application</title>
+        <type>
+          <number>0x02</number>
+          <title>Key Card Activated Switch ERP2</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: EnOcean GmbH</span><br/><br/>
+              When card is inserted field EBO and SOC are both having value 1.
+              When take out, both are having value 0.
+              This coding is required to have a context less translation of
+              RPS profiles between ERP 1 and ERP 2.
+            </description>
+          <case>
+            <datafield>
+              <data>Energy Bow</data>
+              <shortcut>EBO</shortcut>
+              <description>State of the energy bow</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>taken out</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>card inserted</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Button coding</data>
+              <shortcut>BC</shortcut>
+              <description>Signalize button coding</description>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>button</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>2</bitoffs>
+              <bitsize>3</bitsize>
+              <enum/>
+            </datafield>
+            <datafield>
+              <data>State of card</data>
+              <shortcut>SOC</shortcut>
+              <description>State of the card</description>
+              <bitoffs>5</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>taken out</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>card inserted</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <data/>
+              <shortcut/>
+              <description/>
+              <bitoffs>6</bitoffs>
+              <bitsize>2</bitsize>
+              <enum/>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

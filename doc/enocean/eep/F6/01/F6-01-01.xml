@@ -1,0 +1,74 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xF6</number>
+      <title>RPS Telegram</title>
+      <telegram>RPS</telegram>
+      <func>
+        <number>0x01</number>
+        <title>Switch Buttons</title>
+        <type>
+          <number>0x01</number>
+          <title>Push Button</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: EnOcean GmbH</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>This profile represents a very simple push button which has no coding
+            for rockers enabled. Its mechanical construction does not require any
+            coding of rocker status and therefore is not used. It simply sends
+            the energy bow status as push &amp; hold / release.
+            The databyte &amp; status is kept compatible to the F6-02-01 profile,
+            only the energy bow bit is used, status is adjusted to corresponding
+            telegram (no button pressed).
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Data exchange</span>
+            <br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event-triggered
+            <br/>Communication interval: N/A
+            <br/>Trigger event: button is pressed / released
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: RPS teach-in
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: no
+            <br/>Security level format: -
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Push button</data>
+              <shortcut>PB</shortcut>
+              <description>Status of the push button</description>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Released</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Pressed &amp; Hold</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

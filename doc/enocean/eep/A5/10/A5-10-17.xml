@@ -1,0 +1,87 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x10</number>
+        <title>Room Operating Panel</title>
+        <type>
+          <number>0x17</number>
+          <title>10 Bit Temperature Sensor, Occupancy Control</title>
+          <status>released</status>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>14</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature 10 bit (linear)</description>
+              <info>DB_1.0(LSB) to DB_2.1(MSB) Temperature (10 bit) -10...41.2&#176;C, linear n=1023...0</info>
+              <bitoffs>14</bitoffs>
+              <bitsize>10</bitsize>
+              <range>
+                <min>1023</min>
+                <max>0</max>
+              </range>
+              <scale>
+                <min>-10</min>
+                <max>+41.2</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Occupancy</data>
+              <shortcut>OCC</shortcut>
+              <description>Occupancy button</description>
+              <info>Occupancy button</info>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Button released</description>
+                </item>
+                <item>
+                  <value>0</value>
+                  <description>Button pressed</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

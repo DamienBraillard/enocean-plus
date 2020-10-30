@@ -1,0 +1,323 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x38</number>
+        <title>Central Command</title>
+        <type>
+          <number>0x09</number>
+          <title>Extended Lighting-Control</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: PEHA / infratec</span><br/><br/>
+            With this central command all lighting actors can be manipulated.
+                <br/>
+                <br/>
+                <br/>Remarks for data table:
+                <br/>
+                <br/>REMARK 1:
+                <br/>Set the RGB level for corresponding lighting-control.
+                <br/>Devices without this feature ignore this command.
+                <br/>
+                <br/>REMARK 2:
+                <br/>Up to 16 different scenes can be selected and configured.
+                <br/>
+                <br/>REMARK 3:
+                <br/>Change the minimal and maximal dimmer-value. Example:
+                <br/>
+                <img>graphics/EEP_A5-38-09_01.png</img>
+                <br/>General for switchers:
+                <br/>The values 0 .. 127 are defined to &#8220;Off&#8221;.
+                <br/>The values 128.. 255 are defined to &#8220;On&#8221;.
+                <br/>
+                <br/>REMARK 4:
+                <br/>Example: If the lamp was replaced, the operating hours are reset to 0.
+                <br/>
+                <br/>REMARK 5:
+                <br/>This function blocks all other commands from the other taught-in
+                transmitters. The transmitter, which has called this function,
+                must delete the blocking state, before the other transmitters can use the device again.
+                <br/>
+                <br/>REMARK 6:
+                <br/>For important central commands, it's not necessary to send directly the
+                statefeedback, e.g. when many modules are activated simultaneously.<br/>
+                Note: Special functionality is in function &#8220;Status request (0)&#8221;,
+                the status is always sent.
+                <br/>
+                <br/>REMARK 7:
+                <br/>Ramp time is the time needed to transition from minimum to maximum dimming levels.
+                </description>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Parameter 1</data>
+              <shortcut>P1</shortcut>
+              <description>Function defined parameter value</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <description>Func. 00: -- not used &#8211;-<br/>
+                      <br/>Func. 01: -- not used --
+                      <br/>
+                      <br/>Func. 02: -- not used --
+                      <br/>
+                      <br/>Func. 03: -- not used --
+                      <br/>
+                      <br/>Func. 04: -- not used --
+                      <br/>
+                      <br/>Func. 05: -- not used --
+                      <br/>
+                      <br/>Func. 06: Dimm-Value (0 ... 255)
+                      <br/>
+                      <br/>Func. 07: R - Red (0 .. 255)
+                      <br/>
+                      <br/>Func. 08: -- not used --
+                      <br/>
+                      <br/>Func. 09: Dimm-Value (0 ... 255)
+                      <br/>
+                      <br/>Func. 10: Lamp operating hours (MSB 15..8)
+                      <br/>
+                      <br/>Func. 11: -- not used --
+                      <br/>
+                      <br/>Func. 12: Energy metering value (MSB 15..8)
+                      </description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Parameter 2</data>
+              <shortcut>P2</shortcut>
+              <description>Function defined parameter value</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <description>Func. 00: -- not used &#8211;-<br/>
+                      <br/>Func. 01: -- not used --
+                      <br/>
+                      <br/>Func. 02: -- not used --
+                      <br/>
+                      <br/>Func. 03: Ramping time (MSB 15...8) (65535 s)
+                      <br/>
+                      <br/>Func. 04: Ramping time (MSB 15...8) (65535 s)
+                      <br/>
+                      <br/>Func. 05: -- not used --
+                      <br/>
+                      <br/>Func. 06: Ramping time (MSB 15...8) (65535 s)
+                      <br/>
+                      <br/>Func. 07: G - Green (0 ... 255)
+                      <br/>
+                      <br/>Func. 08: -- not used --
+                      <br/>
+                      <br/>Func. 09: Dimm-Value (0 ... 255)
+                      <br/>
+                      <br/>Func. 10: Lamp operating hours (7...0 LSB)
+                      <br/>
+                      <br/>Func. 11: -- not used --
+                      <br/>
+                      <br/>Func. 12: Energy metering value (7..0 LSB)
+                    </description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Parameter 3</data>
+              <shortcut>P3</shortcut>
+              <description>Function defined parameter value</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <description>Func. 00: -- not used &#8211;-<br/>
+                      <br/>Func. 01: -- not used --
+                      <br/>
+                      <br/>Func. 02: -- not used --
+                      <br/>
+                      <br/>Func. 03: Ramping time (7...0 LSB) (65535 s)
+                      <br/>
+                      <br/>Func. 04: Ramping time (7...0 LSB) (65535 s)
+                      <br/>
+                      <br/>Func. 05: -- not used --
+                      <br/>
+                      <br/>Func. 06: Ramping time (7...0 LSB) (65535 s)
+                      <br/>
+                      <br/>Func. 07: B - Blue(0 ... 255)
+                      <br/>
+                      <br/>Func. 08:
+                      <br/>Bit7: 0 = Drive to scene-value
+                      <br/>Bit7: 1 = Stores actual value in the scene
+                      <br/>Bit3..0: Scene number 0 ... 15
+                      <br/>
+                      <br/>Func. 09: -- not used --
+                      <br/>
+                      <br/>Func. 10: -- not used --
+                      <br/>
+                      <br/>Func. 11: Blocks the local operations
+                      <br/>Enum:
+                      <br/>0 = Unlock local operations
+                      <br/>1 = Locking switch on commands
+                      <br/>2 = Locking switch off commands
+                      <br/>3 = Locking local operations
+                      <br/>
+                      <br/>Func. 12: Unit of energy metering value
+                      <br/>Enum:
+                      <br/>0 = mW
+                      <br/>1 = W
+                      <br/>2 = kW
+                      <br/>3 = MW
+                      <br/>4 = Wh
+                      <br/>5 = kWh
+                      <br/>6 = MWh
+                      <br/>7 = GWh
+                      <br/>8 = mA
+                      <br/>9 = 1/10 A
+                      <br/>10 = mV
+                      <br/>11 = 1/10 V
+                      <br/>12 ... 15 Not used
+                    </description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Function</data>
+              <shortcut>FUNC</shortcut>
+              <description/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Do nothing, status request</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Switched off</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Switched on (Memory value)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Dimming up with ramping time</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Dimming down with ramping time</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Dimming stops</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Set dimmer-value and ramping time</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Set RGB values (see remark 1)</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>Scene function (see remark 2)</description>
+                </item>
+                <item>
+                  <value>9</value>
+                  <description>Set minimal and maximal dimmer-value (see remark 3)</description>
+                </item>
+                <item>
+                  <value>10</value>
+                  <description>Set the operating hours of the lamp (see remark 4)</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>Locking local operations (see remark 5)</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>Set a new value for the energy metering
+                    (overwrite the actual value with the selected unit)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Send status flag</data>
+              <shortcut>SSF</shortcut>
+              <description>see remark 6</description>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Send new status of device</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Send no status (e.g. Global central commands)</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Store final value</data>
+              <shortcut>SFV</shortcut>
+              <description/>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Yes</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Service Mode Flag</data>
+              <shortcut>SMF</shortcut>
+              <description/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal operation</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Service mode: The module disables all
+                      senders, except this sender, which has set the service mode.
+                      (For example for maintenance)</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

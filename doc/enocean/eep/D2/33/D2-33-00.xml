@@ -1,0 +1,1684 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x33</number>
+        <title>Intelligent, Bi-directional Heaters and Controllers</title>
+        <type>
+          <number>0x00</number>
+          <title>Type 0x00</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: WATTS Electronics</span>
+            <br/>
+            <br/>
+          </description>
+          <case>
+            <description><br/><b>1) Gateway messages</b><br/>
+              There are four different messages which can be used to transmit
+              data to heaters:
+              <br/>
+              <br/><b>1a) Gateway request message type</b>
+              <br/>
+              Used to send external temperatures to heaters and ask for
+              special requests.
+              <br/>
+              <img>graphics/D2-33-00_MID00.png</img>
+             </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>17</bitoffs>
+              <bitsize>7</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Gateway request message type</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Request Frame</data>
+              <shortcut>REQ</shortcut>
+              <description>Request information to the heater</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>7</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>Question: status and flags</description>
+                </item>
+                <item>
+                  <value>9</value>
+                  <description>Question: parameters heaters</description>
+                </item>
+                <item>
+                  <value>10</value>
+                  <description>Question: sensor CO/HYGRO/Sound</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>Question: sensor particle/radioactivity</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>Question: sensor air flow, hygrometry, pressure and temperature</description>
+                </item>
+                <item>
+                  <value>13</value>
+                  <description>Information to heater</description>
+                </item>
+                <item>
+                  <value>14</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>Acknowledge frame</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>External Temperature</data>
+              <shortcut>EXT</shortcut>
+              <description>Recent external temperature:<br/>Temp(&#176;C) = value / 10</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>1</min>
+                <max>500</max>
+              </range>
+              <scale>
+                <min>0.1</min>
+                <max>50.0</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <description><br/><br/><b>1b) Sensor parameters</b><br/>
+               This command is transmitted by the gateway controller to
+               enable/disable a sensor. If a sensor is disabled, no measurement
+               will be taken and the corresponding data field will be set to
+               0 to indicate that the sensor is disabled.
+               <br/>
+               For any fields that are not supported, as indicated in the VLD
+               family table above, 0 shall be transmitted in the corresponding
+               field of the sensor parameters message. Only the supported
+               fields are valid for each EEP and the rest should be ignored
+               on the heater side.
+               <br/>
+               <img>graphics/D2-33-00_MID01.png</img>
+             </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>4</bitsize>
+                <value>1</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>26</bitoffs>
+              <bitsize>6</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Sensor parameters</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Window Open Detection Status</data>
+              <shortcut>WOS</shortcut>
+              <description>Indicates if the open window detection is active</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>PIR Detection Status</data>
+              <shortcut>PIS</shortcut>
+              <description>Indicates if the PIR function is active</description>
+              <info/>
+              <bitoffs>5</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Reference Temperature Status</data>
+              <shortcut>RTS</shortcut>
+              <description>Indicates which temperature has to be used</description>
+              <info/>
+              <bitoffs>6</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>COV Sensor</data>
+              <shortcut>CVS</shortcut>
+              <description>Indicate if COV sensor is active</description>
+              <info/>
+              <bitoffs>7</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>CO Sensor</data>
+              <shortcut>COS</shortcut>
+              <description>Indicate if CO sensor is active</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>CO2 Sensor</data>
+              <shortcut>C2S</shortcut>
+              <description>Indicate if CO2 sensor is active</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Particles 1 Sensor</data>
+              <shortcut>P1S</shortcut>
+              <description>Indicate if particles 1 sensor is active</description>
+              <info/>
+              <bitoffs>10</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Particles 2.5 Sensor</data>
+              <shortcut>P2S</shortcut>
+              <description>Indicate if particles 2.5 sensor is active</description>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Particles 10 Sensor</data>
+              <shortcut>P10S</shortcut>
+              <description>Indicate if particles 10 sensor is active</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Radio Activity Sensor</data>
+              <shortcut>RAS</shortcut>
+              <description>Indicate if radio activity sensor is active</description>
+              <info/>
+              <bitoffs>13</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Sound Sensor</data>
+              <shortcut>SOS</shortcut>
+              <description>Indicate if sound sensor is active</description>
+              <info/>
+              <bitoffs>14</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Hygrometry Sensor</data>
+              <shortcut>HYS</shortcut>
+              <description>Indicate if hygrometry sensor is active</description>
+              <info/>
+              <bitoffs>15</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Moving Sensor</data>
+              <shortcut>AMS</shortcut>
+              <description>Indicate if air moving sensor is active</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Pressure Sensor</data>
+              <shortcut>PRS</shortcut>
+              <description>Indicate if pressure sensor is active</description>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Scale Status</data>
+              <shortcut>TSS</shortcut>
+              <description>Defines the used temperature scale for the room
+               control panel display and menus</description>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Default</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>&#176;Celsius</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>&#176;Fahrenheit</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Time Notation Status</data>
+              <shortcut>TNS</shortcut>
+              <description>Defines the used time notation</description>
+              <info/>
+              <bitoffs>20</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Default</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>24 h</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>12 h</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Display Content Status</data>
+              <shortcut>DCS</shortcut>
+              <description>Defines the main display content</description>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No change</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Default</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Time</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Room temperature (internal)</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Room temperature (external)</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Temperature setpoint</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Display off</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Derogation Status</data>
+              <shortcut>DGS</shortcut>
+              <description>Indicates if the derogation is allowed</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Derogation is not allowed</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Derogation is allowed</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <description><br/><br/><b>1c) Program</b><br/>
+               Use to define scheduling (timeslot + setpoint temperature) for
+               all week.
+               <br/>
+               <br/>
+               To set a continuous loop over several weeks with the same setpoint
+               temperature (Non timed mode), the gateway must send the following
+               configuration: (as Comfort/Reduce)
+               <br/>- Send in One time mode
+               <br/>- Monday 00:00 to Monday 00:00 (Start = Stop)
+               <br/>- Set point: in Celcius
+               <br/>
+               <br/>If start time = stop time, the stop time isn&#8217;t taken into
+               account and in this case the One time timeslot is a &#8220;forever&#8221; loop.
+               <br/>
+               <br/>
+               To send a full new weekly schedule, the gateway must sequentially
+               send all timeslots with the desired setpoint temperature.
+               <br/>
+               <br/>
+               Priority: On Time information has higher priority than weekly
+               information. In case of non-information for one time and weekly,
+               the heater is in stop mode.
+               <br/>
+               <br/>
+               Warning: When both the CSC and TPT fields are set to 1, all
+               scheduling programs (one time and weekly) of the heater are cleared.
+               <br/>
+               <br/>
+               <img>graphics/D2-33-00_MID02.png</img>
+             </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>4</bitsize>
+                <value>2</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>43</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Program</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Scheduled Order Type</data>
+              <shortcut>TPT</shortcut>
+              <description>Type of provided schedule order</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>One time</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Weekly</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>End Time Day</data>
+              <shortcut>ETD</shortcut>
+              <description>The end day to apply the provided scheduled order</description>
+              <info/>
+              <bitoffs>5</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Monday</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Tuesday</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Wednesday</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Thursday</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Friday</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Saturday</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Sunday</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>End Time Minute</data>
+              <shortcut>ETM</shortcut>
+              <description>The end time (minute) to apply the provided
+               scheduled order</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>6</bitsize>
+              <range>
+                <min>0</min>
+                <max>59</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>59</max>
+              </scale>
+              <unit>Min</unit>
+            </datafield>
+            <datafield>
+              <data>End Time Hour</data>
+              <shortcut>ETH</shortcut>
+              <description>The end time (hour) to apply the provided
+               scheduled order</description>
+              <info/>
+              <bitoffs>14</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>0</min>
+                <max>23</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>23</max>
+              </scale>
+              <unit>Hour</unit>
+            </datafield>
+            <datafield>
+              <data>Start Time Day</data>
+              <shortcut>STD</shortcut>
+              <description>The start day to apply the provided scheduled order</description>
+              <info/>
+              <bitoffs>19</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Monday</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Tuesday</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Wednesday</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Thursday</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Friday</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Saturday</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Sunday</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Start Time Minute</data>
+              <shortcut>STM</shortcut>
+              <description>The start time (minute) to apply the provided
+               scheduled order</description>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>6</bitsize>
+              <range>
+                <min>0</min>
+                <max>59</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>59</max>
+              </scale>
+              <unit>Min</unit>
+            </datafield>
+            <datafield>
+              <data>Start Time Hour</data>
+              <shortcut>STH</shortcut>
+              <description>The start time (hour) to apply the provided
+               scheduled order</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>0</min>
+                <max>23</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>23</max>
+              </scale>
+              <unit>Hour</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature Setpoint</data>
+              <shortcut>TSP</shortcut>
+              <description>The temperature setpoint to apply<br/>the provided scheduled order:
+               <br/>Setpoint(&#176;C) = value / 10</description>
+              <info/>
+              <bitoffs>33</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>1</min>
+                <max>500</max>
+              </range>
+              <scale>
+                <min>0.1</min>
+                <max>50.0</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Clear Schedule</data>
+              <shortcut>CSC</shortcut>
+              <description>Allow to clear Weekly or one time</description>
+              <info/>
+              <bitoffs>42</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Set</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Clear</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <description><br/><br/><b>1d) Time and date</b><br/>
+               Use to define Time and date for heaters.
+               <br/>
+               <img>graphics/D2-33-00_MID03.png</img>
+             </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>4</bitsize>
+                <value>3</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>39</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Time and date</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Day</data>
+              <shortcut>DAY</shortcut>
+              <description>Date format: YYYY/MM/DD</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>1</min>
+                <max>31</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>31</max>
+              </scale>
+              <unit>Day</unit>
+            </datafield>
+            <datafield>
+              <data>Month</data>
+              <shortcut>MON</shortcut>
+              <description>Date format: YYYY/MM/DD</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>1</min>
+                <max>12</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>12</max>
+              </scale>
+              <unit>Mon</unit>
+            </datafield>
+            <datafield>
+              <data>Year</data>
+              <shortcut>YR</shortcut>
+              <description>Date format: YYYY/MM/DD</description>
+              <info/>
+              <bitoffs>13</bitoffs>
+              <bitsize>12</bitsize>
+              <range>
+                <min>0</min>
+                <max>4095</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>4095</max>
+              </scale>
+              <unit>Year</unit>
+            </datafield>
+            <datafield>
+              <data>Minute</data>
+              <shortcut>MIN</shortcut>
+              <description>Time format: hh:mm</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>6</bitsize>
+              <range>
+                <min>0</min>
+                <max>59</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>59</max>
+              </scale>
+              <unit>Min</unit>
+            </datafield>
+            <datafield>
+              <data>Hour</data>
+              <shortcut>HR</shortcut>
+              <description>Time format: hh:mm</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>5</bitsize>
+              <range>
+                <min>0</min>
+                <max>23</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>23</max>
+              </scale>
+              <unit>Hour</unit>
+            </datafield>
+            <datafield>
+              <data>Day Week</data>
+              <shortcut>DAYW</shortcut>
+              <description>Day of week</description>
+              <info/>
+              <bitoffs>36</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Monday</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Tuesday</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Wednesday</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Thursday</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Friday</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Saturday</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Sunday</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <description><br/><b>2) Heater message</b><br/>
+               5 different messages to communicate data to Gateway:
+               <br/>
+               <br/><b>2a) Request and status</b>
+               <br/>
+               Ask for special data from gateway and send actual status
+               of product.
+               <br/>
+               <img>graphics/D2-33-00_MID08.png</img>
+             </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>4</bitsize>
+                <value>8</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>43</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>8</value>
+                  <description>Request and status</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Request Frame</data>
+              <shortcut>REQ</shortcut>
+              <description>Ask information from heater</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Question External Temp.</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Question Sensor parameters</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Question Program</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Question Time and date</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Information to gateway</description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>7</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <min>8</min>
+                  <max>14</max>
+                  <description>Reserved for gateway frame</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>Acknowledge frame</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Error Flag</data>
+              <shortcut>ERF</shortcut>
+              <description>Indicates the errors occurred</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Temperature sensor is open</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Temperature sensor is Short circuit</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Temperature measured is greater than 50&#176;C</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Error between internal temp and external temp
+                   is greater than 4&#176;C</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>9</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>10</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>13</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>14</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Heating Flag</data>
+              <shortcut>HTF</shortcut>
+              <description>Indicates if the heater is heating the room</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No heating up</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Heating up</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Pilot Wire Flag</data>
+              <shortcut>PWF</shortcut>
+              <description>Indicates the status of the pilot wire</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No pilot wire</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Pilot wire active</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Pilot wire -1</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Pilot wire -2</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Window Open Detection Flag</data>
+              <shortcut>WOF</shortcut>
+              <description>Indicates if an open window is detected</description>
+              <info/>
+              <bitoffs>27</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Close</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Open</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>PIR Flag</data>
+              <shortcut>PIF</shortcut>
+              <description>Indicates if the PIR detected a movement</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>No movement detected</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Movement detected</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Key Lock User Status</data>
+              <shortcut>KLU</shortcut>
+              <description>Indicates if the children protection is active or not</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Key Lock is disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Key Lock is enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Reference Temperature Flag</data>
+              <shortcut>RTF</shortcut>
+              <description>Indicates which temperature is used</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Internal</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>External</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Derogation Flag</data>
+              <shortcut>DGF</shortcut>
+              <description>Indicates the status of the derogation</description>
+              <info/>
+              <bitoffs>33</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No derogation</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Derogation active</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Internal Temperature</data>
+              <shortcut>INT</shortcut>
+              <description>Recent internal temperature:<br/>
+               Temp(&#176;C) = value / 10
+               </description>
+              <info/>
+              <bitoffs>34</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>1</min>
+                <max>500</max>
+              </range>
+              <scale>
+                <min>+0.1</min>
+                <max>+50.0</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+          <case>
+            <description><br/><b>2b) Heater parameters</b><br/>
+               Use by gateway to know Energy, Setpoint in derogation mode and
+               firmware version.
+               <br/>
+               <img>graphics/D2-33-00_MID09.png</img>
+             </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>4</bitsize>
+                <value>9</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>47</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>9</value>
+                  <description>Heater parameters</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy Measurement</data>
+              <shortcut>EM</shortcut>
+              <description>Total amount of energy consumed<br/>Energy(KWh) = value / 10
+               </description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>24</bitsize>
+              <range>
+                <min>0</min>
+                <max>16777215</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>1677721</max>
+              </scale>
+              <unit>kWh</unit>
+            </datafield>
+            <datafield>
+              <data>Derogation Temperature Setpoint</data>
+              <shortcut>DTS</shortcut>
+              <description>The temperature setpoint set with the derogation:<br/>Setpoint(&#176;C) = value / 10
+               </description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>1</min>
+                <max>500</max>
+              </range>
+              <scale>
+                <min>+0.1</min>
+                <max>+50.0</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Firmware Version</data>
+              <shortcut>FWV</shortcut>
+              <description>Give the version of the firmware</description>
+              <info/>
+              <bitoffs>37</bitoffs>
+              <bitsize>10</bitsize>
+              <range>
+                <min>0</min>
+                <max>1024</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>1024</max>
+              </scale>
+              <unit>-</unit>
+            </datafield>
+          </case>
+          <case>
+            <description><br/><b>2c) Value of CO, COV, CO2 and sound level</b><br/>
+               Use by gateway to know value of CO, COV, CO2 and sound level.
+               <br/>
+               <img>graphics/D2-33-00_MID10.png</img>
+             </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>4</bitsize>
+                <value>10</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>43</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>10</value>
+                  <description>Value of CO, COV, CO2 and sound level</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>COV Value</data>
+              <shortcut>CVV</shortcut>
+              <description>COV value in ppb</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>16</bitsize>
+              <range>
+                <min>1</min>
+                <max>65535</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>65535</max>
+              </scale>
+              <unit>ppb</unit>
+            </datafield>
+            <datafield>
+              <data>CO Value</data>
+              <shortcut>VOCT</shortcut>
+              <description>CO value in ppm</description>
+              <info/>
+              <bitoffs>20</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>1</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>255</max>
+              </scale>
+              <unit>ppm</unit>
+            </datafield>
+            <datafield>
+              <data>CO2 Value</data>
+              <shortcut>C2V</shortcut>
+              <description>CO2 value in ppm</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>1</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>10</min>
+                <max>2550</max>
+              </scale>
+              <unit>ppm</unit>
+            </datafield>
+            <datafield>
+              <data>Sound Value</data>
+              <shortcut>SOV</shortcut>
+              <description>Sound value in dB</description>
+              <info/>
+              <bitoffs>36</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>1</min>
+                <max>127</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>127</max>
+              </scale>
+              <unit>dB</unit>
+            </datafield>
+          </case>
+          <case>
+            <description><br/><b>2d) Value of particles and radioactivity sensors</b><br/>
+               Use by gateway to know value of particle and radioactivity.
+               <br/>
+               <img>graphics/D2-33-00_MID11.png</img>
+             </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>4</bitsize>
+                <value>11</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>45</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>11</value>
+                  <description>Value of particles and radioactivity sensors</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Particle 1 Value</data>
+              <shortcut>PM1</shortcut>
+              <description>Particle 1 value in &#956;g/m3</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>1</min>
+                <max>511</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>511</max>
+              </scale>
+              <unit>&#956;g/m3</unit>
+            </datafield>
+            <datafield>
+              <data>Particle 2 Value</data>
+              <shortcut>PM2</shortcut>
+              <description>Particle 2 value in &#956;g/m3</description>
+              <info/>
+              <bitoffs>13</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>1</min>
+                <max>511</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>511</max>
+              </scale>
+              <unit>&#956;g/m3</unit>
+            </datafield>
+            <datafield>
+              <data>Particle 10 Value</data>
+              <shortcut>PM10</shortcut>
+              <description>Particle 10 value in &#956;g/m3</description>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>1</min>
+                <max>511</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>511</max>
+              </scale>
+              <unit>&#956;g/m3</unit>
+            </datafield>
+            <datafield>
+              <data>Radioactivity Value</data>
+              <shortcut>RAV</shortcut>
+              <description>Radioactivity value In &#956;Sv/h</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>14</bitsize>
+              <range>
+                <min>1</min>
+                <max>16383</max>
+              </range>
+              <scale>
+                <min>0.01</min>
+                <max>163.83</max>
+              </scale>
+              <unit>&#956;Sv/h</unit>
+            </datafield>
+          </case>
+          <case>
+            <description><br/><b>2e) Value of air flow, hygrometry, pressure and temperature</b><br/>
+               Use by gateway to know value of air flow, hygrometry, pressure
+               and temperature.
+               <br/>
+               <img>graphics/D2-33-00_MID12.png</img>
+             </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>4</bitsize>
+                <value>12</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>7</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>44</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Message Identifier</data>
+              <shortcut>MID</shortcut>
+              <description>Defines the type of message</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>12</value>
+                  <description>Value of air, hygro., pressure and temp.</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Air Moving</data>
+              <shortcut>AMV</shortcut>
+              <description>Air moving value in m/s</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>1</min>
+                <max>15</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>15</max>
+              </scale>
+              <unit>m/s</unit>
+            </datafield>
+            <datafield>
+              <data>Pressure Value</data>
+              <shortcut>PRV</shortcut>
+              <description>Pressure value in hPa</description>
+              <info/>
+              <bitoffs>15</bitoffs>
+              <bitsize>10</bitsize>
+              <range>
+                <min>1</min>
+                <max>1023</max>
+              </range>
+              <scale>
+                <min>500</min>
+                <max>1150</max>
+              </scale>
+              <unit>hPa</unit>
+            </datafield>
+            <datafield>
+              <data>Hygrometry Value</data>
+              <shortcut>HYV</shortcut>
+              <description>Hygrometry value in %</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>1</min>
+                <max>200</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Internal Temperature</data>
+              <shortcut>INT</shortcut>
+              <description>Recent internal temperature:<br/>Temp(&#176;C) = value / 10</description>
+              <info/>
+              <bitoffs>33</bitoffs>
+              <bitsize>11</bitsize>
+              <range>
+                <min>1</min>
+                <max>500</max>
+              </range>
+              <scale>
+                <min>+0.1</min>
+                <max>+50.0</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

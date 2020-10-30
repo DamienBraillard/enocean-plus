@@ -1,0 +1,244 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x11</number>
+        <title>Controller Status</title>
+        <type>
+          <number>0x05</number>
+          <title>Dual-Channel Switch Actuator</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Nanjing Putian Telecommunications CO., Ltd.,</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>
+            This EEP is used for sending the latest relay status (including current
+            working mode) of a dual-channel switch actuator. The telegram is sent
+            when the relay status changes or a gateway request is received.
+            Each time the gateway is powered on, it will send a request telegram to
+            request that the actuator reports its latest relay status, while in
+            normal working state, it won&#8217;t send any telegram to the actuator and
+            only receive the relay status from the actuator.
+            <br/>
+            <br/>
+            1) Gateway first power on:
+            <br/>
+            <img>graphics/A5-11-05_V01.png</img>
+            <br/>
+            2) When the actuator receives a switch telegram and its status changes:
+            <br/>
+            <img>graphics/A5-11-05_V02.png</img>
+            <span style="border-bottom:2px groove #000000;">Data exchange</span>
+            <br/>Direction: bi-directional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event &amp; request
+            <br/>Communication interval: -
+            <br/>Trigger event: change of relay status
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/><span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: 4BS teach-in 2
+            <br/>
+            <br/><span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: no
+            <br/>Security level format: -
+            <br/>
+            <br/>
+            <br/><span style="border-bottom:2px groove #000000;">Appendix</span>
+            <br/>
+            Operation mode description:
+            <br/>
+            <br/><b>Mode 1:</b>
+            <br/>One switch controls one dual-channel actuator. Each rock controls
+            one channel.
+            <br/>I: power ON, O: power OFF
+            <br/>
+            <img>graphics/A5-11-05_V04.png</img>
+            <br/>
+            <br/><b>Mode 2:</b>
+            <br/>In this mode, actuator can be controlled by both switch and
+            occupancy sensor, also can be set &#8220;Auto&#8221; control by occupancy sensor
+            or &#8220;Manual&#8221; control by switch through button &#8220;A&#8221; or &#8220;M&#8221;.
+            Each channel can be controlled independently.
+            <br/>
+            <img>graphics/A5-11-05_V05.png</img>
+            <br/>
+            <br/><b>Mode 3:</b>
+            <br/>A bit like mode 1, but single rocker button controls two channels
+            one time.
+            <br/>
+            <img>graphics/A5-11-05_V06.png</img>
+            <br/>
+            <br/><b>Mode 4:</b>
+            <br/>One dual-rock switch button can control two dual-channel actuators
+            as 4 channel lighting in all. We can control one channel only through
+            trigger the rock angle.
+            <br/>
+            <img>graphics/A5-11-05_V07.png</img>
+            <br/>
+            <br/>
+            DIRECTION-1 = Gateway request telegram; from gateway to actuator
+            <br/>
+            DIRECTION-2 = Actuator status report; from actuator to gateway
+          </description>
+          <case>
+            <direction>1</direction>
+            <condition>
+              <direction>1</direction>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>28</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description>Defines if the telegram is a request or contains data</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Request</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <direction>2</direction>
+            <condition>
+              <direction>2</direction>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>25</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Working Mode</data>
+              <shortcut>WM</shortcut>
+              <description>Actuators current working mode</description>
+              <info/>
+              <bitoffs>25</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0b001</value>
+                  <description>mode 1</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0b010</value>
+                  <description>mode 2</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0b011</value>
+                  <description>mode 3</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0b100</value>
+                  <description>mode 4</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Relay Status</data>
+              <shortcut>RS</shortcut>
+              <description>Actuators current relay status<br/>Bit 0.1: CH1
+              <br/>Bit 0.2: CH2
+              </description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0b00</value>
+                  <description>CH1 off, CH2 off</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0b01</value>
+                  <description>CH1 on, CH2 off</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0b10</value>
+                  <description>CH1 off, CH2 on</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>0b11</value>
+                  <description>CH1 on, CH2 on</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message Type</data>
+              <shortcut>MT</shortcut>
+              <description>Defines if the telegram is a request or contains data</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Status Report</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

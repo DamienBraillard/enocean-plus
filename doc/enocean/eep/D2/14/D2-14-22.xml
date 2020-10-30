@@ -1,0 +1,126 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x14</number>
+        <title>Multi Function Sensors</title>
+        <type>
+          <number>0x22</number>
+          <title>Outdoor Sensor for Temperature, Humidity and Energy Storage</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Perfactory</span><br/><br/>
+              For the parameter ES (energy storage) applies: manufacturers /
+              devices which would like to indicate a percentage value it is
+              recommended to handle this in the user manual of the device,
+              respectively an application note.
+            </description>
+          <case>
+            <description>
+              <img>graphics/D2-14-22.png</img>
+            </description>
+            <datafield>
+              <reserved/>
+              <bitoffs>19</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP9</shortcut>
+              <description>Temperature (linear)<br/>-----------
+                  <br/>Status of Temperature Sensor
+                </description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>9</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>500</max>
+                  <scale>
+                    <min>-40</min>
+                    <max>60</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>501</min>
+                  <max>510</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>511</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Humidity</data>
+              <shortcut>HUM</shortcut>
+              <description>Rel. Humidity (linear)<br/>-----------
+                  <br/>Status of Humidity Sensor
+                </description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>200</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <min>201</min>
+                  <max>254</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Energy Storage</data>
+              <shortcut>ES</shortcut>
+              <description>Energy Storage Status</description>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>High</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Medium</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Low</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Critical</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

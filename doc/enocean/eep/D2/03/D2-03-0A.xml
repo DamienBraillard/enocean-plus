@@ -1,0 +1,66 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <description/>
+      <func>
+        <number>0x03</number>
+        <title>Light, Switching + Blind Control, Push Button &#8211; Single Button</title>
+        <type>
+          <number>0x0A</number>
+          <title>Push Button &#8211; Single Button</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: ID-RF Corporation</span>
+          </description>
+          <case>
+            <datafield>
+              <data>Battery Autonomy</data>
+              <shortcut>BATT</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>1</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>1</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Button Action</data>
+              <description>BA</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Simple Press</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Double Press</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Long Press</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Long Press released</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

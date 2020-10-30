@@ -1,0 +1,63 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x01</number>
+        <title>Electronic Switches and Dimmers with Local Control</title>
+        <type>
+          <number>0x16</number>
+          <title>Type 0x16</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Menred GmbH</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>
+              This profile is used to adjust the incandescence of two types of lamp,
+              an ordinary and a LED one. The principle used is dimming, linearly
+              for an ordinary lamp and nonlinearly for the LED lamp (due to the
+              light dimming characteristics of each kind of light). The dim value
+              itself will be always between 0 and 100%.
+              <br/><br/>
+              The maximum and minimum values are received at the same time; the
+              device knows whether or not the values are valid by comparing them.
+              If an invalid value is entered, the device discards this data and no
+              change is applied. To know the valid values please refer to the
+              &#8220;ValidRange&#8221; section of the commands description.
+		      <br/>
+		      <br/>
+		      <span style="border-bottom:2px groove #000000;">Data exchange</span>
+		      <br/>Direction: bidirectional
+		      <br/>Addressing: unicast (ADT) / broadcast
+		      <br/>Communication trigger: data change-triggered / time-triggered
+		      <br/>Communication interval: 100 ms
+		      <br/>Trigger event: e.g.: event description, threshold/delta for
+              observed value, downtime, heartbeat, &#8230;
+              <br/>Tx delay: default 100 - 200 ms, max. 5000 ms
+		      <br/>Rx timeout: 100 ms (minimum time between two received messages)
+		      <br/>
+		      <br/>
+		      <span style="border-bottom:2px groove #000000;">Teach-in</span>
+		      <br/>Teach-in method: RPS teach-in / 1BS teach-in /
+              4BS teach-in 1 / Universal teach-in (UTE)
+              <br/>
+		      <br/>
+		      <span style="border-bottom:2px groove #000000;">Security</span>
+		      <br/>Encryption supported: no
+		      <br/>Security level format: -
+		      <br/>
+		      <br/>
+		      <table><tr><th>Supported command</th><th>Type 0x16</th></tr><tr><td>0x1 &#8211; Actuator Set Output</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x2 &#8211; Actuator Set Local</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x3 &#8211; Actuator Status Query</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x4 &#8211; Actuator Status Response</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x5 &#8211; Actuator Set Measurement</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>0x6 &#8211; Actuator Measurement Query</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>0x7 &#8211; Actuator Measurement Response</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>0x8 &#8211; Actuator Set Pilot Wire Mode</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>0x9 &#8211; Actuator Pilot Wire Mode Query</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>0xA &#8211; Actuator Pilot Wire Mode Response</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>0xF &#8211; Actuator Set Dimming Limits, Dimming Limits Query,
+                  Dimming Limits Response (= Extended commands)</td><td style="background-color:#FFFFFF">X</td></tr></table>
+		      <br/>
+		      <table><tr><th>Supported Extended command</th><th>0xF</th></tr><tr><td>0x0 &#8211; Actuator Set Dimming Limits</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x1 &#8211; Actuator Dimming Limits Query</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x2 &#8211; Actuator Status Query</td><td style="background-color:#FFFFFF">X</td></tr></table>
+		    </description>
+          <ref>
+            <rorg>D2</rorg>
+            <func>01</func>
+            <type>00</type>
+          </ref>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

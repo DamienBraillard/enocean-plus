@@ -1,0 +1,640 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x05</number>
+        <title>Blinds Control for Position and Angle</title>
+        <type>
+          <number>0x00</number>
+          <title>Type 0x00</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: AWAG Elektrotechnik AG</span>
+          </description>
+          <case>
+            <title>CMD 1 - Go to Position and Angle</title>
+            <description>Once the actuator is configured either by the &#8220;Set Parameters&#8221; command
+              or through manual configuration (using local buttons) the position
+              of the blinds can be controlled with this command.<br/>
+              When the actuator is set to &#8220;blockage&#8221; mode, neither local nor
+              central positioning and configuration commands will be executed.
+              This mode is intended for putting the device temporarily out of
+              service, e.g. for a maintenance operation.
+              <br/>
+              When the actuator is set to the &#8220;alarm&#8221; mode neither local nor
+              central positioning and configuration commands will be executed.
+              Before entering the &#8220;alarm&#8221; mode, the actuator will execute the
+              &#8220;alarm action&#8221; as configured by the &#8220;Set parameter&#8221; command.
+              <br/>
+              When this command is sent with the &#8220;deblockage&#8221; option, the actuator
+              terminates the &#8220;alarm&#8221; or &#8220;blockage&#8221; mode and enters the normal mode.
+              <br/>
+              <br/>
+              Exemplary illustration of data bytes 0 ... 3:
+              <br/>
+              <img>graphics/D2-05-xx_00.png</img>
+              <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>28</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x01</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>20</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Position</data>
+              <shortcut>POS</shortcut>
+              <description>Vertical position</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Do not change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Angle</data>
+              <shortcut>ANG</shortcut>
+              <description>Rotation angle</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Do not change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Repositioning</data>
+              <shortcut>REPO</shortcut>
+              <description>How to adjust the internal positioning tracker
+                before going to the new position</description>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Go directly to POS/ANG</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Go up (0%), then to POS/ANG</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Go down (100%), then to POS/ANG</description>
+                </item>
+                <item>
+                  <value>3 ... 7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Locking modes</data>
+              <shortcut>LOCK</shortcut>
+              <description>Set/reset locking modes</description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Do not change</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Set blockage mode</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Set alarm mode</description>
+                </item>
+                <item>
+                  <value>3 ... 6</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Deblockage</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Channel</data>
+              <shortcut>CHN</shortcut>
+              <description>Channel address</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Channel 2</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Channel 3</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Channel 4</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>All channels</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Goto command</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 2 - Stop</title>
+            <description>This command immediately stops a running blind motor. It has no
+              effect when the actuator is in &#8220;blockage&#8221; or &#8220;alarm&#8221; mode,
+              i.e. it will not stop an eventual &#8220;go up&#8221; or &#8220;go down&#8221; alarm action.<br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x02</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>Channel</data>
+              <shortcut>CHN</shortcut>
+              <description>Channel address</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Channel 2</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Channel 3</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Channel 4</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>All channels</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Stop command</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 3 - Query Position and Angle</title>
+            <description>This command requests the actuator to return a &#8220;reply&#8221; command.<br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x03</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>Channel</data>
+              <shortcut>CHN</shortcut>
+              <description>Channel address</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Channel 2</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Channel 3</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Channel 4</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>All channels</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Query command</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 4 - Reply Position and Angle</title>
+            <description>Either upon request (&#8220;Query&#8221; command) or after an internal trigger
+              (see EEP Properties) the actuator sends this command to inform
+              about its current state.<br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>28</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x04</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <data>Position</data>
+              <shortcut>POS</shortcut>
+              <description>Current vertical position</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Position unknown, will be known<br/> after the next goto cmd</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Angle</data>
+              <shortcut>ANG</shortcut>
+              <description>Current rotation angle</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>127</value>
+                  <description>Angle unknown, will be known<br/> after the
+                    next goto cmd</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Locking modes</data>
+              <shortcut>LOCK</shortcut>
+              <description>Current locking mode</description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Normal (no lock)</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Blockage mode</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Alarm mode</description>
+                </item>
+                <item>
+                  <value>3 ... 7</value>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Channel</data>
+              <shortcut>CHN</shortcut>
+              <description>Channel address</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Channel 2</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Channel 3</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Channel 4</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>4</value>
+                  <description>Reply command</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD 5 - Set parameters</title>
+            <description>This command sets one or multiple configuration parameters of the
+              actuator. When a parameter value is set to &#8220;-&gt; no change&#8220; this
+              parameter will not be modified. The VERT and ROT parameters describe
+              the duration needed by the motor for a full run of the blind, or
+              for a complete turn of the slats, respectively.
+              They have to be measured on site and assigned to the actuator.<br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>36</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x05</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <data>Set vertical</data>
+              <shortcut>VERT</shortcut>
+              <description>Measured duration of a vertical run</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>15</bitsize>
+              <enum>
+                <item>
+                  <min>500</min>
+                  <max>30000</max>
+                  <scale>
+                    <min>5000</min>
+                    <max>300000</max>
+                  </scale>
+                  <unit>ms</unit>
+                </item>
+                <item>
+                  <value>0 ... 499</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>32767 (0x7FFF)</value>
+                  <description>-&gt; No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set rotation</data>
+              <shortcut>ROT</shortcut>
+              <description>Measured duration of rotation</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>1</min>
+                  <max>254</max>
+                  <scale>
+                    <min>10</min>
+                    <max>2540</max>
+                  </scale>
+                  <unit>ms</unit>
+                </item>
+                <item>
+                  <value>0</value>
+                  <description>No rotation</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>-&gt; No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set alarm action</data>
+              <shortcut>AA</shortcut>
+              <description>Besides locking all other commands entering the
+                alarm mode results in</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>No action</description>
+                  <info/>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Immediate stop</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Go up (0%)</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Go down (100%)</description>
+                </item>
+                <item>
+                  <value>4 ... 6</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>-&gt; No change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Channel</data>
+              <shortcut>CHN</shortcut>
+              <description>Channel address</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Channel 1</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Channel 2</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Channel 3</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Channel 4</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>All channels</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>36</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>5</value>
+                  <description>Set parameters command</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

@@ -1,0 +1,149 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x09</number>
+        <title>Gas Sensor</title>
+        <type>
+          <number>0x0A</number>
+          <title>Hydrogen Gas Sensor</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: SiMICS</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>
+            Hydrogen Gas Sensor with 16 bit resolution and 0-2000 ppm
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Data exchange</span>
+            <br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event- &amp; time-triggered
+            <br/>Communication interval: -
+            <br/>Trigger event: change in gas concentration and temp
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: 4BS teach-in 2
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: yes
+            <br/>Security level format: PSK, RLC, AES128
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Concentration</data>
+              <shortcut>Conc</shortcut>
+              <description>Gas concentration</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>16</bitsize>
+              <range>
+                <min>0</min>
+                <max>65535</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>65535</max>
+              </scale>
+              <unit>ppm</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TEMP</shortcut>
+              <description>Temperature (linear)</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>-20</min>
+                <max>+60</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Supply voltage</data>
+              <shortcut>SV</shortcut>
+              <description>Supply voltage / super cap.</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>0</min>
+                <max>15</max>
+              </range>
+              <scale>
+                <min>2.0</min>
+                <max>5.0</max>
+              </scale>
+              <unit>V</unit>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temp sensor availability</data>
+              <shortcut>TSA</shortcut>
+              <description>Temp sensor availability at TMP</description>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Temp sensor is not supported</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Temp sensor is supported</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Supply voltage availability</data>
+              <shortcut>SVA</shortcut>
+              <description>Supply voltage availability at SV</description>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Supply voltage is not supported</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Supply voltage is supported</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

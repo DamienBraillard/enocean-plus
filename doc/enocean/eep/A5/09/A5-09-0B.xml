@@ -1,0 +1,181 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x09</number>
+        <title>Gas Sensor</title>
+        <type>
+          <number>0x0B</number>
+          <title>Radioactivity Sensor</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: SiMICS</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>Radioactivity Sensor
+            <br/><br/><span style="border-bottom:2px groove #000000;">Data exchange</span><br/>Direction: unidirectional
+            <br/>Addressing: broadcast
+            <br/>Communication trigger: event- &amp; time-triggered
+            <br/>Communication interval: -
+            <br/>Trigger event: change in radioactivity level
+            <br/>Tx delay: -
+            <br/>Rx timeout: -
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Teach-in</span>
+            <br/>Teach-in method: 4BS teach-in 2
+            <br/>
+            <br/>
+            <span style="border-bottom:2px groove #000000;">Security</span>
+            <br/>Encryption supported: yes
+            <br/>Security level format: PSK, RLC, AES128
+          </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Supply voltage</data>
+              <shortcut>SV</shortcut>
+              <description>Supply voltage / super cap.</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>0</min>
+                <max>15</max>
+              </range>
+              <scale>
+                <min>2.0</min>
+                <max>5.0</max>
+              </scale>
+              <unit>V</unit>
+            </datafield>
+            <datafield>
+              <data>Radioactivity</data>
+              <shortcut>Ract</shortcut>
+              <description>Radiation level</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>16</bitsize>
+              <range>
+                <min>0</min>
+                <max>65535</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>6553</max>
+              </scale>
+              <unit>According to</unit>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Scale Multiplier</data>
+              <shortcut>SCM</shortcut>
+              <description>Scale Multiplier</description>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>0.001</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>0.01</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>0.1</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>1</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>10</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>100</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>1000</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>10000</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>100000</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Value unit</data>
+              <shortcut>VUNIT</shortcut>
+              <description>The unit of the radiation level</description>
+              <bitoffs>29</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>&#956;Sv/h</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>cpm</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Bq/L</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Bq/kg</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Supply voltage availability</data>
+              <shortcut>SVA</shortcut>
+              <description>Supply voltage availability at SV</description>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Supply voltage is not supported</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Supply voltage is supported</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

@@ -1,0 +1,185 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x30</number>
+        <title>Digital Input</title>
+        <type>
+          <number>0x03</number>
+          <title>4 Digital Inputs, Wake and Temperature</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Afriso / EnOcean</span><br/><br/>
+            Description:<br/>
+            This is used for universal modules with 4 digital inputs and a room temperature.
+            The wake input signal of the device is provided to show the telegram transmission trigger.
+            The application meaning and exact data interpretation of the digital channels depends on the end application and is not defined in this profile documentation.
+            <br/><br/>
+            <span style="border-bottom:2px groove #000000;">Data exchange</span>
+            <br/>
+            Direction: unidirectional<br/>
+            Addressing: broadcast<br/>
+            Communication trigger: event- &amp; time-triggered<br/>
+            Trigger event: wake event &#8211; application dependent<br/>
+            Teach-in method: 4BS teach-in 2
+            <br/><br/>
+            Appendix:<br/>
+            D1.4 &#8211; The Status of Wake signalizes the status of the WAKE PIN which has a special
+            meaning in an ultra low application. Usually, by a status change of this input the module
+            is triggered to perform a predefined operation.<br/><br/>
+            Applications using this profile:<br/>
+            <ul><li>water sensor conductive &#8211; Wake Status = 0 (water detected)</li><li>pressure gauge with minimum or maximum (wake signal, configurable if min or max)</li><li>indication and individual switching points (digital channels show different areas)</li></ul>
+            </description>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature (linear)</description>
+              <info>Temperature (linear)</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>255</min>
+                <max>0</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Status of Wake</data>
+              <shortcut>WA0</shortcut>
+              <description>Value of wake signal</description>
+              <info>Status of Wake</info>
+              <bitoffs>19</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Low</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>High</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Digital Input 3</data>
+              <shortcut>DI3</shortcut>
+              <description>Digital Input 3</description>
+              <info>Digital Input 3</info>
+              <bitoffs>20</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Low</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>High</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Digital Input 2</data>
+              <shortcut>DI2</shortcut>
+              <description>Digital Input 2</description>
+              <info>Digital Input 2</info>
+              <bitoffs>21</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Low</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>High</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Digital Input 1</data>
+              <shortcut>DI1</shortcut>
+              <description>Digital Input 1</description>
+              <info>Digital Input 1</info>
+              <bitoffs>22</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Low</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>High</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Digital Input 0</data>
+              <shortcut>DI0</shortcut>
+              <description>Digital Input 0</description>
+              <info>Digital Input 0</info>
+              <bitoffs>23</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Low</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>High</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

@@ -1,0 +1,136 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <oldnumber>.RORG</oldnumber>
+      <fullname>Variable Length Data</fullname>
+      <telegram>VLD</telegram>
+      <description></description>
+      <func>
+        <number>0x14</number>
+        <title>Multi Function Sensors</title>
+        <status>released</status>
+        <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Echoflex Solutions</span><br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/><br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: unidirectional
+                <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Teach-in</span><br/>Teach-in method: Universal teach-in (UTE)
+                <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Security</span><br/>Encryption mandatory: No  
+            <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">EEP Family Table</span><br/>Each TYPE has to support all telegrams and parameters marked in its column.
+            <br/><br/><table><tr><th>Command Overview</th><th>52</th></tr><tr><td>Sensor Reading</td><td style="background-color:#FFFFFF">X</td></tr></table><br/><br/><table><tr><th>Parameter Overview</th><th>52</th></tr><tr><td>temperature</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Illumination</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Presence</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Sound Value</td><td style="background-color:#FFFFFF">X</td></tr></table><br/><br/><br/></description>
+        <type>
+          <number>0x52</number>
+          <title/>
+          <status>not released</status>
+          <case>
+            <title>CMD: Sensor Reading</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Addressing: broadcast 
+                    <br/>Communication trigger: event_trigger<br/>Event description: 5&#176;C change in temperature, 5% change in illumination from previous transmission, change in presence state, or a 5% change in sound pressure.
+                  <br/>
+                  </description>
+            <datafield>
+              <data>temperature</data>
+              <description>Measurement of Temperature in linear</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>9</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>500</max>
+                  <scale>
+                    <min>0</min>
+                    <max>50</max>
+                  </scale>
+                  <unit>C</unit>
+                </item>
+                <item>
+                  <value>511</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+              <trigger>X</trigger>
+            </datafield>
+            <datafield>
+              <data>Illumination</data>
+              <description>Illumination linear in 1 lx steps</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>17</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100000</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100000</max>
+                  </scale>
+                  <unit>lx</unit>
+                </item>
+                <item>
+                  <min>100001</min>
+                  <max>131070</max>
+                  <description>Reserved131071</description>
+                </item>
+              </enum>
+              <trigger>X</trigger>
+            </datafield>
+            <datafield>
+              <data>Presence</data>
+              <description>Presence Detector</description>
+              <info/>
+              <bitoffs>26</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Present</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Not present</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Not detectable</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Presence Detector error</description>
+                </item>
+              </enum>
+              <trigger>X</trigger>
+            </datafield>
+            <datafield>
+              <data>Sound Pressure</data>
+              <description>Sound Pressure</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>11</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>2046</max>
+                  <scale>
+                    <min>0</min>
+                    <max>204.6</max>
+                  </scale>
+                  <unit>dbSPL</unit>
+                </item>
+                <item>
+                  <value>2047</value>
+                  <description>Error</description>
+                </item>
+              </enum>
+              <trigger>X</trigger>
+            </datafield>
+            <datafield>
+              <info/>
+              <bitoffs>39</bitoffs>
+              <bitsize>1</bitsize>
+              <reserved/>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

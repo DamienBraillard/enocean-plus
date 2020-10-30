@@ -1,0 +1,93 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <description/>
+      <func>
+        <number>0x04</number>
+        <title>Temperature and Humidity Sensor</title>
+        <type>
+          <number>0x04</number>
+          <title>Range -40 to +120degC 12bit measurement and 0% to 100%</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: ITEC Corporation</span><br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/>Range<br/>-40 to +120degC 12bit-measurment<br/>and 0% to 100%
+                <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>Direction: unidirectional<br/>Addressing: broadcast
+                <br/>Communication trigger: event_trigger
+                <br/>Communication interval: 
+                <br/>Event description: 
+                <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Teach-in</span><br/>Teach-in method: 4BS teach in 2
+                <br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Security</span><br/>Encryption mandatory: No
+              </description>
+          <case>
+            <datafield>
+              <data>humidity</data>
+              <description>Measurement of Relative Humidity in</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>199</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>temperature</data>
+              <description>Measurement of Temperature in linear</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>12</bitsize>
+              <range>
+                <min>0</min>
+                <max>1599</max>
+              </range>
+              <scale>
+                <min>-40</min>
+                <max>120</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>LrnBit</data>
+              <description>LrnBit key</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data Telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

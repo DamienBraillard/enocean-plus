@@ -1,0 +1,453 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <oldnumber>.RORG</oldnumber>
+      <fullname>Variable Length Data</fullname>
+      <telegram>VLD</telegram>
+      <description/>
+      <func>
+        <number>0x06</number>
+        <title>Intelligent door / window</title>
+        <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Roto Frank AG</span><br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/>
+               This EEP Profile is created for an external connection box, which controls an electric window drive. It is possible to close, tilt or stop the window.
+               <br/>
+               <br/>
+               <span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span>
+               <br/>
+               Direction: bidirectional
+               <br/>
+               Timeout: 300
+               <br/>
+               <br/>
+               <span style="text-decoration:underline; border-bottom: 1px solid #000;">Teach-in</span>
+               <br/>
+               Teach-in method: Universal teach-in (UTE)
+               <br/>
+               <br/>
+               <span style="text-decoration:underline; border-bottom: 1px solid #000;">Security</span>
+               <br/>
+               Encryption mandatory: yes
+               <br/>
+               Security level format: RLC, CMAC, AES
+               <br/>
+               <br/>
+               <span style="text-decoration:underline; border-bottom: 1px solid #000;">EEP Family Table</span>
+               <br/>
+               Each TYPE has to support all telegrams and parameters marked in its column.
+               <br/>
+               <br/>
+               <table><tr><th>Command Overview</th><th>0</th></tr><tr><td>Set</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Query</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Status Message</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Service Message</td><td style="background-color:#FFFFFF">X</td></tr></table>
+               <br/>
+               <br/>
+               <table><tr><th>Parameter Overview</th><th>0</th></tr><tr><td>Message ID</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Window Position</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Aeration Timer</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Response Type</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Position Status</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Tilt Position</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Remaining Aeration Time</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Failure Code</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>Tilt Cycles</td><td style="background-color:#FFFFFF">X</td></tr></table>
+               <br/>
+               <br/>
+               <br/>
+            </description>
+        <type>
+          <number>0x10</number>
+          <title>Electric Window Drive Controller</title>
+          <status>not released</status>
+          <case>
+            <title>CMD: Set</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/>
+                     This EEP Profile is created for an external connection box, which controls an electric window drive. It is possible to close, tilt or stop the window..
+                     <br/>
+                     <br/>
+                     <span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span>
+                     <br/>
+                     Direction: to
+                     <br/>
+                     Addressing: unicast
+                     <br/>
+                     Communication trigger: event_trigger
+                     <br/>
+                     Event description: Position/Timer changes on User Interface
+                     <br/>
+                  </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x00</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>Message ID</data>
+              <description>Message type</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Set</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Window Position</data>
+              <description>Sets the window position.</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>1</min>
+                  <max>100</max>
+                  <scale>
+                    <min>1</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>tilt</unit>
+                </item>
+                <item>
+                  <value>0x00</value>
+                  <description>Close &amp; Unlock</description>
+                </item>
+                <item>
+                  <min>0x65</min>
+                  <max>0xFC</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>0xFD</value>
+                  <description>Do not change</description>
+                </item>
+                <item>
+                  <value>0xFE</value>
+                  <description>Stop</description>
+                </item>
+                <item>
+                  <value>0xFF</value>
+                  <description>Close &amp; Lock</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Aeration Timer</data>
+              <description>Time the window is tilted for aeration.</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>16</bitsize>
+              <enum>
+                <item>
+                  <min>1</min>
+                  <max>64800</max>
+                  <scale>
+                    <min>1</min>
+                    <max>64800</max>
+                  </scale>
+                  <unit>s</unit>
+                </item>
+                <item>
+                  <value>0x0000</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <min>0xFD21</min>
+                  <max>0xFFFD</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>0xFFFE</value>
+                  <description>Do not change</description>
+                </item>
+                <item>
+                  <value>0xFFFF</value>
+                  <description>Continuous Aeration</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD: Query</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>
+                     Direction: to
+                     <br/>
+                     Addressing: unicast
+                     <br/>
+                     Communication trigger: event_trigger
+                     <br/>
+                     Event description: Gateway/User Interface updates values
+                     <br/>
+                  </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x01</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>Message ID</data>
+              <description>Message type</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x01</value>
+                  <description>Query</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Response Type</data>
+              <description>Response type</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Status</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Service</description>
+                </item>
+                <item>
+                  <min>0x02</min>
+                  <max>0xFF</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD: Status Message</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>
+                     Direction: from
+                     <br/>
+                     Addressing: broadcast
+                     <br/>
+                     Communication trigger: event_time_trigger
+                     <br/>
+                     Timing description:
+                     <br/>
+                     <br/>
+                  </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x02</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>Message ID</data>
+              <description>Message type</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x02</value>
+                  <description>Status</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Position Status</data>
+              <description>Current position of the window drive</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Closed &amp; Locked</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Move unlocking</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Move unlocking stopped</description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Move tilting</description>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>Tilt &amp; Stopped</description>
+                </item>
+                <item>
+                  <value>0x05</value>
+                  <description>Move closing</description>
+                </item>
+                <item>
+                  <value>0x06</value>
+                  <description>Move locking</description>
+                </item>
+                <item>
+                  <value>0x07</value>
+                  <description>Move locking stopped</description>
+                </item>
+                <item>
+                  <value>0x08</value>
+                  <description>Position unknown</description>
+                </item>
+                <item>
+                  <value>0x09</value>
+                  <description>Position unknown stopped</description>
+                </item>
+                <item>
+                  <min>0x0A</min>
+                  <max>0xFF</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Tilt Position</data>
+              <description>Response of the current tilt position.</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>100</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>% tilt</unit>
+                </item>
+                <item>
+                  <min>0x65</min>
+                  <max>0xFF</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Remaining Aeration Time</data>
+              <description>Feedback of the aeration timer.</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>16</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>64800</max>
+                  <scale>
+                    <min>0</min>
+                    <max>64800</max>
+                  </scale>
+                  <unit>s</unit>
+                </item>
+                <item>
+                  <min>0xFD21</min>
+                  <max>0xFFFE</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>0xFFFF</value>
+                  <description>Continuous Aeration</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>CMD: Service Message</title>
+            <description><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span><br/>
+                     Direction: to
+                     <br/>
+                     Addressing: broadcast
+                     <br/>
+                     Communication trigger: event_trigger
+                     <br/>
+                     Event description:
+                     <br/>
+                  </description>
+            <condition>
+              <datafield>
+                <bitoffs>0</bitoffs>
+                <bitsize>8</bitsize>
+                <value>0x03</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>Message ID</data>
+              <description>Message type</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x03</value>
+                  <description>Service</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Failure Code</data>
+              <description>Indicates current failure</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>No Failure</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Close Failure</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Tilt Failure</description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Drive Connection Failure</description>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>Drive Overcurrent</description>
+                </item>
+                <item>
+                  <value>0x05</value>
+                  <description>Drive Timeout</description>
+                </item>
+                <item>
+                  <value>0x06</value>
+                  <description>Drive Failure</description>
+                </item>
+                <item>
+                  <min>0x07</min>
+                  <max>0xFF</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Tilt Cycles</data>
+              <description>Tilt counter. Value is incremented when window drive changes position from closed to a tilted position.</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>65535</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>65535</max>
+              </scale>
+              <unit/>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

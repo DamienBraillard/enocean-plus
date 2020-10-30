@@ -1,0 +1,119 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0xA0</number>
+        <title>Standard Valve</title>
+        <type>
+          <number>0x01</number>
+          <title>Valve Control</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Afriso / EnOcean</span><br/><br/>
+              Description:<br/>
+              Radio operated valve control with feedback message.
+              Valve is controlled through the air interface to be opened or closed.
+              The valve reports the actual status after finishing the determined operation.
+              <br/><br/>
+              <span style="border-bottom:2px groove #000000;">Data exchange</span>
+              <br/>
+              Direction: bidirectional<br/>
+              Addressing: addressed (inbound) and broadcast (outbound)<br/>
+              Communication trigger: event- &amp; time-triggered<br/>
+              Trigger event: position of valve has changed<br/>
+              Teach-in method: UTE
+              <br/><br/>
+              DIRECTION-1 = Outbound (water valve to the controller)
+              <br/>
+              Description: Valve reports its status. Report is sent after operation was executed or as a heartbeat.
+              <br/><br/>
+              DIRECTION-2 = Inbound (controller to the water valve)
+              <br/>
+              Description: Operational command to the valve.
+              After this request a feedback response will be transmitted,
+              once the operation is finished.
+              <br/>
+              A &#8220;no change&#8221;-command will also be followed by a feedback response.
+              Therefore, it can be used as a status request.
+              </description>
+          <case>
+            <direction>1</direction>
+            <condition>
+              <direction>1</direction>
+            </condition>
+            <datafield>
+              <data>Feedback</data>
+              <shortcut>FDB</shortcut>
+              <description>Return</description>
+              <info>Feedback</info>
+              <bitoffs>6</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0b00</value>
+                  <description>Not defined</description>
+                </item>
+                <item>
+                  <value>0b01</value>
+                  <description>Closed</description>
+                </item>
+                <item>
+                  <value>0b10</value>
+                  <description>Opened</description>
+                </item>
+                <item>
+                  <value>0b11</value>
+                  <description>Not defined</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>6</bitsize>
+            </datafield>
+          </case>
+          <case>
+            <direction>2</direction>
+            <condition>
+              <direction>2</direction>
+            </condition>
+            <datafield>
+              <data>Request</data>
+              <shortcut>REQ</shortcut>
+              <description>Request to operate the valve</description>
+              <info>Request</info>
+              <bitoffs>6</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0b00</value>
+                  <description>No change (request of feedback)</description>
+                </item>
+                <item>
+                  <value>0b01</value>
+                  <description>Request to close valve</description>
+                </item>
+                <item>
+                  <value>0b10</value>
+                  <description>Request to open valve</description>
+                </item>
+                <item>
+                  <value>0b11</value>
+                  <description>Request to close valve</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>6</bitsize>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

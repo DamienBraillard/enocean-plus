@@ -1,0 +1,81 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x3F</number>
+        <title>Universal</title>
+        <type>
+          <number>0x7F</number>
+          <title>Universal</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: EnOcean GmbH</span><br/><br/><span style="border-bottom:2px groove #000000;">Description</span><br/>
+              This profile was intended for manufacturer specific applications.
+              Every manufacturer may independently define the types within this profile.
+              <br/><br/>
+              This profile was replaced by the use of MSC-Telegrams with the advantage
+              of more payloads and the manufacturer Id as identification.
+              For future applications only use MSC-Telegrams.
+              <br/><br/>
+              This description is only necessary for legacy reasons.
+              <br/><br/>
+              <span style="border-bottom:2px groove #000000;">Data exchange</span>
+              <br/>Direction: unidirectional / bidirectional
+              <br/>Addressing: unicast (ADT) / broadcast
+              <br/>Communication trigger: event- &amp; time-triggered
+              <br/>Communication interval: application specific
+              <br/>Trigger event: application specific
+              <br/>Tx delay: not specified
+              <br/>Rx timeout: not specified
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Teach-in</span>
+              <br/>Teach-in method: 4BS teach-in
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Security</span>
+              <br/>Encryption supported: no
+              <br/>Security level format: -
+            </description>
+          <case>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>undefined</data>
+              <shortcut>undef</shortcut>
+              <description>undefined</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>28</bitsize>
+            </datafield>
+            <datafield>
+              <data>undefined</data>
+              <shortcut>undef</shortcut>
+              <description>undefined</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

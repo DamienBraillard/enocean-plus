@@ -1,0 +1,96 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x13</number>
+        <title>Environmental Applications</title>
+        <type>
+          <number>0x05</number>
+          <title>Direction Exchange</title>
+          <status>released</status>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>7</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Elevation</data>
+              <shortcut>ELV</shortcut>
+              <description>Elevation (0&#176; -&gt; horizon)</description>
+              <info>DB_3 Elevation -90&#176; &#8230; +90&#176;, linear n=0&#8230;180 0&#176; -&gt;Horizon</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>180</max>
+              </range>
+              <scale>
+                <min>-90</min>
+                <max>+90</max>
+              </scale>
+              <unit>&#176;</unit>
+            </datafield>
+            <datafield>
+              <data>Azimut</data>
+              <shortcut>AZM</shortcut>
+              <description>Azimuth (0&#176; -&gt; True north; clockwise)</description>
+              <info>DB_2.BIT_0: Azimut (MSB) 0&#176; &#8230; 359&#176;, linear n=0&#8230;359 0&#176; -&gt; True north
+                DB_1: Azimut (LSB)</info>
+              <bitoffs>15</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>0</min>
+                <max>359</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>359</max>
+              </scale>
+              <unit>&#176;</unit>
+            </datafield>
+            <datafield>
+              <data>Identifier</data>
+              <shortcut>ID</shortcut>
+              <description>Identifier</description>
+              <info>DB_0.BIT_7 &#8230; 4: Identifier</info>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x5</value>
+                  <description/>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

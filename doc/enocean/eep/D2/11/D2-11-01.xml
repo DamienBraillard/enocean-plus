@@ -1,0 +1,856 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x11</number>
+        <title>Bidirectional Room Operating Panel</title>
+        <type>
+          <number>0x01</number>
+          <title>Type 0x01</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Thermokon Sensortechnik GmbH</span><br/><br/><span style="border-bottom:2px groove #000000;">Data exchange</span><br/>Direction: bidirectional (Smart-Ack)
+              <br/>Addressing: broadcast and addressed
+              <br/>Communication trigger: event- &amp; time-triggered
+              <br/>Communication interval: time-triggered (configurable at the device) &amp; event-triggered
+              <br/>Trigger event: keypress
+              <br/>Tx delay: -
+              <br/>Rx timeout: -
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Teach-in</span>
+              <br/>Teach-in method: Smart-Ack teach-in without repeater
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Security</span>
+              <br/>Encryption required: no
+              <br/>Security level format: -
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Product Description</span>
+              <br/>The device represented by this EEP is a &#8220;Bidirectional Room Operating
+            Panel with Display&#8221;. It is powered by solar cell.
+              <br/>
+              <br/>It may be equipped with the following features (for details please see
+            the EEP-Family table below):
+              <ul><li>Temperature Sensor</li></ul>
+              <ul><li>Humidity Sensor</li></ul>
+              <ul><li>Temperature Setpoint Adjustment</li></ul>
+              <ul><li>Fan Speed Adjustment</li></ul>
+              <ul><li>Occupancy-State Adjustment</li></ul>
+              <br/>For pairing the bidirectional &#8220;Smart Ack Teach-In without repeater&#8221;
+            method is used.
+              <br/>
+              <br/>The device transmits the actual sensor values periodically (default: 1000 s)
+            or on the event keypress.
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Temperature Sensor, Humidity Sensor</span>
+              <br/>The environmental sensors are updated periodically (adjustable,
+            default: 100 s) and, if there is a change, the updated values
+            will be send immediately.
+              <br/>
+              <br/>The Smart Ack functionality will be used for setting display symbols
+            like &#8220;window open, heating/cooling, occupancy state&#8221; or for overwriting
+            parameters like setpoint, fan speed or occupancy state which are
+            stored at the device.
+              <br/>
+              <br/>
+              <br/>
+              <b>Communication flow, triggered by a keystroke (first keystroke
+            within inactive state, display state is off):</b>
+              <br/>
+              <img>graphics/D2-11-0x_V1.png</img>
+              <br/>
+              <br/>
+              <br/>
+              <b>Communication flow, triggered by an event like temperature-
+            and or humidity change or heartbeat:</b>
+              <br/>
+              <img>graphics/D2-11-0x_V2.png</img>
+            </description>
+          <case>
+            <title>Message type A / ID 0 (First switch press after sleep-mode, request new data)</title>
+            <description>Direction: Sensor -&gt; Gateway<br/>
+                <br/>
+                <b>Bit 0.7</b> indicates which setpoint type is actual used at the device.
+              The difference is made at the visualization of the setpoint (real
+              temperature setpoint (24.5&#176;C) or setpoint shift (+ 3.0&#176;C)) and this
+              information is needed for interpreting the value of DB2 at Message
+              Type C (ID2).
+                <br/>
+                <img>graphics/D2-11-00_ID0.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x00</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>1</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>Setpoint type</data>
+              <shortcut>SPT</shortcut>
+              <description>Setpoint type actual used by the device<br/>(temperature correction / temperature setpoint)
+                </description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Temperature correction</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Temperature setpoint</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message ID</data>
+              <shortcut>MID</shortcut>
+              <description>Message Type A, ID-0</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>ID-0</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>ID-1</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>ID-2</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <min>3</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message type B / ID 1 (Override device parameter, reply to data request)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+                <br/>
+                <b>Bit 3.7</b> may be used for setting new setpoint type at the
+                device. If no change is needed mirroring Bit 0.7 of the last
+                received Message Type A is required.
+                <br/>
+                <br/>
+                <b>Byte 2</b> may be used for overwriting the actual setpoint
+                shift at the device (i.e. for resetting the setpoint shift at the
+                evening to default value). If no change is needed mirroring Byte 2
+                of the last received Message-Type C is required.
+                <br/>
+                <br/>
+                <b>Byte 1</b> may be used for setting new basesetpoint at the
+                device. If no change is needed mirroring Byte 1 of the last
+                received Message-Type C is required.
+                <br/>
+                <br/>
+                <b>Bit 0.7 &#8230; 0.4</b> may be used for setting new valid setpoint
+                shift at the device. If no change is needed mirroring Bit0.7 &#8230; 0.4
+                of the last received Message-Type C is required.
+                <br/>
+                <img>graphics/D2-11-00_ID1.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x01</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>Set Setpoint type</data>
+              <shortcut>SPT</shortcut>
+              <description>Set setpoint type to be used by the device</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Temperature correction</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Temperature setpoint</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Display heating symbol</data>
+              <shortcut>DHS</shortcut>
+              <description>Set/Clear heating symbol at the display</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Heating symbol off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Heating symbol on</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Display cooling symbol</data>
+              <shortcut>DCS</shortcut>
+              <description>Set/Clear cooling symbol at the display</description>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Cooling symbol off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Cooling symbol on</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Display &#8220;window open&#8221; symbol</data>
+              <shortcut>SSW</shortcut>
+              <description>Set/Clear &#8220;window open&#8221; symbol at the display</description>
+              <info/>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>&#8220;Window open&#8221; symbol off</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>&#8220;Window open&#8221; symbol on</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message ID</data>
+              <shortcut>MID</shortcut>
+              <description>Message Type B, ID-1</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>ID-0</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>ID-1</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>ID-2</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <min>3</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature correction</data>
+              <shortcut>OSO</shortcut>
+              <description>Override Setpoint offset (linear, min. - &#8230; max. +)<br/>(valid temperature correction)
+                </description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <ref>COA</ref>
+              </scale>
+              <unit>K</unit>
+            </datafield>
+            <datafield>
+              <data>Basesetpoint</data>
+              <shortcut>BSP</shortcut>
+              <description>Set basesetpoint for visualization of the
+                temperature setpoint</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>14</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <min>15</min>
+                  <max>30</max>
+                  <scale>
+                    <min>15</min>
+                    <max>30</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>31</min>
+                  <max>255</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Valid temperature correction</data>
+              <shortcut>COA</shortcut>
+              <description>Set valid temperature correction</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <scale>
+                    <min>-1</min>
+                    <max>1</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>2</value>
+                  <scale>
+                    <min>-2</min>
+                    <max>2</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>3</value>
+                  <scale>
+                    <min>-3</min>
+                    <max>3</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>4</value>
+                  <scale>
+                    <min>-4</min>
+                    <max>4</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>5</value>
+                  <scale>
+                    <min>-5</min>
+                    <max>5</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>6</value>
+                  <scale>
+                    <min>-6</min>
+                    <max>6</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>7</value>
+                  <scale>
+                    <min>-7</min>
+                    <max>7</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>8</value>
+                  <scale>
+                    <min>-8</min>
+                    <max>8</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>9</value>
+                  <scale>
+                    <min>-9</min>
+                    <max>9</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>10</value>
+                  <scale>
+                    <min>-10</min>
+                    <max>10</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <min>11</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Speed</data>
+              <shortcut>OFS</shortcut>
+              <description>Override actual Fan Speed</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Speed 0</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Speed 1</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Speed 2</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Speed 3</description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>6</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Not available</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Occupancy State</data>
+              <shortcut>OOS</shortcut>
+              <description>Override actual Occupancy State</description>
+              <info/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>State Unoccupied</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>State Occupied</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message type C / ID 2 (Transmit actual data)</title>
+            <description>Direction: Sensor -&gt; Gateway<br/>
+                <br/>
+                <b>Bit 5.7</b> indicates which setpoint type is actual used at the
+                device. The difference is made at the visualization of the setpoint
+                (real temperature setpoint (24.5 &#176;C) or setpoint shift (+ 3.0 &#176;C))
+                and this information is needed for interpreting the value of DB2.
+                <br/>
+                <br/>
+                <b>Byte 4</b> transmits the actual measured temperature.
+                <br/>
+                <br/>
+                <b>Byte 2</b> transmits the actual setpoint shift. How to interpret
+                this value is a combination of Bit 5.7, Byte 1 and Bit 0.7 &#8230; 0.4.
+                <br/>If the actual setpoint type is setpoint shift, then the value of
+                Byte 2 only represents the scaled valid setpoint shift at Bit 0.7 &#8230; 0.4.
+                <br/>If the setpoint type is temperature setpoint, then the temperature
+                setpoint is calculated as sum of the internal basesetpoint at
+                Byte 1 and the scaled valid setpoint shift at Bit 0.7 &#8230; 0.4,
+                transmitted at Byte 2.
+                <br/>
+                <br/>
+                <b>Byte 1</b> transmits the actual, at the device stored, basesetpoint.
+                <br/>
+                <br/>
+                <b>Bit 0.7 &#8230; 0.4</b> transmits the actual valid, at the device stored,
+                setpoint shift.
+                <br/>
+                <br/>
+                <img>graphics/D2-11-00_ID2.png</img>
+                <br/>
+              </description>
+            <condition>
+              <datafield>
+                <bitoffs>4</bitoffs>
+                <bitsize>4</bitsize>
+                <value>0x02</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Setpoint type</data>
+              <shortcut>SPT</shortcut>
+              <description>Setpoint type actual used by the device<br/>(temperature correction / temperature setpoint)
+                </description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Temperature correction</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Temperature setpoint</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Telegram Type</data>
+              <shortcut>TT</shortcut>
+              <description>Telegram Trigger</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Heartbeat</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Change of temperature- or humidity value</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>User caused parameter change</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Message ID</data>
+              <shortcut>MID</shortcut>
+              <description>Message Type C, ID-2</description>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>ID-0</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>ID-1</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>ID-2</description>
+                </item>
+              </enum>
+              <enum>
+                <item>
+                  <min>3</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TEMP</shortcut>
+              <description>Temperature</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Humidity</data>
+              <shortcut>HUMI</shortcut>
+              <description>Humidity</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>250</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+100</max>
+              </scale>
+              <unit>%rH</unit>
+            </datafield>
+            <datafield>
+              <data>Setpoint offset</data>
+              <shortcut>SP</shortcut>
+              <description>Setpoint shift, linear<br/>(refers to valid setpoint shift at DB0.7 &#8230; DB0.4)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <ref>BSB</ref>
+              </scale>
+              <unit>K</unit>
+            </datafield>
+            <datafield>
+              <data>Basesetpoint</data>
+              <shortcut>IBS</shortcut>
+              <description>Internal basesetpoint, required for setpoint
+                type &#8220;temperature setpoint&#8221;</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>14</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <min>15</min>
+                  <max>30</max>
+                  <scale>
+                    <min>15</min>
+                    <max>30</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <min>31</min>
+                  <max>255</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Valid temperature correction</data>
+              <shortcut>BSB</shortcut>
+              <description>Valid temperature correction</description>
+              <info/>
+              <bitoffs>40</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <scale>
+                    <min>-1</min>
+                    <max>1</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>2</value>
+                  <scale>
+                    <min>-2</min>
+                    <max>2</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>3</value>
+                  <scale>
+                    <min>-3</min>
+                    <max>3</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>4</value>
+                  <scale>
+                    <min>-4</min>
+                    <max>4</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>5</value>
+                  <scale>
+                    <min>-5</min>
+                    <max>5</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>6</value>
+                  <scale>
+                    <min>-6</min>
+                    <max>6</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>7</value>
+                  <scale>
+                    <min>-7</min>
+                    <max>7</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>8</value>
+                  <scale>
+                    <min>-8</min>
+                    <max>8</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>9</value>
+                  <scale>
+                    <min>-9</min>
+                    <max>9</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <value>10</value>
+                  <scale>
+                    <min>-10</min>
+                    <max>10</max>
+                  </scale>
+                  <unit>K</unit>
+                </item>
+                <item>
+                  <min>11</min>
+                  <max>15</max>
+                  <description>Reserved</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan Speed</data>
+              <shortcut>FS</shortcut>
+              <description>Fan Speed</description>
+              <info/>
+              <bitoffs>44</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Speed 0</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Speed 1</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Speed 2</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Speed 3</description>
+                </item>
+                <item>
+                  <min>5</min>
+                  <max>6</max>
+                  <description>Reserved</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>Not available</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Occupancy State</data>
+              <shortcut>OS</shortcut>
+              <description>Occupancy State</description>
+              <info/>
+              <bitoffs>47</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>State Unoccupied</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>State Occupied</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

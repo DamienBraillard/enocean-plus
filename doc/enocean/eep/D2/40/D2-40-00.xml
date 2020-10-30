@@ -1,0 +1,156 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x40</number>
+        <title>LED Controller Status</title>
+        <type>
+          <number>0x00</number>
+          <title>Type 0x00</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: EnOcean GmbH</span><br/><br/><b>MsgId 0x00:</b>Status of monocolor LED controller
+              <br/><img>graphics/D2-40-00.png</img></description>
+          <case>
+            <datafield>
+              <data>LED output enabled</data>
+              <shortcut>OUTEN</shortcut>
+              <description>Driving LED enabled</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Disabled</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Enabled</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>&#8220;Demand Response&#8221; mode Active</data>
+              <shortcut>DRA</shortcut>
+              <description>Controller is in the DR mode. It had received a
+                DR command from DR controller, and it is executing it.</description>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Daylight Harvesting Active</data>
+              <shortcut>DHAR</shortcut>
+              <description>Daylight harvesting feature is turned on.
+                Readings from photo sensor are influencing the dimming level.</description>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>False</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>True</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Occupancy State</data>
+              <shortcut>OCC</shortcut>
+              <description>Room which controller is in charge of
+                is considered occupied.</description>
+              <info/>
+              <bitoffs>3</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Not occupied</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Occupied</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Unknown</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Status Tx reason</data>
+              <shortcut>SREAS</shortcut>
+              <description>Reason for sending this status message</description>
+              <info/>
+              <bitoffs>5</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Other</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Heartbeat</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>MsgId</data>
+              <shortcut>MI</shortcut>
+              <description>Message Id; 0x00</description>
+              <info/>
+              <bitoffs>6</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>LED Status monocolor</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Current Dim Level</data>
+              <shortcut>DLVL</shortcut>
+              <description>Current dim level for the monocolor LED</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>200</max>
+                  <scale>
+                    <min>0</min>
+                    <max>100</max>
+                  </scale>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>0xFF</value>
+                  <description>If not used</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

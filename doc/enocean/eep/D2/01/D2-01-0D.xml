@@ -1,0 +1,125 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x01</number>
+        <title>Electronic Switches and Dimmers with Local Control</title>
+        <type>
+          <number>0x0D</number>
+          <title>Type 0x0D</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: ID-RF</span><br/><br/><br/><span style="border-bottom:2px groove #000000;">Description for TYPE 0x0D, 0x0E, 0x0F, 0x12</span><br/><br/>Add three commands:
+              <br/>- CMD 0xB &#8211; Actuator Set External Interface Settings
+              <br/>- CMD 0xC &#8211; Actuator External Interface Settings Query
+              <br/>- CMD 0xD &#8211; Actuator External Interface Settings Response
+              <br/>
+              <br/>Supported functions:
+              <br/>- External Switch/Push Button Control
+              <br/>- External Switch/Push Button Type (Bi-stable or Mono-stable / 2-state switch)
+              <br/>- Auto OFF Timer
+              <br/>- Delay OFF Timer
+              <br/>
+              <br/>Add D2-01-0D profile &#8211; Micro smart plug with 1 channel, no metering capabilities
+              <br/>Add D2-01-0E profile &#8211; Micro smart plug with 1 channel, and metering capabilities
+              <br/>Add D2-01-0F profile &#8211; Slot-in module with 1 channel, no metering capabilities
+              <br/>Add D2-01-12 profile &#8211; Slot-in module with 2 channels, no metering capabilities
+              <br/>
+              <br/>These new profiles are modifications of the existing ones, please find below a listing:
+              <br/>- Profile D2-01-0D is all same as D2-01-0A but with one modification
+              <br/>- Profile D2-01-0E is all same as D2-01-0B but with one modification
+              <br/>- Profiles D2-01-0F is all same as D2-01-0A but with three modifications
+              <br/>- Profiles D2-01-12 is all same as D2-01-0A but with four modifications
+		      <br/>
+		      <br/>
+		      <br/><span style="border-bottom:2px groove #000000;">Description of new supported functions</span><br/>
+		      <br/><b>External Switch/Push Button Control</b>
+		      <br/><br/>
+              As for &#8220;Local Control&#8221; function, it indicates if the product can be
+              controlled using an additional physical interface, as an external
+              push button or wall switch. This interface is not directly integrated
+              to the product, but can be connected using wires.
+              <br/>
+		      <br/><b>External Switch/Push Button Type</b>
+              <ul><li>Bi-stable or Mono-stable:<br/>
+              External interface can be composed of bi-stable button (switch) or
+              mono-stable button (push button). Depending of the type selected,
+              the product will have different reactions when switch/push button
+              actions are detected.
+              <br/>
+              - If bi-stable button type selected, each change of state (open or
+              close) toggle the output.
+              <br/>
+              - If mono-stable button type selected, first change of state (open
+              or close) toggle the output, second change (close or open) is
+              ignored, and output remains unchanged.
+		      <br/>
+              NOTE: If the product has more than one output, the external interface
+              type is applied for all outputs.
+              </li></ul>
+              <ul><li>2-state switch:<br/>
+              This parameter is effective only if external switch/push button type
+              is set as &#8220;bi-stable&#8221;. When this setting is enabled, the device will
+              turn ON output(s) when contacts are closed and turn OFF output(s)
+              when contacts are open. When this setting is disabled (default mode),
+              a change of contacts state will toggle the output(s).
+              </li></ul>
+		      <br/><b>Auto OFF Timer</b>
+		      <br/>
+              This functions turns OFF the output when time elapsed.
+		      <br/>
+              Use case: In corridor, when you turn ON the light, you want it
+              to be turned OFF automatically after a certain time.
+              <br/>
+              <br/><b>Delay OFF Timer</b>
+              <br/>
+              When the device receives a valid radio command, setting an output state to OFF,
+              instead of setting immediately the new output state, this function set
+              the new output state when time elapsed.
+              <br/>
+              Use Case: In hotel room, when you send a radio command (removing card
+              from card switch) to turn OFF the light, instead, turn OFF light after
+              a certain time, to allow people to leave the room.
+              <br/>
+              <br/>
+		      The addition of these functions required three new commands:
+              <br/>- CMD 0xB &#8211; Actuator Set External Interface Settings
+              <br/>- CMD 0xC &#8211; Actuator External Interface Settings Query
+		      <br/>- CMD 0xD &#8211; Actuator External Interface Settings Response
+              <br/>
+		      <br/>
+		      <span style="border-bottom:2px groove #000000;">Data exchange</span>
+		      <br/>Direction: bidirectional
+		      <br/>Addressing: broadcast
+		      <br/>Communication trigger: event triggered
+		      <br/>Communication interval: no fix interval
+		      <br/>Trigger event: actuator status change, consumption information
+		      <br/>Tx delay: -
+		      <br/>Rx timeout: -
+		      <br/>
+		      <br/>
+		      <span style="border-bottom:2px groove #000000;">Teach-in</span>
+		      <br/>Teach-in method: Universal teach-in (UTE)
+		      <br/>
+		      <br/>
+		      <span style="border-bottom:2px groove #000000;">Security</span>
+		      <br/>Encryption supported: no
+		      <br/>Security level format: -
+		      <br/>
+		      <br/>
+		      <br/>
+              <table><tr><th>Supported command</th><th>Type 0x0D</th><th>Type 0x0E</th><th>Type 0x0F</th><th>Type 0x12</th></tr><tr><td>0x1 &#8211; Actuator Set Output</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x2 &#8211; Actuator Set Local</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x3 &#8211; Actuator Status Query</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x4 &#8211; Actuator Status Response</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0x5 &#8211; Actuator Set Measurement</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>0x6 &#8211; Actuator Measurement Query</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>0x7 &#8211; Actuator Measurement Response</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>0x8 &#8211; Actuator Set Pilot Wire Mode</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>0x9 &#8211; Actuator Pilot Wire Mode Query</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>0xA &#8211; Actuator Pilot Wire Mode Response</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td></tr><tr><td>0xB &#8211; Actuator Set External Interface Settings</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0xC &#8211; Actuator External Interface Settings Query</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr><tr><td>0xD &#8211; Actuator External Interface Settings Response</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">-</td><td style="background-color:#FFFFFF">X</td><td style="background-color:#FFFFFF">X</td></tr></table>
+		      <br/>
+		    </description>
+          <ref>
+            <rorg>D2</rorg>
+            <func>01</func>
+            <type>00</type>
+          </ref>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

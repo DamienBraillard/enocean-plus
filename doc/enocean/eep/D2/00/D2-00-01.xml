@@ -1,0 +1,989 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x00</number>
+        <title>Room Control Panel (RCP)</title>
+        <type>
+          <number>0x01</number>
+          <title>RCP with Temperature Measurement and Display (BI-DIR)</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Fr. Sauter AG</span>
+            <br/>
+            <br/>
+            <span style="background-color:#F8DF36;">Note: EEP Release 2.1, 2.5, and 2.6 reflected a wrong byte-order for all messages of this EEP!</span>
+            <br/>
+            <span style="background-color:#FFF08D;">Example Message Type A:</span>
+            <br/>
+            <span style="background-color:#FFF08D;">Instead of DB_1 = 0x01    DB_0 = 0x81 (which is correct for KP=1 and CV=1)</span>
+            <br/>
+            <span style="background-color:#FFF08D;">by mistake DB_1 = 0x81    DB_0 = 0x11 (which is wrong) was printed.</span>
+            <br/>
+            <span style="background-color:#FFF08D;">We apologize for the mistake.</span>
+          </description>
+          <case>
+            <title>Message type A / ID 01 (First User Action on RCP)</title>
+            <description>Direction: Sensor -&gt; Gateway<br/>
+            Transaction Response: Message Type B or Type E<br/>
+            Chaining: No<br/>
+            Timing: T1+ = 170ms<br/>
+            <img>graphics/EEP_D2-00-01_Message_A.png</img>
+            </description>
+            <condition>
+              <datafield>
+                <bitoffs>5</bitoffs>
+                <bitsize>3</bitsize>
+                <value>1</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <data>MsgId</data>
+              <shortcut>MI</shortcut>
+              <description>Message Id; 0x01</description>
+              <info/>
+              <bitoffs>5</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>1</value>
+                  <description>Message Id</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>9</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <data>User Action</data>
+              <shortcut>KP</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>not used</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Presence</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Temperature Set Point &#8220;down&#8221; or &#8220;&#8212;&#8220;</description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>not used</description>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>not used</description>
+                </item>
+                <item>
+                  <value>0x05</value>
+                  <description>Temperature Set Point &#8220;up&#8221; or &#8220;+&#8221;</description>
+                </item>
+                <item>
+                  <value>0x06</value>
+                  <description>Fan</description>
+                </item>
+                <item>
+                  <min>0x07</min>
+                  <max>0x1F</max>
+                  <description>Not Used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>ConfigValid</data>
+              <shortcut>CV</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Configuration data not valid (e.g. never received message of type E)</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Configuration data valid</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message Type B / ID 02 (Display Content)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+            Reply to Message Type A<br/>
+            Response: None<br/>
+            Chaining: Up to 2 messages per chain<br/>
+            Timing: T2+ = 300ms<br/>
+            <img>graphics/EEP_D2-00-01_Message_B.png</img><br/>
+            IMPORTANT NOTE:<br/>
+            The symbols Sa, Sb, Sc, Sd, Se are optional. One or more of those symbols are available
+            on the display only if the manufacturer of a RCP implements them in a specific design.
+            Thus, they are NOT mandatory for a RCP in order to comply with this EEP.<br/>
+               </description>
+            <condition>
+              <datafield>
+                <bitoffs>5</bitoffs>
+                <bitsize>3</bitsize>
+                <value>2</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>32</bitoffs>
+              <bitsize>3</bitsize>
+            </datafield>
+            <datafield>
+              <data>MsgId</data>
+              <shortcut>MI</shortcut>
+              <description>Message Id;0x02</description>
+              <info/>
+              <bitoffs>5</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>2</value>
+                  <description>Message Id</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>MoreData</data>
+              <shortcut>MD</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>no more data</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>more data will follow after T2+</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan</data>
+              <shortcut>F</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Do not display</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Speed Level 0</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Speed Level 1</description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Speed Level 2</description>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>Speed Level 3</description>
+                </item>
+                <item>
+                  <min>0x05</min>
+                  <max>0x07</max>
+                  <description>not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan manual</data>
+              <shortcut>M</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Auto</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Fan manual</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Figure A Type</data>
+              <shortcut>TA</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Do not display</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Room Temperature</description>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Room Temperature</description>
+                  <unit>&#176;F</unit>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Nominal Temperature</description>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>Nominal Temperature</description>
+                  <unit>&#176;F</unit>
+                </item>
+                <item>
+                  <value>0x05</value>
+                  <description>Delta Temperature Set Point</description>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>0x06</value>
+                  <description>Delta Temperature Set Point</description>
+                  <unit>&#176;F</unit>
+                </item>
+                <item>
+                  <value>0x07</value>
+                  <description>Delta Temperature Set Point(graphic)</description>
+                </item>
+                <item>
+                  <value>0x08</value>
+                  <description>Time 00:00 to 23:59 [24h]</description>
+                </item>
+                <item>
+                  <value>0x09</value>
+                  <description>Time 00:00 to 11:59 [AM]</description>
+                </item>
+                <item>
+                  <value>0x0A</value>
+                  <description>Time 00:00 to 11:59 [PM]</description>
+                </item>
+                <item>
+                  <value>0x0B</value>
+                  <description>Date 01.01 to 31.12 [DD.MM]</description>
+                </item>
+                <item>
+                  <value>0x0C</value>
+                  <description>Date 01.01 to 12.31 [MM.DD]</description>
+                </item>
+                <item>
+                  <value>0x0D</value>
+                  <description>Illumination (linear) 0 to 9999</description>
+                  <unit>lx</unit>
+                </item>
+                <item>
+                  <value>0x0E</value>
+                  <description>Percentage 0 to 100</description>
+                  <unit>%</unit>
+                </item>
+                <item>
+                  <value>0x0F</value>
+                  <description>Parts per Million 0 to 9999</description>
+                  <unit>ppm</unit>
+                </item>
+                <item>
+                  <value>0x10</value>
+                  <description>Relative Humidity 0 to 100</description>
+                  <unit>% rH</unit>
+                </item>
+                <item>
+                  <min>0x11</min>
+                  <max>0x1F</max>
+                  <description>not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Presence</data>
+              <shortcut>PR</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Do not display</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Present</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Not present</description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Night time reduction</description>
+                </item>
+                <item>
+                  <min>0x04</min>
+                  <max>0x07</max>
+                  <description>not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Figure A Value</data>
+              <shortcut>ZA</shortcut>
+              <description>Format according to TA:<br/>Byte-Order: Little-Endian!</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>16</bitsize>
+              <enum>
+                <item>
+                  <min>0x01</min>
+                  <max>0x07</max>
+                  <description>0 ... 4000</description>
+                  <unit>0.01&#176;</unit>
+                </item>
+                <item>
+                  <min>0x08</min>
+                  <max>0x0A</max>
+                  <description>Time 0000 ... 2359</description>
+                </item>
+                <item>
+                  <min>0x0B</min>
+                  <max>0x0C</max>
+                  <description>Date 0101 ... 3112</description>
+                </item>
+                <item>
+                  <value>0x0D</value>
+                  <description>0 ... 9999</description>
+                  <unit>lx</unit>
+                </item>
+                <item>
+                  <min>0x0E</min>
+                  <max>0x10</max>
+                  <description>0 ... 10000</description>
+                  <unit>0.01%</unit>
+                </item>
+                <item>
+                  <value>0x0F</value>
+                  <description>0 ... 9999</description>
+                  <unit>ppm</unit>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Heating</data>
+              <shortcut>Sa</shortcut>
+              <description>optional</description>
+              <info/>
+              <bitoffs>39</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>On</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Cooling</data>
+              <shortcut>Sb</shortcut>
+              <description>optional</description>
+              <info/>
+              <bitoffs>38</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>On</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Dew-Point</data>
+              <shortcut>Sc</shortcut>
+              <description>optional</description>
+              <info/>
+              <bitoffs>37</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>Warning</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>No warning</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Window</data>
+              <shortcut>Sd</shortcut>
+              <description>optional</description>
+              <info/>
+              <bitoffs>36</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>Closed</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>Opened</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>User Notification</data>
+              <shortcut>Se</shortcut>
+              <description>optional</description>
+              <info/>
+              <bitoffs>35</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>Off</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>On</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message Type C / ID 03 (Repeated User Action on RCP)</title>
+            <description>Direction: Sensor -&gt; Gateway<br/>
+            Fire and Forget<br/>
+            Response: None <br/>
+            Chaining: No<br/>
+            Timing: may only be sent within 5s from latest receipt of a Message Type B<br/>
+            <img>graphics/EEP_D2-00-01_Message_C.png</img><br/>
+            </description>
+            <condition>
+              <datafield>
+                <bitoffs>5</bitoffs>
+                <bitsize>3</bitsize>
+                <value>3</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>4</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>MsgId</data>
+              <shortcut>MI</shortcut>
+              <description>Message Id; 0x03</description>
+              <info/>
+              <bitoffs>5</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Message Id</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Fan</data>
+              <shortcut>F</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>1</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>no change</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Speed Level 0</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Speed Level 1</description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Speed Level 2</description>
+                </item>
+                <item>
+                  <value>0x04</value>
+                  <description>Speed Level 3</description>
+                </item>
+                <item>
+                  <value>0x05</value>
+                  <description>Speed Level Auto</description>
+                </item>
+                <item>
+                  <min>0x06</min>
+                  <max>0x07</max>
+                  <description>not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set Point A Type</data>
+              <shortcut>TA</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>11</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>no change</description>
+                </item>
+                <item>
+                  <min>0x01</min>
+                  <max>0x04</max>
+                  <description>not used</description>
+                </item>
+                <item>
+                  <value>0x05</value>
+                  <description>Temperature Set Point [&#176;]</description>
+                </item>
+                <item>
+                  <min>0x06</min>
+                  <max>0x1F</max>
+                  <description>not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Presence</data>
+              <shortcut>PR</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>no change</description>
+                </item>
+                <item>
+                  <value>0x01</value>
+                  <description>Present</description>
+                </item>
+                <item>
+                  <value>0x02</value>
+                  <description>Not present</description>
+                </item>
+                <item>
+                  <value>0x03</value>
+                  <description>Night time reduction</description>
+                </item>
+                <item>
+                  <min>0x04</min>
+                  <max>0x07</max>
+                  <description>not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set Point A Value</data>
+              <shortcut>ZA</shortcut>
+              <description>Format according to TA: 0x05 [0.01&#176;]<br/><br/>Byte-Order: Little-Endian!</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>16</bitsize>
+              <range>
+                <min>-1270</min>
+                <max>+1270</max>
+              </range>
+              <scale>
+                <min>-12.70</min>
+                <max>+12.70</max>
+              </scale>
+              <unit>&#176;</unit>
+            </datafield>
+          </case>
+          <case>
+            <title>Message Type D / ID 04 (Measurement Result)</title>
+            <description>Direction: Sensor -&gt; Gateway<br/>
+            Fire and Forget<br/>
+            Response: None<br/>
+            Chaining: No<br/>
+            Timing: None<br/>
+            <img>graphics/EEP_D2-00-01_Message_D.png</img><br/>
+            </description>
+            <condition>
+              <datafield>
+                <bitoffs>5</bitoffs>
+                <bitsize>3</bitsize>
+                <value>4</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>5</bitsize>
+            </datafield>
+            <datafield>
+              <data>MsgId</data>
+              <shortcut>MI</shortcut>
+              <description>Message Id;0x04</description>
+              <info/>
+              <bitoffs>5</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>4</value>
+                  <description>Message Id</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Channel A Value</data>
+              <shortcut>VA (LSB)</shortcut>
+              <description>Format according to TA:<br/><br/>LSB (Bit 7 ... 0)</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>4000</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>40.00</max>
+              </scale>
+              <unit>&#176;</unit>
+            </datafield>
+            <datafield>
+              <data>Channel A Value</data>
+              <shortcut>VA (MSB)</shortcut>
+              <description>See: VA (LSB)<br/><br/>MSB (Bit 11 ... 8)</description>
+              <info/>
+              <bitoffs>20</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>Channel A Type</data>
+              <shortcut>TA</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Temperature [&#176;C]</description>
+                </item>
+                <item>
+                  <min>0x01</min>
+                  <max>0x0E</max>
+                  <description>not used</description>
+                </item>
+                <item>
+                  <value>0x0F</value>
+                  <description>Measurement result not valid</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <title>Message Type E / ID 05 (Sensor Configuration)</title>
+            <description>Direction: Gateway -&gt; Sensor<br/>
+            Reply to Message Type A<br/>
+            Response: None <br/>
+            Chaining: Up to 2 messages per chain<br/>
+            Timing: T2+ = 300ms<br/>
+            <img>graphics/EEP_D2-00-01_Message_E.png</img><br/>
+            </description>
+            <condition>
+              <datafield>
+                <bitoffs>5</bitoffs>
+                <bitsize>3</bitsize>
+                <value>5</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>0</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>8</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>28</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>44</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>MsgId</data>
+              <shortcut>MI</shortcut>
+              <description>Message Id; 0x05</description>
+              <info/>
+              <bitoffs>5</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>5</value>
+                  <description>Message Id</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>MoreData</data>
+              <shortcut>MD</shortcut>
+              <description/>
+              <info/>
+              <bitoffs>4</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>no more data</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>more data will follow after T2+</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set Point Range Limit</data>
+              <shortcut>SPR</shortcut>
+              <description>Limit of Set Point Range, absolute value:<br/><br/>
+                REMARK:<br/>Set Point Range shall be symmetrical to 0&#176;</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Set Point disabled</description>
+                </item>
+                <item>
+                  <min>0x01</min>
+                  <max>0x7F</max>
+                  <description>0,1&#176; &#8230; 12,7&#176; [0,1&#176;]</description>
+                  <scale>
+                    <min>0.1</min>
+                    <max>12.7</max>
+                  </scale>
+                  <unit>&#176;</unit>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set PointSteps</data>
+              <shortcut>SPS</shortcut>
+              <description>Number of Set Point Steps:<br/><br/>
+                REMARK:<br/>Specifies the number of equidistant steps between 0 and Set Point Range Limit
+                </description>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>7</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Set Point disabled</description>
+                </item>
+                <item>
+                  <min>0x01</min>
+                  <max>0x7F</max>
+                  <description>1 &#8230; 127</description>
+                  <scale>
+                    <min>1</min>
+                    <max>127</max>
+                  </scale>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Measurement Timing</data>
+              <shortcut>TT (LSB)</shortcut>
+              <description>Time between two subsequent Temperature measurements<br/><br/>
+                  LSB (Bit 3 ... 0)
+                </description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x00</value>
+                  <description>Temperature measurement disabled</description>
+                </item>
+                <item>
+                  <min>0x01</min>
+                  <max>0x3C</max>
+                  <description>10 &#8230; 600s [10s]</description>
+                  <scale>
+                    <min>10</min>
+                    <max>600</max>
+                  </scale>
+                  <unit>s</unit>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Temperature Measurement Timing</data>
+              <shortcut>TT (MSB)</shortcut>
+              <description>Time between two subsequent Temperature measurements<br/><br/>
+                  MSB (Bit 5 ... 4)
+                </description>
+              <info/>
+              <bitoffs>38</bitoffs>
+              <bitsize>2</bitsize>
+            </datafield>
+            <datafield>
+              <data>Fan</data>
+              <shortcut>F</shortcut>
+              <description>Number of Fan Speed Levels available to user:</description>
+              <info/>
+              <bitoffs>35</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>Fan Speed disabled</description>
+                </item>
+                <item>
+                  <min>0x1</min>
+                  <max>0x7</max>
+                  <description>1 &#8230; 7</description>
+                  <scale>
+                    <min>1</min>
+                    <max>7</max>
+                  </scale>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Presence</data>
+              <shortcut>PR</shortcut>
+              <description>Number of Presence Levels available to user</description>
+              <info/>
+              <bitoffs>32</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>Presence disabled</description>
+                </item>
+                <item>
+                  <min>0x1</min>
+                  <max>0x7</max>
+                  <description>1 &#8230; 7</description>
+                  <scale>
+                    <min>1</min>
+                    <max>7</max>
+                  </scale>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Keep Alive Timing</data>
+              <shortcut>KA</shortcut>
+              <description>Number of measurements (without trigger of a message
+                  Type D) between two subsequent &#8220;Keep Alive messages&#8221;:</description>
+              <info/>
+              <bitoffs>45</bitoffs>
+              <bitsize>3</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>Transmission of measurement result with
+                      each Temperature measurement</description>
+                </item>
+                <item>
+                  <min>0x1</min>
+                  <max>0x7</max>
+                  <description>10 &#8230; 70 measurements [step-size 10]</description>
+                  <scale>
+                    <min>10</min>
+                    <max>70</max>
+                  </scale>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Significant Temperature Difference</data>
+              <shortcut>ST</shortcut>
+              <description>Difference between two subsequent temperature
+                measurements to trigger a Message Type D [0.2&#176;]</description>
+              <info/>
+              <bitoffs>40</bitoffs>
+              <bitsize>4</bitsize>
+              <range>
+                <min>0x0</min>
+                <max>0xF</max>
+              </range>
+              <scale>
+                <min>0.0</min>
+                <max>3.0</max>
+              </scale>
+              <unit>&#176;</unit>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

@@ -1,0 +1,147 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <description/>
+      <func>
+        <number>0x30</number>
+        <title>Digital Input Contact</title>
+        <type>
+          <number>0x06</number>
+          <title>Single Alternate Input Contact, Retransmission, Heartbeat</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: ITEC Corporation</span><br/><br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Description</span><br/> Contact sensor with states open/close. (Heartbeat telegram also has status.)<br/>Additionally, each telegram has index number, retransmission counter.<br/>These items enable identification of event trigger and retransmission, contributing to  improving redundancy.<br/>The index field is incremented once per change in contact input state and wraps around to 0 after it reaches 7.<br/>After a change in contact input state the device will transmit a number of redundant telegrams in a short time. These will all have their "Type" fields set to 0 because they are transmitted as a result of a change in contact state. The first of these telegrams will have a "Retransmission" field of 0; the second will have a "Retransmission" field of 1, and so forth. <br/>
+                <br/>
+                <br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Data exchange</span>
+                <br/>Direction: unidirectional<br/>Addressing: broadcast 
+                <br/>Communication trigger: event_time_trigger 
+                <br/>Communication interval: 300
+                <br/>Timing description: Retransmission, heartbeat
+                <br/>
+                <br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Teach-in</span>
+                <br/>Teach-in method: 4BS teach in 2
+                <br/>
+                <br/><span style="text-decoration:underline; border-bottom: 1px solid #000;">Security</span>
+                <br/>Encryption mandatory: No
+              </description>
+          <case>
+            <datafield>
+              <data>NotUsed</data>
+              <description>NotUsed key</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>16</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>contact</data>
+              <description>The state of the contact input</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Open</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Close</description>
+                </item>
+              </enum>
+              <trigger>X</trigger>
+            </datafield>
+            <datafield>
+              <data>Index</data>
+              <description>This field is incremented once each time the contact input changes state.</description>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>3</bitsize>
+              <range>
+                <min>0</min>
+                <max>7</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>7</max>
+              </scale>
+              <unit></unit>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Type</data>
+              <description>Indicates whether this telegram was transmitted as a result of a change in contact input state, or if it was transmitted as a result of the heartbeat timer.</description>
+              <info/>
+              <bitoffs>20</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Trigger event</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Heartbeat</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>Retransmission</data>
+              <description>This field is incremented once for each redundant telegram that is transmitted as a result of a change of contact input state.</description>
+              <info/>
+              <bitoffs>21</bitoffs>
+              <bitsize>3</bitsize>
+              <range>
+                <min>0</min>
+                <max>7</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>7</max>
+              </scale>
+              <unit></unit>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>NotUsed</data>
+              <description>NotUsed key</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+              <reserved/>
+            </datafield>
+            <datafield>
+              <data>LrnBit</data>
+              <description>LrnBit key</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data Telegram</description>
+                </item>
+              </enum>
+              <trigger></trigger>
+            </datafield>
+            <datafield>
+              <data>NotUsed</data>
+              <description>NotUsed key</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>3</bitsize>
+              <reserved/>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

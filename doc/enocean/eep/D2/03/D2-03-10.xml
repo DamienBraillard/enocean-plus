@@ -1,0 +1,109 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x03</number>
+        <title>Light, Switching + Blind Control</title>
+        <type>
+          <number>0x10</number>
+          <title>Mechanical Handle</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Eltako</span><br/><br/>This document contains the description of
+              <span style="border-bottom:2px groove #000000;">decrypted</span> mechanical handle data.
+              The mechanical handle profile must be redefined because there is no
+              status field in EnOcean security available.
+              <br/>
+              <br/>
+              <b>EEP Properties:</b>
+              <br/>DATA EXCHANGE
+              <br/>Direction: unidirectional
+              <br/>Addressing: broadcast
+              <br/>Communication trigger: event-triggered
+              <br/>Communication interval: N/A
+              <br/>Trigger event: rotate mechanical handle
+              <br/>Tx delay: N/A
+              <br/>Rx timeout: N/A
+              <br/>
+              <br/>TEACH-IN
+              <br/>Teach-in method: Secure Teach-in, followed by special RPS teach-in
+              sequence: Mechanical handle (closed =&gt; opened =&gt; closed within 2s)
+              <br/>
+              <br/>SECURITY
+              <br/>Encryption supported: yes
+              <br/>Security level format:
+            </description>
+          <case>
+            <datafield>
+              <data>Window handle, decrypted data</data>
+              <shortcut>WIN</shortcut>
+              <description>Movement of the window handle</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0b00000001</value>
+                  <description>
+                    <br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_01.png</img>
+                  </description>
+                </item>
+                <item>
+                  <value>0b00000010</value>
+                  <description>
+                    <br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_02.png</img>
+                  </description>
+                </item>
+                <item>
+                  <value>0b00000011</value>
+                  <description>
+                    <br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_03.png</img>
+                  </description>
+                </item>
+                <item>
+                  <value>0b00000100</value>
+                  <description>
+                    <br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_04.png</img>
+                  </description>
+                </item>
+                <item>
+                  <value>0b00000011</value>
+                  <description>
+                    <br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_05.png</img>
+                  </description>
+                </item>
+                <item>
+                  <value>0b00000010</value>
+                  <description>
+                    <br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_06.png</img>
+                  </description>
+                </item>
+                <item>
+                  <value>0b00000011</value>
+                  <description>
+                    <br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_07.png</img>
+                  </description>
+                </item>
+                <item>
+                  <value>0b00000100</value>
+                  <description>
+                    <br/>
+                    <img style="width:70mm;margin:0;position:float">graphics/Window_Handle_08.png</img>
+                  </description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

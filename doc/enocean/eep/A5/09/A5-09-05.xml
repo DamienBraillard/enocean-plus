@@ -1,0 +1,210 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x09</number>
+        <title>Gas Sensor</title>
+        <type>
+          <number>0x05</number>
+          <title>VOC Sensor</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: NanoSense</span>
+          </description>
+          <case>
+            <datafield>
+              <data>VOC</data>
+              <shortcut>Conc</shortcut>
+              <description>VOC Concentration</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>16</bitsize>
+              <range>
+                <min>0</min>
+                <max>65535</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>65535</max>
+              </scale>
+              <unit>ppb</unit>
+            </datafield>
+            <datafield>
+              <data>VOC ID</data>
+              <shortcut>VOC_ID</shortcut>
+              <description>VOC identification</description>
+              <info/>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>VOCT (total)</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Formaldehyde</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Benzene</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Styrene</description>
+                </item>
+                <item>
+                  <value>4</value>
+                  <description>Toluene</description>
+                </item>
+                <item>
+                  <value>5</value>
+                  <description>Tetrachloroethylene</description>
+                </item>
+                <item>
+                  <value>6</value>
+                  <description>Xylene</description>
+                </item>
+                <item>
+                  <value>7</value>
+                  <description>n-Hexane</description>
+                </item>
+                <item>
+                  <value>8</value>
+                  <description>n-Octane</description>
+                </item>
+                <item>
+                  <value>9</value>
+                  <description>Cyclopentane</description>
+                </item>
+                <item>
+                  <value>10</value>
+                  <description>Methanol</description>
+                </item>
+                <item>
+                  <value>11</value>
+                  <description>Ethanol</description>
+                </item>
+                <item>
+                  <value>12</value>
+                  <description>1-Pentanol</description>
+                </item>
+                <item>
+                  <value>13</value>
+                  <description>Acetone</description>
+                </item>
+                <item>
+                  <value>14</value>
+                  <description>ethylene Oxide</description>
+                </item>
+                <item>
+                  <value>15</value>
+                  <description>Acetaldehyde ue</description>
+                </item>
+                <item>
+                  <value>16</value>
+                  <description>Acetic Acid</description>
+                </item>
+                <item>
+                  <value>17</value>
+                  <description>Propionice Acid</description>
+                </item>
+                <item>
+                  <value>18</value>
+                  <description>Valeric Acid</description>
+                </item>
+                <item>
+                  <value>19</value>
+                  <description>Butyric Acid</description>
+                </item>
+                <item>
+                  <value>20</value>
+                  <description>Ammoniac</description>
+                </item>
+                <item>
+                  <value>22</value>
+                  <description>Hydrogen Sulfide</description>
+                </item>
+                <item>
+                  <value>23</value>
+                  <description>Dimethylsulfide</description>
+                </item>
+                <item>
+                  <value>24</value>
+                  <description>2-Butanol (butyl Alcohol)</description>
+                </item>
+                <item>
+                  <value>25</value>
+                  <description>2-Methylpropanol</description>
+                </item>
+                <item>
+                  <value>26</value>
+                  <description>Diethyl ether</description>
+                </item>
+                <item>
+                  <value>255</value>
+                  <description>ozone</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Scale Multiplier</data>
+              <shortcut>SCM</shortcut>
+              <description>Scale Multiplier</description>
+              <bitoffs>30</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>0.01</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>0.1</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>1</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>10</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

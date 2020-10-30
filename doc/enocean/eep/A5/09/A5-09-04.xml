@@ -1,0 +1,134 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xA5</number>
+      <title>4BS Telegram</title>
+      <telegram>4BS</telegram>
+      <func>
+        <number>0x09</number>
+        <title>Gas Sensor</title>
+        <type>
+          <number>0x04</number>
+          <title>CO2 Sensor</title>
+          <status>released</status>
+          <case>
+            <datafield>
+              <reserved/>
+              <bitoffs>24</bitoffs>
+              <bitsize>4</bitsize>
+            </datafield>
+            <datafield>
+              <reserved/>
+              <bitoffs>31</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>LRN Bit</data>
+              <shortcut>LRNB</shortcut>
+              <description>LRN Bit</description>
+              <bitoffs>28</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Teach-in telegram</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Data telegram</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Humidity</data>
+              <shortcut>HUM</shortcut>
+              <description>Rel. Humidity (linear), 0.5 % = 1 bit</description>
+              <info>DB_3: Humidity 0&#8230;100%, linear n=0&#8230;200 (0,5 % = 1 bit)</info>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>200</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>100</max>
+              </scale>
+              <unit>%</unit>
+            </datafield>
+            <datafield>
+              <data>Concentration</data>
+              <shortcut>Conc</shortcut>
+              <description>Concentration (linear), increment = 10 ppm</description>
+              <info>DB_2: Concentration 0&#8230;2550 ppm, linear n=0&#8230;255 (increment = 10 ppm)</info>
+              <bitoffs>8</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>2550</max>
+              </scale>
+              <unit>ppm</unit>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Temperature (linear), increment = 0.2 &#176;C</description>
+              <info>DB_1: Temperature 0&#8230;51.0 &#176;C, linear n=0&#8230;255 (increment = 0.2&#176;C)</info>
+              <bitoffs>16</bitoffs>
+              <bitsize>8</bitsize>
+              <range>
+                <min>0</min>
+                <max>255</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+51.0</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>H-Sensor</data>
+              <shortcut>HSN</shortcut>
+              <description>..</description>
+              <info/>
+              <bitoffs>29</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Humidity Sensor not available</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Humidity Sensor available</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>T-Sensor</data>
+              <shortcut>TSN</shortcut>
+              <description>..</description>
+              <info/>
+              <bitoffs>30</bitoffs>
+              <bitsize>1</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Temperature Sensor not available</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Temperature Sensor available</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

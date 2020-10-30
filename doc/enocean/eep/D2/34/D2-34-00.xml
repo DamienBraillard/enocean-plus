@@ -1,0 +1,581 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xD2</number>
+      <title>VLD Telegram</title>
+      <telegram>VLD</telegram>
+      <func>
+        <number>0x34</number>
+        <title>Heating Actuator</title>
+        <type>
+          <number>0x00</number>
+          <title>1 Output Channel</title>
+          <status>released</status>
+          <description>
+            <span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: AWAG Elektrotechnik AG</span>
+          </description>
+          <case>
+            <description>
+              <br/>
+              <b>CMD 0x3 &#8211; Actuator Status Query</b>
+              <br/>
+              <img>graphics/D2-34-00_CMD-0x3.png</img>
+            </description>
+            <condition>
+              <datafield>
+                <bitoffs>12</bitoffs>
+                <bitsize>4</bitsize>
+                <value>3</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>5</bitoffs>
+              <bitsize>7</bitsize>
+            </datafield>
+            <datafield>
+              <data>Channel</data>
+              <shortcut>CHN</shortcut>
+              <description>Channel address</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <scale>
+                    <min>1</min>
+                    <max>30</max>
+                  </scale>
+                  <unit>CHN</unit>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>3</value>
+                  <description>Status query command</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <description>
+              <br/>
+              <b>CMD 0x4 &#8211; Actuator Status Response</b>
+              <br/>
+              <img>graphics/D2-34-00_CMD-0x4.png</img>
+            </description>
+            <condition>
+              <datafield>
+                <bitoffs>28</bitoffs>
+                <bitsize>4</bitsize>
+                <value>4</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>27</bitoffs>
+              <bitsize>1</bitsize>
+            </datafield>
+            <datafield>
+              <data>Temperature</data>
+              <shortcut>TMP</shortcut>
+              <description>Current room temperature</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>9</bitsize>
+              <enum>
+                <item>
+                  <min>0</min>
+                  <max>400</max>
+                  <scale>
+                    <min>0</min>
+                    <max>+40</max>
+                  </scale>
+                  <unit>&#176;C</unit>
+                </item>
+                <item>
+                  <value>0x1FF</value>
+                  <description>Unknown</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set point</data>
+              <shortcut>SP</shortcut>
+              <description>Currently active set point</description>
+              <info/>
+              <bitoffs>9</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>0</min>
+                <max>400</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Operation Mode</data>
+              <shortcut>OPM</shortcut>
+              <description>Current mode valid for the channel</description>
+              <info/>
+              <bitoffs>18</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>0x0</value>
+                  <description>Off (deactivated)</description>
+                </item>
+                <item>
+                  <value>0x1</value>
+                  <description>Temperature unknown</description>
+                </item>
+                <item>
+                  <value>0x2</value>
+                  <description>No heating required</description>
+                </item>
+                <item>
+                  <value>0x3</value>
+                  <description>Heating required</description>
+                </item>
+                <item>
+                  <min>0x4</min>
+                  <max>0xF</max>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Channel</data>
+              <shortcut>CHN</shortcut>
+              <description>Channel address</description>
+              <info/>
+              <bitoffs>22</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <scale>
+                    <min>1</min>
+                    <max>30</max>
+                  </scale>
+                  <unit>CHN</unit>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>28</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>4</value>
+                  <description>Status response command</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <description>
+              <br/>
+              <b>CMD 0x5 &#8211; Actuator Set Point Configuration</b>
+              <br/>
+              <img>graphics/D2-34-00_CMD-0x5.png</img>
+            </description>
+            <condition>
+              <datafield>
+                <bitoffs>36</bitoffs>
+                <bitsize>4</bitsize>
+                <value>5</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>29</bitoffs>
+              <bitsize>7</bitsize>
+            </datafield>
+            <datafield>
+              <data>Configuration</data>
+              <shortcut>CFG</shortcut>
+              <description>How set point is evaluated<br/>(see appendix)</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Room panel value</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Override with OVR</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Add SHF to panel value</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Subtract SHF from panel value</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Duration</data>
+              <shortcut>DUR</shortcut>
+              <description>Duration of the override until fallback to room panel value</description>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>6</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Endless</description>
+                </item>
+                <item>
+                  <min>1</min>
+                  <max>63</max>
+                  <scale>
+                    <min>1</min>
+                    <max>63</max>
+                  </scale>
+                  <unit>h</unit>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set point</data>
+              <shortcut>SHF</shortcut>
+              <description>Set point shift value</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>10</max>
+              </scale>
+              <unit>K</unit>
+            </datafield>
+            <datafield>
+              <data>Set point</data>
+              <shortcut>OVR</shortcut>
+              <description>Set point override value</description>
+              <info/>
+              <bitoffs>15</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>0</min>
+                <max>400</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Channel</data>
+              <shortcut>CHN</shortcut>
+              <description>Channel address</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <scale>
+                    <min>1</min>
+                    <max>30</max>
+                  </scale>
+                  <unit>CHN</unit>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>36</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>5</value>
+                  <description>Set point configuration command</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <description>
+              <br/>
+              <b>CMD 0x6 &#8211; Actuator Set Point Query</b>
+              <br/>
+              <img>graphics/D2-34-00_CMD-0x6.png</img>
+            </description>
+            <condition>
+              <datafield>
+                <bitoffs>12</bitoffs>
+                <bitsize>4</bitsize>
+                <value>6</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>5</bitoffs>
+              <bitsize>7</bitsize>
+            </datafield>
+            <datafield>
+              <data>Channel</data>
+              <shortcut>CHN</shortcut>
+              <description>Channel address</description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <scale>
+                    <min>1</min>
+                    <max>30</max>
+                  </scale>
+                  <unit>CHN</unit>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>12</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>6</value>
+                  <description>Set point query command</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+          <case>
+            <description>
+              <br/>
+              <b>CMD 0x7 &#8211; Actuator Set Point Response</b>
+              <br/>
+              <img>graphics/D2-34-00_CMD-0x7.png</img>
+            </description>
+            <condition>
+              <datafield>
+                <bitoffs>44</bitoffs>
+                <bitsize>4</bitsize>
+                <value>7</value>
+              </datafield>
+            </condition>
+            <datafield>
+              <reserved/>
+              <bitoffs>38</bitoffs>
+              <bitsize>6</bitsize>
+            </datafield>
+            <datafield>
+              <data>Configuration</data>
+              <shortcut>CFG</shortcut>
+              <description>How set point is evaluated<br/>(see appendix)
+                </description>
+              <info/>
+              <bitoffs>0</bitoffs>
+              <bitsize>2</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Room panel value</description>
+                </item>
+                <item>
+                  <value>1</value>
+                  <description>Override with OVR</description>
+                </item>
+                <item>
+                  <value>2</value>
+                  <description>Add SHF to panel value</description>
+                </item>
+                <item>
+                  <value>3</value>
+                  <description>Subtract SHF from panel value</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Duration</data>
+              <shortcut>DUR</shortcut>
+              <description>Remaining override time until fallback to room panel value</description>
+              <info/>
+              <bitoffs>2</bitoffs>
+              <bitsize>6</bitsize>
+              <enum>
+                <item>
+                  <value>0</value>
+                  <description>Expired (CFG = 0)</description>
+                </item>
+                <item>
+                  <min>1</min>
+                  <max>63</max>
+                  <scale>
+                    <min>1</min>
+                    <max>63</max>
+                  </scale>
+                  <unit>h</unit>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Set point</data>
+              <shortcut>PNL</shortcut>
+              <description>Set point provided by room panel</description>
+              <info/>
+              <bitoffs>8</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>0</min>
+                <max>400</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Set point</data>
+              <shortcut>SHF</shortcut>
+              <description>Set point shift value</description>
+              <info/>
+              <bitoffs>17</bitoffs>
+              <bitsize>7</bitsize>
+              <range>
+                <min>0</min>
+                <max>100</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>10</max>
+              </scale>
+              <unit>K</unit>
+            </datafield>
+            <datafield>
+              <data>Set point</data>
+              <shortcut>OVR</shortcut>
+              <description>Set point override value</description>
+              <info/>
+              <bitoffs>24</bitoffs>
+              <bitsize>9</bitsize>
+              <range>
+                <min>0</min>
+                <max>400</max>
+              </range>
+              <scale>
+                <min>0</min>
+                <max>+40</max>
+              </scale>
+              <unit>&#176;C</unit>
+            </datafield>
+            <datafield>
+              <data>Channel</data>
+              <shortcut>CHN</shortcut>
+              <description>Channel address</description>
+              <info/>
+              <bitoffs>33</bitoffs>
+              <bitsize>5</bitsize>
+              <enum>
+                <item>
+                  <min>0x00</min>
+                  <max>0x1D</max>
+                  <scale>
+                    <min>1</min>
+                    <max>30</max>
+                  </scale>
+                  <unit>CHN</unit>
+                </item>
+                <item>
+                  <value>0x1E</value>
+                  <description>All channels supported by the device</description>
+                </item>
+                <item>
+                  <value>0x1F</value>
+                  <description>Not used</description>
+                </item>
+              </enum>
+            </datafield>
+            <datafield>
+              <data>Command ID</data>
+              <shortcut>CMD</shortcut>
+              <description>Command identifier</description>
+              <info/>
+              <bitoffs>44</bitoffs>
+              <bitsize>4</bitsize>
+              <enum>
+                <item>
+                  <value>7</value>
+                  <description>Set point response command</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>

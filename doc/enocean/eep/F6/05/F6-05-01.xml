@@ -1,0 +1,60 @@
+<eep>
+  <profile>
+    <rorg>
+      <number>0xF6</number>
+      <title>RPS Telegram</title>
+      <telegram>RPS</telegram>
+      <func>
+        <number>0x05</number>
+        <title>Detectors</title>
+        <type>
+          <number>0x01</number>
+          <title>Liquid Leakage Sensor (mechanic harvester)</title>
+          <status>released</status>
+          <description><span style="background-color:#CDFF7D;border-bottom:2px groove #000000;font-style:italic;">Submitter: Afriso / EnOcean</span><br/><br/>Description:
+              <br/>This profile is used for devices detecting leakage.
+              It is commonly placed on ground where a leakage causes damage.
+              <br/>The principle is that &#8220;paper rings&#8221; swell in water and trigger an
+              ECO 200 (generator) based transmitter.
+              <br/>
+              <br/>
+              <span style="border-bottom:2px groove #000000;">Data exchange</span>
+              <br/>Direction: unidirectional
+              <br/>Addressing: broadcast
+              <br/>Communication trigger: event-triggered
+              <br/>Communication interval: NA
+              <br/>Trigger event: (water detection)
+              <br/>Teach-in method: RPS teach-in
+            </description>
+          <case>
+            <statusfield>
+              <data>T21</data>
+              <bitoffs>2</bitoffs>
+              <bitsize>1</bitsize>
+              <value>1</value>
+            </statusfield>
+            <statusfield>
+              <data>NU</data>
+              <bitoffs>3</bitoffs>
+              <bitsize>1</bitsize>
+              <value>1</value>
+            </statusfield>
+            <datafield>
+              <data>Water sensor</data>
+              <shortcut>WAS</shortcut>
+              <description>Alert signal that the sensor detected water leakage</description>
+              <bitoffs>0</bitoffs>
+              <bitsize>8</bitsize>
+              <enum>
+                <item>
+                  <value>0x11</value>
+                  <description>Water detected</description>
+                </item>
+              </enum>
+            </datafield>
+          </case>
+        </type>
+      </func>
+    </rorg>
+  </profile>
+</eep>
