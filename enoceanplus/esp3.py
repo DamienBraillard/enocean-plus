@@ -20,7 +20,7 @@ import logging
 from binascii import hexlify
 from enum import IntEnum
 from functools import reduce
-from typing import Tuple, Type, Union
+from typing import Iterable, Tuple, Type, Union
 
 log = logging.getLogger(__name__)
 
@@ -49,13 +49,14 @@ __CRC_TABLE = [
 # fmt: on
 
 
-def _crc8(buffer: memoryview):
+def _crc8(buffer: Iterable, initial: int = 0x00):
     """Calculates the CRC8 checksum for an array of bytes
 
     :param buffer: The bytes for which to calculate the checksum
+    :param initial: The optional initial CRC value to update, ignore or provide 0 for new CRC calculation
     :return byte A byte that is the CRC8 checksum value of the specified buffer.
     """
-    return reduce(lambda s, v: __CRC_TABLE[s ^ v], buffer, 0x00)
+    return reduce(lambda s, v: __CRC_TABLE[s ^ v], buffer, initial)
 
 
 class Esp3ParseResult(IntEnum):
@@ -116,6 +117,36 @@ class Esp3Packet:
             self.packet_type = Esp3PacketType(self.raw_packet_type)
         except ValueError:
             self.packet_type = Esp3PacketType.Unknown
+
+    def encode(self) -> bytes:
+        """
+        Encodes the current ESP3 packet in binary form for sending to the dongle
+
+        :returns bytes: A bytes buffer that contains the encoded packet according to the ESP3 serial protocol
+        """
+        data_len = len(self.data)
+        data_len_msb = (data_len >> 8) & 0xFF
+        data_len_lsb = data_len & 0xFF
+        optional_data_len = len(self.optional_data) & 0xFF
+        header_crc = _crc8(
+            [data_len_msb, data_len_lsb, optional_data_len, self.packet_type]
+        )
+        body_crc = _crc8(self.data)
+        if optional_data_len > 0:
+            body_crc = _crc8(self.optional_data, body_crc)
+
+        packet = bytearray()
+        packet.append(0x55)
+        packet.append(data_len_msb)
+        packet.append(data_len_lsb)
+        packet.append(optional_data_len)
+        packet.append(self.packet_type)
+        packet.append(header_crc)
+        packet.extend(self.data)
+        packet.extend(self.optional_data)
+        packet.append(body_crc)
+
+        return bytes(packet)
 
     @classmethod
     def try_decode(
