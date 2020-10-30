@@ -16,9 +16,13 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
+import logging
+from binascii import hexlify
 from enum import IntEnum
 from functools import reduce
-from typing import Union
+from typing import Tuple, Type, Union
+
+log = logging.getLogger(__name__)
 
 # CRC-8-CCIT polynomial table. Source: https://gist.github.com/hypebeast/3833758
 # fmt: off
@@ -40,6 +44,8 @@ __CRC_TABLE = [
     0xae, 0xa9, 0xa0, 0xa7, 0xb2, 0xb5, 0xbc, 0xbb, 0x96, 0x91, 0x98, 0x9f, 0x8a, 0x8d, 0x84, 0x83,
     0xde, 0xd9, 0xd0, 0xd7, 0xc2, 0xc5, 0xcc, 0xcb, 0xe6, 0xe1, 0xe8, 0xef, 0xfa, 0xfd, 0xf4, 0xf3
 ]
+
+
 # fmt: on
 
 
@@ -52,7 +58,14 @@ def _crc8(buffer: memoryview):
     return reduce(lambda s, v: __CRC_TABLE[s ^ v], buffer, 0x00)
 
 
-class PacketType(IntEnum):
+class Esp3ParseResult(IntEnum):
+    Success = 1
+    BadCRC = 2
+    NotEnoughData = 3
+    NoPacket = 4
+
+
+class Esp3PacketType(IntEnum):
     Unknown = 0x00
     RadioERP1 = 0x01
     Response = 0x02
@@ -80,13 +93,13 @@ class Esp3Packet:
     data: bytes
     optional_data: bytes
     raw_packet_type: int
-    packet_type: PacketType
+    packet_type: Esp3PacketType
 
     def __init__(
         self,
+        packet_type: Union[int, Esp3PacketType],
         data: Union[bytes, None],
         optional_data: Union[bytes, None],
-        packet_type: Union[int, PacketType],
     ) -> None:
         """
         Initialize a new instance of the class
@@ -100,6 +113,167 @@ class Esp3Packet:
         self.optional_data = optional_data if optional_data is not None else b""
         self.raw_packet_type = int(packet_type)
         try:
-            self.packet_type = PacketType(self.raw_packet_type)
+            self.packet_type = Esp3PacketType(self.raw_packet_type)
         except ValueError:
-            self.packet_type = PacketType.Unknown
+            self.packet_type = Esp3PacketType.Unknown
+
+    @classmethod
+    def try_decode(
+        cls, buffer: bytearray
+    ) -> Tuple[Esp3ParseResult, int, Union[Type["Esp3Packet"], None]]:
+        """
+        Attempts to parse an ESP3 packet from the specified buffer
+        and remove the parsed bytes form the buffer if the operation was successful.
+
+        The method searches for the first synchronization byte 0x55 in the buffer and then
+        tries to parse the packet from here.
+
+        If the 0x55 synchronization byte is not the first byte of the buffer,
+        all the bytes before the packet are also removed. This is to avoid a failed
+        parse attempt because of garbage data
+
+        Beware that, when the method returns and a packet was found and parsed,
+        the content of buffer is modified so that the data used for parsing is removed.
+
+        :param bytearray buffer: The buffer of bytes to examine and to modify in case of successful parse
+        :returns (int, Esp3Packet): A tuple that contains:
+                                    parse_result, consumed_bytes_count, parsed_packet
+                                    The parsed_packet is None if parse_result is anything else than
+                                    Esp3ParseResult.Success
+        """
+
+        log.debug(f"Processing raw ESP3 buffer: {hexlify(buffer)}")
+
+        # Searches the start of the packet and uses all bytes before the sync byte
+        # If we can't find a sync byte, we consume the whole data. We can't do anything with this garbage.
+        used_len = buffer.find(0x55)
+        if used_len < 0:
+            if logging.INFO >= log.level:
+                log.info(
+                    f"No start byte 0x55 found. No ESP3 packet found in buffer: {hexlify(buffer)} "
+                )
+            return Esp3ParseResult.NoPacket, len(buffer), None
+
+        # From there, we'll use a memory view to avoid data copy
+        buffer_view = memoryview(buffer)
+
+        # Parse/check the header. Except if result is not enough data, we consume the header
+        (
+            parse_result,
+            packet_type,
+            data_len,
+            optional_len,
+        ) = Esp3Packet.__try_decode_header(buffer_view[used_len:])
+        if parse_result != Esp3ParseResult.NotEnoughData:
+            used_len += 6
+
+        # Now parse the data and construct the packet if successful
+        packet = None
+        if parse_result == Esp3ParseResult.Success:
+            # Parse/check the data. Except if result is not enough data, we consume the data, optional data and CRC
+            parse_result, data, optional = Esp3Packet.__try_decode_data(
+                buffer_view[used_len:], data_len, optional_len
+            )
+            if parse_result != Esp3ParseResult.NotEnoughData:
+                used_len += data_len + optional_len + 1
+
+            # Create the packet if we have a success
+            if parse_result == Esp3ParseResult.Success:
+                packet = Esp3Packet(packet_type, data, optional)
+                log.info(f"Packet parse successful: {str(packet)}")
+            else:
+                log.info(f"Packet body decoding inconclusive: {str(parse_result)}")
+        else:
+            log.info(f"Packet header decoding inconclusive: {str(parse_result)}")
+
+        # Done, we now extend the used data up-to the next sync byte (we skip all the garbage after the used data)
+        used_len = buffer.find(0x55, used_len)
+        if used_len < 0:
+            used_len = len(buffer)
+        log.debug(f"Parse outcome is {str(parse_result)} with {used_len} used bytes")
+        return parse_result, used_len, packet
+
+    @staticmethod
+    def __try_decode_header(
+        buffer: memoryview,
+    ) -> Tuple[Esp3ParseResult, int, int, int]:
+        """
+        Attempts to decode a packet header at the start of the specified buffer
+
+        :param buffer: The buffer that starts with the sync byte 0x55
+        :returns (Esp3ParseResult, int, int, int): A tuple that contains:
+                                       result, packet_type, data_length, optional_length.
+                                       If parsing failed, packet_type, data_length, and optional_length
+                                       are all set to -1
+        """
+
+        # Check that the buffer is at least 6 bytes and starts with the sync byte
+        if len(buffer) < 6:
+            return Esp3ParseResult.NotEnoughData, -1, -1, -1
+
+        # Parse the header
+        data_len = buffer[1] << 8 | buffer[2]
+        optional_len = buffer[3]
+        packet_type = buffer[4]
+        crc = buffer[5]
+
+        # Verify the CRC
+        crc_data = buffer[1:5]
+        expected_crc = _crc8(crc_data)
+        if crc != expected_crc:
+            if logging.DEBUG >= log.level:
+                log.debug(
+                    f"Expected header CRC {hex(expected_crc)} but got {crc} "
+                    f"for data {hexlify(bytes(crc_data))}"
+                )
+            return Esp3ParseResult.BadCRC, -1, -1, -1
+
+        log.debug(
+            f"Header decoded for packet type {packet_type}: {data_len} bytes of data and {optional_len} bytes of "
+            f"optional data"
+        )
+        return Esp3ParseResult.Success, packet_type, data_len, optional_len
+
+    @staticmethod
+    def __try_decode_data(
+        buffer: memoryview, data_len, optional_len
+    ) -> Tuple[Esp3ParseResult, bytes, bytes]:
+        """
+        Attempts to extract the packet data at the start of the specified buffer
+
+        :param buffer: The buffer that starts with the sync byte 0x55
+        :param data_len: The length of the packet data section
+        :param optional_len: The length of the optional packet data section
+        :returns (Esp3ParseResult, bytearray, bytearray): A tuple that contains:
+                                       used_bytes, data_buffer, optional_buffer.
+                                       If parsing failed, data_buffer and optional_buffer are all empty
+        """
+
+        # Check that the buffer contains at least the two data sections and an extra CRC bytes
+        if len(buffer) < data_len + optional_len + 1:
+            return Esp3ParseResult.NotEnoughData, b"", b""
+
+        # Verify the CRC
+        crc = buffer[data_len + optional_len]
+        crc_data = buffer[: data_len + optional_len]
+        expected_crc = _crc8(crc_data)
+        if crc != expected_crc:
+            if logging.DEBUG >= log.level:
+                log.debug(
+                    f"Expected body CRC {hex(expected_crc)} but got {crc} "
+                    f"for data {hexlify(bytes(crc_data))}"
+                )
+            return Esp3ParseResult.BadCRC, b"", b""
+
+        data = bytes(buffer[:data_len])
+        optional = bytes(buffer[data_len : data_len + optional_len])
+
+        return Esp3ParseResult.Success, data, optional
+
+    def __repr__(self) -> str:
+        return (
+            f"ESP3: "
+            f"Type={self.raw_packet_type} ({str(self.packet_type)}), "
+            f"Data({len(self.data)})={hexlify(self.data)}, "
+            f"Optional({len(self.optional_data)})={hexlify(self.optional_data)}"
+        )
