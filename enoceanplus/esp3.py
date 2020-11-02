@@ -89,6 +89,10 @@ class Esp3Packet:
 
     For details about the packet structure and encoding, refer to the EnOcean ERP3 documentation:
     https://www.enocean.com/fileadmin/redaktion/pdf/tec_docs/EnOceanSerialProtocol3.pdf
+
+    The packet decoding implementation is based on the reference C implementation described in the
+    "appendix 3.4 (UART Synchronization example code) of the document above. Especially the synchronization
+    behavior.
     """
 
     data: bytes
@@ -188,25 +192,38 @@ class Esp3Packet:
         # From there, we'll use a memory view to avoid data copy
         buffer_view = memoryview(buffer)
 
-        # Parse/check the header. Except if result is not enough data, we consume the header
+        # Parse/check the header.
+        # If result is success, we consume the header
+        # In case of bad CRC, we just consume the sync byte so that the next one can be found later
         (
             parse_result,
             packet_type,
             data_len,
             optional_len,
         ) = Esp3Packet.__try_decode_header(buffer_view[used_len:])
-        if parse_result != Esp3ParseResult.NotEnoughData:
+        if parse_result == Esp3ParseResult.Success:
             used_len += 6
+        elif parse_result == Esp3ParseResult.BadCRC:
+            used_len += 1
 
         # Now parse the data and construct the packet if successful
         packet = None
         if parse_result == Esp3ParseResult.Success:
-            # Parse/check the data. Except if result is not enough data, we consume the data, optional data and CRC
+            # Parse/check the data.
+            # If success, we consume the data, optional data and CRC
+            # If bad CRC, we consume the data and optional data. CRC is only consumed if it's not a sync byte
+            #             as it might be the start of a new packet
             parse_result, data, optional = Esp3Packet.__try_decode_data(
                 buffer_view[used_len:], data_len, optional_len
             )
-            if parse_result != Esp3ParseResult.NotEnoughData:
+            if parse_result == Esp3ParseResult.Success:
                 used_len += data_len + optional_len + 1
+            elif parse_result == Esp3ParseResult.BadCRC:
+                crc = buffer_view[used_len + data_len + optional_len]
+                if crc == 0x55:
+                    used_len += data_len + optional_len
+                else:
+                    used_len += data_len + optional_len + 1
 
             # Create the packet if we have a success
             if parse_result == Esp3ParseResult.Success:

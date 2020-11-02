@@ -220,23 +220,13 @@ class TestEsp3Packet:
             ),
             pytest.param(
                 b"\x55\x00\x01\x01\x55\xFF\xAA\xBB\xB2",
-                9,
+                4,
                 id="other sync byte in header",
             ),
             pytest.param(
-                b"--\x55\x00\x01\x01\x55\xFF\xAA\xBB\xB2--",
-                13,
-                id="other sync byte in header + extra bytes",
-            ),
-            pytest.param(
-                b"\x55\x00\x01\x01\x55\xFF\xAA\xBB\xB2\x55",
-                9,
+                b"\x55\x55\x01\x01\x01\xFF\xAA\xBB\xB2\x55",
+                1,
                 id="other sync byte in and after header",
-            ),
-            pytest.param(
-                b"--\x55\x00\x01\x01\x55\xFF\xAA\xBB\xB2--\x55",
-                13,
-                id="other sync byte in and after header + extra bytes",
             ),
             pytest.param(
                 b"\x55\x00\x01\x01\x01\xFF\xAA\xBB\xB2\x55",
@@ -250,7 +240,7 @@ class TestEsp3Packet:
             ),
         ],
     )
-    def test_try_decode__bad_header_checksum__consumes_bytes_up_to_the_next_sync_byte_after_header_or_buffer_end(
+    def test_try_decode__bad_header_checksum__consumes_bytes_up_to_the_next_sync_byte_or_buffer_end(
         self, buffer, expected_count
     ):
         # Arrange
@@ -300,6 +290,11 @@ class TestEsp3Packet:
                 id="other sync byte in packet",
             ),
             pytest.param(
+                b"\x55\x00\x01\x01\x01\x79\xAA\xBB\x55",
+                8,
+                id="other sync byte in checksum",
+            ),
+            pytest.param(
                 b"--\x55\x00\x01\x01\x01\x79\xAA\x55\xFF--",
                 13,
                 id="other sync byte in packet + extra bytes",
@@ -308,6 +303,11 @@ class TestEsp3Packet:
                 b"\x55\x00\x01\x01\x01\x79\xAA\x55\xFF\x55",
                 9,
                 id="other sync byte in and after packet",
+            ),
+            pytest.param(
+                b"\x55\x00\x01\x01\x01\x79\xAA\xBB\x55\x55",
+                8,
+                id="other sync byte in checksum and after packet",
             ),
             pytest.param(
                 b"--\x55\x00\x01\x01\x01\x79\xAA\x55\xFF--\x55",
@@ -326,7 +326,7 @@ class TestEsp3Packet:
             ),
         ],
     )
-    def test_try_decode__bad_data_checksum__consumes_bytes_up_to_the_next_sync_byte_after_data_or_buffer_end(
+    def test_try_decode__bad_data_checksum__consumes_bytes_up_to_the_next_sync_byte_after_data__or_buffer_end(
         self, buffer, expected_count
     ):
         # Arrange
